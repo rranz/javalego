@@ -1,4 +1,4 @@
-meccano4j_vaadin
+javalego
 ================
 
-Componentes Vaadin para la plataforma Meccano4J
+Arquitectura Colaborativa de Microsiervos
