@@ -1,3 +1,20 @@
+-----------------------------------------------------------------------------------------
+CREAR REPOSITORIO LOCAL CON NUESTROS PROYECTOS Y SUBIR A GITHUB
+-----------------------------------------------------------------------------------------
+1. Crear repositorio local desde la perspectiva Git
+2. Copiar todos los proyectos o carpeta javalego completa en el directorio del repositorio git creado.
+3. Desde la perspectiva Git, seleccionar la carpeta "Working Tree", botón derecho y seleccionar "Import projects ...",
+seleccionar la carpeta javalego o projectos anteriormente copiado e importarlos al workspace.
+4. Una vez configurado correctamente el repositorio local, subiremos los proyectos al repositorio remoto:
+	Desde la perspectiva Git, seleccionar "Remotes".origin. icono nube flecha roja, botón derecho y opción "Push".
+	Definimos nuestro usuario o email y password y aceptamos la subida al repositorio remoto.
+
+
+
+
+--------------------------------------------------------------------------------------------------
+SEGUNDA OPCIÓN
+--------------------------------------------------------------------------------------------------
 Integrar proyectos Maven JavaLego con Git en Eclipse (EGit plugin).
 
 Pasos a seguir:
