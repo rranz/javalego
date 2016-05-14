@@ -1,0 +1,46 @@
+ANDROID STUDIO
+
+Migración Eclipse JavaLego projects:
+
+Proyecto android_jsca (librería Javalego para Android):
+
+1. En el menú inicial, seleccionar importar ADT Eclipse Project android_jsca o librería Javalego para android.
+2. Al finalizar, ejecutar un Make Project. Si no existen errores, se generará un .aar en javalego-app/build/outputs.
+3. Es importante que el nombre de la aplicación no se app (estándar Android Studio) para no coincidir con otros proyectos. Renombrar a javalego-app.
+
+Proyecto ERP android_erp
+
+1. Crear un nuevo projecto en Android Studio javalego-erp
+2. Seleccionar el proyecto, botón derecho seleccionar "Module settings", seleccionar app (aplicación) y botón + para añadir módulo. 
+Seleccionar el proyecto javalego-android del proyecto android_jsca.
+3. Ahora ya podemos importar los packages java del proyecto Eclipse al nuevo
+...
+
+
+Editor:
+
+Seleccionar las teclas de acción al estilo Eclipse
+
+File.Settings.Keymap.Eclipse
+
+Eliminar diccionarios de comprobación sintáctica:
+
+File.Settings.Editor.Spelling seleccionar pestaña diccionarios y desmarcar los existentes.
+
+
+Editor java: Atajos del teclado
+
+https://cetatech.ceta-ciemat.es/2015/02/atajos-imprescindibles-en-android-studio
+
+Formatear código: Ctrl+Alt+L
+Comentario: Ctrl+/ (del teclado numérico) o Ctrl+Mayúsculas+/ (teclado numérico)
+
+
+Referencias de una clase, método, ...
+Ctrl+G (Edit | Find | Find Usages)
+
+Documentación clase, método, ...
+Ctrl+Mayús+Espacio (View | Quick Documentation).
+
+
+

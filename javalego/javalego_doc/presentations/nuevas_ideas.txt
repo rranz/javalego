@@ -1,0 +1,119 @@
+PRESENTACIÓN
+
+http://www.wealthtracksoftware.com/ CRM EN APPLE IOS POR EJEMPLO PASAR A WEB Y ANDROID. VER MODELO EN JSON O XML.
+
+COLABORAR CON EMPRESAS PARA:
+- Publicidad bidireccional de productos de arquitecturas de referencia como Vaadin, Spring, Shiro, ...
+- Publicidad de productos de negocio desarrollados por empresas
+- Publicidad de proyectos abiertos por personas, empresas o formando grupos de trabajo mixtos
+  publicando los productos que ofrecen, su tecnología y referencias en redes sociales, github y procesos de calidad (cobertura, test, jenkins,...)
+
+- Ej.: Modelo Autentia www.autentia.com
+
+COLABORAR CON DESARROLLADORES PARA:
+- Publicidad de sus productos de arquitectura o negocio, proyectos en los que colabora, redes sociales (linkedin, ...).
+  
+
+BENEFICIOS
+
+2. Transferencia del conocimiento de tecnologías de referencia a través de la especificación de funcionalidades transversales implementadas para diferentes
+   frameworks y librerías
+   
+       Ej.: Definición de una arquitectura para un proyecto implica: selección de frameworks y librerías Java para conseguir las funcionalidades
+       que requiere nuestro proyecto (anarquía tecnológica). El problema es que nos estamos acoplando de forma directa con éstos y si a lo largo del desarrollo del proyecto
+       vemos que estos frameworks no son los más idóneos o en un futuro queremos migrar a nuevos frameworks de referencia o por requerimiento de
+       la infraestructura de nuestra empresa (servidores, versión de java, ...) no podremos. Además, las aplicaciones quedarán obsoletas en poco tiempo
+       ya que en este mundo informático están surgiendo nuevos tecnologías de forma constante.
+       Requiere personal especializado en cada tecnología utilizada y problemas de selección, costes y formación contínua de su personal.
+       
+       Poner ejemplo la arquitectura propuesta de Autentia. y un escenario evolutivo de estas tecnologías en varios años.
+       Propuesta de meccanoj para simplificar el uso de tantas tecnologías existentes a partir de una especificación única.
+       Ej.: gestión documental, informes, acceso a datos, pantallas, cruds, reglas de edición, ...
+       
+       Ej.: Queremos definir un mantenimiento CRUD de una tabla que tiene: modelo de datos, reglas de edición, reglas de negocio, formularios de edición, ...
+       y lo queremos desarrollar para la Web y para dispositivos móviles nativos. Hay que pensar también en el acceso a datos y su persistencia.
+       ¿CÓMO CODIFICAMOS NUESTRA APLICACIÓN SÓLO UNA VEZ? ¿CÓMO DESARROLLAMOS DE FORMA INDEPENDIENTE A LA TECNOLOGÍA DE NUESTRA ARQUITECTURA?.
+       ¿PORQUÉ ME TENGO QUE SOMETER LA FORMA DE CODIFICACIÓN QUE ME IMPONEN FRAMEWORKS Y LIBRERÍAS?.
+   
+   
+       Ej.: Quiero generar un informe en Excel de mis datos que se muestra en pantalla en una rejilla. ¿Qué hago?.
+            
+            Opción 1. Busco una librería (como POI, JExcelAPI, ..) y programo con este API la salida de mi informe.
+            Opción 2. Utilizo una herramienta de informes (BIRT, JasperReports, ...) y me construyo un informe
+            
+            ¿Qué pasa si mañana se decide cambiar de framework, librería o herramient de informes?
+            Pierdo mi el trabajo utilizado.
+            
+            Opción 3. Utilizo la especificación de un componente de arquitectura especializado en la generación de informes
+            que de forma sencilla se programa y selecciono alguna de las implementaciones existentes o desarrolla una propia para algún framework, api o herramienta aportando su conocimiento
+            a la comunidad en modo open source o comercial subiéndola a la tienda de la plataforma.
+            
+            Esta última opción no permitirá preservar nuestros desarrollos si decidimos cambiar de tecnología.
+            
+            Ej.: De código Excel existente en la plataforma. mostrar código de generación de un informe.
+   
+3. Normativa de calidad y certificación aplicada a los productos que ayudan a la certificación de proyectos. 
+4. Integración de productos no intrusiva y selectiva en la arquitectura de las empresas.
+5. Facilita la extensibilidad de nuestros desarrollos hacia otras tecnologías o nuevas funcionalidades.
+6. Codificación simple y fácilmente mantenible.
+7.
+
+OFERTA COMERCIAL
+
+1. Soporte en la definición de arquitecturas de proyectos.
+2. Formación, desarrollos de calidad, consultoría, ...
+   
+
+
+EJEMPLOS PRÁCTICOS DE LAS FUNCIONALIDADES DE LA TIENDA O PLATAFORMA
+
+1. Búsquedas por categorías, empresas, personas, repositorios, redes sociales,
+2. Buscar funcionalidades agrupadas por tecnologías o plataformas.
+3. Datos del resultado de las búsquedas tabla:
+   1. Componente 2. Producto 3. Empresa 4. Personas 5. Tecnologías (frameworks o librerías utilizadas).
+   
+   
+
+
+
+
+proyecto en fase de desarrollo 
+modelo de empresa startup y necesito un business angel.
+financiación e inversión de alguna empresa para abordarlo con garantías (% porcentajes negociables).
+
+
+objetivo comercial:
+
+1. Venta de productos básico o complejos (erp, crm, .. aplicaciones verticales).
+2. Consultoría, desarrollos a medida, basado en el prestigio y confianza que da una plataforma opensource
+donde se pueden obtener los componentes con los que se desarrollan. Además, de su firma de calidad basada
+en pruebas de test, cobertura, documeción, prototipos, ...
+3. Publicidad en tienda
+4. Servicios en Cloud de productos de negocio publicados en la tienda. (tarifas de servicios).
+5. Plataforma da: peputación, confianza, prestigio de calidad, a través de publicación de código y acceso a pruebas, ... que garanticen el correcto funcionamiento. Comunidad de desarrolladores. Registro de proyectos. Gestión del conocimiento.
+6. Productividad nos permitirá conseguir proyectos realizando propuestas económicas por debajo de los precios actuales de mercado.
+7. Garantía de calidad y confianza inversora: con la tienda y el acceso a los componentes y sus pruebas de integración.
+8. Conseguir servicios de consultoría, formación, desarrollos, cuando seamos una referencia dentro del mundo del desarrollo Java (tienda y proyectos realizados, conferencias, ...)
+6. Servicios de migración o desarrollos en plataformas para dispositivos móviles nativas o no.
+7. 
+
+
+aportaciones a la comunidad:
+
+Ofrecer la implementación servicios Java independientes de la tecnología (plataforma, frameworks, apis, ...) 
+que permita una evolución tecnológica preservando los desarrollos realizados. Los desarrollos no deben
+adaptarse a las tecnologías utilizadas (Spring, JSF, Vaadin, JS, ...), son los productos que implementan
+la definición de componentes los encargados de generar nuestro modelo de negocio en las tecnologías que
+decidamos utilizar en nuestros proyectos.
+
+Android
+   - databinding, jpa, validación de beans jsr30, ... componentes, cruds, utilidades,..
+
+Vaadin
+- CRUDS, componentes, 	
+
+Java
+- Abstracción de Acceso a datos (Spring Data, Android SQLLite, Hibernate, custom,...), 
+- Abstración de Seguridad (Shiro, Spring Security),...
+- Configuración de aplicación por entornos.
+- Abstración de Localización para diferentes plataformas: web o mobile.

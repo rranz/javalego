@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	JAVALEGO
+
+
+	¿QUÉ ES?
+
+	Es una Arquitectura Colaborativa Open Source Java que permite construir de productos software para distintas áreas tecnológicas.
+
+		Antecedentes
+		
+			¿Cansado de aprender frameworks, librerías, lenguajes, ...?
+			
+			¿Cansado de su baja productividad por motivos tecnológicos? 
+	
+			¿Cansado de desarrollar en tecnologías obsoletas?
+			
+			¿Cansado de realizar migraciones hacia nuevas tecnologías?
+			
+		
+		Nuestros objetivos
+		
+			Desarrollar aplicaciones con código simple y claro que ejecute funcionalidades concretas. 
+			
+			Desarrollar código que se ejecute en diferentes plataformas (web, híbrida o nativa para móviles).
+			
+			Desarrollar código que integre frameworks y librerías de referencia demandadas en nuestros proyectos.
+			
+			Desarrollar código que pueda evolucionar hacia nuevas tecnologías emergentes sin realizar cambios. 
+			
+			Mejorar nuestra productividad para ser más competitivos y felices desarrollando. 
+		
+			IMAGEN CAMINO CON BROZAS O DESPEJADO.
+		
+		
+		
+		¿Cómo?
+		
+			
+			"Arquitectura de productos"
+			
+			Hemos desarrollado una arquitectura colaborativa open source basada en Java que
+			permite construir productos software de calidad para resolver requerimientos funcionales concretos.
+
+
+			"Un código base soportado para múltiples tecnologías"
+			
+			La idea es crear una especificación simple y clara que nos permita desacoplarnos de la tecnología real utilizada.
+			A partir de esta especificación, construiremos los productos que implementen esta especificación acoplados con las tecnologías requeridas en nuestros proyectos.
+			Esta versatilidad, permitirá reutilizar estos productos en otros proyectos que demande esta funcionalidad y tecnología.
+			
+			
+			"Compartir el conocimiento" 
+			
+			La experiencia adquirida en el uso de frameworks, librerías y plataformas servirá para compartir su conocimiento.
+			
+			
+			"Publicar nuestros productos"
+			
+			Para poder registrar y publicar nuestros productos, acceda a nuestra Tienda virtual.   
+	
+			
+			"Calidad del software"
+			
+			Para garantizar la calidad de los productos registrados en la Tienda, se han definido unas mínimas reglas de calidad a cumplir y accesibles.
+			
+				Documentación
+				Usabilidad
+				Cobertura de código
+				Cobertura de test
+
+
+		Caso práctico:
+		
+			Descripción de todo el proceso desde la especificación a la tienda (proyecto, github, sonarqube, docs, ...)
+			Editor de empresas.
+		
+		
+	TIENDA 
+	
+		Hemos construido una tienda virtual para registrar y publicar los productos desarrollados por la comunidad.
+
+		Los productos están asociados a proyectos Open Source registrados en repositorios de código (Github, Gitlab, ...)
+		
+		Los proyectos contienen información de: 
+			Enlaces a redes sociales, repositorio de código, demos, ...
+			Licencia
+			Versión actual
+			Demos
+			Tecnologías utilizadas
+			Valoraciones
+		
+		Los productos contienen información relativa a:
+			Demos
+			Imágenes
+			Valoraciones
+			Código de ejemplo
+			...		
+	
+		Debe registrarse como miembro de la comunidad para poder registrar sus proyectos y productos. Podrá incluir enlaces a sus redes sociales o páginas web.
+
+		Los proyectos estarán clasificados por Arquitectura y Negocio.
+		
+		Los productos estarán clasificados por:		
+	
+			Arquitectura:
+				Interface de Usuario (UI)
+				Datos
+				Informes
+				Flujos de trabajo
+				Gestores de contenidos CMS
+				Seguridad				
+				Miscaléneos				
+		
+			Negocio:
+				Soluciones
+				Módulos
+				Formularios
+				Servicios
+				Procesos
+				Reglas
+				Interfaces
+				Miscaléneos
+	
+		Acceso
+	
+	
+	COMUNIDAD
+	
+		CÓMO COLABORAR
+		
+			<li>Foro de debate</li>
+			<li>Wiki</li>
+			<li>FAQ</li>
+			<li>Contacta con nosotros si quieres colaborar</li>
+	
+	
+	DOCUMENTACIÓN
+
+		<h5>Guía de inicio</h5>
+
+			Introducción
+
+			Requerimientos: Java 1.7+, Maven, Eclipse, Android Studio, Git, ...
+
+			Proyectos Base de la Arquitectura. Incluir .html de projects
+			
+			Fundamentos básicos de la arquitectura:
+			----------------------------------------------------------
+			
+			Contextos, servicios y productos (link a context.html)
+
+			 <b>Localización:</b> {@link LocaleContext}
+			 <p>
+			 <b>UI:</b> {@link UIContext}
+			 <p>
+			 <b>Data:</b> {@link DataContext}
+			 <p>
+			 <b>Security:</b> {@link SecurityContext}
+			
+			
+			
+			Localización de aplicaciones (link locale.html)
+			
+			UI  (MVP model crear .html doc)
+
+					<li>Modelo de negocio para: mantenimientos CRUD básicos y
+						complejos, informes, reglas, UI, persistencia, seguridad, ...
+					</lo>
+					<p>
+						<strong>Vaadin</strong>
+					</p>
+					<lo>
+					<li>Generación de mantenimientos CRUD (simples, reglas de edición,
+						maestro/detalle, acciones, filtros, vistas, ordenaciones, …) a partir
+						de un modelo de negocio.</li>
+					<li>Nuevos componentes</li>
+					<li>Patrones MVP para múltiples funcionalidades UI</li>
+					<li>Utilidades</li>
+					</lo>
+
+			
+			Security (crear .html doc)
+			
+			Acceso a datos (crear .html doc)
+				vaadin y android
+
+					<strong>Android</strong>
+		
+					<lo>
+					<li>Enlace a datos (binding)</li>
+					<li>Persistencia de datos JPA basada en anotaciones</li>
+					<li>Validación de beans implementando la especificación estándar
+						de Java (anotaciones)</li>
+					<li>Nuevos componentes</li>
+					<li>Generación de mantenimiento CRUD (simples, reglas de edición,
+						maestro/detalle, filtros, acciones, vistas, ordenaciones, …) a partir
+						de un modelo de negocio (MVP).</li>
+					<li>Generación de informes</li>
+					<li>Importación exportación de datos mediante plantillas</li>
+					<li>Utilidades</li>
+					</lo>		
+		
+			Informes (crear .html doc)
+			
+
+		Tienda (manual con instantáneas)
+
+		Video tutoriales
+
+			
+	
+	
+	DEMOS
+	
+		ERP (Vaadin Android)
+		Tienda
+
+	
+	
+	DESCARGAS
+	
+		Código fuente (Github repositories)
+		Maven dependencies y crear repositorio en maven mvnrepository
+	
+	
+	SOPORTE
+	
+		<p>Ponemos a su disposición ayuda, soporte, formación y cualquier
+		tipo de asistencia que necesite</p>
+		Contacte (link)
+		
+		
+</body>
+</html>

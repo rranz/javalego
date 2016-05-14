@@ -1,0 +1,27 @@
+@import "material-design-colors.scss";
+@import "vaadin_valo.scss";
+@import "general.scss";
+@import "buttons.scss";
+@import "tiles.scss";
+@import "javalego.scss";
+@import "tabbutton.scss";
+
+@import "shame.scss";
+
+@include font-open-sans;
+
+/* This file prefixes all rules with the theme name to avoid causing conflicts with other themes. */
+/* The actual styles should be defined in jscatheme.scss */
+.vaadin_valo {
+  /*@include md-red;*/
+  @include vaadin_valo;
+  @include general;
+  @include buttons;
+  @include tiles;
+  @include javalego; 
+  @include tabbutton-color;
+  @include tabbutton;
+
+  // TODO unwanted fixes and workarounds
+  @include shame;  
+}

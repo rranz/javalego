@@ -1,0 +1,163 @@
+Hay que crear sección de proyectos.
+
+Cada proyectos tiene dependencias con otros proyectos y tiene una lista de proyectos que expone para la tienda.
+
+Cada proyecto está asociado a github repository de donde podremos obtener todos los datos descargas, datos del proyecto, personas de colaboran versiones ....
+
+Hay que crear un ejemplo de un proyecto "Componentes Vaadin UI" que tiene dependencias con otros proyectos (services_UI, ...) también existentes en Github y definidos como proyectos (sin producto). Crear repositorios en Github y bajarlos en Eclipse y ver si funciona. Después ver si podemos subirlo a Maven con un repositorio en VPS particular.
+
+Finalmente, mostrar toda esta información en la tienda. 
+
+Crear sección de proyectos al margen de la tienda. 
+
+
+SOURCE(GitHub)
+ISSUES (Jira)
+FORUM
+METRICS (SonarQube).
+
+
+
+Hay que crear la sección de proyectos y sus productos. 
+tiene que existir una dependencia para poder vincularlo a GitHub y acceder a su fuente y dependencias.
+
+Incluir equipo de desarrollo con imágenes y conexión con linkdin o google+ o twitter. Social opciones.
+
+Darse de alta en la plataforma. (ver cómo conectar con Gibhub para obtener estos datos.).
+
+Ej.:
+
+accordion pertenece al proyecto services_UI.
+
+Accordion Vaadin pertenece al proyect oservices_vaadin_ui
+
+Ver cómo bajarte el proyecto y ver si funciona correctamente con las dependencias del resto de proyectos sin necesidad de maven.
+
+
+
+
+Crear ejemplo práctico con meccano sl y miguel y cosín. simular
+
+Utilizar menú con asociación de detail como en tienda en formato _______  __________ y selección
+recuadro 100% (MENUTABS) ver primefaces qué nombre tiene.
+
+
+SECCIONES DE LA WEB:
+
+COMUNIDAD     PROYECTOS     TIENDA      AYUDA     Empresa Meccano4J  ...
+
+
+COMUNIDAD
+
+	Miembros
+	Equipos
+		Miembros (datos, conexión social linkedin, ... sistemas de publicidad)
+	Tareas 
+		Miembros o equipos
+		Proyectos y productos afectados
+		Planificación (ver Mylyn o jira)
+		Gestión % realizado comentarios públicos o privados
+		
+	Empresas (datos, linkdin, web, twitter, ... publicidad en la web)
+		Equipos		
+		Miembros
+
+PROYECTOS (analizar jira o tracks ver cómo conectar código a tareas).
+
+	Colaboran:  Empresas, miembros o equipos
+	Generan: Productos Negocio o Arquitecturas (ver calidad y certificación: test cobertura, ...) que se publicarán en la tienda en las modalidades de licencia definidas.
+
+TIENDA
+	Arquitecturas
+           .....
+	Negocio
+            ....
+
+
+La idea es definir todas las piezas del puzzle para que esté todo conectado y ofrecer un sistema robusto donde controlar los trabajos desarrollados, no solo como un proyecto sino como una comunidad de personas que generan productos ya sean opensource o comerciales.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(Safe Creative registrar tesis ppt).
+
+
+  SOFTWARE STORE (versus Google Play) 
+    Plataforma de 
+    (icono mago y mapa del mundo un lado personas (social) otro objetos(software)
+
+
+	ARQUITECTURA
+
+                   MODELADO (datasources, languages, ...)
+
+  
+                   SERVICIOS (data, presentación, reports, ...)
+
+                   COMPONENTES (p.form, r.table, ...)
+
+ 
+        NEGOCIO
+               
+       	           MODELADO (entidades, informes, workflows, ...)
+
+ 		   SERVICIOS (Repositorios, reglas, workflows, ...)
+
+		   PRODUCTOS EMPRESARIALES 
+                        (Tipos: MÓDULOS, SOLUCIONES, SOLUCIONES INTEGRALES, ...)
+ 	                (Elementos utilizados: MODELOS y/o SERVICIOS y/o COMPONENTES)
+			(Ej.: formularios, módulos, informes, soluciones, soluciones integrales)
+
+
+SERVICIOS: Categoría, Dependencias, versión, (free buy + empresa) (colores), TDD (unit, integration, cobertura), JavaDoc, User Guide. Certificación (validación por grupos de auditoría de software).
+COMPONENTE: Categoría, Dependencias, versión, (free buy + comercial)(colores)
+PRODUCTO: Categoría, Dependencias, versión, (free buy + comercial)(jurídica o física)
+
+
+SOCIAL SOTWARE FACTORY -> INCUBATORS PROJECTS -> PRODUCTO, COMPONENTE O SERVICIOS. Subir a la plataforma (free o comercial)
+
+
+
+
+Flujo:
+
+Software Store:
+
+	Componente
+		1. Selección de elementos
+        	2. Nuevo Producto
+  		++P, ++S, ++Component, ++Model
+
+		1. Selección 
+		2. Transformación
+		3. Nuevo producto
+		++P
+
+		1. Selección
+		2. Correctivo o evolutivos.
+		3. Nueva versión.
+		++V
+
+
+Crear prototipo, Crear Web, Crear presentación, Crear oferta comercial de subir software a la plataforma.
+
+Buscar startup + business angels + inversión = proyecto = producto comercial.
+
+

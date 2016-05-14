@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="javalego-app-rest">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="javalego_app-2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/javalego_app/javalego_app">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javalego_security-2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/javalego_security/javalego_security">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javalego_locale-2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/javalego_locale/javalego_locale">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javalego_ui-2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/javalego_ui/javalego_ui">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javalego_model-2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/javalego_model/javalego_model">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javalego_util-2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/javalego_util/javalego_util">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javalego_office-2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/javalego_office/javalego_office">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javalego_data-2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/javalego_data/javalego_data">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javalego_ui_vaadin-2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/javalego_ui_vaadin/javalego_ui_vaadin">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javalego_security_shiro-2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/javalego_security_shiro/javalego_security_shiro">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javalego_data_spring-2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/javalego_data_spring/javalego_data_spring">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javalego_data_rest-2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/javalego_data_rest/javalego_data_rest">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/javalego-app-rest/target/classes"/>
+        <property name="context-root" value="app-rest"/>
+    </wb-module>
+</project-modules>

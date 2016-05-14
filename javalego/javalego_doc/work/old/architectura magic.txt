@@ -1,0 +1,149 @@
+MAGIC                         (song The Queen Magic) (Safe Creative registrar tesis ppt).
+Java Social Platform ¿?
+
+    Plataforma de 
+    (icono mago y mapa del mundo un lado personas (social) otro objetos(software)
+
+OBJETIVOS:
+	
+	1. Crear una plataforma que permita crear y publicar software de forma colaborativa.
+	2. Crear una plataforma basada en:
+	    1. Componentes de arquitectura.
+					modelos, servicios, componentes y productos que puedan
+		2. Componentes de negocio.
+	
+	
+	
+PORTAL DE PUBLICACIÓN DE COMPONENTES DE SOFTWARE:
+	
+  1. PROYECT FACTORY (factoría de proyectos)
+	
+	   Crear Web para:
+	   1. Crear grupos de trabajo.
+	   2. Líneas de proyectos según su estado de ejecución:
+			1. Nuevo proyecto (incubation).
+			2. Nueva versión
+       3. Datos del proyecto:
+			1. Estado
+			2. Equipo de trabajo y definir el rol de cada persona
+			3. Tareas (conexión a herramienta online. Ver partners para soporte comercial Ej.: Jira).
+			4. Foro y blog.
+			5. Descargas: versiones disponibles.
+			6. Documentación (JavaDoc, guías de usuario, bibliografía).
+			7. TDD (Jenkins) 
+			8. Control de versiones: GitHub (para equipos de trabajo desconectados).
+			9. Conexión SourceForge (analizar este tema para open source).
+	       10. Permisos.
+	   4. Subir proyecto como producto a la tienda definiendo sus características (formato jar, war o ear): 
+	       1. Free o comercial (licencia de uso).
+		   2. Dependencias
+		   3. Nombre del producto.
+		   4. Categoría: componente de arquitectura, módulo, solución, servicio, ...
+	
+  2. PRODUCT STORE (Tienda de productos. versus Google Play) 
+
+		ARQUITECTURA
+
+            MODELADO (datasources, languages, ...)
+
+  
+            SERVICIOS (data, presentación, reports, ...)
+
+            COMPONENTES (p.form, r.table, ...)
+
+ 
+        NEGOCIO
+               
+       	   MODELADO (entidades, informes, workflows, ...)
+
+ 		   SERVICIOS (Repositorios, reglas, workflows, ...)
+
+		   PRODUCTOS EMPRESARIALES 
+                        (Tipos: MÓDULOS, SOLUCIONES, SOLUCIONES INTEGRALES, ...)
+ 	                (Elementos utilizados: MODELOS y/o SERVICIOS y/o COMPONENTES)
+			(Ej.: formularios, módulos, informes, soluciones, soluciones integrales)
+
+
+	SERVICIOS: Categoría, Dependencias, versión, (free buy + empresa) (colores), TDD (unit, integration, cobertura), JavaDoc, User Guide. Certificación (validación por grupos de auditoría de software).
+	COMPONENTE: Categoría, Dependencias, versión, (free buy + comercial)(colores)
+	PRODUCTO: Categoría, Dependencias, versión, (free buy + comercial)(jurídica o física)
+
+
+
+Flujo:
+
+Product Store:
+
+	Componente
+		1. Selección de elementos
+        	2. Nuevo Producto
+  		++P, ++S, ++Component, ++Model
+
+		1. Selección 
+		2. Transformación
+		3. Nuevo producto
+		++P
+
+		1. Selección
+		2. Correctivo o evolutivos.
+		3. Nueva versión.
+		++V
+
+	Foros, blogs, ...
+
+Crear prototipo, Crear Web, Crear presentación, Crear oferta comercial de subir software a la plataforma.
+
+Buscar startup + business angels + inversión = proyecto = producto comercial.
+
+
+
+
+Ejemplo:
+
+1. Definir el modelo de datos para definir la entidad o tabla xxx
+2. Utilizar el servicio de datos Spring Data disponible en la arquitectura.
+3. Utilizar el servicio de presentación Vaadin para Web y Mobile
+4. Definir un formulario CRUD y asociarle al modelo.
+5. Genera un componente de tipo formulario para mantener la entidad o tabla xxxx
+
+1. Utilizar componente de formulario anterior
+2. Crear un servicio de generación de informes.
+3. Definir el modelo de entrada de datos o parámetros.
+4. Crear acción de formulario asociada al servicio de informe.
+5. .... formulario con acción.
+
+1. Definir servicios de cálculo de crédito.
+2. Definir modelo de datos utilizado para realizar los cálculos.
+3. Generar un componente de cálculo de créditos
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

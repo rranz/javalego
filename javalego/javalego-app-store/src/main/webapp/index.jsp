@@ -1,0 +1,4 @@
+<%@page%>
+<% 
+response.sendRedirect("home"); 
+%>

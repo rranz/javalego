@@ -1,0 +1,7 @@
+Cambiar la password del root
+
+mysql/bin>mysql -u root -h localhost -p
+
+mysql>SET PASSWORD FOR 'root'@'localhost' = PASSWORD('new-password-here');
+
+http://www.cyberciti.biz/faq/mysql-change-user-password/

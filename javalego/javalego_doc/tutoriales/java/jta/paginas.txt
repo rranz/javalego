@@ -1,0 +1,36 @@
+Páginas web de interés:
+
+----------------------------------------------------------------------------------------------------------------------- 
+Configuración archivos xml de JPA para Transacciones JTA distribuidas delegadas en el servidor WAS:
+----------------------------------------------------------------------------------------------------------------------- 
+http://www.ibm.com/developerworks/websphere/techjournal/0609_alcott/0609_alcott.html
+
+Hibernate requires the configuration of two essential pieces in order to properly run with transactions. The first, hibernate.transaction.factory_class, defines transactional control and the second, hibernate.transaction.manager_lookup_class, defines the mechanism for registration of transaction synchronization so the persistence manager is notified at transaction end when it needs to synchronize changes with the database. For transactional control, both container-managed and bean-managed configurations are supported. The following properties must be set in Hibernate.cfg.xml when using Hibernate with WebSphere Application Server:
+for container-managed transactions:
+<property name="hibernate.transaction.factory_class">
+	org.hibernate.transaction.CMTTransactionFactory
+</property>
+<property name="hibernate.transaction.manager_lookup_class">
+	org.hibernate.transaction.WebSphereExtendedJTATransactionLookup
+</property>
+for bean-managed transactions:
+<property name="hibernate.transaction.factory_class">
+	org.hibernate.transaction.JTATransactionFactory
+</property>
+<property name="hibernate.transaction.manager_lookup_class">
+	org.hibernate.transaction.WebSphereExtendedJTATransactionLookup
+</property>
+<property name="jta.UserTransaction">
+	java:comp/UserTransaction
+</property >
+The jta.UserTransaction property configures the factory class to obtain an instance of a UserTransaction object instance from the WebSphere container.
+The hibernate.transaction.manager_lookup_class property is supported on the WebSphere platform by WebSphere Application Server V6.x and later, and on WebSphere Business Integration Server Foundation V5.1 and later. This property configures Hibernate to use the ExtendedJTATransaction interface, which was introduced in WebSphere Business Integration Server Foundation V5.1 and WebSphere Application Server V6.0. The WebSphere ExtendedJTATransaction interface establishes a pattern that is formalized in Java EE 5 via the JTA 1.1 specification.
+
+-----------------------------------------------------------------------------------------------------------------------
+
+Si usamos JDBC únicamente hay que incluir:
+
+	<tx:jta-transaction-manager/>
+	
+	en context.xml.
+ 

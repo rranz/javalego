@@ -1,0 +1,314 @@
+JAVALEGO
+
+Contextos y entornos
+
+
+
+Contexto:
+
+	Los contextos ofrecen acceso a los servicios de aplicación dentro de un entorno de ejecución.
+
+ <p>
+ <i>Contextos:</i>
+ <p>
+ <b>Localización:</b> {@link LocaleContext}
+ <p>
+ <b>UI:</b> {@link UIContext}
+ <p>
+ <b>Data:</b> {@link DataContext}
+ <p>
+ <b>Security:</b> {@link SecurityContext}
+ 
+	
+ <p>
+	Para acceder y configurar todos los contextos de nuestra aplicación podemos usar la clase AppContext.
+	Su uso es opcional ya que los contextos y sus servicios pueden configurarse de forma individual.
+ 
+<h2>Entorno de ejecución:</h2> 
+ 
+ Nuestra aplicación puede tener varios entornos de ejecución (pruebas, producción, ...) y necesitamos configurar sus 
+ servicios. Para definir dicha configuracíon, podremos implementar la interface Environment o instanciar la clase EnvironmentImpl y, 
+ finalmente, invocar el método AppContext.getCurrent().load() para inicializar los contextos de la aplicación y sus servicios.  
+
+ Código de ejemplo:
+ 
+ 1. Implementar clase Environment con diferentes modalidades de código:
+ 
+ [java]
+/**
+ * Entorno de TEST Spring para instanciar los servicios de la aplicación ERP
+ * Demo
+ *
+ */
+public class TestEnvironmentSpring implements Environment {
+
+	@Autowired
+	private SecurityServices securityServices;
+
+	@Autowired
+	private UserSession userSession;
+
+	@Autowired
+	private DataServices dataServices;
+
+	@Autowired
+	private UserServices userServices;
+
+	@Autowired
+	private DataProvider<IEntity> dataProvider;
+
+	@Autowired
+	private Translator translator;
+
+	@Override
+	public String getName() {
+		return Texts.TEST.name();
+	}
+
+	@Override
+	public Key getTitle() {
+		return Texts.TEST;
+	}
+
+	@Override
+	public Key getDescription() {
+		return Texts.TEST;
+	}
+
+	/**
+	 * Servicios de seguridad implementados con la librería <a
+	 * href="http://shiro.apache.org/">Apache Shiro</a>
+	 */
+	@Override
+	public synchronized SecurityServices getSecurity() {
+		return securityServices;
+	}
+
+	/**
+	 * Datos de la sesión de usuarios obtenidos del framework <a
+	 * href="https://vaadin.com/">Vaadin</a>.
+	 */
+	@Override
+	public synchronized UserSession getUserSession() {
+		return userSession;
+	}
+
+	/**
+	 * Servicios de acceso a datos implementados con <a
+	 * href="http://projects.spring.io/spring-data/">Spring Data</a>
+	 */
+	@Override
+	public synchronized DataProvider<IEntity> getDataProvider() {
+		return dataProvider;
+	}
+
+	/**
+	 * Servicios de gestión de usuarios de acceso a la aplicación. CRUD
+	 */
+	@Override
+	public UserServices getUserServices() {
+		return userServices;
+	}
+
+	/**
+	 * Traductor usado para la localización de textos. Por defecto, traductor
+	 * basado en código java {@link TranslatorCode}: anotaciones y enumerados.
+	 */
+	@Override
+	public Translator getTranslator() {
+		return translator;
+	}
+
+	/**
+	 * Servicios de negocio de la aplicación ERP.
+	 */
+	@Override
+	public DataServices getDataServices() {
+		return dataServices;
+	}
+
+	/**
+	 * Lista de repositorios de iconos usados por la aplicación para la capa de
+	 * presentación.
+	 */
+	@Override
+	public synchronized Collection<RepositoryIcons<Icon>> getRepositoriesIcons() throws LocalizedException {
+
+		// Cargar una lista de imágenes mediante enumerados y un directorio de
+		// ficheros de imágenes.
+		// Los nombres de los ficheros deben de coincidir con la lista de
+		// enumerados.
+		ResourceIconsVaadin rep = ResourceIconsVaadin.getCurrent();
+		rep.load(Icons.class, "/icons");
+
+		List<RepositoryIcons<Icon>> repositories = new ArrayList<RepositoryIcons<Icon>>();
+		repositories.add(rep);
+
+		return repositories;
+	}
+
+}
+ [/java]
+ 
+ [java]
+/**
+ * Entorno de TEST Aplicación ERP Demo
+ *
+ */
+public class TestEnvironment implements Environment {
+
+	@Override
+	public String getName() {
+		return Texts.TEST.name();
+	}
+
+	@Override
+	public Key getTitle() {
+		return Texts.TEST;
+	}
+
+	@Override
+	public Key getDescription() {
+		return Texts.TEST;
+	}
+
+	/**
+	 * Lista de repositorio de iconos usados por la aplicación para la capa de
+	 * presentación basada en Vaadin.
+	 */
+	@Override
+	public synchronized Collection<RepositoryIcons<Icon>> getRepositoriesIcons() throws LocalizedException {
+
+		ResourceIconsVaadin rep = ResourceIconsVaadin.getCurrent();
+		rep.load(Icons.class, "/icons");
+
+		List<RepositoryIcons<Icon>> repositories = new ArrayList<RepositoryIcons<Icon>>();
+		repositories.add(rep);
+
+		return repositories;
+	}
+
+	/**
+	 * Servicios de seguridad implementados con la librería <a
+	 * href="http://shiro.apache.org/">Apache Shiro</a>
+	 */
+	@Override
+	public synchronized SecurityServices getSecurity() {
+		return new SecurityContextShiro("classpath:shiro.ini");
+	}
+
+	/**
+	 * Datos de la sesión de usuarios obtenidos del framework <a
+	 * href="https://vaadin.com/">Vaadin</a>.
+	 */
+	@Override
+	public synchronized UserSession getUserSession() {
+		return new UserSessionVaadin();
+	}
+
+	/**
+	 * Servicios de acceso a datos implementados con <a
+	 * href="http://projects.spring.io/spring-data/">Spring Data</a>
+	 */
+	@Override
+	public synchronized DataProvider<IEntity> getDataProvider() {
+		return new SpringDataProvider(ErpApplicationContext.class);
+	}
+
+	/**
+	 * Servicios de gestión de usuarios de acceso a la aplicación. CRUD
+	 */
+	@Override
+	public UserServices getUserServices() {
+		return null;
+	}
+
+	/**
+	 * Traductor usado para la localización de textos. Por defecto, traductor
+	 * basado en código java {@link TranslatorCode}: anotaciones y enumerados.
+	 */
+	@Override
+	public Translator getTranslator() {
+		return null;
+	}
+
+	/**
+	 * Servicios de negocio de la aplicación ERP.
+	 */
+	@Override
+	public DataServices getDataServices() {
+		return new ErpDataServices();
+	}
+
+}
+ 
+ [/java]
+ 
+ 2. Usar la clase básica EnvironmentImpl que implementa la interface Environment para establecer los servicios de aplicación:
+ [java]
+ 
+		EnvironmentImpl environment = new EnvironmentImpl(LocaleStore.TEST.name(), LocaleStore.TEST);
+
+		// Establecer los servicios de la aplicación.
+
+		// Acceso a datos
+		environment.setDataProvider(new SpringDataProvider(StoreApplicationContext.class));
+
+		// Repositorio de imágenes
+		List<RepositoryIcons<Icon>> icons = new ArrayList<RepositoryIcons<Icon>>();
+
+		// Iconos de librería Font Awesome.
+		FontAwesomeIcons fa = FontAwesomeIcons.getCurrent();
+		fa.addIcon(MenuIcons2.BOOK, FontAwesome.BOOK);
+		fa.addIcon(MenuIcons2.MONITOR, FontAwesome.DESKTOP);
+
+		ResourceIconsVaadin rep = ResourceIconsVaadin.getCurrent();
+		rep.load(MenuIcons.class, "/menu_icons");
+		rep.load(ProviderIcons.class, "/provider_icons");
+
+		icons.add(fa);
+		icons.add(rep);
+
+		environment.setRepositoriesIcons(icons);
+
+		// Servicios de seguridad
+		environment.setSecurity(new SecurityContextShiro("classpath:shiro.ini"));
+ [/java]
+
+ 3. Finalmente, inicializamos los contextos de aplicación a partir de la configuración de un entorno de ejecución:
+ [java]
+	AppContext.getCurrent().load(environment);
+	logger.info("Loaded environment " + AppContext.getCurrent().getTitle()); 
+ [/java]	
+
+ 
+ Servicios
+ 
+ Los servicios de aplicación están basados en una especificación (interface), son independientes de cualquier tecnología y su
+ sintaxis debe ser clara y simple. Como esta especificación es independiente de la tecnlogía, la arquitectura debe ofrecer una o
+ varias implementaciones para su integración en nuestros proyectos (frameworks, servidores y librerías de referencia).
+ A esta implementación la denomiamos "producto".
+ 
+ Producto
+ 
+ Los productos son parte fundamental de esta arquitectura colaborativa. Actualmente, JavaLego incorpora productos para
+ todos sus servicios, integrando tecnologías de referencia como: Spring, Vaadin, Shiro, ...
+ 
+ Como no podemos dar soporte a todas las tecnologías existentes, los miembros de nuestra comunidad colaboran para ampliar 
+ la oferta de productos.
+  
+ La tienda
+ 
+ Para poder publicar y clasificar estos productos, hemos desarrollado una tienda online.
+ La tienda ofrece la posibilidad de registrarnos como miembros de la comunidad y colaborar en el desarrollo de productos.
+ 
+ Repositorios de código
+ 
+ El código fuente de los productos estará registrados como proyectos en repositorios de código como Github. 
+ 
+ 
+ "Estamos convencidos que colaborando entre todos podremos mejorar nuestra productividad
+ y facilitar el conocimiento de nuevas tecnologías."
+ 
+ 
+ Revisar presentación para continuar... 

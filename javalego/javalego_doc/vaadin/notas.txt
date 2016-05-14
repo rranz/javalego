@@ -1,0 +1,51 @@
+
+Crear proyecto Vaadin e incluirlo en nuestro workspace. Posteriomente configurarlo para que funcione correctamente en Eclipse.
+
+C:\gana\apache-maven-3.0.4\bin\mvn archetype:generate -DarchetypeGroupId=com.vaadin -DarchetypeArtifactId=vaadin-archetype-application -DarchetypeVersion=7.1.8
+
+
+
+INSTALAR FONTS ADICIONALES PARA LAS APLICACIONES DESDE
+-------------------------------------------------------------------------------------------
+
+Google Web Fonts
+
+Ver manual en:
+
+http://softisto.blogspot.com.es/2013/06/como-instalar-fuentes-de-google-web.html#.UqYGuvTuI-o
+
+
+
+CONFIGURAR ECLIPSE PARA EDITOR ARCHIVOS SCSS COMO CSS:
+-------------------------------------------------------------------------------------------
+
+You need to associate the .scss file type with the native Eclipse CSS Editor in Eclipse[Part 1]. After you do that, you need to add the .scss file type to the native CSS Editor as well so the CSS Editor will be able to open it [Part 2]. Here are the steps for eclipse (I'm running Eclipse Java EE IDE for Web Developers, Indigo):
+
+---------- [Part 1] ---------- 
+1) Go to Window --> Preferences 
+2) Drill down to General --> Editors --> File Associations 
+3) In File Associations pane, click the 'Add..." button on the top right. 
+4) For "File Type:", enter *.scss and then click OK. 
+5) Find the *.scss entry in the File Associations list and select it. 
+6) After selecting *.scss, on the bottom pane "Associated editors:", click the "Add..." button. 
+7) Make sure "Internal editors" is selected on the top, then find and select "CSS Editor" and then click OK. 
+
+This associated the file type .scss with eclipses native CSS Editor. Now we have to configure the native CSS Editor to support .scss files. To do this, follow this steps:
+
+---------- [Part 2] ---------- 
+1) Go to Window --> Preferences 
+2) Drill down to General --> Content Types 
+3) In the Content Types pane, expand "Text", then select "CSS". 
+4) After "CSS" is selected, on the bottom "File associations:" pane, click the "Add..." button. 
+4) For "Content type:", enter *.scss and then click OK. 
+5) Click OK to close out the Preferences window. 
+
+All done. All you need to do now is close any .scss files that you have open then re-open them and wha-la, css colors in Eclipse for .scss files!
+
+
+
+EDITOR HTML5 + JS ONLINE
+----------------------------------------------------
+http://liveweave.com/
+
+usuario: ranzgrajal roberto1

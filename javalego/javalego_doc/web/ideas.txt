@@ -1,0 +1,118 @@
+SECCIONES
+
+QUÉ ES MECCANOJ
+
+Slogan:
+
+    Desarrollamos aplicaciones web adaptadas a dispositivos móviles
+	Desarrollamos aplicaciones nativas en Android
+	Amplia experiencia en el desarrollo de aplicaciones empresariales.
+	Diseñamos su página Web en WordPress
+	Descarge nuestra demo en Google Play (App Android) o en wwww. (Aplicación web adaptada a dispositivos móviles)
+
+
+indra modelo web
+SECTORES CONSULTORÍA TECNOLOGÍA OUTSOURCING INNOVACIÓN SOBRE INDRA
+
+
+1. IMAGEN CORPORATIVA LOGO: CARUSEL CON FRASES E IMÁGENES QUE REPRESENTAN TODOS LOS PUNTOS PRINCIPALES QUE OFRECE MECCANO:
+   SERVICIOS PROFESIONES, ARQUITECTURA OPENSOURCE, TIENDA, REDES SOCIALES COMUNIDAD, STAFF 
+
+
+. EMPRESA (http://autentia.com/empresa/)
+
+. SERVICIOS
+
+. COMUNIDAD
+
+
+Síguenos en: twitter, blogs, facebook, .. contacto y acerca de la empresa.
+
+
+-------------- MOSTRAR ICONOS DE ACCESO A REDES SOCIALES twitter meccanoj, ... facebook,...
+
+2. STAFF : ROBERTO MIGUEL https://vaadin.com/company
+
+3. SERVICIOS PROFESIONALES: SOFTWARE A MEDIDA REFERENCIA A ARQUITECTURA (VER AUTENTIA) http://autentia.com/servicios/software-a-medida/
+                            FREELANCE, SOPORTE, CLOUD, CONSULTORÍA, ... (VER AUTENTIA)
+               
+			   Presupuesto gratis
+               Calidad a precios muy competitivos.
+               Desarrollos a medida para pymes: apps y web
+               Colaboración en el desarrollo de proyectos de innovación y soluciones empresariales para su comercialización. (si tienes una idea de negocio real nosotros te ayudamos a conseguirla).
+               Mi información de empresa accesible desde la nube. Creamos servicios web de tus datos de empresa para poder visualizarlos y mantenerlos en dispositivos móviles o en la web.
+               Diseñamos páginas web en Wordpress.
+               Ofrecemos nuestra experiencia para realizar trabajos en modalidad freelance.
+			   Soporte en la definición de arquitecturas de proyectos.
+			   Formación, desarrollos de calidad, consultoría, ...     
+                            
+4. Arquitectura MeccanoJ.
+
+	Para conseguir ofrecer software de calidad a precios competitivos es necesario apoyarse en infraestructuras
+	sólidas que te permitan desarrollar con eficiencia.
+	
+	MeccanoJ dispone de una arquitectura open source basada en componentes para diferentes plataformas tecnológicas.
+		Características: presentación ppt meccanoj
+	
+	Tienda:
+	Los productos desarrollados con nuestra arquitectura son publicados en una tienda virtual para ofrecer seguridad y transparencia a nuestros clientes.
+
+   Antecedentes
+   ¿qué es? componentes, productos, tienda, comunidad, opensource.
+   Objetivos
+   Beneficios: eficiencia, calidad, Codificación simple y fácilmente mantenible,
+			. Normativa de calidad y certificación aplicada a los productos que ayudan a la certificación de proyectos. 
+			. Integración de productos no intrusiva y selectiva en la arquitectura de las empresas.	
+			. Facilita la extensibilidad de nuestros desarrollos hacia otras tecnologías o nuevas funcionalidades.
+				Transferencia del conocimiento de tecnologías de referencia a través de la especificación de funcionalidades transversales implementadas para diferentes
+				frameworks y librerías
+   
+   Opensource comunidad
+		Ofrecer la implementación servicios Java independientes de la tecnología (plataforma, frameworks, apis, ...) 
+		que permita una evolución tecnológica preservando los desarrollos realizados. Los desarrollos no deben
+		adaptarse a las tecnologías utilizadas (Spring, JSF, Vaadin, JS, ...), son los productos que implementan
+		la definición de componentes los encargados de generar nuestro modelo de negocio en las tecnologías que
+		decidamos utilizar en nuestros proyectos.
+
+		Android
+		   - databinding, jpa, validación de beans jsr30, ... componentes, cruds, utilidades,..
+
+		Vaadin
+		- CRUDS, componentes, 	
+
+		Java
+		- Abstracción de Acceso a datos (Spring Data, Android SQLLite, Hibernate, custom,...), 
+		- Abstración de Seguridad (Shiro, Spring Security),...
+		- Configuración de aplicación por entornos.
+		- Abstración de Localización para diferentes plataformas: web o mobile.
+
+   
+   
+   PRODUCTOS: ANDROID o VAADIN, SHIRO, SPRING, ... VER PROYECTOS DE LA ARQUITECTURA, CLOUD, ... VIDEOS GOOGLEPLAY, DEMOS ERP, ...
+
+	Excel donde mostramos qué cubre actualmente nuestra arquitectura.
+	En constante evolución tecnológica.
+	Independiente de la tecnología para poder escalar a nuevos productos en constante evolución.
+	Código fuente Github OpenSource pero bajo copyrigth safecreative.
+	Acceso a demos: web y google play para erp básico.
+	
+	Crear esquema:
+	                             meccanoJ.
+	         componentes
+	                      Modelo de negocio -   UI -     Acceso a datos      Seguridad      Localización
+	                      
+	                      por funcionalidad y tipos
+	                      xxx  xxx              xx xxx     xxx  xxxx
+	                      
+	         productos
+	                      por tecnología
+	                      vaadin android shiro (ver excel de cobertura actual).    
+
+5. TIENDA
+
+6. ARQUITECTURA: COMPONENTES, PRODUCTOS, CÓDIGO DE EJEMPLOS, GITHUB, COMUNIDAD, OPENSOURCE
+
+7.  REDES SOCIALES: GOOGLE+, LINKEDIN, WORDPRESS, BLOGS,
+
+
+

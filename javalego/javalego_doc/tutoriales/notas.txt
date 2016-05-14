@@ -1,0 +1,5 @@
+Ignorar la injección de dependencias de WAS o servidores de aplicaciones CDI de ciertos paquetes o jars.
+
+Manifest-Version: 1.0
+Ignore-Scanning-Archives: primefaces-4.0.jar, cgu_common.jar
+Ignore-Scanning-Packages: es.bde

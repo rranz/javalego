@@ -1,0 +1,138 @@
+@import "material-design-colors.scss";
+
+/* Funciones de configuración del color reutilizables */
+
+@mixin tabbutton-color($tabbutton-color: silver, $tabbutton-color-text: silver) {
+	background: $tabbutton-color;
+	color: $tabbutton-color-text;
+	border-bottom-color: $tabbutton-color;	
+}
+
+@mixin tabbutton-color-selected($tabbutton-text-selected) {
+	border-bottom-color: $tabbutton-text-selected;
+	color: $tabbutton-text-selected;	
+}
+
+@mixin tabbutton-color-hover($tabbutton-text-over) {
+	color: $tabbutton-text-over;
+	border-bottom-color: $tabbutton-text-over;
+}
+
+@mixin tabbutton-color-tabs($tabbutton-color, $padding-tabs) {
+	background: $tabbutton-color;
+	padding-left: $padding-tabs;
+	padding-right: $padding-tabs;
+}
+
+/* TabButton style */
+
+@mixin tabbutton {
+
+/* Variables de colores */
+$tabbutton-orange: $orange-500-color;
+$tabbutton-orange-text: $orange-200-color;	
+	
+$tabbutton-blue: $blue-900-color;
+$tabbutton-blue-text: $blue-500-color;
+
+$tabbutton-indigo: $indigo-600-color;
+$tabbutton-indigo-text: $indigo-300-color;
+
+$tabbutton-text-over: white;	
+$tabbutton-text-selected: white;
+
+$padding-text: 12px;
+$padding-tabs: 4px;	
+	
+/* Configuración estándar */
+	
+.tabbutton-text {
+	padding: $padding-text;
+}
+
+.tabbutton-icon-text {
+	padding: $padding-text;
+}
+
+.tabbutton-icon {
+	padding: $padding-text;
+}
+
+.tabbutton-layout {
+	border: solid;
+	font-weight: bold;
+	border-width: 0px;
+	border-bottom-width: 4px;	
+	background: white;
+	color: #bdbdbd;
+	border-bottom-color: white;	
+}
+
+.tabbutton-selected {
+	border-bottom-color: #0277bd;
+	color: #0277bd;	
+}
+
+.tabbutton-icon:hover, .tabbutton-text:hover, .tabbutton-layout:hover, .tabbutton-icon-text:hover {
+	cursor: pointer;
+}
+
+/* Configuración por colores Material Design */
+
+/* Blue */
+
+.tabbutton-blue {
+	@include tabbutton-color($tabbutton-blue, $tabbutton-blue-text);
+}
+
+.tabbutton-blue-selected {
+	@include tabbutton-color-selected($tabbutton-text-selected);
+}
+
+.tabbutton-blue:hover {
+	@include tabbutton-color-hover($tabbutton-text-over);
+}
+
+.menutabs-blue {
+	@include tabbutton-color-tabs($tabbutton-blue, $padding-tabs);
+}
+
+/* Indigo */
+
+.tabbutton-indigo {
+	@include tabbutton-color($tabbutton-indigo, $tabbutton-indigo-text);
+}
+
+.tabbutton-indigo-selected {
+	@include tabbutton-color-selected($tabbutton-text-selected);
+}
+
+.tabbutton-indigo:hover {
+	@include tabbutton-color-hover($tabbutton-text-over);
+}
+
+.menutabs-indigo {
+	@include tabbutton-color-tabs($tabbutton-indigo, $padding-tabs);
+}
+
+
+/* Orange */
+
+.tabbutton-orange {
+	@include tabbutton-color($tabbutton-orange, $tabbutton-orange-text);
+}
+
+.tabbutton-orange-selected {
+	@include tabbutton-color-selected($tabbutton-text-selected);
+}
+
+.tabbutton-orange:hover {
+	@include tabbutton-color-hover($tabbutton-text-over);
+}
+
+.menutabs-orange {
+	@include tabbutton-color-tabs($tabbutton-orange, $padding-tabs);
+}
+
+}
+

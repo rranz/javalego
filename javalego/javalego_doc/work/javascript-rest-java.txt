@@ -1,0 +1,15 @@
+Es necesario crear una arquitectura frontend y backend que
+se conecta a partir de servicios rest para:
+1. Obtener textos traducidos para frontend y mensajes.
+2. Obtener datos
+3. Seguridad: acceso a componentes fronted o lista de accesos a módulos, ...
+...
+
+Generación de servicios AngularJs 2.0 a partir del modelo de negocio del backend java.
+	Crear mantenimientos.
+	
+Crear componentes AngularJS 2.0 para mantenimientos y generar html a partir del modelo de negocio.
+
+Analizar necesidades reales que podríamos cubrir a partir del modelo de negocio definido en Java Backend.
+
+MicroCode píldoras de código

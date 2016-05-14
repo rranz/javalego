@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Security</title>
+</head>
+<body>
+	<h1>JAVALEGO</h1>
+	<h2>Seguridad</h2>
+
+Contextos, servicios y productos
+
+ Código de ejemplo:
+ 
+ [java]
+ 	Shiro
+ 	Spring Security
+ [/java]
+ 
+ Servicios de gestión de usuarios
+ 
+ MockUserServices
+ ShiroUserServices
+ 
+</body>
+</html>

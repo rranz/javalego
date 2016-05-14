@@ -1,0 +1,4 @@
+#Sun Mar 17 09:40:14 CET 2013
+com.vaadin.integration.eclipse.useLatestNightly=false
+com.vaadin.integration.eclipse.widgetsetStyle=OBF
+eclipse.preferences.version=1

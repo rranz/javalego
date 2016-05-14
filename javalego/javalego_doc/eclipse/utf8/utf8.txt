@@ -1,0 +1,20 @@
+Convertir proyectos y workspace con codificación utf-8:
+
+Proceso de conversión basado native2ascii.exe de java:
+
+
+1. Convertir todos los archivos con build.xml en todos los proyectos. Ejecutar proceso con archivos *.java, *.txt, *.html, ...
+
+2. Cambiar el workspace a utf-8 aplicando a todos los proyectos. Preferences.General.Workspace
+
+3. Cambiar encoding en resto de archivos: xml, txt, html, ... Preferences.Web.Html/Css/Jsp.Encoding
+
+4. Modificar el pom.xml del javalego root para establecer la propiedad maven
+
+ <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> utf-8 y así evitar que se creen ficheros ansi.
+
+CONFIGURAR pom.xml root o los proyectos según se indica en:
+
+http://www.adictosaltrabajo.com/tutoriales/tutoriales.php?pagina=characterencoding-native2ascii
+
+2. borrar estos archivos build.xml al finalizar proceso.

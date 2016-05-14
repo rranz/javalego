@@ -1,0 +1,108 @@
+Plataforma de Software Java
+
+Tienda
+
+	Header: Foro Blog Login Idioma Avisos documentación (tour, guía de usuario, manual).
+
+		(Si estamos registrados)
+		Mis proyectos
+		Ultimas descargas realizadas
+
+
+Menú izquierdo
+
+Componentes de arquitectura
+
+	Categorías (cuadros de colores e iconos blancos):
+			Lista
+
+Productos de negocio
+
+	Categorías:
+		Lista:
+		
+Proyectos
+
+	Categoría:
+		Lista
+				Datos de cada proyecto ver en documento (ver personas del equipo con fotos o imagen hombre).	
+				Estado
+				Repository de control de versiones (conexión GitHub).
+				Permisos
+				Licencia
+				Seguir en: twiter, facebook, wordpress,...
+				..
+		
+Central		
+	
+	Lista alfabética
+	Favoritos
+	Novedades
+	Más populares
+		
+		
+		Producto:
+		Ficha: Icono, título subtítulo
+		Recuadros de colores con letras o iconos para representarlo
+		Estrellas (opiniones)
+		Licencia
+		
+				Abrir producto o componente
+				
+				Imagen
+				Videos
+				Título
+				Descripción
+				Opiniones
+				Dependencias
+				Versiones ordenadas por fechas y opiniones 
+				Seguir en: twiter, facebook, wordpress,...
+				Documentación: JavaDoc para componetnes, guías de usuario
+				Descarga: Maven Gradle o descarga directa.
+			
+Casos de uso: (docx ver)
+
+	Crear un proyecto
+	Promover un componente
+	Descargar componetnes o productos								
+		
+
+
+Ficha de datos componente o producto:
+
+1. Tipo.Categoría
+2. Título 
+3. Subtítulo
+4. Guía de usuario
+5. Introducción.
+6. Features
+7. Tabla releases: number (snapshot, current, RCxx), documentation (reference|api)
+
+8. Opciones adicionales (tabla independiente).
+	1. Twitter (ej. https://twitter.com/SpringFramework)
+2. Github (ej.: https://github.com/spring-projects/spring-framework)
+3. Gestión del proyecto (Ej.: https://jira.springsource.org/browse/SPR)
+4. Integración continua (Ej.: https://build.springsource.org/browse/SPR)
+5. StackOverflow (foros)
+6. SonarQube (cobertura, sonar).
+
+
+Guías de usuario:
+
+Tiene que tener una estructura definida (ver cómo)
+
+
+
+1. Started guide (primeros pasos).
+2. Título
+3. Descripción
+4. Contenido (html)
+
+Codigo:
+    Descargar
+    
+    
+    
+    
+    
+    

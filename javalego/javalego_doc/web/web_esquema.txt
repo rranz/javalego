@@ -1,0 +1,130 @@
+SECCIONES
+
+HOME: 
+	Imágenes para cada item carrousel:
+	Desarrollamos aplicaciones web adaptadas a dispositivos móviles
+	Desarrollamos aplicaciones nativas en Android
+	Amplia experiencia en el desarrollo de aplicaciones empresariales.
+	Conozca nuestra arquitectura de desarrollo
+	Descarge nuestra demo en Google Play (App Android) link o en wwww link. (Aplicación web adaptada a dispositivos móviles)
+	Si tienes una idea de negocio real nosotros te ayudamos a conseguirla
+	Mi información de empresa accesible desde la nube
+   
+EMPRESA: Imágenes corporativas, título meccanoj  http://autentia.com/empresa/
+	
+		Bienvenido a nuestra página web.
+		Nuestra empresa está especializada en el desarrollo de aplicaciones adaptadas a dispositivos móviles y aplicaciones nativas en Android.
+		Tenemos una amplia experiencia en entorno Java, frameworks de referencia (Spring, Vaadin, Shiro, JSF, ...) y servidores de aplicaciones.
+		Ofrecemos soporte y garantía para nuestros proyectos.
+		Nos comprometemos con la calidad de nuestros servicios, complimiento de planificaciones y entrega completa de código fuente. 
+		Ofrecemos precios muy competitivos.
+		Casos de éxito.
+		Showcase de empresas: logotipos carrousel.
+	    - Hecho con amor  LIGHTNING FAST (la velocidad del rayo), compromiso de calidad, 
+		- transparencia, compromiso de entraga, ... cualidades de nuestros servicios.	
+		Siguenos en Twitter, Blog y Facebook.
+		Nuestros partners
+		Nuestros clientes.
+		
+SERVICIOS:
+    
+		Ofrecemos soluciones a la medida de sus necesidades.
+		Trabajamos con metodología ágiles.
+		Ofrecemos aplicaciones multi-idioma.
+		Podemos colaborar en proyectos como servicios freelance. (estamos en ODesk)
+		Analizamos su proyecto y entregamos un presupuesto gratuito.
+	    Ofrecemos servicios para acceder a sus datos de empresa (Cloud Computing)
+	    Diseñamos páginas web en Wordpress.
+	    Ofrecemos soporte técnico y asesoramiento.
+				
+			Imagen + ( support fantastic (description), mobile solutions (desc), market analisi, photography ,...
+			Crear sección de gridview con:
+			Imagen, título y descripción de cada características ofrecida. Ej.: Imagen, Advanded Theme Options, We include an extramely advanced ...
+			Demos
+
+
+ARQUITECTURA:
+
+	Concepto:
+	MeccanoJ ha desarrollado una arquitectura Open Source basada en componentes que permite desarrollar aplicaciones web y aplicaciones nativas para móviles usando Java o Groovy como lenguaje para definir su modelo de negocio.
+		Características: presentación ppt meccanoj
+	
+	Estructurar web como en presentación meccanoj:
+		COMPONENTES, PRODUCTOS, CÓDIGO DE EJEMPLOS, GITHUB, COMUNIDAD, OPENSOURCE
+		   
+		Para conseguir ofrecer software de calidad a precios competitivos es necesario apoyarse en infraestructuras
+		sólidas que te permitan desarrollar con eficiencia.
+		
+	Tienda:
+		Los productos desarrollados con nuestra arquitectura son publicados en nuestra Tienda virtual para ofrecer una total transparencia a nuestros clientes que genere confianza.
+		Acceda a nuestro catálogo de proyectos Open Source publicados en GitHub.
+		Acceda a nuestras demos disponibles para aplicaciones Web (adaptadas a dispositivos móviles) y aplicaciones nativas en Android.
+
+	Beneficios: 
+			. Open Source
+			. Eficiencia, calidad, Codificación simple y fácilmente mantenible,
+			. Normativa de calidad y certificación aplicada a los productos que ayudan a la certificación de proyectos. 
+			. Integración de productos no intrusiva y selectiva para arquitecturas empresariales.	
+			. Facilita la extensibilidad de nuestros desarrollos hacia nuevas tecnologías de referencia o nuevas funcionalidades.
+			. Facilita el conocimiento de tecnologías a partir de nuestras implementaciones en los principales frameworks y librerías de referencia.
+			. 
+			Independiente de la tecnología para poder escalar a nuevos productos en constante evolución.
+			Código fuente Github OpenSource pero bajo copyrigth safecreative.
+	   
+	Comunidad:
+		. Ofrecemos la posibilidad de colaborar en nuestros proyectos Open Source en GitHub (link).
+		. Compartimos nuestro conocimiento a través del código de nuestros productos.
+		. Ofrecemos servicios Java independientes de la tecnología (plataforma, frameworks, apis, ...) 
+			que permita una evolución tecnológica preservando los desarrollos realizados. Los desarrollos no deben
+			adaptarse a las tecnologías utilizadas (Spring, JSF, Vaadin, JS, ...), son los productos que implementan
+			la definición de componentes los encargados de generar nuestro modelo de negocio en las tecnologías que
+			decidamos utilizar en nuestros proyectos.
+
+		. Aportaciones a la comunidad Android: 
+			   - databinding, jpa, validación de beans jsr30, ... componentes, cruds, utilidades,..
+
+		. Aportaciones a la comunidad Vaadin: 
+			- CRUDS, componentes, 	
+
+		. Aportaciones a la comunidad Java:
+			- Abstracción de Acceso a datos (Spring Data, Android SQLLite, Hibernate, custom,...), 
+			- Abstración de Seguridad (Shiro, Spring Security),...
+			- Configuración de aplicación por entornos.
+			- Abstración de Localización para diferentes plataformas: web o mobile.
+
+	PRODUCTOS: 
+	
+		Acceso a demos: web y google play para erp básico.
+		
+	COBERTURA:
+	
+	                             meccanoJ.
+	         componentes
+	                      Modelo de negocio -   UI -     Acceso a datos      Seguridad      Localización
+	                      
+	                      por funcionalidad y tipos
+	                      xxx  xxx              xx xxx     xxx  xxxx
+	                      
+	         productos
+	                      por tecnología
+	                      vaadin android shiro (ver excel de cobertura actual). 
+
+						  
+TEAM: Ficha con foto: roberto y miguel, rafa ?. https://vaadin.com/company
+	  conexión Linkedin, twitter, google+, ...
+	  
+CONTACTO: 
+   Testimonios de clientes (texto, nombre o empresa). 
+   sobre nosotros: nuestros contactos: dirección, ciudad, provincia, telefono, email, ... boletín de noticias
+   GET IN TOUCH WITH US
+   Map de geolocalización de sede empresa.
+   Our blog (recent news & events).
+   Contact info
+		Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
+		Address:
+		102580 Santa Monica BLVD Los Angeles
+		Phone numbers:
+		+3 045 224 33 12, +3 045 330 40 44
+		Email:
+		sales@yoursite.com
+		iconos de redes sociales

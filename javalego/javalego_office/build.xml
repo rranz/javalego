@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- build.xml - a simple Ant buildfile -->
+<project name="Framework Buildfile" default="EncodeFile" basedir=".">
+
+	<!-- The directory containing source code -->
+	<property name="src.dir" value="." />
+
+	<!-- Temporary build directories -->
+	<property name="build.dir" value="." />
+	<property name="build.classes" value="${src.dir}" />
+	<property name="build.lib" value="${build.dir}" />
+
+	<target name="EncodeFile">
+		<native2ascii reverse="true" encoding="UTF-8" src="src/main/java" dest="out" includes="**/*.java" ext=".java" />
+	</target>
+
+</project>

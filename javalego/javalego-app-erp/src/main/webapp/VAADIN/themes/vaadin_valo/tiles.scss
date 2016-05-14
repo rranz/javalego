@@ -1,0 +1,15 @@
+
+@mixin tiles  { 
+	
+.tile { 
+	background: white;
+	margin: 0px;
+	padding: 4px;
+}
+
+.tile:HOVER {
+	background: #CEE3F6;
+	cursor: pointer;
+}
+
+}

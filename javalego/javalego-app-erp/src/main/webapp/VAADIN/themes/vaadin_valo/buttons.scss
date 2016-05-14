@@ -1,0 +1,305 @@
+@import "material-design-colors.scss";
+
+@mixin buttons {
+
+/* CSSBUTTON */
+
+.cssbutton-text {
+	padding: 10px;
+	/*font-size: 14px;*/
+}
+
+.cssbutton-icon-text {
+ 	padding: 4px;
+ 	padding-left: 10px;
+ 	padding-right: 10px;
+	/*font-size: 14px;*/
+	display:inline-block; 
+	vertical-align: middle;
+}
+
+.cssbutton-small {
+	padding: 0px;
+	padding-left: 1px;
+	padding-right: 1px;
+}
+
+.cssbutton-icon {
+ 	padding: 4px;
+ 	padding-left: 8px;
+ 	padding-right: 8px;
+	display:inline-block; 
+	vertical-align: middle;
+}
+
+.cssbutton-icon-small {
+ 	padding: 2px;
+ 	padding-top: 3px;
+ 	padding-left: 4px;
+ 	padding-right: 4px;
+	display:inline-block; 
+	vertical-align: middle;
+}
+
+
+.cssbutton-icon:hover, .cssbutton-text:hover, .cssbutton-layout:hover, .cssbutton-icon-text:hover {
+	cursor: inherit;
+}
+
+.cssbutton-layout {
+	color: #3F3F3F; /* #005C99; azul bonito*/
+}
+
+.cssbutton-layout:hover {
+	background-color: #B2E0FF;
+	cursor: pointer;
+}
+
+.cssbutton-ic-drawer:hover {
+	background-color: inherit;
+	cursor: pointer;
+}
+
+/* Colores Action Button */
+
+.cssbutton-red {
+	background: #B73030;
+	color: white;
+}
+.cssbutton-green {
+	background: $green-600-color;
+	color: white;
+}
+.cssbutton-yellow {
+	background: #EAD706;
+	color: white;
+}
+.cssbutton-indigo {
+	background: $indigo-600-color;
+	color:white;
+}
+.cssbutton-blue {
+	background:  $blue-700-color;
+	color: white;
+}
+.cssbutton-orange {
+	background:  $orange-600-color;
+	color: white;
+}
+.cssbutton-teal {
+	background: #0B615E;
+	color: white;
+}
+.cssbutton-black {
+	background: #3F3F3F;
+	color: white;
+}
+.cssbutton-white {
+	background: white;
+	color: black;
+}
+.cssbutton-silver {
+	background: silver;
+	color: black;
+}
+.cssbutton-gray {
+	background: gray;
+	color: white;
+} 
+.cssbutton-navy {
+	background:  $blue-900-color;
+	color: white;
+} 
+
+.cssbutton-selected {
+	font-weight: bold;
+	font-style: italic;
+}
+
+.cssbutton-selected-background {
+  @include valo-gradient(#81d4fa);
+}
+
+.cssbutton-disabled:hover {
+	background: $indigo-600-color;
+	cursor: default;
+}
+.cssbutton-disabled {
+	background: $blue-900-color;
+	color: white;
+	border: none;
+	font-weight: bold;
+}
+.cssbutton-border {
+	border: solid;
+	border-width: 0px;
+	border-bottom-width: 1px;
+	border-bottom-color: #EBEBEB;	
+}
+
+
+/* MENUPANELS */
+
+.menupanels-level2-red {
+	background:  $red-50-color;
+	color: black;
+	border: none;
+}
+.menupanels-level2-green {
+	background:  $green-50-color;
+	color: black;
+	border: none;
+}
+.menupanels-level2-yellow {
+	background: $yellow-50-color;
+	color: black;
+	border: none;
+}
+.menupanels-level2-blue {
+	background: $blue-50-color;
+	color: black;
+	border: none;
+}
+.menupanels-level2-indigo {
+	background:  $indigo-50-color;
+	color: black;
+	border: none;
+}
+.menupanels-level2-orange {
+	background:  $orange-50-color;
+	color: black;
+	border: none;
+}
+.menupanels-level2-teal {
+	background:  $teal-50-color;
+	color: black;
+	border: none;
+}
+.menupanels-level2-black {
+	background:  $grey-50-color;
+	color: black;
+	border: none;
+}
+.menupanels-level2-white {
+	background:  $grey-50-color;
+	color: black;
+	border: none;
+}
+.menupanels-level2-gray {
+	background:  $grey-50-color;
+	color: $grey-800-color;
+	border: none;
+} 
+
+
+
+
+/* BACKBUTTON */
+
+.backbutton-layout {
+	background: white; /* #F2F2F2;*/
+}
+.backbutton-layout:hover {
+	background: #B2E0FF;
+	cursor: pointer;
+}
+
+
+
+
+/* BOTON CON UN BORDER-BOTTOM CON COLORES */
+
+.borderbutton-text {
+	padding: 10px;
+	/*font-size: 14px;*/
+}
+
+.borderbutton-icon-text {
+ 	padding: 4px;
+ 	padding-left: 0px;
+ 	padding-right: 10px;
+	/*font-size: 14px;*/
+	display:inline-block; 
+	vertical-align: middle;
+}
+
+.borderbutton-icon {
+ 	padding: 4px;
+ 	padding-left: 8px;
+ 	padding-right: 8px;
+	display:inline-block; 
+	vertical-align: middle;
+}
+
+.borderbutton-icon:hover, .borderbutton-text:hover, .borderbutton-layout:hover, .borderbutton-icon-text:hover {
+	cursor: inherit;
+}
+
+.borderbutton-layout {
+	border: solid;
+	border-width: 0px;
+	border-color: white;
+	color: black;
+	border-bottom-width: 3px;
+	border-bottom-color: red;
+	background: white;		
+}
+
+.borderbutton-layout:hover {
+	background-color: #B2E0FF;
+	cursor: pointer;
+}
+
+/* Colores Action Button */
+
+.borderbutton-red {
+	border-bottom-color: red;
+}
+.borderbutton-green {
+	border-bottom-color: green;
+}
+.borderbutton-yellow {
+	border-bottom-color: #EAD706;
+}
+.borderbutton-blue {
+	border-bottom-color: #0066FF;
+}
+.borderbutton-orange {
+	border-bottom-color: orange;
+}
+.borderbutton-teal {
+	border-bottom-color: #0B615E;
+}
+.borderbutton-black {
+	border-bottom-color: #3F3F3F;
+}
+.borderbutton-white {
+	border-bottom-color: white;
+}
+.borderbutton-silver {
+	border-bottom-color: silver;
+}
+.borderbutton-gray {
+	border-bottom-color: gray;
+} 
+.borderbutton-navy {
+	border-bottom-color: #0B3861;
+} 
+
+
+.borderbutton-selected {
+	font-weight: bold;
+	font-style: italic;
+}
+
+.borderbutton-disabled:hover {
+	background: #3F3F3F;
+	cursor: default;
+}
+.borderbutton-disabled {
+	background: #3F3F3F;
+	color: white;
+	border: none;
+}
+
+}

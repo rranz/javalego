@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<link type="text/css" rel="stylesheet" href="css/SyntaxHighlighter.css"></link>
+<script language="javascript" src="js/shCore.js"></script>
+<script language="javascript" src="js/shBrushJava.js"></script>
+<script language="javascript" src="js/shBrushXml.js"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Código: MenuPanelsDemo.java</title>
+</head>
+<body>
+<pre name="code" class="java">
+/**
+ * Demo de paneles
+ * 
+ * @author ROBERTO RANZ
+ */
+public class MenuPanelsDemo extends Panel implements View {
+
+	public static final String NAME = "MENUPANELSDEMO";
+
+	/**
+	 * Constructor
+	 * 
+	 * @param navigator
+	 */
+	public MenuPanelsDemo() throws LocalizedException {
+
+		setSizeFull();
+
+		MenuPanels mp = new MenuPanels();
+
+		MenuPresenter p = new MenuPresenter(new MenuPanelsModel(), mp);
+		p.addItemChangeListener(new MenuPresenterListener() {
+			@Override
+			public void propertyChange(ItemChangeEvent<IMenuItem> event) {
+			}
+		});		
+		
+		mp.setWidth("300px");
+		
+		VerticalLayout layout = new VerticalLayout();
+		layout.setMargin(true);
+
+		layout.addComponent(mp);
+
+		setContent(layout);
+	}
+
+	@Override
+	public void enter(ViewChangeEvent event) {
+
+	}
+
+}
+</pre>
+
+<script language="javascript">
+dp.SyntaxHighlighter.ClipboardSwf = '/flash/clipboard.swf';
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+
+</body>
+</html>

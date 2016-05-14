@@ -1,0 +1,25 @@
+TAREAS PENDIENTES JAVALEGO STORE
+
+Persistir casos reales de la arquitectura como proyecto jpa.
+
+Help completo. 
+
+-----------------------------------------------------------------------------------------------------
+
+Conectar con Github y crear un proyecto de prueba para ver cómo se integra.
+
+Adaptar TilesBeansView para que se versatil a diferentes tipologías de visualización tipo Browser de Windows (lista detalle mosaico contenido, ...)
+El ICustomListBeanView le pasaremos el tipo de visualización para que personalice su contenido.
+Lista de Beans (Tiles y List como tipolog�as posibles) e incluir botón de cambio de modalidad de visualización.
+
+Componente Vaadin para incluir videos en tutoriales.
+https://vaadin.com/directory#addon/mediaelementjs-player
+
+Filtro de combobox
+http://blog.oio.de/2015/01/17/write-simple-auto-complete-combobox-vaadin/
+
+
+
+DOCUMENTAR SERVICIOS REST:
+http://www.adictosaltrabajo.com/tutoriales/tutoriales.php?pagina=RESTSwagger
+http://swagger.io/

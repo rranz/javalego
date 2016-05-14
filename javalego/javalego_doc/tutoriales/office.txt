@@ -1,0 +1,23 @@
+
+inmovilizar panels
+-------------------------
+Para inmovilizar panels columna y cabecera, posicionar el curso en la intersecci�n o celda donde se iniciará el scroll horizontal y vertical y pulsaremos la opción de inmovilizar paneles.
+
+
+Para crea documento de word con cap�tulos hay que utilizar el siguiente procedimento:
+-------------------------------------------------------------------------------------
+1. Crear un nuevo documento
+
+2. Menú Insertar -> Salto. Opción: Sección - Tipo de salto de sección: Opción "Salto de página".
+
+3. Una vez creado el salto de página, menú Formato -> Numeración Viñetas y
+   dentro del diálogo, seleccione la opción: Esquema numerado y la última opción (Capítulo 1..).
+   Repita este punto por tantos capítulos como desee.
+ 
+4. Incluir cap�tulo en "Encabezado de página". Menú "Ver -> Encabezado y pié de página"
+	 Dentro de la barra de botones emergente, deshabilitar el botón marcado (imagen similar a dos páginas conectadas).
+	 Esta opción elimina el utilizar el mismo encabezado que la página anterior.
+	 Menú "Insertar -> Referencia Cruzada" y seleccione de la lista el capítulo deseado y
+	 pulse el botón de "Insertar" y el botón de "Aceptar". Ya ha insertado el capítulo
+	 deseado en la página deseada. Repita este procedimiento en la primera página de 
+	 cada capítulo.

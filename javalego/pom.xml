@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>javalego</groupId>
+	<artifactId>javalego_maven</artifactId>
+	<packaging>pom</packaging>
+	<version>2.0</version>
+	<name>JAVALEGO for Maven</name>
+	<url>http://maven.apache.org</url>
+	<description>JAVALEGO Project for Maven</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<servlet-api.version>3.0.1</servlet-api.version>
+		<deploy.skip>false</deploy.skip>
+		<junit.version>4.7</junit.version>
+		<javalego.version>2.0</javalego.version>
+		<log4j.version>1.2.14</log4j.version>
+		<slf.version>1.6.4</slf.version>
+		<java.version>1.7</java.version>
+	</properties>
+
+	<!-- REQUERMIENTOS PARA MAVEN CENTRAL http://central.sonatype.org/pages/requirements.html -->
+
+	<developers>
+		<developer>
+			<name>Manfred Moser</name>
+			<email>manfred@sonatype.com</email>
+			<organization>Sonatype</organization>
+			<organizationUrl>http://www.sonatype.com</organizationUrl>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>http://svn.apache.org/viewvc/maven</url>
+	</scm>
+	<!-- <scm> <connection>scm:git:git@github.com:juven/git-demo.git</connection> 
+		<developerConnection>scm:git:git@github.com:juven/git-demo.git</developerConnection> 
+		<url>git@github.com:juven/git-demo.git</url> </scm> -->
+
+	<build>
+		<plugins>
+
+			<!-- COMPILER -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<!-- RESOURCES -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<!-- SITE -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<configuration>
+					<inputEncoding>UTF-8</inputEncoding>
+					<outputEncoding>UTF-8</outputEncoding>
+				</configuration>
+			</plugin>
+
+			<!-- SOURCE CODE -->
+			<!-- 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			 -->
+
+			<!-- JAVADOC <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-javadoc-plugin</artifactId> 
+				<executions> <execution> <id>attach-javadocs</id> <goals> <goal>jar</goal> 
+				</goals> </execution> </executions> </plugin> -->
+
+		</plugins>
+
+		<!-- Incluir .java ficheros en el JAR (si no queremos que estos archivos 
+			permanezcan en el /target directorio, hay que comentar este tag y realizar 
+			un clean de todos los proyectos <resources> <resource> <directory>src/main/java</directory> 
+			<includes> <include>**/*.java</include> </includes> </resource> </resources> -->
+
+	</build>
+
+	<dependencies>
+	</dependencies>
+
+	<modules>
+		<module>javalego_util</module>
+		<module>javalego_security</module>
+		<module>javalego_security_shiro</module>
+		<module>javalego_model</module>
+		<module>javalego_locale</module>
+		<module>javalego_data</module>
+		<module>javalego_data_spring</module>
+		<module>javalego_data_rest</module>
+		<module>javalego_data_rest_client</module>
+		<module>javalego_ui</module>
+		<module>javalego_ui_vaadin</module>
+		<module>javalego_app</module>
+		<module>javalego_office</module>
+	</modules>
+
+	<!-- DEPLOY artefactos en Archiva y Maven Central (TODO) -->
+
+	<distributionManagement>
+		<repository>
+			<id>internal</id>
+			<url>http://localhost:8080/repository/internal/</url>
+		</repository>
+
+		<!-- maven central distribuir los artefactos <repository> <id>nexus-site</id> 
+			<url>http://central_nexus/server</url> </repository> -->
+	</distributionManagement>
+
+
+	<repositories>
+		<repository>
+			<id>internal</id>
+			<name>Archiva Managed Internal Repository</name>
+			<url>http://localhost:8080/repository/internal/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>internal</id>
+			<name>Archiva Managed Internal Repository</name>
+			<url>http://localhost:8080/repository/internal/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+
+	<!-- Deploy to Maven Central http://java.dzone.com/articles/deploy-maven-central
+	<pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.6</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.1</version>
+			</plugin>
+		</plugins>
+		...
+	</pluginManagement> -->
+
+
+	<!-- <profiles> <profile> <id>Repositorios Locales</id> <activation> <activeByDefault>true</activeByDefault> 
+		</activation> <repositories> <repository> <id>internal</id> <url>http://localhost:8080/archiva/repository/internal/</url> 
+		<releases> <enabled>true</enabled> </releases> <snapshots> <enabled>false</enabled> 
+		</snapshots> </repository> <repository> <id>snapshots</id> <url>http://localhost:8080/archiva/repository/snapshots/</url> 
+		<releases> <enabled>false</enabled> </releases> <snapshots> <enabled>true</enabled> 
+		</snapshots> </repository> </repositories> </profile> </profiles> -->
+
+</project>

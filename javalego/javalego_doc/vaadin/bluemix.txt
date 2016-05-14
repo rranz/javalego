@@ -1,0 +1,49 @@
+
+Referencia:
+
+https://hub.jazz.net/project/johndevs/vaadin-jpa-app-groovy/overview
+
+Comandos para conectar y subir aplicación war:
+
+
+Conecte con Bluemix.
+
+cf api https://api.eu-gb.bluemix.net
+
+Inicie una sesi�n en Bluemix.
+
+cf login -u roberto.ranz@gmail.com
+
+cf target -o roberto.ranz@gmail.com -s dev
+
+Despliegue la app en Bluemix.
+
+cf push store -p store.war
+
+Acceda a la app. Consulte aqu� los cambios:
+
+store.eu-gb.mybluemix.net
+
+
+
+
+
+{
+  "mysql-5.5": {
+    "name": "store",
+    "label": "mysql-5.5",
+    "plan": "300",
+    "credentials": {
+      "name": "d618f34854c484c39aa5db8d57592be54",
+      "hostname": "159.8.128.240",
+      "host": "159.8.128.240",
+      "port": 3307,
+      "user": "ubu0G1bvH1BMl",
+      "username": "ubu0G1bvH1BMl",
+      "password": "pgAzYXNzq36sp",
+      "uri": "mysql://ubu0G1bvH1BMl:pgAzYXNzq36sp@159.8.128.240:3307/d618f34854c484c39aa5db8d57592be54"
+    }
+  }
+}
+
+

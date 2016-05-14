@@ -1,0 +1,110 @@
+
+@mixin valo-menu-title2-style {
+  line-height: 1.2;
+  @include valo-gradient($color: $v-selection-color);
+  $font-color: valo-font-color($v-selection-color, 1);
+  color: $font-color;
+  text-shadow: valo-text-shadow($font-color: $font-color, $background-color: $v-selection-color);
+  padding: round($v-unit-size/3) round($v-unit-size/2);
+  font-size: round($v-font-size * 0.9);
+  border-bottom: valo-border($color: $v-selection-color);
+  @include box-shadow(valo-bevel-and-shadow($shadow: $v-shadow));
+}
+
+@mixin javalego {
+
+/* Common settings */
+.toggledisplay {
+    .enoughspace, .notenoughspace {
+    }
+ 
+    .notenoughspace { /* Really small */
+    }
+
+    .enoughspace { /* Really big */
+    }
+}
+    
+/* Quite little space */
+.toggledisplay[width-range~="0-800px"] {
+    .enoughspace    {display: none}
+    .notenoughspace {display: inline-block}
+}
+    
+/* Plenty of space */
+.toggledisplay[width-range~="801px-"] {
+    .enoughspace    {display: inline-block}
+	.notenoughspace {display: none}
+}
+
+.maxwidth {
+	display: inline-block;
+	width: 100%;
+}
+
+.minwidth {
+	display: inline-block;
+	width: 360px;
+	padding: 6px;
+	padding-top: $v-layout-margin-top;
+}
+
+/* .menos {
+	transform: translateX(-320px);
+}
+.mas {
+	transform: translateX(320px);
+} */
+
+.headercolor {
+  /*line-height: 1.2;*/
+  @include valo-gradient($v-selection-color);
+  /*
+  $font-color: valo-font-color($v-selection-color, 1);
+  color: $font-color;
+  text-shadow: valo-text-shadow($font-color: $font-color, $background-color: $v-selection-color);
+  padding: round($v-unit-size/3) round($v-unit-size/2);
+  font-size: round($v-font-size * 0.9);
+  border-bottom: valo-border($color: $v-selection-color);
+  */
+  padding: 4px;
+  @include box-shadow(valo-bevel-and-shadow($shadow: $v-shadow));
+}
+
+.whitecolor {
+	background: white;
+}
+
+.hide-scroll-x {
+	overflow-x: hidden;
+}
+
+
+/* Responsive examples */
+
+/* Basic settings for all sizes */
+.myresponsive {
+    padding: 5px;
+    line-height: 36pt;
+}
+    
+/* Small size */
+.myresponsive[width-range~="0-600px"] {
+    background: orange;
+    font-size: 16pt;
+}
+
+/* Medium size */
+.myresponsive[width-range~="601px-1000px"] {
+    background: azure;
+    font-size: 24pt;
+}
+
+/* Anything bigger */
+.myresponsive[width-range~="1001px-"] {
+    background: palegreen;
+    font-size: 36pt;
+}
+
+
+}

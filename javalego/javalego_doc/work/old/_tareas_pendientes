@@ -1,0 +1,73 @@
+HAY QUE USAR TERRITORIAL Y SHIRO 
+
+ZZZZZUI ejemplo territorial
+com.jsca.data.... territorial
+
+com.jsca.security shiro y user role model para todos los providers de seguridad.
+
+Copiar user, roles, ,  y persistencia o no en jsca para crear un entorno persistente
+
+
+
+SHIRO INCLUIR CLASES DE REALM Y QUITAR SHIRO.INI. Incluir persistencia de usuaarios, 
+roles y permisos y seguridad de módulos, ... a través de anotaciones RequiredRoles RequiredPermissions.
+
+
+Utilizar MyRealm creando una clase específica
+que implemente métodos para JSCA.
+
+Roles creando la clase Role
+Permission con descripciones...
+Incluir información al editar el perfil de usuario.
+Sacar los datos de roles y permisos de esta clase
+profile y así centralizar información.
+
+Customizable y no requerido 
+
+interface MyRealm para obtener estos datos
+
+Cambiar shiro.ini actual.
+
+Cifrarcontraseñas.
+
+-+------------------------------------------------------------------------------------------------------------
+
+
+
+
+Editor
+
+
+Pasar filtros y vistas a registros
+
+registros
+
+todos   filtrar vistas favoritos
+
+mismo csslayout para datos
+
+
+Adaptar menutabs para responsitive.
+
+Crear pantalla de presentación de demo ERP con
+pantalla principal de área de trabajo y añadir menuTabs para los
+módulos que vayamos abriendo pero sin mantener siempre visible del área
+de trabajo.
+
+MenuTabs añadir visible, closeable, colores, ... enabled.
+
+
+FILTROS (al seleccionar pestaña de todos se elimina el filtro).
+
+Al seleccionar uno: mostrar descripción
+Si hay input realizar un presenter y al seleccionar el botón de filtrar aplicar filtro llamando
+al getStatement() del filtro. Notificar número de registros: rojo si no hay y verde si existen.
+
+Paginación.
+
+Redimensionamiento del table (ver mobile).
+
+Query archetype maven para uso en Eclipse para jars JSCA 
+http://stephou.wordpress.com/2009/09/27/create-a-maven-archetype-from-an-existing-project-on-eclipse/
+
+

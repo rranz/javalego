@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>UI</title>
+</head>
+<body>
+	<h1>JAVALEGO</h1>
+	<h2>UI Interface de usuario</h2>
+
+<p>Introducción a sus servicios
+
+<article>
+
+<section>
+	<h4>Contexto</h4>
+	<p>Servicios ofrecidos por el contexto UI:
+	<ol>
+		<li>Gestión de proveedores</li>
+		<li>Persistencia</li>
+		<li>Servicios de negocio</li>
+	</ol>
+
+</section>
+
+ Código de ejemplo:
+ 
+ [java]
+ 
+ 	UI Project (especificación)
+ 
+ 	Model de tipos de datos de edición : Text, Date, ...
+ 	
+ 	<p>Define los metadatos que describen los objetos del modelo de
+		nuestra aplicación. Estos objetos pueden ser: componentes UI,
+		informes, servicios de negocio, módulos, aplicaciones, acciones, ...
+	<p>Los metadatos básicos son: identificador o nombre, etiqueta o
+		título, descripción (opcional) y una imagen o icono que lo representa
+		(opcional)
+	<p>Ejemplos: Podemos definir un metadato asociado a un campo de una
+		entidad para definir su título y descripción. Los atributos título y
+		descripción deben ser multiidioma (ver localización de aplicaciones)</p>
+
+	<p>Otras funcionalidades:
+	<p>Localización de excepciones
+	<p>Tipología de tipos de campos de edición (textos, números,
+		fechas, enumerados, moneda, cif, nif, imagen, ...). Incluyen metadatos
+		adicionales.
+	<p>Constantes localizadas para su reutilización en otros proyectos
+		(acciones, acciones de editores, excepciones, seguridad, warnings,
+		...)
+	<p>
+		Validadores de beans. Se utiliza actualmente para implementar la
+		validación de Beans basada en anotaciones para la plataforma Android
+		donde actualmente no está implementada.
+ 
+ 	Productos:
+ 	
+ 	
+ 	
+ 	Vaadin componentes MVP
+ 	
+ 	Android componentes MVP
+ 
+ [/java]
+ 
+</body>
+</html>

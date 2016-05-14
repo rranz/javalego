@@ -1,0 +1,156 @@
+
+@mixin general {
+
+.layout-shadow-rounded {
+	background: #fff;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(0, 0, 0, 0.07);
+	-moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(0, 0, 0, 0.07);
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(0, 0, 0, 0.07);	
+}
+
+/* Configuración de fuentes */
+.font-normal {
+	font-size: inherit;
+}
+.font-bold {
+	font-style: bold;
+}
+.font-medium {
+	font-size: medium;
+}
+.font-large {
+	font-size: large;
+}
+.font-small {
+	font-size: small;
+}
+
+.padding-clear {
+ 	padding: 0px;
+}
+
+.layout-shadow {
+	background: #fff;
+	-webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(0, 0, 0, 0.07);
+	-moz-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(0, 0, 0, 0.07);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(0, 0, 0, 0.07);	
+}
+
+/* Shadow bottom */
+.layout-bottom-shadow {
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.21);
+	-moz-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.21);
+	-webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.21);	      
+}
+
+.layout-rounded {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.margin4 {
+	margin: 4px;
+}
+
+.margin10 {
+	margin: 10px;
+}
+
+.layout-border {
+	border: solid;
+	border-width: 1px;
+	border-color: silver;	
+}
+
+.layout-border-right {
+	border: solid;
+	border-width: 1px;
+	border-color: silver;	
+	border-left: none;
+	border-top: none;
+	border-bottom: none;
+}
+
+/* .layout-border-rigth {
+	
+	border: solid;
+	border-width: 1px;
+	border-color: #E6E6E6;	
+	border-left: none;
+	border-top: none;
+	border-bottom: none;
+ @include box-shadow(valo-bevel-and-shadow($shadow: $v-shadow));
+}
+ */
+
+.layout-border-rounded {
+	border: solid;
+	border-width: 1px;
+	border-color: silver;	
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+/* .layout-margin {
+	margin-left: 1px;
+	padding: 1px;
+	background: gray;
+} */
+
+.required-color {
+	background: #FFFFCC;
+}
+
+/*
+ 	Ocultar el asterisco de campos requeridos.
+
+.v-required-field-indicator {
+	display: none;
+	width: 0px;
+	padding-right: 6px;
+}
+*/
+
+/* Cambios CSS en los componentes estándar de Vaadin */
+
+.v-textfield.v-readonly,.v-textarea.v-readonly {
+	border: thin;
+	border-style: solid;
+	border-color: silver;
+	opacity: .98;
+	filter: alpha(opacity = 98);
+}
+
+input.v-textfield-readonly,textarea.v-textarea-readonly {
+	background: transparent;
+	border: none;
+	resize: none;
+	color: #6C6C6C;
+}
+
+/* Captions */
+.v-caption-right-to-left .v-captiontext {
+	float: right;
+}
+
+/* NOTA: para extender las propiedades del CSS de archivo styles.css de Vaadin sólo hay
+   que definir otra etiqueta como prefijo ".v-textfield-" + la nueva propiedad CSS que
+   queremos implementar para incluirla mediante addStyleName() a nuestros componentes
+   name = "right-to-left". Ej.: addStyleName("right-to-left");
+*/
+/* TextField content */
+.v-textfield-right-to-left {
+	text-align: right;
+}
+
+/* This actually works for DateField */
+.v-datefield-right-to-left {
+	direction: rtl;
+}
+
+}

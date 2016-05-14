@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1>JAVALEGO</h1>
+<h2>Localización de aplicaciones (i18n)</h2>
+
+<article>
+	<p>	
+	Tradicionalmente, la localización de aplicaciónes se realiza con textos incluidos en archivos de paquete de recursos por cada idioma requerido.
+	</p><p>
+	Nuestra arquitectura ofrece la posibilidad de localizar aplicaciones usando únicamente código Java basado en anotaciones y enumerados.
+	</p>
+	
+	<p>¿Ventajas que nos aporta?</p>
+	<br>
+	
+	<ol>
+		<li>Reduce el tiempo necesario para mantener actualizados los códigos y traducciones.</li>
+		<li>Se elimina la lectura de ficheros.</li>
+		<li>Se eliminan los errores típicos del mantenimiento manual de textos en multiples archivos.</li>
+		<li>Se elimina la duplicidad de códigos, uno por cada archivo.</li>
+		<li>Permite la refactorización de códigos. Opcion realmente importante con respecto al método tradicional.</li>
+		<li>Permite añadir nuevos campos a localizar. Ej.: value + descripcion para campo entidad. Reduciendo y simplificando la gestión de códigos.</li>
+		<li>Al tratarse de código Java, nos permitirá añadir nuevos requerimientos funcionales de arquitectura o específicos para nuestra aplicación.</li>
+		<li>Soporte i18n (internacionalización) y l10n (localización). Detecta y gestiona la configuración regional del usuario a partir de su petición y, opcionalmente, mediante su sesión.</li>
+	</ol>
+	<br>
+	
+	<p>Incluimos también la opción típica de usar archivos de paquetes de recursos (ResourceBundles), e incluso podremos personalizar nuestros propios métodos de localización.</p>
+	
+	<p>La localización de aplicaciones está representada como un tipo de contexto (clase LocaleContext) donde se definen sus funcionalidades para localizar textos, imágenes, excepciones, ...</p> 
+
+<section>
+	<h4>Contexto</h4>
+	<p>Servicios ofrecidos por el contexto de localización de aplicaciones:
+	<ol>
+		<li>Localización de textos</li>
+		<li>Localización de excepciones</li>
+		<li>Localización de imágenes e iconos</li>
+		<li>Gestión de repositorios de imágenes e iconos</li>
+		<li></li>
+	</ol>
+</section>
+
+<section>
+<p>Código de ejemplo:</p>
+
+<h4>Configuración de textos con anotaciones y enumerados</h4>
+
+<p><b>Java 1.8+</b></p>
+[java]
+	public enum TestLocale implements Key {
+	
+		@Locale(value = value = "Borrar {0}", description = "Borrar {0} de la base de datos")) 
+		@Locale(locale = "en", value = "Delete {0}", description = "Delete {0} record")
+		DELETE,
+	
+		@Locale(value = "Domicilio", description = "Domicilio habitual") 
+		@Locale(locale = "en", value = "Address")
+		ADDRESS
+	}
+[/java]
+
+<p><b>Java 1.7</b></p>
+[java]
+	public enum TestLocale implements Key {
+	
+		@Languages(locales = { 
+			@Locale(value = "Borrar {0}", description = "Borrar {0} de la base de datos"), 
+			@Locale(locale = "en", value = "Delete {0}", description = "Delete {0} record") })
+		DELETE,
+	
+		@Languages(locales = { 
+			@Locale(value = "Domicilio", description = "Domicilio habitual"), 
+			@Locale(locale = "en", value = "Address") })
+		ADDRESS
+	}
+[/java]
+
+[java]
+	/**
+	 * Traducción de textos usando códigos de enumerados y anotaciones
+	 * localizadas en varios idiomas.
+	 * 
+	 * @see TestLocale
+	 */
+	@Test
+	public void test() throws Exception {
+
+		// Localizar un texto que incluye un parámetro
+		logger.info(LocaleContext.getText(TestLocale.DELETE, "registro"));
+		logger.info(LocaleContext.getDescription(TestLocale.DELETE, "registro"));
+		
+		// Localizar un texto sin parámetro
+		logger.info(LocaleContext.getText(TestLocale.ADDRESS));
+	}
+[/java]
+</section>
+
+<section>
+<h4>Configuración de textos con resourceBundles</h4>
+
+[java]
+	/**
+	 * Traducción de textos usando archivos de paquetes de recursos. (estándar
+	 * Java).
+	 */
+	@Test
+	public void testResources() throws Exception {
+
+		// Establecer el tipo de traductor basado en varios archivos de recursos
+		// incluidos en el directorio /locales.
+		LocaleContext.setTranslatorResources("locales/messages", "locales/messages2");
+
+		// Localizar un texto con un parámetro
+		logger.info(LocaleContext.getText(TestLocale.PEOPLE));
+
+	}
+[/java]
+	
+<p>Usamos enumerados para definir las claves definidas en los archivos de recursos 
+en sustitución a cadenas de caracteres para evitar errores y facilitar la refactorización de código.</p>
+
+[java]
+	public enum TestLocale implements Key {
+		DELETE,	ADDRESS, PEOPLE
+	}
+	
+	
+	Archivo messages_es_ES.properties
+	
+	people=Gente
+	address=Dirección
+	
+	Archivo messages_en_US.properties
+	
+	people=People
+	address=Address
+	
+[/java]
+
+</section>
+
+<section>
+<h4>Configuración de iconos basado en enumeraciones y recursos de imágenes</h4>
+
+<p>Código de ejemplo con enumeraciones y ficheros de imágenes.
+[java]
+/**
+ * Test de localización de imágenes e iconos.
+ */
+public class IconTest {
+
+	public static final Logger logger = Logger.getLogger(IconTest.class);
+
+	/**
+	 * Códigos de iconos existentes en el directorio de recursos /icons.
+	 */
+	public enum TestIcons implements Icon {
+		CATEGORIES, HOME, PRODUCTS
+	}
+
+	@Test
+	public void test() throws Exception {
+
+		logger.info("Loading US Icons in  /icons ...");
+
+		String name = "test-icons";
+
+		// Creación de un repositorio de iconos
+		// El directorio /icons contiene la lista de recursos de ficheros con imágenes cuyos
+		// nombres deben de coincidir con la lista de códigos enumerados.
+		ResourceIcons rep = new ResourceIcons().load(name, TestIcons.class, Locale.US, "/icons");
+
+		LocaleContext.addRepositoryIcons(rep);
+
+		logger.info("Categories icon US value: " + LocaleContext.getIcon(TestIcons.CATEGORIES, Locale.US));
+
+		logger.info("Icon US names: " + Arrays.toString(LocaleContext.findRepositoryIcons(name).getNames()));
+
+		logger.info("Loaded US icons successful");
+
+	}
+
+}
+[/java]
+
+<p><strong>Vaadin</strong>. Código de ejemplo
+
+
+[java]
+/**
+ * Recursos de iconos para Vaadin.
+ */
+public class ResourceIconsVaadin extends ResourceIcons implements RepositoryIconsUI<Embedded, Icon> {
+
+	private static final long serialVersionUID = -6892705058503896554L;
+
+	/**
+	 * Instancia actual
+	 */
+	private static ResourceIconsVaadin current = null;
+
+	private static HashMap<String, Resource> resources = new HashMap<String, Resource>();
+
+	/**
+	 * Obtener la instancia actual de los servicios de iconos.
+	 * 
+	 * @return
+	 */
+	public synchronized static ResourceIconsVaadin getCurrent() {
+
+		if (current == null) {
+			current = new ResourceIconsVaadin();
+		}
+		return current;
+	}
+
+	@Override
+	public Embedded getComponent(String caption, Icon key) throws LocalizedException {
+
+		return getComponent(caption, getIconString(key));
+	}
+
+	@Override
+	public Embedded getComponent(String caption, String description, Icon key) throws LocalizedException {
+
+		Embedded e = getComponent(caption, getIconString(key));
+		e.setDescription(description);
+
+		return e;
+	}
+
+	public Embedded getComponent(String key) throws LocalizedException {
+		return getComponent(null, key);
+	}
+
+	public Embedded getComponent(String caption, String key) throws LocalizedException {
+		Embedded e = new Embedded(caption, getResource(key));
+		return e;
+	}
+
+	/**
+	 * Componente de tipo Link de Vaadin.
+	 * 
+	 * @param url
+	 * @param key
+	 * @return
+	 * @throws LocalizedException
+	 */
+	public Link getLink(String url, Icon key) throws LocalizedException {
+		Link link = new Link(null, new ExternalResource(url));
+		link.setIcon(getResource(getIconString(key)));
+		link.setTargetName("_blank");
+		return link;
+	}
+
+	@Override
+	public Embedded getComponent(Icon key) throws LocalizedException {
+		return getComponent(getIconString(key));
+	}
+
+	/**
+	 * Obtiene un ClassResource del icono pasado como parámetro.
+	 * 
+	 * @param key
+	 * @return
+	 * @throws LocalizedException
+	 */
+	public Resource getResource(Icon key) {
+		return getResource(getIconString(key));
+	}
+
+	@Override
+	public byte[] getBytes(Icon key) throws LocalizedException {
+		return getBytes(getIconString(key));
+	}
+
+	@Override
+	public boolean exist(Icon key) {
+		return icons.get(getIconString(key)) != null;
+	}
+
+	/**
+	 * Obtiene un ClassResource del icono pasado como parámetro.
+	 * 
+	 * @param key
+	 * @return
+	 * @throws LocalizedException
+	 */
+	public Resource getResource(String key) {
+
+		Resource resource = resources.get(key);
+
+		if (resource == null) {
+
+			IconItem icon = getIcon(key);
+
+			if (icon != null) {
+
+				resource = new ClassResource(((ResourceIcon) icon).getResource());
+
+				resources.put(key, resource);
+
+			}
+			else {
+				return null;
+			}
+		}
+		return resource;
+	}
+
+	public Embedded getComponent(String key, int size) throws LocalizedException {
+		Embedded e = new Embedded(null, getResource(key));
+		e.setSizeUndefined();
+		if (size > 0) {
+			e.setWidth(size + "px");
+			e.setHeight(size + "px");
+		}
+		return e;
+	}
+
+	@Override
+	public Embedded getComponent(Icon key, int size) throws LocalizedException {
+		return getComponent(getIconString(key), size);
+	}
+}
+[/java]
+
+[java]
+/**
+ * Test de localización de imágenes e iconos usando las diferentes tipologías de
+ * repositorios de iconos existentes para Vaadin.
+ */
+public class IconTest {
+
+	public static final Logger logger = Logger.getLogger(IconTest.class);
+
+	/**
+	 * Códigos de iconos existentes en el directorio de recursos /icons.
+	 */
+	public enum TestIcons implements Icon {
+		CATEGORIES, HOME, PRODUCTS
+	}
+
+	@Test
+	public void test() throws Exception {
+
+		logger.info("Loading US Icons in  /icons ...");
+
+		// Configurar repositorio de imágenes.
+		LocaleContext.addRepositoryIcons(new ResourceIconsVaadin().load(TestIcons.class, Locale.US, "/icons"));
+
+		// Obtener el componente que representa un icono con locale = US.
+		Component component = UIContextVaadin.getComponent(TestIcons.CATEGORIES);
+
+		logger.info("Component for CATEGORIES icon: " + component.getClass().getCanonicalName());
+
+		assertNotNull(component);
+
+		// Obtener el componente que representa un icono con locale = US.
+		component = UIContextVaadin.getComponent(TestIcons.CATEGORIES, Locale.US);
+
+		assertNotNull(component);
+
+		logger.info("Component for CATEGORIES US icon: " + component.getClass().getCanonicalName());
+
+		logger.info("Loaded US icons successful");
+	}
+
+	@Test
+	public void testFontawesome() {
+
+		try {
+			logger.info("Loading US Icons in  /icons ...");
+
+			// Establecer equivalencias de enumerados con iconos FontAwesome.
+			FontAwesomeIcons fa = FontAwesomeIcons.getCurrent();
+			fa.setLocale(Locale.US);
+			fa.addIcon(TestIcons.HOME, FontAwesome.HOME);
+			fa.addIcon(TestIcons.PRODUCTS, FontAwesome.SHOPPING_CART);
+			fa.addIcon(TestIcons.CATEGORIES, FontAwesome.GEARS);
+
+			// Añadir repositorio al contexto
+			LocaleContext.addRepositoryIcons(FontAwesomeIcons.getCurrent());
+
+			// Obtener el componente que representa un icono con locale = US.
+			Component component = UIContextVaadin.getComponent(TestIcons.HOME);
+
+			logger.info("Component for HOME icon: " + component.getClass().getCanonicalName());
+
+			assertNotNull(component);
+
+			// Obtener el componente que representa un icono con locale = US.
+			component = UIContextVaadin.getComponent(TestIcons.CATEGORIES, Locale.US);
+
+			assertNotNull(component);
+
+			logger.info("Component for CATEGORIES US icon: " + component.getClass().getCanonicalName());
+
+			logger.info("Loaded US icons successful");
+		}
+		catch (Exception e) {
+			assertTrue(false);
+		}
+
+	}
+
+}
+[/java]
+
+<p><strong>Android</strong>. Código de ejemplo.
+
+[java]
+/**
+ * Repositorio de recursos de iconos implementado en Android.
+ */
+public class ResourceIconsAndroid extends AbstractBaseModel implements RepositoryIconsUI<Drawable, Icon> {
+
+    private static final Logger logger = Logger.getLogger(ResourceIconsAndroid.class);
+
+	private static final long serialVersionUID = -6941801552784439910L;
+
+    private Context context;
+
+    private Locale locale;
+
+	/**
+	 * Instancia actual
+	 */
+	private static ResourceIconsAndroid current = null;
+
+	/**
+	 * Obtener la instancia actual de los servicios de iconos.
+	 * 
+	 * @return
+	 */
+	public synchronized static ResourceIconsAndroid getCurrent() {
+
+		if (current == null) {
+			current = new ResourceIconsAndroid(null);
+		}
+		return current;
+	}
+
+    /**
+     * Establecer el contexto de aplicación. Requerido para poder obtener el identificador del recurso buscando por su nombre o clave.
+     * @param context
+     */
+    private ResourceIconsAndroid(Context context) {
+        this.context = context;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    @Override
+	public Drawable getComponent(String caption, String description, Icon icon) {
+        return icon != null ? getComponent(icon.name().toLowerCase()) : null;
+    }
+
+    /**
+     * Buscar el recurso por su nombre clave.
+     * @param key
+     * @return
+     */
+    public Drawable getComponent(String key) {
+
+        Drawable drawable = null;
+
+        if (context != null) {
+            int id = context.getResources().getIdentifier(key, "drawable", context.getPackageName());
+            if (id != 0) {
+                drawable = context.getResources().getDrawable(id);
+            }
+        }
+
+        if (drawable == null) {
+            logger.error(context == null ? "Context is null" : (key != null ? "Icon '" + key + "' not found" : "Icon is null"));
+            return null;
+        }
+        else {
+            drawable.setBounds(0, 0, (int)(drawable.getIntrinsicWidth()*0.5), (int)(drawable.getIntrinsicHeight()*0.5));
+            return drawable;
+        }
+
+	}
+
+	@Override
+	public Drawable getComponent(String caption, Icon icon) {
+		return getComponent(caption, null, icon);
+	}
+
+	@Override
+	public Drawable getComponent(Icon icon) {
+		return getComponent(null, icon);
+	}
+
+	@Override
+	public byte[] getBytes(Icon icon) {
+	    // TODO
+        return null;
+    }
+
+	@Override
+	public Drawable getComponent(Icon icon, int size) throws LocalizedException {
+		return getComponent(icon);
+	}
+
+	@Override
+	public boolean exist(Icon key) {
+		return true;
+	}
+
+	@Override
+	public Locale getLocale() {
+		return locale;
+	}
+
+	/**
+	 * Establecer la localización de los iconos del respositorio
+	 * 
+	 * @param locale
+	 */
+	public void setLocale(Locale locale) {
+		this.locale = locale;
+	}
+
+	@Override
+	public byte[] getBytes(String key) throws LocalizedException {
+		return null;
+	}
+
+	@Override
+	public boolean exist(String key) {
+		return key != null ? getComponent(key.toLowerCase()) != null : null;
+	}
+
+	@Override
+	public String[] getNames() {
+        // TODO
+		String[] items = new String[] {};
+		return items;
+	}
+}
+[/java]
+<p>Código de ejemplo donde se usa este repositorio.
+[java]
+		TextView text = new TextView(activity); 
+
+		text.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
+
+        try {
+            Drawable drawable = UIContextAndroid.getComponent(item.getIcon());
+            if (drawable != null) {
+                text.setCompoundDrawables(drawable, null, null, null);
+            }
+        }
+        catch (LocalizedException e) {
+            logger.error(e.getLocalizedMessage());
+        }
+[/java]
+
+</section>
+
+<section>
+<h4>Configuración de excepciones con anotaciones y resourcebundles.</h4>
+
+[java]
+/**
+ * Test de localización de excepciones
+ */
+public class ExceptionTest {
+
+	public static final Logger logger = Logger.getLogger(ExceptionTest.class);
+
+	/**
+	 * Lista de errores de ejemplo multiidioma
+	 */
+	public enum TestExceptions implements ExceptionKey {
+
+		@ExceptionType(level = ExceptionLevel.ERROR, 
+			locales = { @Locale(value = "EL TRACER DE APLICACION: {0} - {1} YA ESTA REGISTRADO."),
+						@Locale(value = "TRACE APPLICATION: {0} - {1} REGISTERED.", locale = "en") })
+		EXIST_TRACER,
+
+		@ExceptionType(level = ExceptionLevel.ERROR, 
+			locales = { @Locale(value = "ERROR DE CONEXION CON BASE DE DATOS."), 
+						@Locale(value = "DATABASE CONNECT ERROR.", locale = "en") })
+		CONNECT_ERROR,
+
+		// Ejemplo de localización de excepciones definidas con ResourceBundles
+		// (ver recursos .properties)
+		LOGIN_ERROR,
+	}
+
+	/**
+	 * Crea una excepción localizada a partir de locale de la aplicación y un
+	 * código de excepción que incluye anotaciones multiidioma
+	 */
+	@Test
+	public void test() throws Exception {
+
+		// Excepción con 2 parámetros y locale = default
+		logger.info(LocaleContext.getException(TestExceptions.EXIST_TRACER, "TEST", "V1"));
+		// Excepción locale = en.
+		logger.info(LocaleContext.getException(TestExceptions.CONNECT_ERROR, java.util.Locale.ENGLISH));
+
+	}
+
+	/**
+	 * Crea una excepción localizada usando archivos de paquetes de recursos.
+	 */
+	@Test
+	public void testResources() throws Exception {
+
+		LocaleContext.setTranslatorResources(true, "locales/messages", "locales/messages2");
+
+		// Excepción locale = us
+		logger.info(LocaleContext.getException(TestExceptions.LOGIN_ERROR, java.util.Locale.US));
+		// Excepción locale = default
+		logger.info(LocaleContext.getException(TestExceptions.LOGIN_ERROR));
+	}
+}
+[/java]
+</section>
+
+</article>
+
+ 
+
+</body>
+</html>

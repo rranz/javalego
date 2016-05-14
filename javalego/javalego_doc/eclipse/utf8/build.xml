@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE project [
+       <!ENTITY Java.VM.Version.Validation SYSTEM "../framework/Java.VM.Version.Validation/Java.VM.Version.Validation.xml">
+]>
+
+<!-- build.xml - a simple Ant buildfile -->
+<project name="Framework Buildfile" default="" basedir=".">
+	<!-- Java VM Version Control -->
+	<!--&Java.VM.Version.Validation;-->
+
+	<!-- The directory containing source code -->
+	<property name="src.dir" value="." />
+
+	<!-- Temporary build directories -->
+	<property name="build.dir" value="." />
+	<property name="build.classes" value="${src.dir}" />
+	<property name="build.lib" value="${build.dir}" />
+
+	<target name="EncodeFile">
+		<native2ascii reverse="true" encoding="UTF-8" src="src" dest="out" includes="**/*.java" ext=".java" />
+	</target>
+
+
+</project>

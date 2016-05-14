@@ -1,0 +1,214 @@
+Demo 
+
+ERP b�sico que muestra la adaptaci�n multiplataforma de nuestras aplicaciones.
+App Web 
+	-> imagen pc+tablet+phone + github
+App nativa
+	-> imagen phone android
+	
+	Carruosel de im�genes de diferentes opciones y descripci�n de cada una.
+	
+Tienda
+	Conexión con la aplicación Vaadin.
+	-> Imagen y link.
+	Revisar y reestructurar para Valo y as� no incluir en Wordpress.
+	Incluir login y look de demo erp vaadin.
+	
+	
+	
+	
+	
+Arquitectura
+  Getting started
+	
+	Video tutorial (buscar tool).
+	1. Planificar los pasos a seguir para construir una aplicaci�n b�sica de ejemplo
+	2. Men� y mantenimiento b�sico para web y android.
+	3. Documentaci�n generaci�n del modelo (pendiente de desarrollar).
+	4. Roles y accesos.
+	5. Visi�n de acceso desde tienda y GitHub.
+	6. Publicar en tienda el ejemplo ERP Demo con conexi�n a Github. Foro de discusi�n en web (ver con qu�).
+	   a�adir icono de foro en el producto de tienda.
+
+
+
+
+
+
+  
+
+JAVALEGO
+
+�Qu� es?
+
+Es una arquitectura Java basada en componentes para el desarrollo de aplicaciones empresariales.
+
+Metodolog�a de desarrollo:
+Desarrollamos componentes de arquitectura y de negocio
+	�Qu� son componentes de arquitectura y de negocio? Ejemplos con im�genes.
+	
+	"Detalle o ampliar informaci�n"
+	Ver componente + para ampliar o colapsar 
+	
+Desarrollamos aplicaciones empresariales a partir de un modelo de negocio codificado en lenguaje Java, independiente de la plataforma de ejecuci�n (Web o mobile).
+    Imagen del proceso: modelo -> gear arquitectura javalego -> plataformas
+	No generamos c�digo, desarrollamos componentes y productos f�cilmente extensibles y desacoplados de tecnolog�as para permitir su evoluci�n hacia nuevas tecnolog�as presentes y futuras.
+Para desarrollar nuestro modelo de negocio, utilizaremos un conjunto de componentes que cubrir�n nuestros requerimientos funcionales t�picos de cualquier aplicaci�n (UI, seguridad, acceso a datos, servicios, reglas, informes, ...)
+La implementaci�n de esta especificaci�n de componentes estar� representada en la arquitectura por "productos".
+    Ejemplos visuales con Spring Data, Vaadin y android.
+Los productos para poder implementar los servicios ofrecidos por los componentes y, dependiendo de su naturaleza (UI, datos, seguridad, informes, ...), se integrar�n con plataformas, frameworks o apis de referencia. 
+    Ej.: UI men� en android y vaadin
+	Acceso a datos: ADO y Spring
+
+Copyright:	
+Nuestra arquitectura es Open Source y hemos publicado nuestros proyectos en Github.
+Ver Vaadin. conexi�n con documento e imagen safecreative.
+
+� 2014 Vaadin Ltd. All rights reserved. Terms of Service and Use
+Coger texto de tienda vaadin.
+
+Tienda:
+Disponemos de una tienda online donde publicamos nuestro cat�logo de componentes y productos. 
+
+Comunidad:
+Queremos crear una comunidad de desarrolladores que compartan nuestra idea y colaboren en el proyecto.  
+
+-------------------------------------------------------------
+Detalle basado en presentaci�n pptx:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+LEGOJAVA
+MOBILE APPS
+
+PAGINA PRINCIPAL
+------------------------------------------------------------------------------
+Slides:
+
+1:
+Desarrollamos soluciones empresariales de movilidad
+Aplicaciones adaptadas a cualquier formato: smartphone, tablet y ordenador.
+Aplicaciones nativas para Android y aplicaciones web adaptadas a m�viles.
+
+2:
+Somos competitivos
+Ofrecemos calidad
+Servicios freelance
+Estamos abiertos a todos los sectores y alcance de su proyecto
+
+3: 
+Innovamos
+Conozca nuestra arquitectura Java para aplicaciones m�viles
+Android, Vaadin, Spring, ... im�genes
+
+
+ITEMS EN COLUMNAS E IM�GENES
+
+Nuestros servicios
+
+1:
+Desarrollamos aplicaciones empresariales
+Solucionamos las necesidades reales de su empresa.
+Tenemos amplia experiencia en el desarrollos de aplicaciones empresariales a la medida de sus necesidades (Ad-hoc). Desarrollamos con metodolog�as �giles y tecnolog�as est�ndar de referencia. Experiencia demostrada en el sector bancario, seguros, formaci�n y administraci�n p�blica. Amplia experiencia en migraciones de aplicaciones legacy en diversas tecnolog�as.
+Nuestros servicios abarcan todo el ciclo de vida del software: Concepci�n inicial, obtenci�n de requisitos, definici�n de arquitectura, realizaci�n de prototipos de evaluaci�n, dise�o t�cnico, desarrollo del software, ciclo completo de pruebas y despliegue de los productos software producidos. Soporte.
+Actualmente, trabajamos para la peque�a y mediana empresa.
+
+2:
+Ofrecemos soluciones en tecnolog�a m�vil.
+Nuestras aplicaciones se ejecutan como aplicaciones web para m�viles y como aplicaciones nativas para Android.
+
+3: 
+Servicios Cloud
+Gestionamos la instalaci�n y mantenimiento de su aplicaci�n en "la nube" reduciendo costes de infraestructura y administraci�n. Consulte los beneficios que aporta esta tecnolog�a (link) buscar esta informaci�n.
+
+4:
+Desarrollamos en Java
+Nuestra arquitectura Open Source basada en c�digo Java (JavaLego) permite desarrollar aplicaciones empresariales de calidad, en tiempo record y adaptadas a plataformas web y dispositivos m�viles. Nuestro esfuerzo de innovaci�n disponible para la comunidad Java.
+Hemos adoptado Java como �nico lenguaje para el desarrollo de apps en Android y web apps Multiplataforma. 
+El c�digo java de nuestras aplicaciones es �nico para ambas plataformas, es f�cilmente extensible y, al estar basado en una arquitectura robusta, simplifica su codificaci�n. Adem�s, es Open Source.
+Conozca nuestra arquitectura en ... (LINK)
+
+5:
+Desarrollamos la web de su empresa
+Usamos Wordpress como herramienta de gesti�n de contenidos (CMS). Web auto administrable. Creamos contenidos de calidad y ofrecemos soporte para su mantenimiento. 
+
+6:
+Pide presupuesto sin compromiso
+
+�Necesitas una aplicaci�n para tu empresa o una web corporativa? Cu�ntanos tu idea para ofrecerte la mejor opci�n para tu negocio y con un presupuesto muy competitivo.
+
+	Analizamos sus necesidades de negocio y le proponemos un presupuesto gratuito. Precios muy competitivos asumibles para cualquier empresa. 
+Desarrollamos maquetas sin compromiso
+	Si necesita evaluar nuestro trabajo y potencial de nuestras aplicaciones, solicite una maqueta operativa. Contacte con nosotros (link).
+Centro de demostraciones
+	Disponemos de aplicaciones de demostraci�n que le permitir�n evaluar nuestra tecnolog�a y potencial. ERP Demo Web y Google Play.
+
+6:
+Oportunidades de negocio
+	Si tienes una idea de negocio real nosotros te ayudamos a conseguirla. Contacte con nosotros y com�ntenos su proyecto.
+
+7:
+Servicios de Freelance
+	Colaboramos en proyectos Java como freelance. Ofrecemos experiencia, calidad y precios muy competitivos.
+
+8:	
+Siguenos en Twitter, Facebook y Google+
+
+Pulicamos novedades, art�culos de nuestra arquitectura y de desarrollo Java, ...
+
+
+MENUS --------------------------------------------------------------------------------------
+
+Nuestro equipo:
+
+Somos pocos pero buenos. En JavaLego estamos motivados, innovamos y nos apasiona nuestro trabajo. Conoce nuestra arquitectura Open Source para Java.
+
+Tenemos amplia experiencia en el desarrollo de aplicaciones en entorno Java EE y Android,
+hemos trabajado con grandes clientes y empresas de inform�tica, .... experiencia
+
+Foto: nombre y cargo. (redes sociales que tiene cada persona).
+Experiencia linkedin
+
+Trabaja con nosotros
+
+Si quieres unirte a nuestro peque�o equipo de profesionales, contacta con nosotros.
+
+Habla con nosotros
+
+Si crees que tu proyecto no termina de encajar en la descripci�n de lo que est�s leyendo, habla con nosotros, con total confianza, y p�denos presupuesto sin compromiso ninguno.
+
+---------------------------------------------------------------
+Contacto:
+
+	Contacta con nosotros
+	Empresa de desarrollo web en Madrid
+	Nombre, mensaje, contacto (opcional) tel�fono email.
+---------------------------------------
+
+Innovamos:
+
+Arquitectura JavaLego.
+
+
+Referencias profesionales:
+
+Cepsa, Hedima, Indra, AnyHelp, ...
+

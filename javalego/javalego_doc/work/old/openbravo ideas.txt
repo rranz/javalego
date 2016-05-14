@@ -1,0 +1,28 @@
+Crear validación que muestre en rojo validaciones y campos requeridos si al pasar no se han cumplimentado.
+
+Entrar con País de localización e idioma.
+
+Perfil: rol + pais + idioma + datos personales
+
+Gestión de alertas: nueva, resuelta suprimida y confirmada. Datos: 
+   Regla de alerta, alerta, fecha y hora, nota y registro asociado.
+   
+   
+Aplicación
+
+Espacio de trabajo - resto de solapas que se van abriendo según accedemos a los módulos.
+
+Crear MenuPanels:
+
+Solución con los módulos:
+
+  Gestión de Datos Maestros:
+  								Formularios
+  								BI informes
+  								Alertas
+  								...
+  Gestión de Compras
+  Gestión de almacén
+   ....
+
+   

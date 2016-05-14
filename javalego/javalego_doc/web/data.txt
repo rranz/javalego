@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Data</title>
+</head>
+<body>
+
+<h1>JAVALEGO</h1>
+<h2>Capa de datos</h2>
+
+<p>La capa de datos está formada por los servicios que proporcionan los datos persistentes utilizados por la lógica de negocios. 
+Los datos pueden ser de aplicaciones almacenados en un sistema de administración de bases de datos o 
+pueden incluir información de recursos y directorios almacenada en un almacén de datos 
+de protocolo ligero de acceso a directorios (LDAP). 
+Los servicios de datos también pueden incluir alimentación de datos de orígenes externos o 
+datos a los que se puede obtener acceso desde sistemas informáticos heredados.
+
+<p>La arquitectura ha definido una especificación muy sencilla y directa de acceso a los datos que nos permite desarrollar aplicaciones basadas en un código muy claro.
+[java]
+/**
+ * Proveedor de datos.
+ * 
+ * Interface que define los métodos básicos de acceso a datos,
+ * independiente del proveedor o tecnología utilizada.
+ * 
+ * Las implementaciones de esta interface pueden ser Spring Data, JPA Hibernate,
+ * JDBC, beans memory, ... o desarrollar nuestro propio código.
+ * 
+ * @author ROBERTO RANZ
+ * 
+ */
+public interface DataProvider<T> {
+
+	/**
+	 * Tipologías de proveedores de datos posibles actualmente que podemos usar
+	 * para definir la tipología de provider. Esta tipología nos permitirá
+	 * adaptar nuestro modelo de negocio al contexto de ejecución de acceso a la
+	 * base de datos. Ej.: en Android con SQLite podremos adaptar la sentencia
+	 * de un filtro para este tipo de base de datos en lugar de utilizar
+	 * sentencias JPA más simples.
+	 * 
+	 * NOTA: El tipo Mock servirá para definir providers con datos para realizar
+	 * pruebas en desarrollo.
+	 */
+	public enum Type {
+		SQLite, JPA, Spring_Data, REST, Mock
+	};
+
+	/**
+	 * Obtiene todos los objetos de la entidad pasada como parámetro.
+	 * 
+	 * @param entity
+	 *            clase de entidad
+	 * @return colección de entidades
+	 * @throws LocalizedException
+	 */
+	Collection<? extends T> getList(Class<? extends T> entity) throws LocalizedException;
+
+	/**
+	 * Obtiene una colección de entidades
+	 * 
+	 * @param entity
+	 *            clase de entidad
+	 * @param where
+	 *            condición (sentencia JPQL)
+	 * @param order
+	 *            ordenación (lista de campos separados por comas)
+	 * @return colección de entidades
+	 * @throws LocalizedException
+	 */
+	Collection<? extends T> getList(Class<? extends T> entity, String where, String order) throws LocalizedException;
+
+	/**
+	 * Obtiene de una colección de entidades.
+	 * 
+	 * @param entity
+	 *            clase de entidad
+	 * @param where
+	 *            condición (sentencia JPQL)
+	 * @return colección de entidades
+	 * @throws LocalizedException
+	 */
+	Collection<? extends T> getList(Class<? extends T> entity, String where) throws LocalizedException;
+
+	/**
+	 * Obtiene una colección de entidades paginada.
+	 * 
+	 * @param entity
+	 *            clase de entidad
+	 * @param startIndex
+	 *            posición inicial de recuperación de registros en la tabla
+	 * @param count
+	 *            número de registros a recuperar desde la posición inicial
+	 * @param where
+	 *            condición (sentencia JPQL)
+	 * @param order
+	 *            lista de campos separadas por comas
+	 * @return colección de entidades
+	 * @throws LocalizedException
+	 */
+	Collection<? extends T> getPagedList(Class<? extends T> entity, int startIndex, int count, String where, String order) throws LocalizedException;
+
+	/**
+	 * Obtener una colección de entidades a partir de la ejecución de un query
+	 * definido en la entidad.
+	 * 
+	 * @param name
+	 *            nombre de la consulta
+	 * @return colección de entidades
+	 */
+	Collection<? extends T> getQuery(String name) throws LocalizedException;
+
+	/**
+	 * Cargar o inicializar el proveedor de datos.
+	 */
+	void load() throws LocalizedException;
+
+	/**
+	 * Obtener un valor de tipo Long a partir de una sentencia JPQL.
+	 * 
+	 * @param statement
+	 *            sentencia JPQL
+	 * @return
+	 */
+	Long getLong(String statement) throws LocalizedException;
+
+	/**
+	 * Obtener una entidad a partir de una sentencia JPQL.
+	 * 
+	 * @param statement
+	 *            sentencia JPQL
+	 * @return entidad
+	 */
+	T getObject(String statement) throws LocalizedException;
+
+	/**
+	 * Eliminar un bean o registro de entidad
+	 */
+	void delete(T bean) throws LocalizedException;
+
+	/**
+	 * Persistir registro
+	 * 
+	 * @return
+	 */
+	T save(T bean) throws LocalizedException;
+
+	/**
+	 * Buscar una entidad por su identificador único.
+	 * 
+	 * @param entity
+	 *            clase de entidad
+	 * @param id
+	 *            Identificador único
+	 * @return entidad
+	 * @throws LocalizedException
+	 */
+	T getObject(Class<? extends T> entity, Long id) throws LocalizedException;
+
+	/**
+	 * Buscar una entidad mediante una condición.
+	 * 
+	 * @param entity
+	 *            clase de entidad
+	 * @param where
+	 *            condición (sentencia JPQL)
+	 * @return objeto de entidad
+	 * @throws LocalizedException
+	 */
+	T getObject(Class<? extends T> entity, String where) throws LocalizedException;
+
+	/**
+	 * Obtener la lista de valores posibles que actualmente tiene un campo o
+	 * propiedad de una entidad.
+	 * 
+	 * @param entity
+	 *            clase de entidad
+	 * @param fieldName
+	 *            campo o propiedad de la entidad que deseamos obtener la lista
+	 *            de valores únicos existentes actualmente.
+	 * @param where
+	 *            condición (sentencia JPQL)
+	 * @param order
+	 *            lista de campos separadas por comas
+	 * @return colección de entidades
+	 * @throws LocalizedException
+	 */
+	Collection<?> getFieldValues(Class<? extends T> entity, String fieldName, String where, String order) throws LocalizedException;
+
+	/**
+	 * Tipología de proveedor de datos (SQLite, JPA, Spring_Data, REST, Mock,
+	 * ...)
+	 * 
+	 * @return
+	 */
+	Type getType();
+
+}
+[/java]
+
+<p>El acceso a los datos puede estar implementado por diferentes tecnologías (Spring Data, Hibernate, EclipseLink, IBatis, ...) o 
+puede estar implementado por nuestra propia aplicación.
+
+<article>
+
+<section>
+	<h4>Contexto</h4>
+	<p>Servicios ofrecidos por el contexto de datos:
+	<ol>
+		<li>Gestión de proveedores de datos</li>
+		<li>Persistencia</li>
+		<li>Servicios de negocio</li>
+	</ol>
+
+</section>
+
+<section>
+<h3>Servicios y proveedores de datos</h3>
+
+<p>A continuación, mostramos código de ejemplo con nuestra propuesta de metodología de desarrollo para implementar la capa de datos de una aplicación.
+<p>La arquitectura ofrece sus diferentes alternativas. Recuerde que son opciones de arquitectura que puede integrar en sus proyectos de forma individual o conjunta.
+
+
+[java]
+/**
+ * Test que muestra cómo implementar servicios y proveedores de datos usando
+ * información en memoria para realizar pruebas de concepto.
+ */
+public class DataTest {
+
+	private static MockDataServices services = null;
+
+	private static final Logger logger = Logger.getLogger(DataTest.class);
+
+	@BeforeClass
+	public static void setUp() {
+		services = new MockDataServicesImpl();
+	}
+
+	@Test
+	public void invoices() throws Exception {
+		for (Invoice invoice : services.getAllInvoices()) {
+			logger.debug("Invoice: " + invoice.getTitle() + " - " + invoice.getTotal());
+		}
+	}
+
+	@Test
+	public void products() throws Exception {
+		for (Product product : services.getAllProducts()) {
+			logger.debug("Product: " + product.getTitle() + " - " + product.getDescription());
+		}
+	}
+}	
+[/java]
+
+<h4>Servicios de datos</h4>
+
+[java]
+/**
+ * Servicios de datos
+ */
+public interface MockDataServices extends DataServices {
+
+	/**
+	 * Obtener todas las facturas
+	 * 
+	 * @return
+	 * @throws LocalizedException
+	 */
+	Collection<Invoice> getAllInvoices() throws LocalizedException;
+
+	/**
+	 * Obtener todos los productos
+	 * 
+	 * @return
+	 * @throws LocalizedException
+	 */
+	Collection<Product> getAllProducts() throws LocalizedException;
+
+}
+[/java]
+<p>Implementación de servicios usando un proveedor de datos ficticios para realizar pruebas unitarias.
+[java]
+/**
+ * {@inheritDoc} 
+ */
+public class MockDataServicesImpl implements MockDataServices {
+
+	private MockDataProvider provider = new MockDataProvider();
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Invoice> getAllInvoices() throws LocalizedException {
+		return (Collection<Invoice>) provider.getList(Invoice.class);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Product> getAllProducts() throws LocalizedException {
+		return (Collection<Product>) provider.getList(Product.class);
+	}
+}
+[/java]
+
+<h4>Proveedor de datos</h4>
+
+<p>Ejemplo con datos ficticios
+[java]
+/**
+ * Acceso a datos simulados.
+ * NOTA: sólo se implementan los métodos básicos requeridos para las pruebas de
+ * concepto.
+ */
+public class MockDataProvider implements DataProvider<Entity> {
+
+	@Override
+	public Collection<? extends Entity> getList(Class<? extends Entity> entity) throws LocalizedException {
+		
+		List<Entity> list = new ArrayList<Entity>();
+		if (entity == Invoice.class) {
+			list.add(new Invoice("Invoice 1", 1000.0));
+			list.add(new Invoice("Invoice 2", 2000.0));
+		}
+		else if (entity == Product.class) {
+			list.add(new Product("Product 1", "Description Product 1"));
+			list.add(new Product("Product 2", "Description Product 2"));
+		}
+		return list;
+	}
+
+	@Override
+	public Collection<? extends Entity> getList(Class<? extends Entity> entity, String where, String order) throws LocalizedException {
+		return null;
+	}
+
+	@Override
+	public Collection<? extends Entity> getList(Class<? extends Entity> entity, String where) throws LocalizedException {
+		return null;
+	}
+
+	@Override
+	public Collection<? extends Entity> getPagedList(Class<? extends Entity> entity, int startIndex, int count, String where, String order) throws LocalizedException {
+		return null;
+	}
+
+	@Override
+	public Collection<? extends Entity> getQuery(String name) throws LocalizedException {
+		return null;
+	}
+
+	@Override
+	public void load() throws LocalizedException {
+	}
+
+	@Override
+	public Long getLong(String statement) throws LocalizedException {
+		return null;
+	}
+
+	@Override
+	public Entity getObject(String statement) throws LocalizedException {
+		return null;
+	}
+
+	@Override
+	public void delete(Entity bean) throws LocalizedException {
+	}
+
+	@Override
+	public Entity save(Entity bean) throws LocalizedException {
+		return null;
+	}
+
+	@Override
+	public Entity getObject(Class<? extends Entity> entity, Long id) throws LocalizedException {
+		return null;
+	}
+
+	@Override
+	public Entity getObject(Class<? extends Entity> entity, String where) throws LocalizedException {
+		return null;
+	}
+
+	@Override
+	public Collection<?> getFieldValues(Class<? extends Entity> entity, String fieldName, String where, String order) throws LocalizedException {
+		return null;
+	}
+
+	@Override
+	public com.javalego.data.DataProvider.Type getType() {
+		return DataProvider.Type.Mock;
+	}
+}
+[/java]
+
+<p><strong>Spring Data</strong>
+[java]
+/**
+ * Proveedor de Datos Spring Data.
+ */
+public class SpringDataProvider implements DataProvider<Entity> {
+
+	/**
+	 * Clase anotada donde se configura el contexto de aplicación para evitar el
+	 * uso de archivos xml.
+	 */
+	private Class<?> application;
+
+	/**
+	 * Contexto de aplicación.
+	 */
+	private AnnotationConfigApplicationContext context;
+
+	/**
+	 * Acceso a datos JPA
+	 */
+	private SpringJpaDao<Entity> jpaDao;
+
+	/**
+	 * Constructor
+	 * 
+	 * @param application
+	 *            Clase anotada que gestiona la configuración de Spring
+	 *            {@link Configuration}.
+	 */
+	public SpringDataProvider(Class<?> application) {
+		this.application = application;
+	}
+
+	/**
+	 * Constructor
+	 * 
+	 * @param context
+	 */
+	public SpringDataProvider(AnnotationConfigApplicationContext context) {
+		this.context = context;
+	}
+
+	/**
+	 * Contexto Spring IoC
+	 * 
+	 * @return
+	 */
+	public AnnotationConfigApplicationContext getContext() {
+		return context;
+	}
+
+	@Override
+	public Collection<? extends Entity> getList(Class<? extends Entity> entity) throws LocalizedException {
+		return jpaDao.getList(entity);
+	}
+
+	@Override
+	public Entity getObject(Class<? extends Entity> entity, Long id) throws LocalizedException {
+		return jpaDao.getObject(entity, id);
+	}
+
+	@Override
+	public Collection<? extends Entity> getList(Class<? extends Entity> entity, String where, String order) throws LocalizedException {
+		return jpaDao.getList(entity, where, order);
+	}
+
+	@Override
+	public Collection<? extends Entity> getList(Class<? extends Entity> entity, String where) throws LocalizedException {
+		return jpaDao.getList(entity, where);
+	}
+
+	@Override
+	public Collection<? extends Entity> getPagedList(Class<? extends Entity> entity, int startIndex, int count, String where, String order) throws LocalizedException {
+		return jpaDao.getPagedList(entity, startIndex, count, where, order);
+	}
+
+	@Override
+	public Collection<Entity> getQuery(String name) {
+		return null;
+	}
+
+	@Override
+	public Long getLong(String statement) {
+		return jpaDao.getLong(statement);
+	}
+
+	@Override
+	public Entity getObject(String statement) {
+		return jpaDao.getObject(statement);
+	}
+
+	@Override
+	public void delete(Entity bean) {
+		jpaDao.delete(bean);
+	}
+
+	@Override
+	public Entity save(Entity bean) {
+		return jpaDao.save(bean);
+	}
+
+	@Override
+	public Entity getObject(Class<? extends Entity> entity, String where) throws LocalizedException {
+		return jpaDao.getObject(entity, where);
+	}
+
+	@Override
+	public Collection<?> getFieldValues(Class<? extends Entity> entity, String fieldName, String where, String order) throws LocalizedException {
+		return jpaDao.getFieldValues(entity, fieldName, where, order);
+	}
+
+	/**
+	 * Contexto de aplicación.
+	 * 
+	 * @param context
+	 */
+	public void setContext(AnnotationConfigApplicationContext context) {
+		this.context = context;
+	}
+
+	/**
+	 * Cargar contexto de aplicación.
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void load() {
+
+		// Cargar contexto de aplicación.
+		if (context == null && application != null) {
+			context = new AnnotationConfigApplicationContext(application);
+		}
+		// Inicializar JPA
+		if (jpaDao == null) {
+			jpaDao = (SpringJpaDao) getBean(SpringJpaDao.class);
+		}
+	}
+
+	/**
+	 * Obtener un bean en spring realizando una carga dinámica del Bean en
+	 * Spring si no existe o no se ha declarado en los archivos de contexto de
+	 * Spring.
+	 * 
+	 * @param type
+	 * @return
+	 */
+	public Object getBean(Class<?> type) {
+
+		String beanName = type.getSimpleName();
+
+		beanName = beanName.substring(0, 1).toLowerCase() + beanName.substring(1);
+
+		try {
+			return context.getBean(type);
+		}
+		catch (Exception e) {
+			reloadBean(beanName, type);
+			return context.getBean(type);
+		}
+	}
+
+	/**
+	 * Carga dinámica del bean en Spring
+	 * 
+	 * @param beanName
+	 * @param type
+	 */
+	private void reloadBean(String beanName, Class type) {
+
+		AutowireCapableBeanFactory factory = context.getAutowireCapableBeanFactory();
+
+		BeanDefinitionRegistry registry = (BeanDefinitionRegistry) factory;
+
+		GenericBeanDefinition bd = new GenericBeanDefinition();
+
+		bd.setBeanClass(type);
+
+		registry.registerBeanDefinition(beanName, bd);
+	}
+
+	@Override
+	public Type getType() {
+		return DataProvider.Type.Spring_Data;
+	}
+}
+[/java]
+[java]
+/**
+ * Acceso a datos JPA con Spring.
+ */
+@Service
+@SuppressWarnings("unchecked")
+public class SpringJpaDao<T extends Entity> implements Serializable {
+	
+	private static final long serialVersionUID = -876716860951594139L;
+	
+	/**
+	 * EntityManager para consultas JPA.
+	 */
+	@PersistenceContext
+	private EntityManager em;
+
+	/**
+	 * Lista de objetos de una clase
+	 * @param entity
+	 * @return
+	 * @throws LocalizedException
+	 */
+	public Collection<T> getList(Class<? extends T> entity) throws LocalizedException {
+		
+		return em.createQuery("select p from " + entity.getSimpleName() + " as p").getResultList();
+	}
+
+	...
+}
+[/java]
+
+<h4>Servicios REST</h4>
+
+<p>A continuación, mostramos un ejemplo de implementación de servicios REST de acceso a datos que usan el proveedor de datos definido en el contexto de aplicación.
+
+[java]
+/**
+ * Servicios REST de acceso a datos.
+ */
+@Path("/javalego")
+public class DataServicesRest implements Services {
+
+	private static final Gson gson = new Gson();
+
+	@Context
+	UriInfo uriInfo;
+
+	@Context
+	Request request;
+
+	@SuppressWarnings("unchecked")
+	@GET
+	@Path("/products/all")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAllProducts() throws LocalizedException {
+		
+		Collection<Entity> list = (Collection<Entity>) getDataProvider().getList((Class<? extends Entity>) Product.class);
+		return gson.toJson(list);
+	}
+
+	@GET
+	@Path("/products/save")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String saveProduct(String data) throws LocalizedException {
+		
+		Product product = (Product) getDataProvider().save(gson.fromJson(data, Product.class));
+		return gson.toJson(product);
+	}
+
+	@GET
+	@Path("/products/delete")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void deleteProduct(String data) throws LocalizedException {
+
+		getDataProvider().delete(gson.fromJson(data, Product.class));
+	}
+
+	/**
+	 * Proveedor de datos
+	 * 
+	 * @return
+	 */
+	private DataProvider<Entity> getDataProvider() {
+		return DataContext.getProvider();
+	}
+}
+[/java]
+
+</section>
+</article>
+ 
+</body>
+</html>

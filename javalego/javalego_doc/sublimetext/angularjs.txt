@@ -1,0 +1,13 @@
+Instalar package control en sublime text y los packages de angularjs.
+
+
+1. Descargar portable sublime text en http://www.sublimetext.com/3
+2. Instalar la opción "Package control" para añadir packages a la instalación de sublime text.
+   Ir a la página https://packagecontrol.io/installation y copiar el texto de la pestaña "Sublime Text 3"
+   Seleccionar menú: View -> Show console y pegar el texto copiado en el input text de la consola (final ventana) y
+   pulsar control para iniciar la instalación.
+3. Reiniciar Sublime text
+4. Instalar packages de AngularJs:
+   Teclear control + shift + p o seleccionar menú "Preferences.Package control" y seleccionar Package Control: install. 
+   Se abrirá un ventana de selección donde podremos filtrar los packages de angular tecleando "angular".
+   Seleccionar los paquetes AngularJS y AngularJS Snippets y pulsar intro para su instación (uno a uno).

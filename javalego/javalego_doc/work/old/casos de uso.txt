@@ -1,0 +1,13 @@
+Persona entra en tienda para:
+
+1. Seleccionar un producto de negocio
+2. Localiza CRM.Módulos.Formulario de proveedores (selecciona para descarga free o comercial-pago según licencia).
+3. Puede usarlo como un Servicion Cloud. Nosotro ofrecemos alojamiento, despliegue y servicio de importación/exportación de datos.
+4. Ver demo en web.
+5. Puede solicitar cambios a nuestra empresa meccano4j creando un subproducto y versionado independiente.
+6. Puede solicitar comercializar este subproducto (negociación de comisiones según importancia del producto y mercado).
+7. Puede, en un futuro, añadir nuevos formularios o módulos y acoplarlos al formulario de proveedores anterior.
+
+¿Cuántas empresas o autónomos les gustaría tener disponibilidad de este tipo de información en la nube y
+accesible en cualquier dispositivo?. ¿podrían ser tus colegas unos posibles clientes?.
+

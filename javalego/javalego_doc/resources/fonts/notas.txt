@@ -1,0 +1,12 @@
+INSTALAR FONTS ADICIONALES PARA LAS APLICACIONES DESDE
+-------------------------------------------------------------------------------------------
+
+Google Web Fonts
+
+Ver manual en:
+
+http://softisto.blogspot.com.es/2013/06/como-instalar-fuentes-de-google-web.html#.UqYGuvTuI-o
+
+
+
+Ejecutar archivos ttf del font que queremos instalar en el sistema operativo para tenerla disponible en las aplicaciones.
