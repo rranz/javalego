@@ -18,3 +18,9 @@ se pierden nuestros cambios. Para evitar esta situación, hay que configurar Ecl
 JAutoDoc
 
 http://jautodoc.sourceforge.net/update/
+
+Plugins de interés:
+
+Abrir archivos en explorador: 
+	http://basti1302.github.io/startexplorer/	
+	https://sourceforge.net/projects/startexplorer/
