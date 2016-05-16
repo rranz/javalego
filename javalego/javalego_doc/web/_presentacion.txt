@@ -1,0 +1,32 @@
+JAVALEGO
+
+Crear una presentación visual autoexplicativa para mostrar sus objetivos o características o fundamentos
+
+1. Escribir simple en java
+
+	getList()
+	getMessage()
+	getUser()
+	hasRole()
+	
+2. Definir su tecnología
+
+
+3. Generar o desplegar con ejemplos: AngularJS, Vaadin o Android
+
+
+
+4. Bloques de arquitectura actuales: datos, seguridad, ... y tecnologías soportadas
+
+
+5. Arquitectura colaborativa basada en microsiervos
+	Tienda Open Source
+	Productos
+	Categorías
+	GitHub
+	Demo
+	...
+	
+6. Demos de proyectos desarrollados: Vaadin, Android y AngularJS
+
+	
