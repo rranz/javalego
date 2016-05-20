@@ -7,6 +7,7 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.GenericApplicationContext;
 
 import com.javalego.data.DataProvider;
 import com.javalego.entity.Entity;
@@ -32,7 +33,7 @@ public class SpringDataProvider implements DataProvider<Entity> {
 	/**
 	 * Contexto de aplicación.
 	 */
-	private AnnotationConfigApplicationContext context;
+	private GenericApplicationContext context;
 
 	/**
 	 * Acceso a datos JPA
@@ -55,7 +56,7 @@ public class SpringDataProvider implements DataProvider<Entity> {
 	 * 
 	 * @param context
 	 */
-	public SpringDataProvider(AnnotationConfigApplicationContext context) {
+	public SpringDataProvider(GenericApplicationContext context) {
 		this.context = context;
 	}
 
@@ -64,7 +65,7 @@ public class SpringDataProvider implements DataProvider<Entity> {
 	 * 
 	 * @return
 	 */
-	public AnnotationConfigApplicationContext getContext() {
+	public GenericApplicationContext getContext() {
 		return context;
 	}
 
@@ -133,7 +134,7 @@ public class SpringDataProvider implements DataProvider<Entity> {
 	 * 
 	 * @param context
 	 */
-	public void setContext(AnnotationConfigApplicationContext context) {
+	public void setContext(GenericApplicationContext context) {
 		this.context = context;
 	}
 
@@ -149,16 +150,17 @@ public class SpringDataProvider implements DataProvider<Entity> {
 
 			try {
 				context = new AnnotationConfigApplicationContext(application);
-
-				// Inicializar JPA
-				if (jpaDao == null) {
-					jpaDao = (SpringJpaDao<Entity>) getBean(SpringJpaDao.class);
-				}
 			}
 			catch (Exception e) {
 				throw new LocalizedException(e, CommonErrors.DATABASE_ERROR);
 			}
 		}
+		
+		// Inicializar JPA
+		if (jpaDao == null) {
+			jpaDao = (SpringJpaDao<Entity>) getBean(SpringJpaDao.class);
+		}
+		
 	}
 
 	/**

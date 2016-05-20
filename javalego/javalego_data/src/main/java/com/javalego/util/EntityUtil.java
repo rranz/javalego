@@ -17,7 +17,8 @@ import com.javalego.entity.IdEntity;
 import com.javalego.entity.impl.AbstractCompositeEntity;
 
 /**
- * Métodos de utilidades de objetos de entidad JPA para obtener información de campos clave dependiendo de su tipología (numérica, object o composite).
+ * Métodos de utilidades de objetos de entidad JPA para obtener información de
+ * campos clave dependiendo de su tipología (numérica, object o composite).
  * 
  * @author ROBERTO RANZ
  */
@@ -66,7 +67,8 @@ public class EntityUtil {
 	}
 
 	/**
-	 * Obtener la lista de campos declarados del objeto y sus superclases hasta Object.
+	 * Obtener la lista de campos declarados del objeto y sus superclases hasta
+	 * Object.
 	 * 
 	 * @param object
 	 * @return
@@ -128,7 +130,8 @@ public class EntityUtil {
 	}
 
 	/**
-	 * Obtener la sentencia Sql para buscar por la clave de entidad (simple o compuesta).
+	 * Obtener la sentencia Sql para buscar por la clave de entidad (simple o
+	 * compuesta).
 	 * 
 	 * @param alias
 	 * @return
@@ -139,7 +142,8 @@ public class EntityUtil {
 	}
 
 	/**
-	 * Obtener la sentencia Sql para buscar por la clave de la entidad (simple o compuesta).
+	 * Obtener la sentencia Sql para buscar por la clave de la entidad (simple o
+	 * compuesta).
 	 * 
 	 * @param alias
 	 * @return
@@ -150,7 +154,8 @@ public class EntityUtil {
 	}
 
 	/**
-	 * Obtener la sentencia Sql para buscar por la clave de la entidad (simple o compuesta).
+	 * Obtener la sentencia Sql para buscar por la clave de la entidad (simple o
+	 * compuesta).
 	 * 
 	 * @param alias
 	 * @return
@@ -176,15 +181,19 @@ public class EntityUtil {
 
 			int index = 0;
 
-			// Campo clave que contiene la clave compuesta de la propiedad de entidad relacionada.
+			// Campo clave que contiene la clave compuesta de la propiedad de
+			// entidad relacionada.
 			String fieldKey = getCompositeKeysField(baseObject) != null ? getCompositeKeysField(baseObject).getName() : "";
 
 			for (String fieldname : fieldnames) {
 
 				Object value = idValues != null ? idValues.get(index) : bean.getProperty(baseObject, "".equals(fieldKey) ? fieldname : fieldKey + "." + fieldname);
 
-				// Si es clave compuesta crear condición clave_fieldname para que la clase HQLFactory no transforme Alias.clave.nombre en Alias.clave_nombre y genere error. TODO
-				String name = ("".equals(where) ? "" : " and ") + ("".equals(fieldKey) ? (alias != null ? alias + "." : "") + fieldname : (alias != null ? alias + "." : "") + fieldKey + "." + fieldname);
+				// Si es clave compuesta crear condición clave_fieldname para
+				// que la clase HQLFactory no transforme Alias.clave.nombre en
+				// Alias.clave_nombre y genere error. TODO
+				String name = ("".equals(where) ? "" : " and ")
+						+ ("".equals(fieldKey) ? (alias != null ? alias + "." : "") + fieldname : (alias != null ? alias + "." : "") + fieldKey + "." + fieldname);
 
 				where += name + (value == null ? " is null" : " = " + getValue(value, baseObject));
 				// Obtener la clave de la entidad para localizar el registro.
@@ -198,7 +207,8 @@ public class EntityUtil {
 	}
 
 	/**
-	 * Obtener el valor de un atributo en el formato JQL dependiendo del tipo de valor.
+	 * Obtener el valor de un atributo en el formato JQL dependiendo del tipo de
+	 * valor.
 	 * 
 	 * @param fieldname
 	 * @param baseObject
@@ -269,8 +279,9 @@ public class EntityUtil {
 	}
 
 	/**
-	 * Obtener el texto de los valores clave del objeto de entidad para ser mostrados en la aplicación y tener una referencia del código compuesto o id del registro asociado. NOTA: incluye el nombre de
-	 * los campos
+	 * Obtener el texto de los valores clave del objeto de entidad para ser
+	 * mostrados en la aplicación y tener una referencia del código compuesto o
+	 * id del registro asociado. NOTA: incluye el nombre de los campos
 	 * 
 	 * @return
 	 */
@@ -292,8 +303,9 @@ public class EntityUtil {
 	}
 
 	/**
-	 * Obtener el texto de los valores clave del objeto de entidad para ser mostrados en la aplicación y tener una referencia del código compuesto o id del registro asociado. NOTA: NO incluye el nombre
-	 * de los campos
+	 * Obtener el texto de los valores clave del objeto de entidad para ser
+	 * mostrados en la aplicación y tener una referencia del código compuesto o
+	 * id del registro asociado. NOTA: NO incluye el nombre de los campos
 	 * 
 	 * @return
 	 */
@@ -315,7 +327,9 @@ public class EntityUtil {
 	}
 
 	/**
-	 * Obtener el texto de los nombre clave del objeto de entidad separados por el carácter ,. Servirá para mostrar una referencia del código compuesto o id de entidad.
+	 * Obtener el texto de los nombre clave del objeto de entidad separados por
+	 * el carácter ,. Servirá para mostrar una referencia del código compuesto o
+	 * id de entidad.
 	 * 
 	 * @return
 	 */
@@ -337,7 +351,9 @@ public class EntityUtil {
 	}
 
 	/**
-	 * Token This (nombre entidad para JQL) y nombre del campo clave de la entidad obtenido a partir de la clase de la entidad. Si la entidad es de clave compuesta el método devolverá "".
+	 * Token This (nombre entidad para JQL) y nombre del campo clave de la
+	 * entidad obtenido a partir de la clase de la entidad. Si la entidad es de
+	 * clave compuesta el método devolverá "".
 	 * 
 	 * @return
 	 */
@@ -347,7 +363,8 @@ public class EntityUtil {
 	}
 
 	/**
-	 * Nombre del campo clave de la entidad obtenido a partir de la clase de la entidad. Si la entidad es de clave compuesta el método devolverá "".
+	 * Nombre del campo clave de la entidad obtenido a partir de la clase de la
+	 * entidad. Si la entidad es de clave compuesta el método devolverá "".
 	 * 
 	 * @return
 	 */
@@ -375,7 +392,8 @@ public class EntityUtil {
 	}
 
 	/**
-	 * Nombre del campo clave de la entidad obtenido a partir de la clase de la entidad. Si la entidad es de clave compuesta el método devolverá "".
+	 * Nombre del campo clave de la entidad obtenido a partir de la clase de la
+	 * entidad. Si la entidad es de clave compuesta el método devolverá "".
 	 * 
 	 * @return
 	 * @throws ClassNotFoundException

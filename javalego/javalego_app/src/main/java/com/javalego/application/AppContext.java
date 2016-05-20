@@ -70,6 +70,11 @@ public class AppContext implements Context {
 	private Key title;
 
 	/**
+	 * Entorno cargado
+	 */
+	private boolean loaded;
+
+	/**
 	 * Contexto de aplicación actual.
 	 */
 	private static AppContext current = null;
@@ -103,6 +108,14 @@ public class AppContext implements Context {
 			current = new AppContext(null, null);
 		}
 		return current;
+	}
+
+	/**
+	 * Entorno cargado
+	 * @return
+	 */
+	public boolean isLoaded() {
+		return loaded;
 	}
 
 	/**
@@ -240,6 +253,8 @@ public class AppContext implements Context {
 			throw UIContext.getException(e, CommonErrors.APPLICATION_ERROR);
 		}
 
+		loaded = true;
+		
 	}
 
 	/**

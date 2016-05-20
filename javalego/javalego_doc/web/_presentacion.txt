@@ -1,6 +1,84 @@
 JAVALEGO
 
+ourcode.io
+
 Crear una presentación visual autoexplicativa para mostrar sus objetivos o características o fundamentos
+
+!!!! PÁGINA PRINCIPAL CON TEMAS VISUALES MUY CONCRETOS Y DETALLE EN OTRAS PÁGINAS !!!! COMO AUTENTIA
+
+PRESENTACIÓN
+
+JavaLego es una arquitectura colaborativa que simplifica el desarrollo de aplicaciones empresariales mediante
+el uso de un API o especificación Java orientada a servicios, en constante evolución.
+
+"Simplifica tu código"
+
+Ej.: locale de textos y excepciones desde backend a frontend con Angular y Android y servicios y servicios REST usando modelos de datos también.
+Seguridad, editores y persistencia de datos con mismos ejemplos.
+
+Mostrar imágenes muy simples, con un logo representativo de su funcionalidad, representativas y botón de "Ampliar información"
+
+"Integra tecnologías intercambiables"
+
+"Escalabilidad tecnológica"
+
+"Gestiona entornos y tecnologías"
+
+"Colabora Github"
+
+"Publica en tienda"
+
+"Incorpórate al Equipo servicios profesionales"
+
+"Soporte al desarrollo y colaboraciones en proyectos y desarrollo de software a empresas mediante servicios freelance"
+
+
+"Desarrolle con la máxima productividad y sin complejos procesos de aprendizaje"
+Ej: UI para Vaadin, Android y AngularJS, Datos, ...
+
+Categorías de servicios actuales:
+
+- Entornos o contexto de ejecución
+- Acceso a datos
+- Seguridad
+- UI
+- Informes
+- Servicios de Backend
+- Localización de aplicaciones
+- Servicios de negocio
+
+Algunos servicios como datos, seguridad, UI o informes requieren de la integración con frameworks, librerías u
+otras tecnologías para su implementación.
+
+(imagen de shell o escudo)
+
+Esta integración no modifica nuestro código y nos permite seleccionar la requerida para nuestro proyecto o empresa.
+Nuestro código estará desacoplado de la tecnológica y nos permitirá adaptarnos a nuevos cambios tecnológicos preservando nuestro código,
+con los beneficios que ello conlleva (migraciones, personal especializado, prevención de errores, preservar la inversión, modificación de TDD, ...) 
+
+Arquitectura no intrusiva. Use sólo los servicios y la tecnología de implementación que necesite.
+
+Implementaciones actuales:
+
+- Acceso a datos: Spring Data, Hibernate
+- Seguridad: Shiro, Spring Security
+- UI: Vaadin, Android, AngularJS (generación de código)
+- Informes: Office, Birt
+- Servicios de Backend: Jersey REST
+
+
+COLABORA
+
+¿Cómo puedo colaborar en la arquitectura?.
+Metodología de construcción a partir de los proyectos básicos, Github y tienda.
+La implementación de un servicio se considera un producto que se puede integrar en la tienda
+
+TIENDA
+
+DOCUMENTACIÓN
+
+
+
 
 1. Escribir simple en java
 
@@ -16,10 +94,13 @@ Crear una presentación visual autoexplicativa para mostrar sus objetivos o cara
 
 
 
+
+
+
 4. Bloques de arquitectura actuales: datos, seguridad, ... y tecnologías soportadas
 
 
-5. Arquitectura colaborativa basada en microsiervos
+5. Arquitectura colaborativa
 	Tienda Open Source
 	Productos
 	Categorías

@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.javalego.application.AppContext;
+import com.javalego.application.Environment;
 import com.javalego.application.EnvironmentImpl;
 import com.javalego.exception.LocalizedException;
 
@@ -25,7 +26,7 @@ public class AppTest {
 	@Test
 	public void environment() throws LocalizedException {
 
-		EnvironmentImpl environment = new EnvironmentImpl("TEST");
+		Environment environment = new EnvironmentImpl("TEST");
 
 		// Set services
 		// environment.setDataProvider(IDataProvider);
