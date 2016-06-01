@@ -1,12 +1,14 @@
 package com.javalego.entity;
 
+import java.io.Serializable;
+
 /**
  * Entidad del modelo de dominio.
  * 
  * @author ROBERTO RANZ
  * 
  */
-public interface Entity {
+public interface Entity<T extends Serializable> {
 
 	/**
 	 * Texto de referencia a la tabla principal dentro de una consulta JQL (JPA)
@@ -23,14 +25,6 @@ public interface Entity {
 	String THIS = "this";
 
 	/**
-	 * Campo temporal de representa una clave primaria que es utilizada en por
-	 * la clases relacionadas con la cache de los editores para establecer una
-	 * relación entre los objetos master y objetos detail que nos permite
-	 * localizar los objetos master por este código secuencial y temporal.
-	 */
-	static final String TMP_ID = "tmpID";
-
-	/**
 	 * Obtener el nombre del campo Id del objeto que se utiliza por defecto.
 	 * 
 	 * @return
@@ -42,10 +36,10 @@ public interface Entity {
 	 * 
 	 * @return
 	 */
-	Object getId();
+	T getId();
 
 	/**
 	 * Establecer el valor de la clave de entidad.
 	 */
-	void setId(Object value);
+	void setId(T value);
 }

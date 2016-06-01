@@ -6,10 +6,10 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.impl.EntityId;
 
 @Entity
-public class Producto extends IdNumberEntityImpl {
+public class Producto extends EntityId {
 
 	@Column(length=100, unique=true, nullable=false)
 	private String identificador;

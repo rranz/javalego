@@ -5,10 +5,10 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.impl.EntityId;
 
 @Table(uniqueConstraints={@UniqueConstraint(columnNames={"provincia, codigo"})})
-public class CodigoPostal  extends IdNumberEntityImpl {
+public class CodigoPostal  extends EntityId {
 
 	@NotNull
 	private Provincia provincia;

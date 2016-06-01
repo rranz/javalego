@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.javalego.data.DataContext;
 import com.javalego.data.DataProvider;
-import com.javalego.entity.Entity;
 import com.javalego.exception.LocalizedException;
 import com.javalego.model.keys.Colors;
 import com.javalego.model.keys.Icon;
@@ -62,10 +61,9 @@ public class EditorEmpresas implements IBeansEditorModel<Empresa> {
 		return ModelLocaleEmpresas.EMPRESA;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Empresa> getBeans(String filter, String order) throws LocalizedException {
-		return getDataProvider() != null ? (Collection<Empresa>) getDataProvider().getList(Empresa.class) : null;
+		return getDataProvider() != null ? (Collection<Empresa>) getDataProvider().findAll(Empresa.class) : null;
 	}
 
 	@Override
@@ -136,7 +134,7 @@ public class EditorEmpresas implements IBeansEditorModel<Empresa> {
 	}
 
 	@Override
-	public DataProvider<Entity> getDataProvider() {
+	public DataProvider getDataProvider() {
 		return DataContext.getProvider();
 	}
 

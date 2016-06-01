@@ -44,10 +44,9 @@ public class EditorProveedores extends BaseEditor<Proveedor> {
 			public void beforeSaveEvent(Proveedor bean) throws LocalizedException {
 			}
 
-			@SuppressWarnings("unchecked")
 			@Override
 			public void beforeDeleteEvent(Proveedor bean) throws LocalizedException {
-				Collection<ProveedorContacto> list = (Collection<ProveedorContacto>) DataContext.getProvider().getList(ProveedorContacto.class, "empresa_id = " + bean.getId(), null);
+				Collection<ProveedorContacto> list = (Collection<ProveedorContacto>) DataContext.getProvider().findAll(ProveedorContacto.class, "empresa_id = " + bean.getId(), null);
 				if (list != null && list.size() > 0) {
 					throw new LocalizedException("EXISTEN CONTACTOS DE LA EMPRESA. Eliminación cancelada.");
 				}

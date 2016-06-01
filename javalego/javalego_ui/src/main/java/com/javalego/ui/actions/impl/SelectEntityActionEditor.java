@@ -117,7 +117,7 @@ public abstract class SelectEntityActionEditor<T> extends SelectActionEditor {
 			// Campo de búsqueda de la clave
 			String idFieldName = dataEditor.getName().indexOf(".") > 0 ? dataEditor.getName().substring(dataEditor.getName().indexOf(".") + 1) : dataEditor.getName();
 
-			Object findObject = DataContext.getProvider().getObject("from " + entityClass.getCanonicalName() + " where " + idFieldName + " = " + whereValue + (filter != null ? " and " + filter : ""));
+			Object findObject = DataContext.getProvider().findByProperty(entityClass, idFieldName, whereValue + (filter != null ? " and " + filter : ""));
 
 			notFound = findObject == null;
 			
@@ -201,7 +201,7 @@ public abstract class SelectEntityActionEditor<T> extends SelectActionEditor {
 				Collection<T> list = getCustomObjects();
 				
 				if (list == null) {
-					return DataContext.getProvider() != null ? (Collection<T>) DataContext.getProvider().getList(getEntityClass(), filter, order) : null;
+					return DataContext.getProvider() != null ? (Collection<T>) DataContext.getProvider().findAll(getEntityClass(), filter, order) : null;
 				}
 				else {
 					return list;

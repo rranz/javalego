@@ -8,10 +8,10 @@ import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.impl.EntityId;
 
 @MappedSuperclass
-public abstract class AbstractEmpresa extends IdNumberEntityImpl {
+public abstract class AbstractEmpresa extends EntityId {
 	
 	@NotNull
 	protected String nombre;

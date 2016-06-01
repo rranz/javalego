@@ -6,11 +6,11 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.impl.EntityId;
 import com.javalego.security.model.IRole;
 
 @Entity
-public class Role extends IdNumberEntityImpl implements IRole {
+public class Role extends EntityId implements IRole {
 
 	private String description;
 

@@ -5,11 +5,10 @@ import java.util.Collection;
 import java.util.List;
 
 import com.javalego.application.Environment;
-import com.javalego.data.DataProvider;
 import com.javalego.data.BusinessService;
-import com.javalego.data.jpa.SpringDataProvider;
-import com.javalego.entity.Entity;
-import com.javalego.erp.ErpApplicationContext;
+import com.javalego.data.DataProvider;
+import com.javalego.data.spring.SpringDataProvider;
+import com.javalego.erp.ErpPersistenceContext;
 import com.javalego.erp.data.ErpDataServices;
 import com.javalego.erp.model.Icons;
 import com.javalego.erp.model.Texts;
@@ -88,8 +87,8 @@ public class TestEnvironment implements Environment {
 	 * href="http://projects.spring.io/spring-data/">Spring Data</a>
 	 */
 	@Override
-	public synchronized DataProvider<Entity> getDataProvider() {
-		return new SpringDataProvider(ErpApplicationContext.class);
+	public synchronized DataProvider getDataProvider() {
+		return new SpringDataProvider(ErpPersistenceContext.class);
 	}
 
 	/**

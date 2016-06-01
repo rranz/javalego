@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import com.javalego.data.DataProvider;
-import com.javalego.entity.Entity;
 import com.javalego.exception.LocalizedException;
 import com.javalego.model.keys.Icon;
 import com.javalego.model.keys.Key;
@@ -129,7 +128,7 @@ public interface IBeansEditorModel<T> extends Serializable {
 	 * Nota: si es igual a null, no se realizará persistencia y los datos solo se actualizarán en memoria.
 	 * @return
 	 */
-	DataProvider<Entity> getDataProvider();
+	DataProvider getDataProvider();
 	
 	/**
 	 * Título del editor

@@ -9,13 +9,13 @@ import com.javalego.exception.LocalizedException;
 
 /**
  * Constructor de sentencias JPQL.
- * 
+ * <p>
  * En base a los alias crea joins del tipo "left outer join" que evita la
  * pérdida de registros cuando relacionamos varias tablas ya que el uso directo
  * de los campos de otras tablas desde una consulta simple = (ej.) select
  * pais.nombre from divisas provoca que si existen registros sin un país
  * asociado no se recuperan estos registros.
- * 
+ * <p>
  * Dentro de este generador de sentencias Sql se definen los campos (path
  * incluido pais.nombre) que deseamos recuperar, la tabla principal, la
  * ordenación, la condición y la agrupación, típicas de una sentencia sql. Las
@@ -23,6 +23,8 @@ import com.javalego.exception.LocalizedException;
  * al path de los campos incluidos y se encarga de sustituir el path de los
  * campos incluidos en las campos, ordenación, agrupación o condición por su
  * alias asociado.
+ * <p>
+ * Nota: actualmente no es usada en la arquitectura.
  * 
  * @author ROBERTO RANZ
  */

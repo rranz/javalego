@@ -1,7 +1,6 @@
 package com.javalego.store.model.impl;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,19 +10,15 @@ import org.apache.log4j.Logger;
 import com.javalego.exception.LocalizedException;
 import com.javalego.store.items.IBaseItem;
 import com.javalego.store.items.ICategory;
-import com.javalego.store.items.ILicense;
-import com.javalego.store.items.IMember;
-import com.javalego.store.items.INews;
 import com.javalego.store.items.IProduct;
-import com.javalego.store.items.IProject;
-import com.javalego.store.items.IProvider;
-import com.javalego.store.items.IRepository;
 import com.javalego.store.items.Type;
 import com.javalego.store.items.impl.Category;
 import com.javalego.store.items.impl.Comment;
 import com.javalego.store.items.impl.Company;
 import com.javalego.store.items.impl.Demo;
 import com.javalego.store.items.impl.Developer;
+import com.javalego.store.items.impl.License;
+import com.javalego.store.items.impl.Member;
 import com.javalego.store.items.impl.News;
 import com.javalego.store.items.impl.Product;
 import com.javalego.store.items.impl.Project;
@@ -57,19 +52,19 @@ public class MockDataServices extends AbstractDataServices {
 
 	private static final Logger logger = Logger.getLogger(MockDataServices.class);
 
-	private List<IProduct> products;
+	private List<Product> products;
 
-	private List<ILicense> licenses;
+	private List<License> licenses;
 
-	private List<IProvider> providers;
+	private List<Provider> providers;
 
-	private List<IRepository> repositories;
+	private List<Repository> repositories;
 
-	private List<ICategory> businessCategories;
+	private List<Category> businessCategories;
 
-	private List<IMember> members = new ArrayList<IMember>();
+	private List<Member> members = new ArrayList<Member>();
 
-	private List<ICategory> architectureCategories;
+	private List<Category> architectureCategories;
 
 	private HashMap<String, View> demoViews;
 
@@ -83,9 +78,9 @@ public class MockDataServices extends AbstractDataServices {
 	 * 
 	 * @return
 	 */
-	private Collection<IMember> getMockMembers() {
+	private List<Member> getMockMembers() {
 
-		List<IMember> list = new ArrayList<IMember>();
+		List<Member> list = new ArrayList<Member>();
 
 		Developer m = new Developer("roberto", "ROBERTO", "GARCIA PEREZ", new Date());
 		m.getSocial().setEmail("mailto:robertoperez@gmail.com");
@@ -140,15 +135,15 @@ public class MockDataServices extends AbstractDataServices {
 	}
 
 	@Override
-	public synchronized List<IProduct> getAllProducts() {
+	public synchronized List<Product> getAllProducts() {
 		return products;
 	}
 
 	@Override
-	public synchronized List<IProvider> getAllProviders() {
+	public synchronized List<Provider> getAllProviders() {
 
 		if (providers == null) {
-			providers = new ArrayList<IProvider>();
+			providers = new ArrayList<Provider>();
 			providers.add(new Provider("VAADIN", "Vaadin UI", "http://vaadin.com", ProviderIcons.VAADIN));
 			providers.add(new Provider("ANDROID", "Android", "http://play.google.com", ProviderIcons.ANDROID));
 			providers.add(new Provider("SPRING", "Spring", "http://spring.io", ProviderIcons.SPRING));
@@ -162,11 +157,11 @@ public class MockDataServices extends AbstractDataServices {
 	}
 
 	@Override
-	public synchronized List<ICategory> getCategories(Type type) {
+	public synchronized List<Category> getCategories(Type type) {
 
 		if (businessCategories == null) {
 
-			businessCategories = new ArrayList<ICategory>();
+			businessCategories = new ArrayList<Category>();
 			businessCategories.add(new Category(Type.BUSINESS, LocaleStore.SOLUTIONS, MenuIcons2.SOLUTION));
 			businessCategories.add(new Category(Type.BUSINESS, LocaleStore.MODULES, MenuIcons2.MODULE));
 			businessCategories.add(new Category(Type.BUSINESS, LocaleStore.FORMS, MenuIcons2.FORM));
@@ -176,7 +171,7 @@ public class MockDataServices extends AbstractDataServices {
 			businessCategories.add(new Category(Type.BUSINESS, LocaleStore.INTERFACES, MenuIcons2.INTERFACE));
 			businessCategories.add(new Category(Type.BUSINESS, LocaleStore.MISCELLANEOUS, MenuIcons2.TOOLS));
 
-			architectureCategories = new ArrayList<ICategory>();
+			architectureCategories = new ArrayList<Category>();
 			architectureCategories.add(new Category(Type.ARCHITECTURE, LocaleStore.UI, MenuIcons2.MONITOR));
 			architectureCategories.add(new Category(Type.ARCHITECTURE, LocaleStore.DATA, MenuIcons2.DATA));
 			architectureCategories.add(new Category(Type.ARCHITECTURE, LocaleStore.REPORTS, MenuIcons2.REPORT));
@@ -198,10 +193,10 @@ public class MockDataServices extends AbstractDataServices {
 	}
 
 	@Override
-	public List<ILicense> getAllLicenses() {
+	public List<License> getAllLicenses() {
 
 		if (licenses == null) {
-			licenses = new ArrayList<ILicense>();
+			licenses = new ArrayList<License>();
 			licenses.add(AGPL30);
 			licenses.add(APACHE2);
 			licenses.add(BSD2);
@@ -219,10 +214,10 @@ public class MockDataServices extends AbstractDataServices {
 	}
 
 	@Override
-	public List<IRepository> getAllRepositories() {
+	public List<Repository> getAllRepositories() {
 
 		if (repositories == null) {
-			repositories = new ArrayList<IRepository>();
+			repositories = new ArrayList<Repository>();
 
 			repositories.add(GITHUB);
 			repositories.add(GITLAB);
@@ -231,9 +226,9 @@ public class MockDataServices extends AbstractDataServices {
 		return repositories;
 	}
 
-	public Collection<IProject> getAllProjects() {
+	public List<Project> getAllProjects() {
 
-		List<IProject> list = new ArrayList<IProject>();
+		List<Project> list = new ArrayList<Project>();
 
 		list.add(getFullProject());
 
@@ -263,17 +258,17 @@ public class MockDataServices extends AbstractDataServices {
 	}
 
 	@Override
-	public Collection<IProduct> getProducts(ICategory category, String filter) {
+	public List<Product> getProducts(ICategory category, String filter) {
 
-		List<IProduct> list = null;
+		List<Product> list = null;
 
 		if (category.getCode() == LocaleStore.FORMS) {
-			list = new ArrayList<IProduct>();
+			list = new ArrayList<Product>();
 			list.add(getForm());
 			list.add(getFormAddress());
 		}
 		else if (category.getCode() == LocaleStore.UI) {
-			list = new ArrayList<IProduct>();
+			list = new ArrayList<Product>();
 			list.add(getProduct());
 			list.add(getProduct2());
 		}
@@ -282,11 +277,11 @@ public class MockDataServices extends AbstractDataServices {
 	}
 
 	@Override
-	public Collection<IProduct> getProducts(String filter) {
+	public List<Product> getProducts(String filter) {
 		return getAllProducts();
 	}
 	
-	private IProject getFullProject() {
+	private Project getFullProject() {
 
 		Project p = getProject(Type.ARCHITECTURE, true);
 
@@ -328,7 +323,7 @@ public class MockDataServices extends AbstractDataServices {
 
 	}
 
-	private IProduct getForm() {
+	private Product getForm() {
 
 		Product p = new Product("FORM", "Empresas", "Empresas", getCategories(Type.BUSINESS).get(2));
 		p.setDemo(new Demo(DEMOVIEW_EMPRESAS, null));
@@ -337,7 +332,7 @@ public class MockDataServices extends AbstractDataServices {
 		return p;
 	}
 
-	private IProduct getFormAddress() {
+	private Product getFormAddress() {
 
 		Product p = new Product("FORMADDRESS", "Dirección", "Dirección", getCategories(Type.BUSINESS).get(2));
 		p.setLicense(AGPL30);
@@ -346,7 +341,7 @@ public class MockDataServices extends AbstractDataServices {
 		return p;
 	}
 
-	private IProduct getProduct() {
+	private Product getProduct() {
 
 		Product p = new Product("BUTTONS", "Buttons UI", "Buttons UI", getCategories(Type.ARCHITECTURE).get(0));
 		p.setLicense(AGPL30);
@@ -362,7 +357,7 @@ public class MockDataServices extends AbstractDataServices {
 		return p;
 	}
 
-	private IProduct getProduct2() {
+	private Product getProduct2() {
 
 		Product p = new Product("MENU", "Menus UI", "Menus UI", getCategories(Type.ARCHITECTURE).get(0));
 		p.setLicense(AGPL30);
@@ -383,7 +378,7 @@ public class MockDataServices extends AbstractDataServices {
 	}
 
 	@Override
-	public synchronized List<IMember> getAllMembers() {
+	public synchronized List<Member> getAllMembers() {
 
 		if (!loadedMembers) {
 			members.addAll(getMockMembers());
@@ -394,7 +389,7 @@ public class MockDataServices extends AbstractDataServices {
 	}
 
 	@Override
-	public void addMember(IMember member) {
+	public void addMember(Member member) {
 		members.add(member);
 	}
 
@@ -404,9 +399,9 @@ public class MockDataServices extends AbstractDataServices {
 	}
 
 	@Override
-	public List<INews> getAllNews() {
+	public List<News> getAllNews() {
 
-		List<INews> news = new ArrayList<INews>();
+		List<News> news = new ArrayList<News>();
 
 		news.add(new News(DateUtils.getDate(2014, 2, 2), UIContext.getText(LocaleStore.NEWS1), UIContext.getText(LocaleStore.NEWS1D)));
 
@@ -418,7 +413,7 @@ public class MockDataServices extends AbstractDataServices {
 	}
 
 	@Override
-	public Collection<IProject> getProjects(Type type) throws LocalizedException {
+	public List<Project> getProjects(Type type) throws LocalizedException {
 		return getAllProjects();
 	}
 

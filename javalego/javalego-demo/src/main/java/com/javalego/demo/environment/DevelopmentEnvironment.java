@@ -5,8 +5,8 @@ import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.javalego.data.DataProvider;
-import com.javalego.data.jpa.SpringDataProvider;
-import com.javalego.entity.Entity;
+import com.javalego.data.spring.SpringDataProvider;
+import com.javalego.demo.data.DemoPersistenceContext2;
 import com.javalego.security.SecurityServices;
 import com.javalego.security.shiro.DefaultShiroRealm;
 import com.javalego.security.shiro.SecurityShiro;
@@ -21,10 +21,10 @@ import com.javalego.security.shiro.SecurityShiro;
 public class DevelopmentEnvironment extends BaseEnvironment {
 
 	private SecurityShiro security;
-	
+
 	@Autowired
 	private GenericApplicationContext context;
-	
+
 	private boolean database = true;
 
 	@Override
@@ -62,8 +62,11 @@ public class DevelopmentEnvironment extends BaseEnvironment {
 	}
 
 	@Override
-	public synchronized DataProvider<Entity> getDataProvider() {
-		return database ? new SpringDataProvider(context) : null;
+	public synchronized DataProvider getDataProvider() {
+		if (!database) {
+			return null;
+		}
+		return context != null ? new SpringDataProvider(context) : new SpringDataProvider(DemoPersistenceContext2.class);
 	}
 
 }

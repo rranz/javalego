@@ -1,8 +1,8 @@
 package com.javalego.test.data.entities;
 
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.impl.EntityId;
 
-public class Product extends IdNumberEntityImpl {
+public class Product extends EntityId {
 
 	private String title;
 	

@@ -6,10 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.impl.EntityId;
 
 @Entity
-public class Empresa extends IdNumberEntityImpl {
+public class Empresa extends EntityId {
 	
 	private String nombre;
 

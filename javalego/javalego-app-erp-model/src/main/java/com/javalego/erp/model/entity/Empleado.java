@@ -9,13 +9,13 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.impl.EntityId;
 
 /**
  * Personas físicas registradas y disponibles para su inclusión en el resto de tablas (usuarios, contactos, etc.)
  */
 @Entity
-public class Empleado extends IdNumberEntityImpl {
+public class Empleado extends EntityId {
 
 	@ManyToOne 
 	@JoinColumn(name="departamento_id") 

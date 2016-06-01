@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 
 import com.javalego.data.DataContext;
 import com.javalego.data.DataProvider;
-import com.javalego.entity.Entity;
 import com.javalego.exception.CommonErrors;
 import com.javalego.exception.LocalizedException;
 import com.javalego.locale.LocaleContext;
@@ -212,7 +211,7 @@ public class AppContext implements Context {
 			if (DataContext.getCurrent() != null) {
 
 				// Proveedor de datos
-				DataProvider<Entity> dataProvider = environment.getDataProvider();
+				DataProvider dataProvider = environment.getDataProvider();
 				if (dataProvider != null) {
 					dataProvider.load();
 					DataContext.getCurrent().setProvider(dataProvider);

@@ -1,23 +1,14 @@
 package com.javalego.store.model.impl;
 
-import java.util.Collection;
 import java.util.List;
 
 import com.javalego.data.DataContext;
 import com.javalego.data.DataProvider;
-import com.javalego.entity.Entity;
 import com.javalego.exception.LocalizedException;
 import com.javalego.security.SecurityContext;
 import com.javalego.store.items.IAuthor;
 import com.javalego.store.items.IBaseItem;
 import com.javalego.store.items.ICategory;
-import com.javalego.store.items.ILicense;
-import com.javalego.store.items.IMember;
-import com.javalego.store.items.INews;
-import com.javalego.store.items.IProduct;
-import com.javalego.store.items.IProject;
-import com.javalego.store.items.IProvider;
-import com.javalego.store.items.IRepository;
 import com.javalego.store.items.Type;
 import com.javalego.store.items.impl.Category;
 import com.javalego.store.items.impl.License;
@@ -36,42 +27,41 @@ import com.vaadin.navigator.View;
  * @author ROBERTO RANZ
  *
  */
-@SuppressWarnings("unchecked")
 public class DataServiceImpl extends AbstractDataServices {
 
-	private Collection<ILicense> licenses;
+	private List<License> licenses;
 
-	private Collection<IRepository> repositories;
+	private List<Repository> repositories;
 
-	private Collection<ICategory> businessCategories;
+	private List<Category> businessCategories;
 
-	private Collection<ICategory> architectureCategories;
+	private List<Category> architectureCategories;
 
-	private DataProvider<Entity> d;
+	private DataProvider d;
 
 	public DataServiceImpl() {
 		d = DataContext.getProvider();
 	}
 
 	@Override
-	public synchronized List<IProduct> getAllProducts() throws LocalizedException {
+	public synchronized List<Product> getAllProducts() throws LocalizedException {
 
-		return (List<IProduct>) d.getList(Product.class);
+		return d.findAll(Product.class);
 	}
 
 	@Override
-	public synchronized Collection<IProvider> getAllProviders() throws LocalizedException {
+	public synchronized List<Provider> getAllProviders() throws LocalizedException {
 
-		return (Collection<IProvider>) d.getList(Provider.class);
+		return d.findAll(Provider.class);
 	}
 
 	@Override
-	public synchronized Collection<ICategory> getCategories(Type type) throws LocalizedException {
+	public synchronized List<Category> getCategories(Type type) throws LocalizedException {
 
 		// Cargar inicial
 		if (businessCategories == null) {
-			businessCategories = (Collection<ICategory>) d.getList(Category.class, "type = '" + Type.BUSINESS.name() + "'", null);
-			architectureCategories = (Collection<ICategory>) d.getList(Category.class, "type = '" + Type.ARCHITECTURE.name() + "'", null);
+			businessCategories = d.findAll(Category.class, "type = '" + Type.BUSINESS.name() + "'", null);
+			architectureCategories = d.findAll(Category.class, "type = '" + Type.ARCHITECTURE.name() + "'", null);
 		}
 
 		// Seleccionar por tipo
@@ -87,28 +77,28 @@ public class DataServiceImpl extends AbstractDataServices {
 	}
 
 	@Override
-	public Collection<ILicense> getAllLicenses() throws LocalizedException {
+	public List<License> getAllLicenses() throws LocalizedException {
 
 		if (licenses == null) {
-			licenses = (Collection<ILicense>) d.getList(License.class);
+			licenses = d.findAll(License.class);
 		}
 
 		return licenses;
 	}
 
 	@Override
-	public Collection<IRepository> getAllRepositories() throws LocalizedException {
+	public List<Repository> getAllRepositories() throws LocalizedException {
 
 		if (repositories == null) {
-			repositories = (Collection<IRepository>) d.getList(Repository.class);
+			repositories = d.findAll(Repository.class);
 		}
 		return repositories;
 	}
 
 	@Override
-	public Collection<IProject> getProjects(Type type) throws LocalizedException {
+	public List<Project> getProjects(Type type) throws LocalizedException {
 
-		return (Collection<IProject>) d.getList(Project.class, "type = '" + type.name() + "'");
+		return d.findAll(Project.class, "type = '" + type.name() + "'");
 	}
 
 	@Override
@@ -118,25 +108,25 @@ public class DataServiceImpl extends AbstractDataServices {
 	}
 
 	@Override
-	public Collection<IProduct> getProducts(ICategory category, String filter) throws LocalizedException {
+	public List<Product> getProducts(ICategory category, String filter) throws LocalizedException {
 
-		return (Collection<IProduct>) d.getList(Product.class, "category.code = '" + category.getCode().name() + "'");
+		return d.findAll(Product.class, "category.code = '" + category.getCode().name() + "'");
 	}
 
 	@Override
-	public Collection<IProduct> getProducts(String filter) throws LocalizedException {
+	public List<Product> getProducts(String filter) throws LocalizedException {
 
-		return (Collection<IProduct>) d.getList(Product.class, "title like '" + filter + "%'");
+		return d.findAll(Product.class, "title like '" + filter + "%'");
 	}
 
 	@Override
-	public synchronized Collection<IMember> getAllMembers() throws LocalizedException {
+	public synchronized List<Member> getAllMembers() throws LocalizedException {
 
-		return (Collection<IMember>) d.getList(Member.class);
+		return d.findAll(Member.class);
 	}
 
 	@Override
-	public void addMember(IMember member) throws LocalizedException {
+	public void addMember(Member member) throws LocalizedException {
 
 		d.save((Member) member);
 	}
@@ -159,9 +149,9 @@ public class DataServiceImpl extends AbstractDataServices {
 	}
 
 	@Override
-	public Collection<INews> getAllNews() throws LocalizedException {
+	public List<News> getAllNews() throws LocalizedException {
 
-		return (Collection<INews>) d.getList(News.class);
+		return d.findAll(News.class);
 	}
 
 }

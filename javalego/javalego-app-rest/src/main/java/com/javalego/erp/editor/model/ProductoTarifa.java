@@ -5,10 +5,10 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.impl.EntityId;
 
 @Entity
-public class ProductoTarifa extends IdNumberEntityImpl {
+public class ProductoTarifa extends EntityId {
 
 	private String nombre;
 

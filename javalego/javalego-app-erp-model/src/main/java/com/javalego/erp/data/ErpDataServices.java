@@ -2,10 +2,9 @@ package com.javalego.erp.data;
 
 import java.util.Collection;
 
+import com.javalego.data.BusinessService;
 import com.javalego.data.DataContext;
 import com.javalego.data.DataProvider;
-import com.javalego.data.BusinessService;
-import com.javalego.entity.Entity;
 import com.javalego.erp.model.editors.ModeloCampos;
 import com.javalego.erp.model.entity.Categoria;
 import com.javalego.erp.model.entity.CategoriaProfesional;
@@ -37,10 +36,9 @@ public class ErpDataServices implements BusinessService, ModeloCampos {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	@SuppressWarnings("unchecked")
 	public Collection<Categoria> getCategorias(String filter, String order) throws LocalizedException {
 
-		return getDataProvider() == null ? null : (Collection<Categoria>) getDataProvider().getList(Categoria.class, filter, order == null ? NOMBRE : order);
+		return getDataProvider() == null ? null : (Collection<Categoria>) getDataProvider().findAll(Categoria.class, filter, order == null ? NOMBRE : order);
 	}
 
 	/**
@@ -48,7 +46,7 @@ public class ErpDataServices implements BusinessService, ModeloCampos {
 	 * 
 	 * @return
 	 */
-	private DataProvider<Entity> getDataProvider() {
+	private DataProvider getDataProvider() {
 		return DataContext.getProvider();
 	}
 
@@ -60,20 +58,18 @@ public class ErpDataServices implements BusinessService, ModeloCampos {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	@SuppressWarnings("unchecked")
 	public Collection<CategoriaProfesional> getCategoriasProfesionales(String filter, String order) throws LocalizedException {
 
-		return getDataProvider() == null ? null : (Collection<CategoriaProfesional>) getDataProvider().getList(CategoriaProfesional.class, filter, order == null ? NOMBRE : order);
+		return getDataProvider() == null ? null : (Collection<CategoriaProfesional>) getDataProvider().findAll(CategoriaProfesional.class, filter, order == null ? NOMBRE : order);
 	}
 
-	@SuppressWarnings("unchecked")
 	public boolean hasClienteContactos(Cliente cliente) throws LocalizedException {
 
 		if (getDataProvider() == null) {
 			return false;
 		}
 
-		Collection<ClienteContacto> list = (Collection<ClienteContacto>) getDataProvider().getList(ClienteContacto.class, "empresa_id = " + cliente.getId(), null);
+		Collection<ClienteContacto> list = (Collection<ClienteContacto>) getDataProvider().findAll(ClienteContacto.class, "empresa_id = " + cliente.getId(), null);
 		return list != null && list.size() > 0;
 	}
 
@@ -85,10 +81,9 @@ public class ErpDataServices implements BusinessService, ModeloCampos {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	@SuppressWarnings("unchecked")
 	public Collection<Cliente> getClientes(String filter, String order) throws LocalizedException {
 
-		return getDataProvider() == null ? null : (Collection<Cliente>) getDataProvider().getList(Cliente.class, filter, order == null ? "nombre" : order);
+		return getDataProvider() == null ? null : (Collection<Cliente>) getDataProvider().findAll(Cliente.class, filter, order == null ? "nombre" : order);
 	}
 
 	/**
@@ -99,10 +94,9 @@ public class ErpDataServices implements BusinessService, ModeloCampos {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	@SuppressWarnings("unchecked")
 	public Collection<ClienteContacto> getClienteContactos(String filter, String order) throws LocalizedException {
 
-		return getDataProvider() == null ? null : (Collection<ClienteContacto>) getDataProvider().getList(ClienteContacto.class, filter, order == null ? NOMBRE : order);
+		return getDataProvider() == null ? null : (Collection<ClienteContacto>) getDataProvider().findAll(ClienteContacto.class, filter, order == null ? NOMBRE : order);
 	}
 
 	/**
@@ -111,10 +105,9 @@ public class ErpDataServices implements BusinessService, ModeloCampos {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	@SuppressWarnings("unchecked")
 	public Collection<ProveedorContacto> getProveedorContactos(String filter, String order) throws LocalizedException {
 
-		return getDataProvider() == null ? null : (Collection<ProveedorContacto>) getDataProvider().getList(ProveedorContacto.class, filter, order == null ? NOMBRE : order);
+		return getDataProvider() == null ? null : (Collection<ProveedorContacto>) getDataProvider().findAll(ProveedorContacto.class, filter, order == null ? NOMBRE : order);
 	}
 
 	/**
@@ -125,10 +118,9 @@ public class ErpDataServices implements BusinessService, ModeloCampos {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	@SuppressWarnings("unchecked")
 	public Collection<Departamento> getDepartamentos(String filter, String order) throws LocalizedException {
 
-		return getDataProvider() == null ? null : (Collection<Departamento>) getDataProvider().getList(Departamento.class, filter, order == null ? NOMBRE : order);
+		return getDataProvider() == null ? null : (Collection<Departamento>) getDataProvider().findAll(Departamento.class, filter, order == null ? NOMBRE : order);
 	}
 
 	/**
@@ -139,10 +131,9 @@ public class ErpDataServices implements BusinessService, ModeloCampos {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	@SuppressWarnings("unchecked")
 	public Collection<Empleado> getEmpleados(String filter, String order) throws LocalizedException {
 
-		return getDataProvider() == null ? null : (Collection<Empleado>) getDataProvider().getList(Empleado.class, filter, order == null ? null : order);
+		return getDataProvider() == null ? null : (Collection<Empleado>) getDataProvider().findAll(Empleado.class, filter, order == null ? null : order);
 	}
 
 	/**
@@ -153,10 +144,9 @@ public class ErpDataServices implements BusinessService, ModeloCampos {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	@SuppressWarnings("unchecked")
 	public Collection<Empresa> getEmpresas(String filter, String order) throws LocalizedException {
 
-		return getDataProvider() == null ? null : (Collection<Empresa>) getDataProvider().getList(Empresa.class, filter, order == null ? "nombre" : order);
+		return getDataProvider() == null ? null : (Collection<Empresa>) getDataProvider().findAll(Empresa.class, filter, order == null ? "nombre" : order);
 	}
 
 	/**
@@ -167,10 +157,9 @@ public class ErpDataServices implements BusinessService, ModeloCampos {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	@SuppressWarnings("unchecked")
 	public Collection<Producto> getProductos(String filter, String order) throws LocalizedException {
 
-		return getDataProvider() == null ? null : (Collection<Producto>) getDataProvider().getList(Producto.class, filter, order == null ? NOMBRE : order);
+		return getDataProvider() == null ? null : (Collection<Producto>) getDataProvider().findAll(Producto.class, filter, order == null ? NOMBRE : order);
 	}
 
 	/**
@@ -181,10 +170,9 @@ public class ErpDataServices implements BusinessService, ModeloCampos {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	@SuppressWarnings("unchecked")
 	public Collection<ProductoTarifa> getProductoTarifas(String filter, String order) throws LocalizedException {
 
-		return getDataProvider() == null ? null : (Collection<ProductoTarifa>) getDataProvider().getList(ProductoTarifa.class, filter, order == null ? null : order);
+		return getDataProvider() == null ? null : (Collection<ProductoTarifa>) getDataProvider().findAll(ProductoTarifa.class, filter, order == null ? null : order);
 	}
 
 	/**
@@ -195,9 +183,8 @@ public class ErpDataServices implements BusinessService, ModeloCampos {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	@SuppressWarnings("unchecked")
 	public Collection<Proveedor> getProveedores(String filter, String order) throws LocalizedException {
 
-		return getDataProvider() == null ? null : getDataProvider() == null ? null : (Collection<Proveedor>) getDataProvider().getList(Proveedor.class, filter, order == null ? "nombre" : order);
+		return getDataProvider() == null ? null : getDataProvider() == null ? null : (Collection<Proveedor>) getDataProvider().findAll(Proveedor.class, filter, order == null ? "nombre" : order);
 	}
 }

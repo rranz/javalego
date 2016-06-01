@@ -75,7 +75,7 @@ public class EditorEmpleados extends BaseEditor<Empleado> {
 			public void valueChangeEvent(ValueChangeEvent event) throws LocalizedException {
 
 				if (getDataProvider() != null) {
-					Departamento e = (Departamento) getDataProvider().getObject(Departamento.class, "nombre = '" + event.getValue() + "'");
+					Departamento e = (Departamento) getDataProvider().find(Departamento.class, "nombre = '" + event.getValue() + "'");
 					if (e != null) {
 						event.getEditorRules().setValue(DEPARTAMENTO_ID, e.getId());
 					} else {
@@ -88,7 +88,7 @@ public class EditorEmpleados extends BaseEditor<Empleado> {
 			@SuppressWarnings("unchecked")
 			@Override
 			public Collection<String> getKeys(String constraint) throws LocalizedException {
-				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().getFieldValues(Departamento.class, NOMBRE,
+				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().fieldValues(Departamento.class, NOMBRE,
 						constraint != null ? "nombre like'" + constraint + "%'" : null, NOMBRE);
 			}
 
@@ -104,7 +104,7 @@ public class EditorEmpleados extends BaseEditor<Empleado> {
 
 				if (getDataProvider() != null) {
 
-					CategoriaProfesional e = (CategoriaProfesional) getDataProvider().getObject(CategoriaProfesional.class, "nombre = '" + event.getValue() + "'");
+					CategoriaProfesional e = (CategoriaProfesional) getDataProvider().find(CategoriaProfesional.class, "nombre = '" + event.getValue() + "'");
 
 					if (e != null) {
 						event.getEditorRules().setValue(CATEGORIA_ID, e.getId());
@@ -119,7 +119,7 @@ public class EditorEmpleados extends BaseEditor<Empleado> {
 			@Override
 			public Collection<String> getKeys(String constraint) throws LocalizedException {
 
-				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().getFieldValues(CategoriaProfesional.class, NOMBRE,
+				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().fieldValues(CategoriaProfesional.class, NOMBRE,
 						constraint != null ? "nombre like'" + constraint + "%'" : null, NOMBRE);
 			}
 
@@ -135,7 +135,7 @@ public class EditorEmpleados extends BaseEditor<Empleado> {
 
 				if (getDataProvider() != null) {
 
-					Empresa e = (Empresa) getDataProvider().getObject(Empresa.class, "nombre = '" + event.getValue() + "'");
+					Empresa e = (Empresa) getDataProvider().find(Empresa.class, "nombre = '" + event.getValue() + "'");
 
 					if (e != null) {
 						event.getEditorRules().setValue(EMPRESA_ID, e.getId());
@@ -150,7 +150,7 @@ public class EditorEmpleados extends BaseEditor<Empleado> {
 			@Override
 			public Collection<String> getKeys(String constraint) throws LocalizedException {
 
-				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().getFieldValues(Empresa.class, NOMBRE, constraint != null ? "nombre like'" + constraint + "%'" : null,
+				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().fieldValues(Empresa.class, NOMBRE, constraint != null ? "nombre like'" + constraint + "%'" : null,
 						NOMBRE);
 			}
 

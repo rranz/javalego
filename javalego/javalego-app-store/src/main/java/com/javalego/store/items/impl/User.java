@@ -7,12 +7,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.impl.EntityId;
 import com.javalego.security.model.IRole;
 import com.javalego.security.model.IUser;
 
 @Entity
-public class User extends IdNumberEntityImpl implements IUser {
+public class User extends EntityId implements IUser {
 
 	private String name;
 

@@ -1,9 +1,8 @@
 package com.javalego.store.environment;
 
 import com.javalego.data.DataProvider;
-import com.javalego.data.StoreApplicationContext;
-import com.javalego.data.jpa.SpringDataProvider;
-import com.javalego.entity.Entity;
+import com.javalego.data.StorePersistenceContext;
+import com.javalego.data.spring.SpringDataProvider;
 import com.javalego.security.services.UserServices;
 import com.javalego.store.model.ModelService;
 import com.javalego.store.model.StoreDataServices;
@@ -32,8 +31,8 @@ public class TestEnvironment extends BaseEnvironment {
 	}
 
 	@Override
-	public synchronized DataProvider<Entity> getDataProvider() {
-		return new SpringDataProvider(StoreApplicationContext.class);
+	public synchronized DataProvider getDataProvider() {
+		return new SpringDataProvider(StorePersistenceContext.class);
 	}
 	
 	@Override

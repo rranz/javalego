@@ -7,7 +7,7 @@ package com.javalego.model.context;
  * Clase que permite configurar los servicios del entorno de ejecución para un
  * contexto específico de nuestra aplicación.
  * <p>
- * Ej.: UI, Data, Locale, Security, ...
+ * Ej.: Aplicación, UI, Data, Locale, Security, ...
  * 
  * @author ROBERTO RANZ
  *

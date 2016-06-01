@@ -1,9 +1,10 @@
 package com.javalego.data.rest.client;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.criteria.Order;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -24,7 +25,7 @@ import com.javalego.exception.LocalizedException;
  * @author ROBERTO RANZ
  * 
  */
-public class DataProviderRESTClient implements DataProvider<Entity> {
+public class DataProviderRESTClient implements DataProvider {
 	
 	private static final Gson gson = new Gson();
 	
@@ -58,92 +59,77 @@ public class DataProviderRESTClient implements DataProvider<Entity> {
 		this.endpoint = endpoint;
 	}
 
-	@Override
-	public Collection<? extends Entity> getList(Class<? extends Entity> entity) throws LocalizedException {
-
-		WebTarget target = client.target(endpoint + LIST).path(entity.getCanonicalName());
-		return getList(target, entity);
-	}
-
-	@Override
-	public Collection<? extends Entity> getList(Class<? extends Entity> entity, String where, String order) throws LocalizedException {
-
-		WebTarget target = client.target(endpoint + LIST).path(entity.getCanonicalName()).queryParam(WHERE, where).queryParam(ORDER, order);
-		return getList(target, entity);
-	}
-
-	@Override
-	public Collection<? extends Entity> getList(Class<? extends Entity> entity, String where) throws LocalizedException {
-
-		WebTarget target = client.target(endpoint + LIST).path(entity.getCanonicalName()).queryParam(WHERE, where);
-		return getList(target, entity);
-	}
-
-	@Override
-	public Collection<? extends Entity> getPagedList(Class<? extends Entity> entity, int startIndex, int count, String where, String order) throws LocalizedException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Collection<? extends Entity> getQuery(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void load() {
-	}
-
-	@Override
-	public Long getLong(String statement) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Entity getObject(String statement) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void delete(Entity bean) {
-
-		if (bean != null && bean.getId() != null) {
-			WebTarget target = client.target(endpoint + DELETE).path(bean.getClass().getCanonicalName()).queryParam(ID, bean.getId());
-			target.request().accept(MediaType.APPLICATION_JSON_TYPE).buildGet().invoke(String.class);
-		}
-	}
-
-	@Override
-	public Entity save(Entity bean) {
-		
-		WebTarget target = client.target(endpoint + SAVE).path(bean.getClass().getCanonicalName());
-		return save(target, bean);
-	}
-
-	@Override
-	public Entity getObject(Class<? extends Entity> entity, Long id) throws LocalizedException {
-
-		WebTarget target = client.target(endpoint + OBJECT_ID).path(entity.getCanonicalName()).queryParam(ID, id);
-		return getObject(target, entity);
-
-	}
-
-	@Override
-	public Entity getObject(Class<? extends Entity> entity, String where) throws LocalizedException {
-		
-		WebTarget target = client.target(endpoint + OBJECT_WHERE).path(entity.getCanonicalName()).queryParam(WHERE, where);
-		return getObject(target, entity);
-	}
-
-	@Override
-	public Collection<?> getFieldValues(Class<? extends Entity> entity, String fieldName, String where, String order) throws LocalizedException {
-		
-		WebTarget target = client.target(endpoint + FIELDVALUES).path(entity.getCanonicalName()).queryParam(FIELDNAME, fieldName).queryParam(WHERE, where).queryParam(ORDER, order);
-		return getFieldValues(target, Object.class);
-	}
+//	@Override
+//	public List<? extends Entity> getList(Class<? extends Entity> entity) throws LocalizedException {
+//
+//		WebTarget target = client.target(endpoint + LIST).path(entity.getCanonicalName());
+//		return getList(target, entity);
+//	}
+//
+//	@Override
+//	public List<? extends Entity> getList(Class<? extends Entity> entity, String where, String order) throws LocalizedException {
+//
+//		WebTarget target = client.target(endpoint + LIST).path(entity.getCanonicalName()).queryParam(WHERE, where).queryParam(ORDER, order);
+//		return getList(target, entity);
+//	}
+//
+//	@Override
+//	public List<? extends Entity> getList(Class<? extends Entity> entity, String where) throws LocalizedException {
+//
+//		WebTarget target = client.target(endpoint + LIST).path(entity.getCanonicalName()).queryParam(WHERE, where);
+//		return getList(target, entity);
+//	}
+//
+//	@Override
+//	public List<? extends Entity> getPagedList(Class<? extends Entity> entity, int startIndex, int count, String where, String order) throws LocalizedException {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public void load() {
+//	}
+//
+//	@Override
+//	public Long getLong(String statement) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Entity getObject(String statement) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public void delete(Entity bean) {
+//
+//		if (bean != null && bean.getId() != null) {
+//			WebTarget target = client.target(endpoint + DELETE).path(bean.getClass().getCanonicalName()).queryParam(ID, bean.getId());
+//			target.request().accept(MediaType.APPLICATION_JSON_TYPE).buildGet().invoke(String.class);
+//		}
+//	}
+//
+//	@Override
+//	public Entity save(Entity bean) {
+//		
+//		WebTarget target = client.target(endpoint + SAVE).path(bean.getClass().getCanonicalName());
+//		return save(target, bean);
+//	}
+//
+//	@Override
+//	public Entity getObject(Class<? extends Entity> entity, Long id) throws LocalizedException {
+//
+//		WebTarget target = client.target(endpoint + OBJECT_ID).path(entity.getCanonicalName()).queryParam(ID, id);
+//		return getObject(target, entity);
+//
+//	}
+//
+//	@Override
+//	public Entity getObject(Class<? extends Entity> entity, String where) throws LocalizedException {
+//		
+//	}
 
 	/**
 	 * Obtener una lista de objetos de tipo IEntity con datos Json obtenido de
@@ -152,7 +138,7 @@ public class DataProviderRESTClient implements DataProvider<Entity> {
 	 * @param target
 	 * @return
 	 */
-	private Collection<Entity> getList(WebTarget target, Class<? extends Entity> entity) {
+	private List<Entity> getList(WebTarget target, Class<? extends Entity> entity) {
 
 		String data = target.request().accept(MediaType.APPLICATION_JSON_TYPE).buildGet().invoke(String.class);
 
@@ -190,7 +176,7 @@ public class DataProviderRESTClient implements DataProvider<Entity> {
 	 * @param target
 	 * @return
 	 */
-	private Collection<Object> getFieldValues(WebTarget target, Class<?> type) {
+	private List<Object> getFieldValues(WebTarget target, Class<?> type) {
 
 		String data = target.request().accept(MediaType.APPLICATION_JSON_TYPE).buildGet().invoke(String.class);
 
@@ -228,7 +214,7 @@ public class DataProviderRESTClient implements DataProvider<Entity> {
 	 * @param target
 	 * @return
 	 */
-	private Entity getObject(WebTarget target, Class<? extends Entity> entity) {
+	private Entity getObject(WebTarget target, Class<? extends Entity<?>> entity) {
 
 		String data = target.request().accept(MediaType.APPLICATION_JSON_TYPE).buildGet().invoke(String.class);
 
@@ -279,6 +265,90 @@ public class DataProviderRESTClient implements DataProvider<Entity> {
 	@Override
 	public Type getType() {
 		return DataProvider.Type.REST;
+	}
+
+	@Override
+	public <T extends Entity<PK>, PK extends Serializable> T merge(T entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T extends Entity<?>> T find(Class<T> clazz, Serializable id) {
+		return null;
+	}
+
+	@Override
+	public <T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, Object value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, String value, MatchMode matchMode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends Entity<?>> List<T> findAll(Class<T> clazz) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, String where) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, String where, String order) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, Order order, String... propertiesOrder) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends Entity<?>> List<T> pagedList(Class<T> clazz, int startIndex, int count, String where, String order) throws LocalizedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<?> fieldValues(Class<?> clazz, String propertyName, String where, String order) {
+		WebTarget target = client.target(endpoint + FIELDVALUES).path(clazz.getCanonicalName()).queryParam(FIELDNAME, propertyName).queryParam(WHERE, where).queryParam(ORDER, order);
+		return getFieldValues(target, Object.class);
+	}
+
+	@Override
+	public Long count(Class<?> clazz, String where) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends Entity<PK>, PK extends Serializable> PK save(T entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends Entity<PK>, PK extends Serializable> void delete(T entity) throws LocalizedException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void load() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

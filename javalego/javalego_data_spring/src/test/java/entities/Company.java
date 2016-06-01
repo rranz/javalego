@@ -2,10 +2,10 @@ package entities;
 
 import javax.persistence.Entity;
 
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.impl.EntityId;
 
-@Entity
-public class Company extends IdNumberEntityImpl {
+@Entity(name = "Company")
+public class Company extends EntityId {
 
 	private String name;
 

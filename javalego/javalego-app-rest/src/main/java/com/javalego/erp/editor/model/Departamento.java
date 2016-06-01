@@ -6,10 +6,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.impl.EntityId;
 
 @Entity
-public class Departamento extends IdNumberEntityImpl {
+public class Departamento extends EntityId {
 
 	@Column(unique=true, length=100, nullable=false)
 	private String nombre;

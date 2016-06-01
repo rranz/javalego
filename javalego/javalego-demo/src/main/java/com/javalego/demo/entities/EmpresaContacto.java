@@ -1,16 +1,15 @@
 package com.javalego.demo.entities;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.Entity;
 
-@Entity
-public class EmpresaContacto extends IdNumberEntityImpl {
+//@Entity
+public class EmpresaContacto implements Entity<Long> {
 	
 	@NotNull
 	private String nombre;
@@ -30,6 +29,8 @@ public class EmpresaContacto extends IdNumberEntityImpl {
 	@Column(length=100000)
 	private byte[] foto;
 	
+	private Long id;
+
 	public EmpresaContacto() {}
 	
 	public String getNombre() {
@@ -92,8 +93,8 @@ public class EmpresaContacto extends IdNumberEntityImpl {
 	}
 
 	@Override
-	public void setId(Object id) {
-		this.id = (Long)id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Empresa getEmpresa() {

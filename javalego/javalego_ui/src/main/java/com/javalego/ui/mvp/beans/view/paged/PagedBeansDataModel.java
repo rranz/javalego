@@ -40,7 +40,7 @@ public class PagedBeansDataModel<T> extends FieldsPagedBeansModel<T> {
 			return null;
 		}
 		
-		currentBeans = (List<T>) DataContext.getProvider().getPagedList((Class<Entity>)getBeanClass(), lastIndex, sizePageBeans, getFilter(), getOrder());
+		currentBeans = (List<T>) DataContext.getProvider().pagedList((Class<Entity<?>>)getBeanClass(), lastIndex, sizePageBeans, getFilter(), getOrder());
 		
 		count = null;
 		
@@ -49,11 +49,12 @@ public class PagedBeansDataModel<T> extends FieldsPagedBeansModel<T> {
 		return currentBeans;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public long getCountBeans() throws LocalizedException {
 		
 		if (count == null && DataContext.getProvider() != null) {
-			count = DataContext.getProvider().getLong("select count(*) from " + getBeanClass().getCanonicalName() + (getFilter() != null ? " where " + getFilter() : ""));			
+			count = DataContext.getProvider().count((Class<Entity<?>>) getBeanClass(), getFilter());			
 		}
 		
 		return count == null ? 0 : count;

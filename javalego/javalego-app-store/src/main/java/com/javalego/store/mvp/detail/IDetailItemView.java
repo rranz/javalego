@@ -1,11 +1,13 @@
 package com.javalego.store.mvp.detail;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.javalego.exception.LocalizedException;
 import com.javalego.model.keys.Key;
 import com.javalego.store.items.IBaseItem;
 import com.javalego.store.items.INews;
+import com.javalego.store.items.impl.News;
 import com.javalego.store.model.StoreDataServices;
 import com.javalego.ui.menu.IMenuItem;
 import com.javalego.ui.menu.IMenuModel;
@@ -49,7 +51,7 @@ public interface IDetailItemView<T extends IBaseItem> extends IView {
 		 * @return
 		 * @throws LocalizedException 
 		 */
-		Collection<INews> getNews() throws LocalizedException;
+		List<News> getNews() throws LocalizedException;
 
 		/**
 		 * Obtener una instancia de un item en base a una tipología

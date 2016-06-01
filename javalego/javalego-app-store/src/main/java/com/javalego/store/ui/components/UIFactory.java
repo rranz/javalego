@@ -1,6 +1,7 @@
 package com.javalego.store.ui.components;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.javalego.exception.LocalizedException;
 import com.javalego.store.items.IBaseItem;
@@ -14,6 +15,7 @@ import com.javalego.store.items.IProject;
 import com.javalego.store.items.IProvider;
 import com.javalego.store.items.IScreenShot;
 import com.javalego.store.items.ISocial;
+import com.javalego.store.items.impl.News;
 import com.javalego.store.ui.StoreAppContext;
 import com.javalego.store.ui.editor.IItemEditor;
 import com.javalego.store.ui.editor.impl.CommonEditor;
@@ -133,7 +135,7 @@ public class UIFactory {
 	 * @param news
 	 * @return
 	 */
-	public static Component getNews(Collection<INews> news) {
+	public static Component getNews(List<News> news) {
 
 		VerticalLayout newsLayout = new VerticalLayout();
 		newsLayout.setMargin(true);

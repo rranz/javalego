@@ -1,6 +1,6 @@
 package com.javalego.test.data;
 
-import java.util.Collection;
+import java.util.List;
 
 import com.javalego.data.BusinessService;
 import com.javalego.exception.LocalizedException;
@@ -18,7 +18,7 @@ public interface MockDataServices extends BusinessService {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	Collection<Invoice> getAllInvoices() throws LocalizedException;
+	List<Invoice> getAllInvoices() throws LocalizedException;
 
 	/**
 	 * Obtener todos los productos
@@ -26,6 +26,6 @@ public interface MockDataServices extends BusinessService {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	Collection<Product> getAllProducts() throws LocalizedException;
+	List<Product> getAllProducts() throws LocalizedException;
 
 }

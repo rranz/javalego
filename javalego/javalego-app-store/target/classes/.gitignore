@@ -1,10 +1,9 @@
 /com/
-/doc/
 /entities/
+/net/
+/repositories/
+/doc/
 /icons_editor/
 /menu_icons/
 /menu_icons2/
-/net/
 /provider_icons/
-/repositories/
-/.gitignore

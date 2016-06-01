@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 
 import com.javalego.data.DataContext;
 import com.javalego.data.DataProvider;
-import com.javalego.entity.Entity;
 import com.javalego.model.keys.Icon;
 import com.javalego.model.keys.Key;
 import com.javalego.ui.actions.IActionBeanEditor;
@@ -83,7 +82,7 @@ public abstract class AbstractBeansEditorModel<T> implements IBeansEditorModel<T
 	}
 
 	@Override
-	public DataProvider<Entity> getDataProvider() {
+	public DataProvider getDataProvider() {
 		return DataContext.getProvider();
 	}
 

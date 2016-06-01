@@ -47,7 +47,7 @@ public class EditorContactosProveedores extends BaseEditor<ProveedorContacto> {
 				
 				if (getDataProvider() != null) {
 					
-					Proveedor e = (Proveedor) getDataProvider().getObject(Proveedor.class, "nombre = '" + event.getValue() + "'");
+					Proveedor e = (Proveedor) getDataProvider().find(Proveedor.class, "nombre = '" + event.getValue() + "'");
 					
 					if (e != null) {
 						event.getEditorRules().setValue(EMPRESA_ID, e.getId());
@@ -62,7 +62,7 @@ public class EditorContactosProveedores extends BaseEditor<ProveedorContacto> {
 			@Override
 			public Collection<String> getKeys(String constraint) throws LocalizedException {
 				
-				return DataContext.getProvider() == null ? null : (Collection<String>) DataContext.getProvider().getFieldValues(Proveedor.class, NOMBRE,
+				return DataContext.getProvider() == null ? null : (Collection<String>) DataContext.getProvider().fieldValues(Proveedor.class, NOMBRE,
 						constraint != null ? "nombre like'" + constraint + "%'" : null, NOMBRE);
 			}
 
@@ -76,7 +76,6 @@ public class EditorContactosProveedores extends BaseEditor<ProveedorContacto> {
 
 		// Filtro por empresa
 		FilterParamsService filter = new FilterParamsService(Texts.EMPRESA) {
-			@SuppressWarnings("unchecked")
 			// Personalizamos la construcción de la sentencia sql en el caso de
 			// que estemos trabajando sobre una base de datos SQLite NO JPA.
 			@Override
@@ -88,7 +87,7 @@ public class EditorContactosProveedores extends BaseEditor<ProveedorContacto> {
 
 					if (value != null) {
 
-						Collection<Proveedor> list = (Collection<Proveedor>) DataContext.getProvider().getList(Proveedor.class, "nombre like '" + value + "%'", null);
+						Collection<Proveedor> list = (Collection<Proveedor>) DataContext.getProvider().findAll(Proveedor.class, "nombre like '" + value + "%'", null);
 
 						if (list != null) {
 							String where = "";

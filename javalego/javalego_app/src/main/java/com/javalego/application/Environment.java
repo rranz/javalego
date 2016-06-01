@@ -2,9 +2,8 @@ package com.javalego.application;
 
 import java.util.Collection;
 
-import com.javalego.data.DataProvider;
 import com.javalego.data.BusinessService;
-import com.javalego.entity.Entity;
+import com.javalego.data.DataProvider;
 import com.javalego.exception.LocalizedException;
 import com.javalego.icons.RepositoryIcons;
 import com.javalego.locale.translator.Translator;
@@ -93,7 +92,7 @@ public interface Environment {
 	 * 
 	 * @return
 	 */
-	public abstract DataProvider<Entity> getDataProvider();
+	public abstract DataProvider getDataProvider();
 
 	/**
 	 * Servicios negocio.

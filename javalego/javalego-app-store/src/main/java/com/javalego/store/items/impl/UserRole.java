@@ -3,10 +3,10 @@ package com.javalego.store.items.impl;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.impl.EntityId;
 
 @Entity
-public class UserRole extends IdNumberEntityImpl {
+public class UserRole extends EntityId {
    
     @ManyToOne
     private User user;

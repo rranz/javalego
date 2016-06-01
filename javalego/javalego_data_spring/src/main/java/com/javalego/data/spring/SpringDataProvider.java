@@ -1,7 +1,12 @@
-package com.javalego.data.jpa;
+package com.javalego.data.spring;
 
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.criteria.Order;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
@@ -10,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
 
 import com.javalego.data.DataProvider;
+import com.javalego.data.jpa.GenericDaoJpa;
 import com.javalego.entity.Entity;
 import com.javalego.exception.CommonErrors;
 import com.javalego.exception.LocalizedException;
@@ -20,9 +26,9 @@ import com.javalego.exception.LocalizedException;
  * @author ROBERTO RANZ
  * 
  */
-public class SpringDataProvider implements DataProvider<Entity> {
+public class SpringDataProvider implements DataProvider {
 
-	//private static final Logger logger = Logger.getLogger(SpringDataProvider.class);
+	private static final Logger logger = Logger.getLogger(SpringDataProvider.class);
 
 	/**
 	 * Clase anotada donde se configura el contexto de aplicación para evitar el
@@ -38,7 +44,7 @@ public class SpringDataProvider implements DataProvider<Entity> {
 	/**
 	 * Acceso a datos JPA
 	 */
-	private SpringJpaDao<Entity> jpaDao;
+	private GenericDaoJpa jpaDao;
 
 	/**
 	 * Constructor
@@ -69,66 +75,6 @@ public class SpringDataProvider implements DataProvider<Entity> {
 		return context;
 	}
 
-	@Override
-	public Collection<? extends Entity> getList(Class<? extends Entity> entity) throws LocalizedException {
-		return getDao().getList(entity);
-	}
-
-	@Override
-	public Entity getObject(Class<? extends Entity> entity, Long id) throws LocalizedException {
-		return getDao().getObject(entity, id);
-	}
-
-	@Override
-	public Collection<? extends Entity> getList(Class<? extends Entity> entity, String where, String order) throws LocalizedException {
-		return getDao().getList(entity, where, order);
-	}
-
-	@Override
-	public Collection<? extends Entity> getList(Class<? extends Entity> entity, String where) throws LocalizedException {
-		return getDao().getList(entity, where);
-	}
-
-	@Override
-	public Collection<? extends Entity> getPagedList(Class<? extends Entity> entity, int startIndex, int count, String where, String order) throws LocalizedException {
-		return getDao().getPagedList(entity, startIndex, count, where, order);
-	}
-
-	@Override
-	public Collection<Entity> getQuery(String name)  throws LocalizedException {
-		return null;
-	}
-
-	@Override
-	public Long getLong(String statement) throws LocalizedException {
-		return getDao().getLong(statement);
-	}
-
-	@Override
-	public Entity getObject(String statement) throws LocalizedException  {
-		return getDao().getObject(statement);
-	}
-
-	@Override
-	public void delete(Entity bean)  throws LocalizedException {
-		getDao().delete(bean);
-	}
-
-	@Override
-	public Entity save(Entity bean) throws LocalizedException {
-		return getDao().save(bean);
-	}
-
-	@Override
-	public Entity getObject(Class<? extends Entity> entity, String where) throws LocalizedException {
-		return getDao().getObject(entity, where);
-	}
-
-	@Override
-	public Collection<?> getFieldValues(Class<? extends Entity> entity, String fieldName, String where, String order) throws LocalizedException {
-		return getDao().getFieldValues(entity, fieldName, where, order);
-	}
-
 	/**
 	 * Contexto de aplicación.
 	 * 
@@ -141,9 +87,8 @@ public class SpringDataProvider implements DataProvider<Entity> {
 	/**
 	 * Cargar contexto de aplicación.
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public void load() throws LocalizedException {
+	public void load() {
 
 		// Cargar contexto de aplicación.
 		if (context == null && application != null) {
@@ -152,15 +97,21 @@ public class SpringDataProvider implements DataProvider<Entity> {
 				context = new AnnotationConfigApplicationContext(application);
 			}
 			catch (Exception e) {
-				throw new LocalizedException(e, CommonErrors.DATABASE_ERROR);
+				logger.error(new LocalizedException(e, CommonErrors.DATABASE_ERROR).getLocalizedMessage());
 			}
 		}
-		
-		// Inicializar JPA
+
+		// Inicializar JPA buscando el bean GenericDaoJpa en el contexto o
+		// registrando el bean en el contexto para posteriormente recuperarlo.
 		if (jpaDao == null) {
-			jpaDao = (SpringJpaDao<Entity>) getBean(SpringJpaDao.class);
+			try {
+				jpaDao = context.getBean(GenericDaoJpa.class);
+			}
+			catch (NoSuchBeanDefinitionException e) {
+				jpaDao = (GenericDaoJpa) getBean(GenericDaoJpa.class);
+			}
 		}
-		
+
 	}
 
 	/**
@@ -170,7 +121,7 @@ public class SpringDataProvider implements DataProvider<Entity> {
 	 * 
 	 * @return
 	 */
-	private SpringJpaDao<Entity> getDao() throws LocalizedException {
+	private GenericDaoJpa getDao() {
 		if (jpaDao == null) {
 			load();
 		}
@@ -195,18 +146,18 @@ public class SpringDataProvider implements DataProvider<Entity> {
 			return context.getBean(type);
 		}
 		catch (Exception e) {
-			reloadBean(beanName, type);
+			registerBean(beanName, type);
 			return context.getBean(type);
 		}
 	}
 
 	/**
-	 * Carga dinámica del bean en Spring
+	 * Carga dinámica del bean en el contexto de Spring
 	 * 
 	 * @param beanName
 	 * @param type
 	 */
-	private void reloadBean(String beanName, Class<?> type) {
+	private void registerBean(String beanName, Class<?> type) {
 
 		AutowireCapableBeanFactory factory = context.getAutowireCapableBeanFactory();
 
@@ -222,6 +173,71 @@ public class SpringDataProvider implements DataProvider<Entity> {
 	@Override
 	public Type getType() {
 		return DataProvider.Type.Spring_Data;
+	}
+
+	@Override
+	public <T extends Entity<PK>, PK extends Serializable> PK save(T entity) {
+		return getDao().save(entity);
+	}
+
+	@Override
+	public <T extends Entity<PK>, PK extends Serializable> T merge(T entity) {
+		return getDao().merge(entity);
+	}
+
+	@Override
+	public <T extends Entity<PK>, PK extends Serializable> void delete(T entity) throws LocalizedException {
+		getDao().delete(entity);
+	}
+
+	@Override
+	public <T extends Entity<?>> T find(Class<T> clazz, Serializable id) {
+		return getDao().find(clazz, id);
+	}
+
+	@Override
+	public <T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, Object value) {
+		return getDao().findByProperty(clazz, propertyName, value);
+	}
+
+	@Override
+	public <T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, String value, MatchMode matchMode) {
+		return getDao().findByProperty(clazz, propertyName, value, matchMode);
+	}
+
+	@Override
+	public <T extends Entity<?>> List<T> findAll(Class<T> clazz) {
+		return getDao().findAll(clazz);
+	}
+
+	@Override
+	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, String where) {
+		return getDao().findAll(clazz, where);
+	}
+
+	@Override
+	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, String where, String order) {
+		return getDao().findAll(clazz, where, order);
+	}
+
+	@Override
+	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, Order order, String... propertiesOrder) {
+		return getDao().findAll(clazz, order, propertiesOrder);
+	}
+
+	@Override
+	public <T extends Entity<?>> List<T> pagedList(Class<T> clazz, int startIndex, int count, String where, String order) throws LocalizedException {
+		return getDao().pagedList(clazz, startIndex, count, where, order);
+	}
+
+	@Override
+	public List<?> fieldValues(Class<?> clazz, String propertyName, String where, String order) {
+		return getDao().fieldValues(clazz, propertyName, where, order);
+	}
+
+	@Override
+	public Long count(Class<?> clazz, String where) {
+		return getDao().count(clazz, where);
 	}
 
 }

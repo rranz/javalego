@@ -1,6 +1,7 @@
 package com.javalego.data;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -21,7 +22,7 @@ import com.javalego.data.DataContext;
 import com.javalego.data.DataProvider;
 import com.javalego.data.RESTDataServices;
 import com.javalego.entity.Entity;
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.impl.EntityId;
 import com.javalego.exception.LocalizedException;
 import com.javalego.model.context.Services;
 
@@ -94,16 +95,11 @@ public class RESTDataServices implements Services {
 	// puede realizar con PathParameter /{where}/{order}
 	public String getList(@PathParam("entity") String entityName, @QueryParam(WHERE) String where, @QueryParam(ORDER) String order) {
 		try {
-			Collection<Entity> list = (Collection<Entity>) getDataProvider().getList((Class<? extends Entity>) Class.forName(entityName), NULL.equals(where) ? null : where, NULL.equals(order) ? null : order);
+			List<? extends Entity<?>> list = getDataProvider().findAll((Class<? extends Entity<?>>)Class.forName(entityName), NULL.equals(where) ? null : where, NULL.equals(order) ? null : order);
 			return gson.toJson(list);
 		}
 		catch (ClassNotFoundException e) {
 			logger.error("REST ERROR: ENTITY CLASS '" + entityName + " NOT FOUND");
-			return null;
-		}
-		catch (LocalizedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return null;
 		}
 		
@@ -115,16 +111,11 @@ public class RESTDataServices implements Services {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getObject(@PathParam("entity") String entityName, @QueryParam(ID) Long id) {
 		try {
-			Entity entity = getDataProvider().getObject((Class<? extends IdNumberEntityImpl>) Class.forName(entityName), id);
+			EntityId entity = getDataProvider().find((Class<? extends EntityId>) Class.forName(entityName), id);
 			return gson.toJson(entity);
 		}
 		catch (ClassNotFoundException e) {
 			logger.error("REST ERROR: ENTITY CLASS '" + entityName + " NOT FOUND");
-			return null;
-		}
-		catch (LocalizedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -135,21 +126,16 @@ public class RESTDataServices implements Services {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getObject(@PathParam("entity") String entityName, @QueryParam(WHERE) String where) {
 		try {
-			Entity entity = getDataProvider().getObject((Class<? extends Entity>) Class.forName(entityName), NULL.equals(where) ? null : where);
+			Entity<?> entity = getDataProvider().find((Class<? extends Entity<?>>) Class.forName(entityName), NULL.equals(where) ? null : where);
 			return gson.toJson(entity);
 		}
 		catch (ClassNotFoundException e) {
 			logger.error("REST ERROR: ENTITY CLASS '" + entityName + " NOT FOUND");
 			return null;
 		}
-		catch (LocalizedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@POST
 	@Path("/save/{entity}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -166,20 +152,15 @@ public class RESTDataServices implements Services {
 			logger.error("REST ERROR: ENTITY CLASS '" + entityName + " NOT FOUND");
 			return null;
 		}
-		catch (LocalizedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GET
 	@Path("/delete/{entity}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String delete(@PathParam("entity") String entityName, @QueryParam(ID) Long id) {
 		try {
-			Entity bean = getDataProvider().getObject((Class<? extends IdNumberEntityImpl>) Class.forName(entityName), id);
+			Entity bean = getDataProvider().find((Class<? extends EntityId>) Class.forName(entityName), id);
 			if (bean != null) {
 				getDataProvider().delete(bean);
 			}
@@ -194,22 +175,17 @@ public class RESTDataServices implements Services {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GET
 	@Path("/" + FIELDVALUES + "/{entity}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getFieldValues(@PathParam("entity") String entityName, @QueryParam(FIELDNAME) String fieldName, @QueryParam(WHERE) String where, @QueryParam(ORDER) String order) {
 		try {
-			Collection<?> list = (Collection<?>) getDataProvider().getFieldValues((Class<? extends Entity>) Class.forName(entityName), fieldName, NULL.equals(where) ? null : where, NULL.equals(order) ? null : order);
+			Collection<?> list = (Collection<?>) getDataProvider().fieldValues((Class<? extends Entity>) Class.forName(entityName), fieldName, NULL.equals(where) ? null : where, NULL.equals(order) ? null : order);
 			return gson.toJson(list);
 		}
 		catch (ClassNotFoundException e) {
 			logger.error("REST ERROR: ENTITY CLASS '" + entityName + " NOT FOUND");
-			return null;
-		}
-		catch (LocalizedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -220,7 +196,7 @@ public class RESTDataServices implements Services {
 	 * 
 	 * @return
 	 */
-	private DataProvider<Entity> getDataProvider() {
+	private DataProvider getDataProvider() {
 		return DataContext.getProvider();
 	}
 

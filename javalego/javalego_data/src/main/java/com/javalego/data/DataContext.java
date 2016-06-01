@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javalego.data.DataProvider.Type;
-import com.javalego.entity.Entity;
 import com.javalego.exception.LocalizedException;
 import com.javalego.model.AbstractBaseModel;
 import com.javalego.model.context.Context;
@@ -25,12 +24,12 @@ public class DataContext extends AbstractBaseModel implements Context {
 	/**
 	 * Proveedor de datos utilizado.
 	 */
-	private DataProvider<Entity> dataProvider;
+	private DataProvider dataProvider;
 
 	/**
 	 * Lista de proveedores de datos adicionales al actual.
 	 */
-	private List<DataProvider<Entity>> dataProviders = new ArrayList<DataProvider<Entity>>();
+	private List<DataProvider> dataProviders = new ArrayList<DataProvider>();
 
 	/**
 	 * Servicios de datos o negocio
@@ -47,7 +46,7 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @param currentProvider
 	 */
-	public DataContext(DataProvider<Entity> currentProvider, List<DataProvider<Entity>> dataProviders) {
+	public DataContext(DataProvider currentProvider, List<DataProvider> dataProviders) {
 
 		this.dataProvider = currentProvider;
 		this.dataProviders = dataProviders;
@@ -62,7 +61,7 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @return
 	 */
-	public static DataProvider<Entity> getProvider() {
+	public static DataProvider getProvider() {
 		return getCurrent().getDataProvider();
 	}
 
@@ -98,7 +97,7 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @return
 	 */
-	private DataProvider<Entity> getDataProvider() {
+	private DataProvider getDataProvider() {
 		return dataProvider;
 	}
 
@@ -107,7 +106,7 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @param provider
 	 */
-	public void setProvider(DataProvider<Entity> provider) {
+	public void setProvider(DataProvider provider) {
 
 		this.dataProvider = provider;
 
@@ -123,7 +122,7 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @param dataProvider
 	 */
-	public void addProvider(DataProvider<Entity> dataProvider) {
+	public void addProvider(DataProvider dataProvider) {
 
 		dataProviders.add(dataProvider);
 	}
@@ -135,7 +134,7 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 */
 	public void changeProvider(Type type) throws LocalizedException {
 
-		for (DataProvider<Entity> item : dataProviders) {
+		for (DataProvider item : dataProviders) {
 			if (type.equals(item.getType())) {
 				dataProvider = item;
 				return;

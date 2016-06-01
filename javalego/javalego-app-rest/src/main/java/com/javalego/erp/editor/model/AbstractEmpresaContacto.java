@@ -5,10 +5,10 @@ import javax.persistence.Lob;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.impl.EntityId;
 
 @MappedSuperclass
-public abstract class AbstractEmpresaContacto extends IdNumberEntityImpl {
+public abstract class AbstractEmpresaContacto extends EntityId {
 	
 	@NotNull
 	private String nombre;

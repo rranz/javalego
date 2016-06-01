@@ -4,10 +4,10 @@ import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.impl.EntityId;
 import com.javalego.model.validator.custom.UpperCase;
 
-public class Provincia extends IdNumberEntityImpl {
+public class Provincia extends EntityId {
 
 	@NotNull
 	@Size(max=100)

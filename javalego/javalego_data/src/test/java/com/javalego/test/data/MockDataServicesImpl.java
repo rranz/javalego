@@ -1,6 +1,6 @@
 package com.javalego.test.data;
 
-import java.util.Collection;
+import java.util.List;
 
 import com.javalego.exception.LocalizedException;
 import com.javalego.test.data.entities.Invoice;
@@ -14,16 +14,14 @@ public class MockDataServicesImpl implements MockDataServices {
 
 	private MockDataProvider provider = new MockDataProvider();
 	
-	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<Invoice> getAllInvoices() throws LocalizedException {
-		return (Collection<Invoice>) provider.getList(Invoice.class);
+	public List<Invoice> getAllInvoices() throws LocalizedException {
+		return provider.findAll(Invoice.class);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<Product> getAllProducts() throws LocalizedException {
-		return (Collection<Product>) provider.getList(Product.class);
+	public List<Product> getAllProducts() throws LocalizedException {
+		return provider.findAll(Product.class);
 	}
 
 }

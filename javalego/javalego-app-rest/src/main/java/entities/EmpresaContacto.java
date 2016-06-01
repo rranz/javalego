@@ -1,7 +1,5 @@
 package entities;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -11,10 +9,8 @@ import javax.validation.constraints.NotNull;
 import com.javalego.entity.Entity;
 
 //@Entity
-public class EmpresaContacto implements Entity, Serializable {
+public class EmpresaContacto implements Entity<Long> {
 	
-	private static final long serialVersionUID = 1L;
-
 	@NotNull
 	private String nombre;
 
@@ -97,8 +93,8 @@ public class EmpresaContacto implements Entity, Serializable {
 	}
 
 	@Override
-	public void setId(Object id) {
-		this.id = (Long)id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Empresa getEmpresa() {

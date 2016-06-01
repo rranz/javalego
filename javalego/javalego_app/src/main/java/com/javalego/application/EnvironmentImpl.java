@@ -2,9 +2,8 @@ package com.javalego.application;
 
 import java.util.Collection;
 
-import com.javalego.data.DataProvider;
 import com.javalego.data.BusinessService;
-import com.javalego.entity.Entity;
+import com.javalego.data.DataProvider;
 import com.javalego.exception.LocalizedException;
 import com.javalego.icons.RepositoryIcons;
 import com.javalego.locale.translator.Translator;
@@ -38,7 +37,7 @@ public class EnvironmentImpl implements Environment {
 
 	private UserServices userServices;
 
-	private DataProvider<Entity> dataProvider;
+	private DataProvider dataProvider;
 
 	private BusinessService businessService;
 
@@ -131,7 +130,7 @@ public class EnvironmentImpl implements Environment {
 	}
 
 	@Override
-	public DataProvider<Entity> getDataProvider() {
+	public DataProvider getDataProvider() {
 		return dataProvider;
 	}
 
@@ -146,8 +145,9 @@ public class EnvironmentImpl implements Environment {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	public void setRepositoriesIcons(Collection<RepositoryIcons<Icon>> repositories) {
+	public EnvironmentImpl setRepositoriesIcons(Collection<RepositoryIcons<Icon>> repositories) {
 		this.repositoriesIcons = repositories;
+		return this;
 	}
 
 	/**
@@ -157,8 +157,9 @@ public class EnvironmentImpl implements Environment {
 	 * @see SecurityServices
 	 * @return
 	 */
-	public void setUserServices(UserServices userServices) {
+	public EnvironmentImpl setUserServices(UserServices userServices) {
 		this.userServices = userServices;
+		return this;
 	}
 
 	/**
@@ -166,8 +167,9 @@ public class EnvironmentImpl implements Environment {
 	 * 
 	 * @return
 	 */
-	public void setDataProvider(DataProvider<Entity> dataProvider) {
+	public EnvironmentImpl setDataProvider(DataProvider dataProvider) {
 		this.dataProvider = dataProvider;
+		return this;
 	}
 
 	/**
@@ -175,8 +177,9 @@ public class EnvironmentImpl implements Environment {
 	 * 
 	 * @return
 	 */
-	public void setUserSession(UserSession userSession) {
+	public EnvironmentImpl setUserSession(UserSession userSession) {
 		this.userSession = userSession;
+		return this;
 	}
 
 	/**
@@ -184,8 +187,9 @@ public class EnvironmentImpl implements Environment {
 	 * 
 	 * @return
 	 */
-	public void setSecurity(SecurityServices security) {
+	public EnvironmentImpl setSecurity(SecurityServices security) {
 		this.security = security;
+		return this;
 	}
 
 	/**
@@ -193,8 +197,9 @@ public class EnvironmentImpl implements Environment {
 	 * 
 	 * @return
 	 */
-	public void setDescription(Key description) {
+	public EnvironmentImpl setDescription(Key description) {
 		this.description = description;
+		return this;
 	}
 
 	/**
@@ -202,8 +207,9 @@ public class EnvironmentImpl implements Environment {
 	 * 
 	 * @return
 	 */
-	public void setTitle(Key title) {
+	public EnvironmentImpl setTitle(Key title) {
 		this.title = title;
+		return this;
 	}
 
 	/**
@@ -211,8 +217,9 @@ public class EnvironmentImpl implements Environment {
 	 * 
 	 * @return
 	 */
-	public void setName(String name) {
+	public EnvironmentImpl setName(String name) {
 		this.name = name;
+		return this;
 	}
 
 	@Override
@@ -220,8 +227,9 @@ public class EnvironmentImpl implements Environment {
 		return translator;
 	}
 
-	public void setTranslator(Translator translator) {
+	public EnvironmentImpl setTranslator(Translator translator) {
 		this.translator = translator;
+		return this;
 	}
 
 	@Override
@@ -229,8 +237,9 @@ public class EnvironmentImpl implements Environment {
 		return businessService;
 	}
 
-	public void setBusinessService(BusinessService businessServices) {
+	public EnvironmentImpl setBusinessService(BusinessService businessServices) {
 		this.businessService = businessServices;
+		return this;
 	}
 
 }

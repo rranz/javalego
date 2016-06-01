@@ -1,6 +1,7 @@
 package com.javalego.store.model;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.javalego.data.BusinessService;
 import com.javalego.exception.LocalizedException;
@@ -11,17 +12,19 @@ import com.javalego.store.items.IBaseItem;
 import com.javalego.store.items.IBaseModel;
 import com.javalego.store.items.ICategory;
 import com.javalego.store.items.IComment;
-import com.javalego.store.items.ILicense;
 import com.javalego.store.items.IMember;
-import com.javalego.store.items.INews;
 import com.javalego.store.items.IProduct;
 import com.javalego.store.items.IProject;
-import com.javalego.store.items.IProvider;
-import com.javalego.store.items.IRepository;
 import com.javalego.store.items.Type;
+import com.javalego.store.items.impl.Category;
 import com.javalego.store.items.impl.Company;
 import com.javalego.store.items.impl.Developer;
 import com.javalego.store.items.impl.License;
+import com.javalego.store.items.impl.Member;
+import com.javalego.store.items.impl.News;
+import com.javalego.store.items.impl.Product;
+import com.javalego.store.items.impl.Project;
+import com.javalego.store.items.impl.Provider;
 import com.javalego.store.items.impl.Repository;
 import com.vaadin.navigator.View;
 
@@ -74,7 +77,7 @@ public interface StoreDataServices extends BusinessService {
 	 * @return
 	 * @throws LocalizedException 
 	 */
-	Collection<IProduct> getAllProducts() throws LocalizedException;
+	List<Product> getAllProducts() throws LocalizedException;
 
 	/**
 	 * Licencias de software
@@ -82,7 +85,7 @@ public interface StoreDataServices extends BusinessService {
 	 * @return
 	 * @throws LocalizedException 
 	 */
-	Collection<ILicense> getAllLicenses() throws LocalizedException;
+	List<License> getAllLicenses() throws LocalizedException;
 
 	/**
 	 * Proveedores o tecnologías
@@ -90,7 +93,7 @@ public interface StoreDataServices extends BusinessService {
 	 * @return
 	 * @throws LocalizedException 
 	 */
-	Collection<IProvider> getAllProviders() throws LocalizedException;
+	List<Provider> getAllProviders() throws LocalizedException;
 
 	/**
 	 * Lista de proyectos por tipología
@@ -98,7 +101,7 @@ public interface StoreDataServices extends BusinessService {
 	 * @return
 	 * @throws LocalizedException 
 	 */
-	Collection<IProject> getProjects(Type type) throws LocalizedException;
+	List<Project> getProjects(Type type) throws LocalizedException;
 
 	/**
 	 * Lista de repositorios de código
@@ -106,7 +109,7 @@ public interface StoreDataServices extends BusinessService {
 	 * @return
 	 * @throws LocalizedException 
 	 */
-	Collection<IRepository> getAllRepositories() throws LocalizedException;
+	List<Repository> getAllRepositories() throws LocalizedException;
 
 	/**
 	 * Obtener la lista de categorías por tipo de organización (negocio o
@@ -115,7 +118,7 @@ public interface StoreDataServices extends BusinessService {
 	 * @return
 	 * @throws LocalizedException 
 	 */
-	Collection<ICategory> getCategories(Type type) throws LocalizedException;
+	List<Category> getCategories(Type type) throws LocalizedException;
 
 	/**
 	 * Localiza una vista definida en el store para mostrar una demo de un
@@ -133,7 +136,7 @@ public interface StoreDataServices extends BusinessService {
 	 * @return
 	 * @throws LocalizedException 
 	 */
-	Collection<IProduct> getProducts(ICategory category, String filter) throws LocalizedException;
+	List<Product> getProducts(ICategory category, String filter) throws LocalizedException;
 
 	/**
 	 * Obtener la lista de productos filtrados por coincidencia de texto
@@ -141,7 +144,7 @@ public interface StoreDataServices extends BusinessService {
 	 * @return
 	 * @throws LocalizedException 
 	 */
-	Collection<IProduct> getProducts(String filter) throws LocalizedException;
+	List<Product> getProducts(String filter) throws LocalizedException;
 
 	/**
 	 * Obtener la lista de productos o proyectos a partir del nombre clave de
@@ -178,7 +181,7 @@ public interface StoreDataServices extends BusinessService {
 	 * @return
 	 * @throws LocalizedException 
 	 */
-	Collection<IMember> getAllMembers() throws LocalizedException;
+	List<Member> getAllMembers() throws LocalizedException;
 	
 	/**
 	 * Lista de desarrolladores registrados.
@@ -236,7 +239,7 @@ public interface StoreDataServices extends BusinessService {
 	 * @param member
 	 * @throws LocalizedException 
 	 */
-	void addMember(IMember member) throws LocalizedException;
+	void addMember(Member member) throws LocalizedException;
 
 	/**
 	 * Comprobar acceso al bean (sólo lectura).
@@ -250,5 +253,5 @@ public interface StoreDataServices extends BusinessService {
 	 * @return
 	 * @throws LocalizedException 
 	 */
-	Collection<INews> getAllNews() throws LocalizedException;	
+	List<News> getAllNews() throws LocalizedException;	
 }

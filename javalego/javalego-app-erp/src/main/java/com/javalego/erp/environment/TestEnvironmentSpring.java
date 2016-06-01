@@ -7,9 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.javalego.application.Environment;
-import com.javalego.data.DataProvider;
 import com.javalego.data.BusinessService;
-import com.javalego.entity.Entity;
+import com.javalego.data.DataProvider;
 import com.javalego.erp.model.Icons;
 import com.javalego.erp.model.Texts;
 import com.javalego.exception.LocalizedException;
@@ -43,7 +42,7 @@ public class TestEnvironmentSpring implements Environment {
 	private UserServices userServices;
 
 	@Autowired
-	private DataProvider<Entity> dataProvider;
+	private DataProvider dataProvider;
 
 	@Autowired
 	private Translator translator;
@@ -86,7 +85,7 @@ public class TestEnvironmentSpring implements Environment {
 	 * href="http://projects.spring.io/spring-data/">Spring Data</a>
 	 */
 	@Override
-	public synchronized DataProvider<Entity> getDataProvider() {
+	public synchronized DataProvider getDataProvider() {
 		return dataProvider;
 	}
 

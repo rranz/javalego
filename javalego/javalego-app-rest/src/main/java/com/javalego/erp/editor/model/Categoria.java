@@ -3,10 +3,10 @@ package com.javalego.erp.editor.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.impl.EntityId;
 
 @Entity
-public class Categoria extends IdNumberEntityImpl {
+public class Categoria extends EntityId {
 
 	@Column(unique=true, length=100, nullable=false)
 	private String nombre;

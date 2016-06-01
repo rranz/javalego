@@ -46,7 +46,7 @@ public class GeneratorService {
 
 	private static final Logger logger = Logger.getLogger(GeneratorService.class);
 
-	private DataProvider<Entity> d;
+	private DataProvider d;
 
 	private StoreDataServices s = new DataServiceImpl();
 
@@ -82,12 +82,12 @@ public class GeneratorService {
 
 		Version version = new Version("4.0 SNAPSHOT", "Notas de la release");
 
-		ICategory c = ((List<ICategory>) s.getCategories(Type.BUSINESS)).get(0);
-		IMember m = ((List<IMember>) s.getAllMembers()).get(0);
-		ILicense l = ((List<ILicense>) s.getAllLicenses()).get(0);
-		IRepository r = ((List<IRepository>) s.getAllRepositories()).get(0);
-		IProvider p = ((List<IProvider>) s.getAllProviders()).get(0);
-		IProvider p2 = ((List<IProvider>) s.getAllProviders()).get(1);
+		ICategory c = s.getCategories(Type.BUSINESS).get(0);
+		IMember m = s.getAllMembers().get(0);
+		ILicense l = s.getAllLicenses().get(0);
+		IRepository r = s.getAllRepositories().get(0);
+		IProvider p = s.getAllProviders().get(0);
+		IProvider p2 = s.getAllProviders().get(1);
 
 		Project project = new Project(m, Type.BUSINESS, "javalego_store", "Vaadin UI", "Vaadin UI", ProviderIcons.PROJECT, version, (License) l);
 		project.addProvider(p);

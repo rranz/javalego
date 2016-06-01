@@ -3,9 +3,8 @@ package com.javalego.store.environment;
 import org.apache.log4j.Logger;
 
 import com.javalego.data.DataProvider;
-import com.javalego.data.StoreApplicationContext;
-import com.javalego.data.jpa.SpringDataProvider;
-import com.javalego.entity.Entity;
+import com.javalego.data.StorePersistenceContext;
+import com.javalego.data.spring.SpringDataProvider;
 import com.javalego.exception.LocalizedException;
 import com.javalego.security.SecurityServices;
 import com.javalego.security.services.UserServices;
@@ -94,8 +93,8 @@ public class DevelopmentEnvironment extends BaseEnvironment {
 	}
 
 	@Override
-	public synchronized DataProvider<Entity> getDataProvider() {
-		return database ? new SpringDataProvider(StoreApplicationContext.class) : null;
+	public synchronized DataProvider getDataProvider() {
+		return database ? new SpringDataProvider(StorePersistenceContext.class) : null;
 	}
 
 	@Override

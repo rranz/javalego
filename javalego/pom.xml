@@ -120,7 +120,6 @@
 		<module>javalego_locale</module>
 		<module>javalego_data</module>
 		<module>javalego_data_spring</module>
-		<module>javalego_data_rest</module>
 		<module>javalego_data_rest_client</module>
 		<module>javalego_ui</module>
 		<module>javalego_ui_vaadin</module>

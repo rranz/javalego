@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Lob;
 import javax.persistence.MappedSuperclass;
 
-import com.javalego.entity.impl.IdNumberEntityImpl;
+import com.javalego.entity.impl.EntityId;
 import com.javalego.store.items.IBaseModel;
 
 
@@ -15,7 +15,7 @@ import com.javalego.store.items.IBaseModel;
  *
  */
 @MappedSuperclass
-public abstract class BaseModel extends IdNumberEntityImpl implements IBaseModel {
+public abstract class BaseModel extends EntityId implements IBaseModel {
 
 	private static final long serialVersionUID = 7096080570023425639L;
 

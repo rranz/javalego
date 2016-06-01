@@ -1,6 +1,7 @@
 package com.javalego.erp.model.editors;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import com.javalego.data.DataContext;
@@ -53,7 +54,6 @@ public class EditorContactosClientes extends BaseEditor<ClienteContacto> {
 
 		// Filtro por empresa
 		filter = new FilterParamsService(Texts.EMPRESA) {
-			@SuppressWarnings("unchecked")
 			// Personalizamos la construcción de la sentencia sql en el caso de
 			// que estemos trabajando sobre una base de datos SQLite NO JPA.
 			@Override
@@ -65,7 +65,7 @@ public class EditorContactosClientes extends BaseEditor<ClienteContacto> {
 
 					if (value != null) {
 
-						Collection<Cliente> list = (Collection<Cliente>) getDataProvider().getList(Cliente.class, "nombre like '" + value + "%'", null);
+						Collection<Cliente> list = (Collection<Cliente>) getDataProvider().findAll(Cliente.class, "nombre like '" + value + "%'", null);
 
 						if (list != null) {
 							String where = "";
@@ -100,7 +100,7 @@ public class EditorContactosClientes extends BaseEditor<ClienteContacto> {
 				Cliente e = null;
 
 				if (getDataProvider() != null) {
-					e = (Cliente) getDataProvider().getObject(Cliente.class, "nombre = '" + event.getValue() + "'");
+					e = (Cliente) getDataProvider().find(Cliente.class, "nombre = '" + event.getValue() + "'");
 				}
 				else if (event.getValue() != null) {
 					e = new Cliente();
@@ -118,11 +118,11 @@ public class EditorContactosClientes extends BaseEditor<ClienteContacto> {
 
 			}
 
-			@SuppressWarnings("unchecked")
+			@SuppressWarnings({ "unchecked", "rawtypes" })
 			@Override
-			public Collection<String> getKeys(String constraint) throws LocalizedException {
+			public List getKeys(String constraint) throws LocalizedException {
 
-				return (Collection<String>) getDataProvider().getFieldValues(Cliente.class, NOMBRE, constraint != null ? "nombre like'" + constraint + "%'" : null, NOMBRE);
+				return getDataProvider().fieldValues(Cliente.class, NOMBRE, constraint != null ? "nombre like'" + constraint + "%'" : null, NOMBRE);
 			}
 
 			@Override

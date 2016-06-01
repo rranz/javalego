@@ -1,6 +1,8 @@
 package com.javalego.store.model.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import com.javalego.data.DataContext;
 import com.javalego.exception.LocalizedException;
@@ -28,7 +30,12 @@ public class UserServicesImpl implements UserServices {
 	@Override
 	public synchronized Collection<IUser> getAllUsers() throws LocalizedException {
 
-		return (Collection<IUser>) DataContext.getProvider().getList(User.class);
+		List<User> list = DataContext.getProvider().findAll(User.class);
+		
+		List<IUser> users = new ArrayList<IUser>();
+		users.addAll(list);
+		
+		return users;
 	}
 
 	/**
@@ -40,13 +47,18 @@ public class UserServicesImpl implements UserServices {
 	@SuppressWarnings({ "unchecked", "unused" })
 	private synchronized Collection<IRole> getAllRoles() throws LocalizedException {
 
-		return (Collection<IRole>) DataContext.getProvider().getList(Role.class);
+		List<Role> list = DataContext.getProvider().findAll(Role.class);
+
+		List<IRole> roles = new ArrayList<IRole>();
+		roles.addAll(list);
+		
+		return roles;
 	}
 
 	@Override
 	public IUser findUser(String username) throws LocalizedException {
 
-		return (IUser) DataContext.getProvider().getObject(User.class, "name = '" + username + "'");
+		return (IUser) DataContext.getProvider().find(User.class, "name = '" + username + "'");
 	}
 
 	@Override

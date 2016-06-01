@@ -7,8 +7,9 @@ import com.javalego.exception.LocalizedException;
 import com.javalego.model.keys.Key;
 import com.javalego.store.items.IBaseItem;
 import com.javalego.store.items.INews;
-import com.javalego.store.model.StoreDataServices;
+import com.javalego.store.items.impl.News;
 import com.javalego.store.model.MenuModel;
+import com.javalego.store.model.StoreDataServices;
 import com.javalego.store.mvp.detail.IDetailItemView.DetailItemViewListener;
 import com.javalego.ui.menu.IMenuItem;
 import com.javalego.ui.menu.IMenuModel;
@@ -78,11 +79,8 @@ public class DetailItemPresenter<T extends IBaseItem> implements DetailItemViewL
 	}
 
 	@Override
-	public Collection<INews> getNews() throws LocalizedException {
-		
-		Collection<INews> news = services.getAllNews();
-		
-		return news;
+	public List<News> getNews() throws LocalizedException {
+		return services.getAllNews();
 	}
 
 	@SuppressWarnings("unchecked")

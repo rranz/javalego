@@ -3,14 +3,13 @@ package com.javalego.environment;
 import java.util.Collection;
 
 import com.javalego.application.Environment;
-import com.javalego.data.DataProvider;
 import com.javalego.data.BusinessService;
-import com.javalego.data.jpa.SpringDataProvider;
-import com.javalego.entity.Entity;
+import com.javalego.data.DataProvider;
+import com.javalego.data.spring.SpringDataProvider;
 import com.javalego.exception.LocalizedException;
 import com.javalego.icons.RepositoryIcons;
 import com.javalego.locale.translator.Translator;
-import com.javalego.model.JavaLegoApplicationContext;
+import com.javalego.model.JavaLegoPersistenceContext;
 import com.javalego.model.keys.Icon;
 import com.javalego.model.keys.Key;
 import com.javalego.security.SecurityServices;
@@ -58,8 +57,8 @@ public class TestEnvironment implements Environment {
 	}
 
 	@Override
-	public DataProvider<Entity> getDataProvider() {
-		return new SpringDataProvider(JavaLegoApplicationContext.class);
+	public DataProvider getDataProvider() {
+		return new SpringDataProvider(JavaLegoPersistenceContext.class);
 	}
 
 	@Override

@@ -7,9 +7,9 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
-import com.javalego.entity.impl.IdEntityImp;
-import com.javalego.exception.LocalizedException;
+import com.javalego.entity.Entity;
 import com.javalego.exception.JavaLegoException;
+import com.javalego.exception.LocalizedException;
 import com.javalego.ui.field.FieldModel;
 import com.javalego.ui.mvp.nestedbean.INestedBeanServices;
 import com.javalego.ui.mvp.nestedbean.imp.NestedBeanListValues;
@@ -149,8 +149,8 @@ public class NestedFieldsServices implements IService {
 
 				if (field.getType() == nestedBean.getClass()) {
 					try {
-						Long id = ReflectionUtils.getPropertyValue(nestedBean, IdEntityImp.DEFAULT_ID);
-						masterFilter = field.getName() + "." + IdEntityImp.DEFAULT_ID + " = " + (id == null ? "-1" : id);
+						Long id = ReflectionUtils.getPropertyValue(nestedBean, Entity.DEFAULT_ID);
+						masterFilter = field.getName() + "." + Entity.DEFAULT_ID + " = " + (id == null ? "-1" : id);
 					}
 					catch (JavaLegoException e) {
 						logger.error("METHOD MasterBeanFilter: ERROR SET PROPERTY VALUE MASTERBEAN '" + field.getName());

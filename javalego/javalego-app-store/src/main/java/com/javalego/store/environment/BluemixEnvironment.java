@@ -1,12 +1,11 @@
 package com.javalego.store.environment;
 
-import com.javalego.data.BluemixStoreApplicationContext;
+import com.javalego.data.BluemixStorePersistenceContext;
 import com.javalego.data.DataProvider;
-import com.javalego.data.jpa.SpringDataProvider;
-import com.javalego.entity.Entity;
+import com.javalego.data.spring.SpringDataProvider;
 import com.javalego.security.services.UserServices;
-import com.javalego.store.model.StoreDataServices;
 import com.javalego.store.model.ModelService;
+import com.javalego.store.model.StoreDataServices;
 import com.javalego.store.model.impl.MockDataServices;
 import com.javalego.store.model.impl.ModelServiceImpl;
 
@@ -32,8 +31,8 @@ public class BluemixEnvironment extends BaseEnvironment {
 	}
 
 	@Override
-	public synchronized DataProvider<Entity> getDataProvider() {
-		return new SpringDataProvider(BluemixStoreApplicationContext.class);
+	public synchronized DataProvider getDataProvider() {
+		return new SpringDataProvider(BluemixStorePersistenceContext.class);
 	}
 	
 	@Override

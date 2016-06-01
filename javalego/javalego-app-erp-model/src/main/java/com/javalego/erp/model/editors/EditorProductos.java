@@ -81,12 +81,11 @@ public class EditorProductos extends BaseEditor<Producto> {
 			public void beforeSaveEvent(Producto bean) throws LocalizedException {
 			}
 
-			@SuppressWarnings("unchecked")
 			@Override
 			public void beforeDeleteEvent(Producto bean) throws LocalizedException {
 
 				if (getDataProvider() != null) {
-					Collection<ProductoTarifa> list = (Collection<ProductoTarifa>) getDataProvider().getList(ProductoTarifa.class, "producto_id = " + bean.getId(), null);
+					Collection<ProductoTarifa> list = (Collection<ProductoTarifa>) getDataProvider().findAll(ProductoTarifa.class, "producto_id = " + bean.getId(), null);
 					if (list != null && list.size() > 0) {
 						throw new LocalizedException("EXISTEN TARIFAS PARA ESTE PRODUCTO. Eliminación cancelada.");
 					}
@@ -100,7 +99,7 @@ public class EditorProductos extends BaseEditor<Producto> {
 			@Override
 			public void valueChangeEvent(ValueChangeEvent event) throws LocalizedException {
 
-				Proveedor e = (Proveedor) DataContext.getProvider().getObject(Proveedor.class, "nombre = '" + event.getValue() + "'");
+				Proveedor e = (Proveedor) DataContext.getProvider().find(Proveedor.class, "nombre = '" + event.getValue() + "'");
 				if (e != null) {
 					event.getEditorRules().setValue(PROVEEDOR_ID, e.getId());
 				} else {
@@ -112,7 +111,7 @@ public class EditorProductos extends BaseEditor<Producto> {
 			@SuppressWarnings("unchecked")
 			@Override
 			public Collection<String> getKeys(String constraint) throws LocalizedException {
-				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().getFieldValues(Proveedor.class, NOMBRE,
+				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().fieldValues(Proveedor.class, NOMBRE,
 						constraint != null ? "nombre like'" + constraint + "%'" : null, NOMBRE);
 			}
 
@@ -128,7 +127,7 @@ public class EditorProductos extends BaseEditor<Producto> {
 
 				if (getDataProvider() != null) {
 
-					Categoria e = (Categoria) getDataProvider().getObject(Categoria.class, "nombre = '" + event.getValue() + "'");
+					Categoria e = (Categoria) getDataProvider().find(Categoria.class, "nombre = '" + event.getValue() + "'");
 					if (e != null) {
 						event.getEditorRules().setValue(CATEGORIA_ID, e.getId());
 					} else {
@@ -142,7 +141,7 @@ public class EditorProductos extends BaseEditor<Producto> {
 			@Override
 			public Collection<String> getKeys(String constraint) throws LocalizedException {
 
-				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().getFieldValues(Categoria.class, NOMBRE,
+				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().fieldValues(Categoria.class, NOMBRE,
 						constraint != null ? "nombre like'" + constraint + "%'" : null, NOMBRE);
 			}
 

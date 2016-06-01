@@ -413,40 +413,40 @@ public class StoreUI extends UI implements ViewChangeListener {
 		final CssLayout l = new CssLayout();
 
 		// Adaptador para visualizar los datos del bean
-		ListBeansViewAdapter<IProduct> adapter = new ListBeansViewAdapter<IProduct>() {
+		ListBeansViewAdapter<Product> adapter = new ListBeansViewAdapter<Product>() {
 			@Override
-			public String toHtml(IProduct bean) {
+			public String toHtml(Product bean) {
 				return bean.toHtml();
 			}
 
 			@Override
-			public Icon getIcon(IProduct bean) {
+			public Icon getIcon(Product bean) {
 				return bean.getIcon();
 			}
 		};
 
 		// Modelo de datos
-		IListBeansViewModel<IProduct> model = new IListBeansViewModel<IProduct>() {
+		IListBeansViewModel<Product> model = new IListBeansViewModel<Product>() {
 
 			@Override
-			public Class<IProduct> getBeanClass() {
-				return IProduct.class;
+			public Class<Product> getBeanClass() {
+				return Product.class;
 			}
 
 			@Override
-			public Collection<IProduct> getBeans(String filter, String order) throws LocalizedException {
+			public Collection<Product> getBeans(String filter, String order) throws LocalizedException {
 				return StoreAppContext.getCurrent().getDataServices().getAllProducts();
 			}
 		};
 
-		final TileBeansView<IProduct> view = new TileBeansView<IProduct>(adapter);
+		final TileBeansView<Product> view = new TileBeansView<Product>(adapter);
 
-		final ListBeansViewPresenter<IProduct> presenter = new ListBeansViewPresenter<IProduct>(model, view);
+		final ListBeansViewPresenter<Product> presenter = new ListBeansViewPresenter<Product>(model, view);
 
-		presenter.setObserver(new ListBeansViewObserver<IProduct>() {
+		presenter.setObserver(new ListBeansViewObserver<Product>() {
 			@SuppressWarnings({ "unchecked" })
 			@Override
-			public void editBean(IProduct bean) throws LocalizedException {
+			public void editBean(Product bean) throws LocalizedException {
 
 				// // Editor del item
 				IItemEditor<Product> detail = (IItemEditor<Product>) UIFactory.getEditor(bean, isReadOnly(), true);

@@ -3,6 +3,8 @@ package com.javalego.test.model;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
+import com.javalego.model.keys.MaterialColors;
+
 /**
  * Test modelo de datos.
  * 
@@ -17,5 +19,6 @@ public class ModelTest {
 
 	@Test
 	public void test() {
+		logger.info("Material color: " + MaterialColors.DEEP_ORANGE_A400);
 	}
 }
