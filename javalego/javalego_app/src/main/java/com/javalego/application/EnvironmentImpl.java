@@ -14,27 +14,25 @@ import com.javalego.security.services.UserServices;
 import com.javalego.security.session.UserSession;
 
 /**
- * Configuración de un entorno de ejecución básico que implementa la interface
- * Environment y que puede ser reutilizado en la mayoría de aplicaciones.
+ * Configuración de un entorno de ejecución básico que implementa la interface Environment y que puede ser reutilizado
+ * en la mayoría de aplicaciones.
  * 
  * <p>
- * El entorno de ejecución permite personalizar tanto sus datos básicos (nombre,
- * título, ...) como los diferentes contextos de servicios de aplicación como:
- * localización, seguridad, acceso a datos, UI, ...
+ * El entorno de ejecución permite personalizar tanto sus datos básicos (nombre, título, ...) como los diferentes
+ * contextos de servicios de aplicación como: localización, seguridad, acceso a datos, UI, ...
  * 
  * <p>
  * El entorno debe configurarse al inicio de la aplicación.
  * 
  * <p>
- * Los contextos se pueden usar individualmente. El entorno nos permite definir
- * una configuración específica para ejecutar nuestra aplicación (Ej.: entorno
- * de pruebas, preproducción y producción).
+ * Los contextos se pueden usar individualmente. El entorno nos permite definir una configuración específica para
+ * ejecutar nuestra aplicación (Ej.: entorno de pruebas, preproducción y producción).
  * 
  * @author ROBERTO RANZ
  *
  */
-public class EnvironmentImpl implements Environment {
-
+public class EnvironmentImpl implements Environment
+{
 	private UserServices userServices;
 
 	private DataProvider dataProvider;
@@ -58,7 +56,8 @@ public class EnvironmentImpl implements Environment {
 	/**
 	 * Constructor
 	 */
-	public EnvironmentImpl() {
+	public EnvironmentImpl()
+	{
 	}
 
 	/**
@@ -67,7 +66,8 @@ public class EnvironmentImpl implements Environment {
 	 * @param name
 	 *            Nombre clave
 	 */
-	public EnvironmentImpl(String name) {
+	public EnvironmentImpl(String name)
+	{
 		this.name = name;
 	}
 
@@ -79,7 +79,8 @@ public class EnvironmentImpl implements Environment {
 	 * @param title
 	 *            título
 	 */
-	public EnvironmentImpl(String name, Key title) {
+	public EnvironmentImpl(String name, Key title)
+	{
 		this(name);
 		this.title = title;
 	}
@@ -94,48 +95,57 @@ public class EnvironmentImpl implements Environment {
 	 * @param name
 	 *            descripción
 	 */
-	public EnvironmentImpl(String name, Key title, Key description) {
+	public EnvironmentImpl(String name, Key title, Key description)
+	{
 		this(name, title);
 		this.description = description;
 	}
 
 	@Override
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
 	@Override
-	public Key getTitle() {
+	public Key getTitle()
+	{
 		return title;
 	}
 
 	@Override
-	public Key getDescription() {
+	public Key getDescription()
+	{
 		return description;
 	}
 
 	@Override
-	public Collection<RepositoryIcons<Icon>> getRepositoriesIcons() {
+	public Collection<RepositoryIcons<Icon>> getRepositoriesIcons()
+	{
 		return repositoriesIcons;
 	}
 
 	@Override
-	public SecurityServices getSecurity() {
+	public SecurityServices getSecurity()
+	{
 		return security;
 	}
 
 	@Override
-	public UserSession getUserSession() {
+	public UserSession getUserSession()
+	{
 		return userSession;
 	}
 
 	@Override
-	public DataProvider getDataProvider() {
+	public DataProvider getDataProvider()
+	{
 		return dataProvider;
 	}
 
 	@Override
-	public UserServices getUserServices() {
+	public UserServices getUserServices()
+	{
 		return userServices;
 	}
 
@@ -145,19 +155,21 @@ public class EnvironmentImpl implements Environment {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	public EnvironmentImpl setRepositoriesIcons(Collection<RepositoryIcons<Icon>> repositories) {
+	public EnvironmentImpl setRepositoriesIcons(Collection<RepositoryIcons<Icon>> repositories)
+	{
 		this.repositoriesIcons = repositories;
 		return this;
 	}
 
 	/**
-	 * Gestión de usuarios de la aplicación. Esta información debe estar
-	 * vinculado a tipo de seguridad definido para la aplicación.
+	 * Gestión de usuarios de la aplicación. Esta información debe estar vinculado a tipo de seguridad definido para la
+	 * aplicación.
 	 * 
 	 * @see SecurityServices
 	 * @return
 	 */
-	public EnvironmentImpl setUserServices(UserServices userServices) {
+	public EnvironmentImpl setUserServices(UserServices userServices)
+	{
 		this.userServices = userServices;
 		return this;
 	}
@@ -167,7 +179,8 @@ public class EnvironmentImpl implements Environment {
 	 * 
 	 * @return
 	 */
-	public EnvironmentImpl setDataProvider(DataProvider dataProvider) {
+	public EnvironmentImpl setDataProvider(DataProvider dataProvider)
+	{
 		this.dataProvider = dataProvider;
 		return this;
 	}
@@ -177,7 +190,8 @@ public class EnvironmentImpl implements Environment {
 	 * 
 	 * @return
 	 */
-	public EnvironmentImpl setUserSession(UserSession userSession) {
+	public EnvironmentImpl setUserSession(UserSession userSession)
+	{
 		this.userSession = userSession;
 		return this;
 	}
@@ -187,7 +201,8 @@ public class EnvironmentImpl implements Environment {
 	 * 
 	 * @return
 	 */
-	public EnvironmentImpl setSecurity(SecurityServices security) {
+	public EnvironmentImpl setSecurity(SecurityServices security)
+	{
 		this.security = security;
 		return this;
 	}
@@ -197,7 +212,8 @@ public class EnvironmentImpl implements Environment {
 	 * 
 	 * @return
 	 */
-	public EnvironmentImpl setDescription(Key description) {
+	public EnvironmentImpl setDescription(Key description)
+	{
 		this.description = description;
 		return this;
 	}
@@ -207,7 +223,8 @@ public class EnvironmentImpl implements Environment {
 	 * 
 	 * @return
 	 */
-	public EnvironmentImpl setTitle(Key title) {
+	public EnvironmentImpl setTitle(Key title)
+	{
 		this.title = title;
 		return this;
 	}
@@ -217,27 +234,32 @@ public class EnvironmentImpl implements Environment {
 	 * 
 	 * @return
 	 */
-	public EnvironmentImpl setName(String name) {
+	public EnvironmentImpl setName(String name)
+	{
 		this.name = name;
 		return this;
 	}
 
 	@Override
-	public Translator getTranslator() {
+	public Translator getTranslator()
+	{
 		return translator;
 	}
 
-	public EnvironmentImpl setTranslator(Translator translator) {
+	public EnvironmentImpl setTranslator(Translator translator)
+	{
 		this.translator = translator;
 		return this;
 	}
 
 	@Override
-	public BusinessService getBusinessService() {
+	public BusinessService getBusinessService()
+	{
 		return businessService;
 	}
 
-	public EnvironmentImpl setBusinessService(BusinessService businessServices) {
+	public EnvironmentImpl setBusinessService(BusinessService businessServices)
+	{
 		this.businessService = businessServices;
 		return this;
 	}

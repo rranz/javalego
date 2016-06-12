@@ -16,26 +16,29 @@ import com.javalego.demo.entities.Empresa;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = DemoPersistenceContext.class, loader = AnnotationConfigContextLoader.class)
-public class DemoTest {
-
+public class DemoTest
+{
 	public static final Logger logger = Logger.getLogger(DemoTest.class);
 
 	/**
-	 * Ejemplo de carga del entorno en la clase de persistencia de Spring
-	 * DemoPersistenceContext.
+	 * Ejemplo de carga del entorno en la clase de persistencia de Spring DemoPersistenceContext.
 	 * 
 	 * @throws Exception
 	 */
 	@Test
-	public void environment() throws Exception {
-
+	public void environment() throws Exception
+	{
 		logger.info("Loaded environment " + AppContext.getCurrent().getEnvironmentName());
 
 		// Obtener registros de entidades.
 		List<Empresa> list = (List<Empresa>) DataContext.getProvider().findAll(Empresa.class);
 
+		Empresa e = new Empresa();
+		e.setNombre("OTRO NOMBRE DE EMPRESA");
+		e.setCif("CIF01");
+		e.setRazon_social("RAZON SOCIAL 1222");
+		DataContext.getProvider().save(e);
+		
 		logger.info("Empresa: " + list.get(0).getNombre());
-
 	}
-
 }

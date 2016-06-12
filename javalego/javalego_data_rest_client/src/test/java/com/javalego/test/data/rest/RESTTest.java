@@ -30,7 +30,7 @@ public class RESTTest {
 		Empresa e = new Empresa();
 		e.setNombre("EMPRESA 1");
 		e.setCif("CIF 1");
-		Long bean = rest.save(e);
+		Empresa bean = rest.save(e);
 		System.out.println(bean);
 	}
 
@@ -47,7 +47,7 @@ public class RESTTest {
 	@Test
 	public void fieldValues() throws Exception {
 		DataProviderRESTClient rest = new DataProviderRESTClient(ENDPOINT);
-		Collection<?> values = rest.fieldValues(Empresa.class, "nombre", null, null);
+		Collection<?> values = rest.propertyValues(Empresa.class, "nombre", null, null);
 		System.out.println(values);
 	}
 

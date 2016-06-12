@@ -18,22 +18,21 @@ import com.javalego.security.session.UserSession;
  * Configuración de un entorno de ejecución.
  * 
  * <p>
- * El entorno de ejecución permite personalizar tanto sus datos básicos (nombre,
- * título, ...) como los diferentes contextos de servicios de aplicación como:
- * localización, seguridad, acceso a datos, UI, ...
+ * El entorno de ejecución permite personalizar tanto sus datos básicos (nombre, título, ...) como los diferentes
+ * contextos de servicios de aplicación como: localización, seguridad, acceso a datos, UI, ...
  * 
  * <p>
  * El entorno debe configurarse al inicio de la aplicación.
  * 
  * <p>
- * Los contextos se pueden usar individualmente. El entorno nos permite definir
- * una configuración específica para ejecutar nuestra aplicación (Ej.: entorno
- * de pruebas, preproducción y producción).
+ * Los contextos se pueden usar individualmente. El entorno nos permite definir una configuración específica para
+ * ejecutar nuestra aplicación (Ej.: entorno de pruebas, preproducción y producción).
  * 
  * @author ROBERTO RANZ
  *
  */
-public interface Environment {
+public interface Environment
+{
 
 	/**
 	 * Nombre de referencia
@@ -79,9 +78,8 @@ public interface Environment {
 	public abstract UserSession getUserSession();
 
 	/**
-	 * Traductor usado para la localización de textos. Por defecto, la
-	 * arquitectura incluye el traductor de textos basado en anotaciones
-	 * localizadas y enumerados. {@link TranslatorCode}
+	 * Traductor usado para la localización de textos. Por defecto, la arquitectura incluye el traductor de textos
+	 * basado en anotaciones localizadas y enumerados. {@link TranslatorCode}
 	 * 
 	 * @return
 	 */
@@ -102,8 +100,8 @@ public interface Environment {
 	public abstract BusinessService getBusinessService();
 
 	/**
-	 * Gestión de usuarios de la aplicación. Esta información debe estar
-	 * vinculado a tipo de seguridad definido para la aplicación.
+	 * Gestión de usuarios de la aplicación. Esta información debe estar vinculado a tipo de seguridad definido para la
+	 * aplicación.
 	 * 
 	 * @see SecurityServices
 	 * @return

@@ -88,7 +88,7 @@ public class EditorEmpleados extends BaseEditor<Empleado> {
 			@SuppressWarnings("unchecked")
 			@Override
 			public Collection<String> getKeys(String constraint) throws LocalizedException {
-				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().fieldValues(Departamento.class, NOMBRE,
+				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().propertyValues(Departamento.class, NOMBRE,
 						constraint != null ? "nombre like'" + constraint + "%'" : null, NOMBRE);
 			}
 
@@ -119,7 +119,7 @@ public class EditorEmpleados extends BaseEditor<Empleado> {
 			@Override
 			public Collection<String> getKeys(String constraint) throws LocalizedException {
 
-				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().fieldValues(CategoriaProfesional.class, NOMBRE,
+				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().propertyValues(CategoriaProfesional.class, NOMBRE,
 						constraint != null ? "nombre like'" + constraint + "%'" : null, NOMBRE);
 			}
 
@@ -150,7 +150,7 @@ public class EditorEmpleados extends BaseEditor<Empleado> {
 			@Override
 			public Collection<String> getKeys(String constraint) throws LocalizedException {
 
-				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().fieldValues(Empresa.class, NOMBRE, constraint != null ? "nombre like'" + constraint + "%'" : null,
+				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().propertyValues(Empresa.class, NOMBRE, constraint != null ? "nombre like'" + constraint + "%'" : null,
 						NOMBRE);
 			}
 

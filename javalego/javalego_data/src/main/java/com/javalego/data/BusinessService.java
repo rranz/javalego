@@ -6,6 +6,6 @@ package com.javalego.data;
  * @author ROBERTO RANZ
  *
  */
-public interface BusinessService {
-
+public interface BusinessService
+{
 }

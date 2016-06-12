@@ -66,7 +66,7 @@ public class EditorProductosTarifas extends BaseEditor<ProductoTarifa> {
 
 						if (DataContext.getCurrent().isSQLite() && e.getProveedor() != null && e.getProveedor().getId() != null) {
 							event.getEditorRules().setValue(PRODUCTO_PROVEEDOR_NOMBRE,
-									DataContext.getProvider().fieldValues(Proveedor.class, NOMBRE, "id = " + e.getProveedor().getId(), null).iterator().next());
+									DataContext.getProvider().propertyValues(Proveedor.class, NOMBRE, "id = " + e.getProveedor().getId(), null).iterator().next());
 						}
 
 					}
@@ -81,7 +81,7 @@ public class EditorProductosTarifas extends BaseEditor<ProductoTarifa> {
 			@Override
 			public Collection<String> getKeys(String constraint) throws LocalizedException {
 
-				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().fieldValues(Producto.class, NOMBRE, constraint != null ? "nombre like'" + constraint + "%'" : null,
+				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().propertyValues(Producto.class, NOMBRE, constraint != null ? "nombre like'" + constraint + "%'" : null,
 						NOMBRE);
 			}
 
@@ -119,7 +119,7 @@ public class EditorProductosTarifas extends BaseEditor<ProductoTarifa> {
 				ids += ("".equals(ids) ? "" : ",") + item.getProducto().getId();
 			}
 			Collection<String> names = (Collection<String>) getDataProvider()
-					.fieldValues(Producto.class, "(select p.nombre from proveedor p where p.id = proveedor_id)", "id in(" + ids + ")", null);
+					.propertyValues(Producto.class, "(select p.nombre from proveedor p where p.id = proveedor_id)", "id in(" + ids + ")", null);
 			if (names != null && names.size() > 0) {
 				int i = 0;
 				for (String name : names) {

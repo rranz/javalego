@@ -8,19 +8,18 @@ import java.io.Serializable;
  * @author ROBERTO RANZ
  * 
  */
-public interface Entity<T extends Serializable> {
+public interface Entity<T extends Serializable>
+{
 
 	/**
-	 * Texto de referencia a la tabla principal dentro de una consulta JQL (JPA)
-	 * y que el sistema convertirá al alias. Se incluye el punto porque es el
-	 * uso habitual de esta variable. this.
+	 * Texto de referencia a la tabla principal dentro de una consulta JQL (JPA) y que el sistema convertirá al alias.
+	 * Se incluye el punto porque es el uso habitual de esta variable. this.
 	 */
 	String THIS_FULL = "this.";
 
 	/**
-	 * Texto de referencia a la tabla principal dentro de una consulta JQL (JPA)
-	 * y que el sistema convertirá al alias. Se incluye el punto porque es el
-	 * uso habitual de esta variable.
+	 * Texto de referencia a la tabla principal dentro de una consulta JQL (JPA) y que el sistema convertirá al alias.
+	 * Se incluye el punto porque es el uso habitual de esta variable.
 	 */
 	String THIS = "this";
 

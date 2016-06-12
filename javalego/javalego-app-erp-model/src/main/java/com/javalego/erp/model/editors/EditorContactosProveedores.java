@@ -62,7 +62,7 @@ public class EditorContactosProveedores extends BaseEditor<ProveedorContacto> {
 			@Override
 			public Collection<String> getKeys(String constraint) throws LocalizedException {
 				
-				return DataContext.getProvider() == null ? null : (Collection<String>) DataContext.getProvider().fieldValues(Proveedor.class, NOMBRE,
+				return DataContext.getProvider() == null ? null : (Collection<String>) DataContext.getProvider().propertyValues(Proveedor.class, NOMBRE,
 						constraint != null ? "nombre like'" + constraint + "%'" : null, NOMBRE);
 			}
 

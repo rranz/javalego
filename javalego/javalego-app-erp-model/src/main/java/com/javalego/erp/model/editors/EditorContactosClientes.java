@@ -122,7 +122,7 @@ public class EditorContactosClientes extends BaseEditor<ClienteContacto> {
 			@Override
 			public List getKeys(String constraint) throws LocalizedException {
 
-				return getDataProvider().fieldValues(Cliente.class, NOMBRE, constraint != null ? "nombre like'" + constraint + "%'" : null, NOMBRE);
+				return getDataProvider().propertyValues(Cliente.class, NOMBRE, constraint != null ? "nombre like'" + constraint + "%'" : null, NOMBRE);
 			}
 
 			@Override

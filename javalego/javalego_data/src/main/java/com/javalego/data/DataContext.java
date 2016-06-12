@@ -11,14 +11,14 @@ import com.javalego.model.context.Context;
 /**
  * Contexto de acceso a datos.
  * 
- * Proporciona información de configuración del datasource utilizado y el
- * proveedor de acceso a los datos (Spring Data, JPA Hibernat, JDBC ...)
+ * Proporciona información de configuración del datasource utilizado y el proveedor de acceso a los datos (Spring Data,
+ * JPA Hibernat, JDBC ...)
  * 
  * @author ROBERTO RANZ
  * 
  */
-public class DataContext extends AbstractBaseModel implements Context {
-
+public class DataContext extends AbstractBaseModel implements Context
+{
 	private static final long serialVersionUID = 54507919335753297L;
 
 	/**
@@ -46,12 +46,13 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @param currentProvider
 	 */
-	public DataContext(DataProvider currentProvider, List<DataProvider> dataProviders) {
-
+	public DataContext(DataProvider currentProvider, List<DataProvider> dataProviders)
+	{
 		this.dataProvider = currentProvider;
 		this.dataProviders = dataProviders;
 
-		if (dataProviders.indexOf(currentProvider) < 0) {
+		if (dataProviders.indexOf(currentProvider) < 0)
+		{
 			addProvider(currentProvider);
 		}
 	}
@@ -61,7 +62,8 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @return
 	 */
-	public static DataProvider getProvider() {
+	public static DataProvider getProvider()
+	{
 		return getCurrent().getDataProvider();
 	}
 
@@ -70,14 +72,16 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @param name
 	 */
-	public DataContext(String name) {
+	public DataContext(String name)
+	{
 		this.setName(name);
 	}
 
 	/**
 	 * Constructor
 	 */
-	private DataContext() {
+	private DataContext()
+	{
 	}
 
 	/**
@@ -85,8 +89,10 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @return
 	 */
-	public static synchronized final DataContext getCurrent() {
-		if (current == null) {
+	public static synchronized final DataContext getCurrent()
+	{
+		if (current == null)
+		{
 			current = new DataContext();
 		}
 		return current;
@@ -97,7 +103,8 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @return
 	 */
-	private DataProvider getDataProvider() {
+	private DataProvider getDataProvider()
+	{
 		return dataProvider;
 	}
 
@@ -106,24 +113,24 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @param provider
 	 */
-	public void setProvider(DataProvider provider) {
-
+	public void setProvider(DataProvider provider)
+	{
 		this.dataProvider = provider;
 
-		if (dataProviders.indexOf(provider) < 0) {
+		if (dataProviders.indexOf(provider) < 0)
+		{
 			addProvider(provider);
 		}
 	}
 
 	/**
-	 * Añadir proveedor de datos adicional. Estos proveedores de datos
-	 * adicionales que pueden ser usados dinámicamente (Ej.: en Android cambiar
-	 * de local SQLite a remoto con servicios de datos REST).
+	 * Añadir proveedor de datos adicional. Estos proveedores de datos adicionales que pueden ser usados dinámicamente
+	 * (Ej.: en Android cambiar de local SQLite a remoto con servicios de datos REST).
 	 * 
 	 * @param dataProvider
 	 */
-	public void addProvider(DataProvider dataProvider) {
-
+	public void addProvider(DataProvider dataProvider)
+	{
 		dataProviders.add(dataProvider);
 	}
 
@@ -132,10 +139,12 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @param type
 	 */
-	public void changeProvider(Type type) throws LocalizedException {
-
-		for (DataProvider item : dataProviders) {
-			if (type.equals(item.getType())) {
+	public void changeProvider(Type type) throws LocalizedException
+	{
+		for (DataProvider item : dataProviders)
+		{
+			if (type.equals(item.getType()))
+			{
 				dataProvider = item;
 				return;
 			}
@@ -144,46 +153,46 @@ public class DataContext extends AbstractBaseModel implements Context {
 	}
 
 	/**
-	 * Cambiar el proveedor de datos de la aplicación al proveedor REST que debe
-	 * estar definido en la lista de proveedores
+	 * Cambiar el proveedor de datos de la aplicación al proveedor REST que debe estar definido en la lista de
+	 * proveedores
 	 * 
 	 * @throws LocalizedException
 	 */
-	public void changeREST() throws LocalizedException {
-
+	public void changeREST() throws LocalizedException
+	{
 		changeProvider(DataProvider.Type.REST);
 	}
 
 	/**
-	 * Cambiar el proveedor de datos de la aplicación al proveedor Spring Data
-	 * que debe estar definido en la lista de proveedores
+	 * Cambiar el proveedor de datos de la aplicación al proveedor Spring Data que debe estar definido en la lista de
+	 * proveedores
 	 * 
 	 * @throws LocalizedException
 	 */
-	public void changeSpringData() throws LocalizedException {
-
+	public void changeSpringData() throws LocalizedException
+	{
 		changeProvider(DataProvider.Type.Spring_Data);
 	}
 
 	/**
-	 * Cambiar el proveedor de datos de la aplicación al proveedor JPA que debe
-	 * estar definido en la lista de proveedores
+	 * Cambiar el proveedor de datos de la aplicación al proveedor JPA que debe estar definido en la lista de
+	 * proveedores
 	 * 
 	 * @throws LocalizedException
 	 */
-	public void changeJPA() throws LocalizedException {
-
+	public void changeJPA() throws LocalizedException
+	{
 		changeProvider(DataProvider.Type.JPA);
 	}
 
 	/**
-	 * Cambiar el proveedor de datos de la aplicación al proveedor SQLite que
-	 * debe estar definido en la lista de proveedores
+	 * Cambiar el proveedor de datos de la aplicación al proveedor SQLite que debe estar definido en la lista de
+	 * proveedores
 	 * 
 	 * @throws LocalizedException
 	 */
-	public void changeSQLite() throws LocalizedException {
-
+	public void changeSQLite() throws LocalizedException
+	{
 		changeProvider(DataProvider.Type.SQLite);
 	}
 
@@ -192,8 +201,8 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @param type
 	 */
-	public boolean isType(Type type) {
-
+	public boolean isType(Type type)
+	{
 		return dataProvider != null && dataProvider.getType().equals(type);
 	}
 
@@ -202,8 +211,8 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @return
 	 */
-	public boolean isREST() {
-
+	public boolean isREST()
+	{
 		return getCurrent().getDataProvider() != null ? getCurrent().isType(DataProvider.Type.REST) : false;
 	}
 
@@ -212,8 +221,8 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @return
 	 */
-	public boolean isJPA() {
-
+	public boolean isJPA()
+	{
 		return getCurrent().getDataProvider() != null ? getCurrent().isType(DataProvider.Type.JPA) : false;
 	}
 
@@ -222,8 +231,8 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @return
 	 */
-	public boolean isSpringData() {
-
+	public boolean isSpringData()
+	{
 		return getCurrent().getDataProvider() != null ? getCurrent().isType(DataProvider.Type.Spring_Data) : false;
 	}
 
@@ -232,8 +241,8 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @return
 	 */
-	public boolean isSQLite() {
-
+	public boolean isSQLite()
+	{
 		return getCurrent().getDataProvider() != null ? getCurrent().isType(DataProvider.Type.SQLite) : false;
 	}
 
@@ -242,8 +251,8 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @return
 	 */
-	public boolean isMock() {
-
+	public boolean isMock()
+	{
 		return getCurrent().getDataProvider() != null ? getCurrent().isType(DataProvider.Type.Mock) : false;
 	}
 
@@ -252,7 +261,8 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @return
 	 */
-	public BusinessService getBusinessService() {
+	public BusinessService getBusinessService()
+	{
 		return businessService;
 	}
 
@@ -261,7 +271,8 @@ public class DataContext extends AbstractBaseModel implements Context {
 	 * 
 	 * @param businessService
 	 */
-	public void setBusinessService(BusinessService businessService) {
+	public void setBusinessService(BusinessService businessService)
+	{
 		this.businessService = businessService;
 	}
 

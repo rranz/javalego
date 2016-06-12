@@ -17,8 +17,8 @@ import com.javalego.security.session.UserSession;
 import com.javalego.ui.UIContext;
 
 /**
- * Contexto de aplicación que inicializa todos los servicios a partir de la
- * configuración definida en un entorno de ejecución.
+ * Contexto de aplicación que inicializa todos los servicios a partir de la configuración definida en un entorno de
+ * ejecución.
  * 
  * <p>
  * <i>Contextos y servicios de aplicación disponibles:</i>
@@ -32,29 +32,26 @@ import com.javalego.ui.UIContext;
  * <b>Security:</b> {@link SecurityContext}
  * 
  * <p>
- * Debe usar un entorno de ejecución {@link Environment} para cargar la
- * configuración de contexto de aplicación.
+ * Debe usar un entorno de ejecución {@link Environment} para cargar la configuración de contexto de aplicación.
  * 
  * <p>
- * Este contexto de aplicación es opcional, pudiendo usar de forma independiente
- * los diferentes tipos de contextos de la arquitectura (UI, Data, Locale,
- * Security, ...)
+ * Este contexto de aplicación es opcional, pudiendo usar de forma independiente los diferentes tipos de contextos de la
+ * arquitectura (UI, Data, Locale, Security, ...)
  * 
  * @author ROBERTO RANZ
  */
-public class AppContext implements Context {
+public class AppContext implements Context
+{
 
 	public static final Logger logger = Logger.getLogger(AppContext.class);
 
 	/**
-	 * Entorno de ejecución cuya configuración se ha cargando en el contexto de
-	 * aplicación.
+	 * Entorno de ejecución cuya configuración se ha cargando en el contexto de aplicación.
 	 */
 	private Environment environment;
 
 	/**
-	 * Registra la excepción ocurrida en la inicialización del contexto de
-	 * aplicación.
+	 * Registra la excepción ocurrida en la inicialización del contexto de aplicación.
 	 */
 	private LocalizedException error;
 
@@ -84,7 +81,8 @@ public class AppContext implements Context {
 	 * @param name
 	 * @param title
 	 */
-	protected AppContext(String name, Key title) {
+	protected AppContext(String name, Key title)
+	{
 		current = this;
 		this.name = name;
 		this.title = title;
@@ -93,7 +91,8 @@ public class AppContext implements Context {
 	/**
 	 * Constructor
 	 */
-	protected AppContext() {
+	protected AppContext()
+	{
 		current = this;
 	}
 
@@ -102,8 +101,10 @@ public class AppContext implements Context {
 	 * 
 	 * @return
 	 */
-	public synchronized static AppContext getCurrent() {
-		if (current == null) {
+	public synchronized static AppContext getCurrent()
+	{
+		if (current == null)
+		{
 			current = new AppContext(null, null);
 		}
 		return current;
@@ -111,21 +112,24 @@ public class AppContext implements Context {
 
 	/**
 	 * Entorno cargado
+	 * 
 	 * @return
 	 */
-	public boolean isLoaded() {
+	public boolean isLoaded()
+	{
 		return loaded;
 	}
 
 	/**
 	 * Establecer el actual contexto de aplicación.
 	 * <p>
-	 * Este método nos permitirá personalizar nuestra propia implementación para
-	 * adecuarla a nuestros requerimientos funcionales.
+	 * Este método nos permitirá personalizar nuestra propia implementación para adecuarla a nuestros requerimientos
+	 * funcionales.
 	 * 
 	 * @param current
 	 */
-	public static void setCurrent(AppContext current) {
+	public static void setCurrent(AppContext current)
+	{
 		AppContext.current = current;
 	}
 
@@ -134,7 +138,8 @@ public class AppContext implements Context {
 	 * 
 	 * @return
 	 */
-	public UIContext getUI() {
+	public UIContext getUI()
+	{
 		return UIContext.getCurrent();
 	}
 
@@ -143,7 +148,8 @@ public class AppContext implements Context {
 	 * 
 	 * @return
 	 */
-	public DataContext getData() {
+	public DataContext getData()
+	{
 		return DataContext.getCurrent();
 	}
 
@@ -152,7 +158,8 @@ public class AppContext implements Context {
 	 * 
 	 * @return
 	 */
-	public LocaleContext getLocale() {
+	public LocaleContext getLocale()
+	{
 		return LocaleContext.getCurrent();
 	}
 
@@ -161,7 +168,8 @@ public class AppContext implements Context {
 	 * 
 	 * @return
 	 */
-	public OfficeContext getOffice() {
+	public OfficeContext getOffice()
+	{
 		return OfficeContext.getCurrent();
 	}
 
@@ -170,7 +178,8 @@ public class AppContext implements Context {
 	 * 
 	 * @return
 	 */
-	public SecurityContext getSecurity() {
+	public SecurityContext getSecurity()
+	{
 		return SecurityContext.getCurrent();
 	}
 
@@ -180,40 +189,49 @@ public class AppContext implements Context {
 	 * @param environment
 	 * @throws LocalizedException
 	 */
-	public void load(Environment environment) throws LocalizedException {
+	public void load(Environment environment) throws LocalizedException
+	{
 
-		String title = environment.getTitle() == null ? environment.getName() : LocaleContext.getText(environment.getTitle());
+		String title = environment.getTitle() == null ? environment.getName()
+			: LocaleContext.getText(environment.getTitle());
 
 		// Establecer el título y nombre del entorno si no están definidos.
-		if (this.title == null && environment.getTitle() != null) {
+		if (this.title == null && environment.getTitle() != null)
+		{
 			this.title = environment.getTitle();
 		}
-		if (this.name == null) {
+		if (this.name == null)
+		{
 			this.name = environment.getName();
 		}
 
 		logger.debug("Loading runtime environment " + title + " ...");
 
-		try {
+		try
+		{
 			// Repositorios de iconos
-			if (LocaleContext.getCurrent() != null) {
+			if (LocaleContext.getCurrent() != null)
+			{
 				LocaleContext.getCurrent().setRepositoriesIcons(environment.getRepositoriesIcons());
 			}
 
 			// Localización de aplicaciones
 			// Establecer los servicios de traducción de textos
 			Translator translator = environment.getTranslator();
-			if (translator != null) {
+			if (translator != null)
+			{
 				LocaleContext.setTranslator(translator);
 			}
-			
+
 			// Acceso a datos
-			if (DataContext.getCurrent() != null) {
+			if (DataContext.getCurrent() != null)
+			{
 
 				// Proveedor de datos
 				DataProvider dataProvider = environment.getDataProvider();
-				if (dataProvider != null) {
-					dataProvider.load();
+				if (dataProvider != null)
+				{
+					dataProvider.init();
 					DataContext.getCurrent().setProvider(dataProvider);
 				}
 
@@ -222,17 +240,20 @@ public class AppContext implements Context {
 			}
 
 			// Security
-			if (SecurityContext.getCurrent() != null) {
+			if (SecurityContext.getCurrent() != null)
+			{
 
 				// Servicios de seguridad
 				SecurityServices security = environment.getSecurity();
-				if (security != null) {
+				if (security != null)
+				{
 					SecurityContext.getCurrent().setServices(security);
 				}
 
 				// Sesión de usuario
 				UserSession userSession = environment.getUserSession();
-				if (userSession != null) {
+				if (userSession != null)
+				{
 					SecurityContext.getCurrent().setUserSession(userSession);
 				}
 			}
@@ -241,7 +262,8 @@ public class AppContext implements Context {
 
 			this.environment = environment;
 		}
-		catch (RuntimeException | LocalizedException e) {
+		catch (RuntimeException | LocalizedException e)
+		{
 
 			error = new LocalizedException(UIContext.getText(CommonErrors.APPLICATION_ERROR, e));
 
@@ -253,7 +275,7 @@ public class AppContext implements Context {
 		}
 
 		loaded = true;
-		
+
 	}
 
 	/**
@@ -261,7 +283,8 @@ public class AppContext implements Context {
 	 * 
 	 * @return
 	 */
-	public String getEnvironmentName() {
+	public String getEnvironmentName()
+	{
 		return environment != null ? environment.getName() : "(unknown)";
 	}
 
@@ -270,25 +293,27 @@ public class AppContext implements Context {
 	 * 
 	 * @return
 	 */
-	public Key getEnvironmentTitle() {
+	public Key getEnvironmentTitle()
+	{
 		return environment != null ? environment.getTitle() : null;
 	}
 
 	/**
-	 * Error que se ha producido en la ejecución de la aplicación y que servirá
-	 * para mostrar un mensaje al usuario. (Ej.: error conexión base de datos).
+	 * Error que se ha producido en la ejecución de la aplicación y que servirá para mostrar un mensaje al usuario.
+	 * (Ej.: error conexión base de datos).
 	 */
-	public LocalizedException getError() {
+	public LocalizedException getError()
+	{
 		return error;
 	}
 
 	/**
-	 * Registra la excepción ocurrida en la inicialización del contexto de
-	 * aplicación.
+	 * Registra la excepción ocurrida en la inicialización del contexto de aplicación.
 	 * 
 	 * @param error
 	 */
-	public void setError(LocalizedException error) {
+	public void setError(LocalizedException error)
+	{
 		this.error = error;
 	}
 
@@ -297,7 +322,8 @@ public class AppContext implements Context {
 	 * 
 	 * @return
 	 */
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
@@ -306,7 +332,8 @@ public class AppContext implements Context {
 	 * 
 	 * @return
 	 */
-	public Key getTitle() {
+	public Key getTitle()
+	{
 		return title;
 	}
 
@@ -315,7 +342,8 @@ public class AppContext implements Context {
 	 * 
 	 * @param name
 	 */
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
@@ -324,7 +352,8 @@ public class AppContext implements Context {
 	 * 
 	 * @param title
 	 */
-	public void setTitle(Key title) {
+	public void setTitle(Key title)
+	{
 		this.title = title;
 	}
 

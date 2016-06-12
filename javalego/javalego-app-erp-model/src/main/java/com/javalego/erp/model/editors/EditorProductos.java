@@ -111,7 +111,7 @@ public class EditorProductos extends BaseEditor<Producto> {
 			@SuppressWarnings("unchecked")
 			@Override
 			public Collection<String> getKeys(String constraint) throws LocalizedException {
-				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().fieldValues(Proveedor.class, NOMBRE,
+				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().propertyValues(Proveedor.class, NOMBRE,
 						constraint != null ? "nombre like'" + constraint + "%'" : null, NOMBRE);
 			}
 
@@ -141,7 +141,7 @@ public class EditorProductos extends BaseEditor<Producto> {
 			@Override
 			public Collection<String> getKeys(String constraint) throws LocalizedException {
 
-				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().fieldValues(Categoria.class, NOMBRE,
+				return getDataProvider() == null ? null : (Collection<String>) getDataProvider().propertyValues(Categoria.class, NOMBRE,
 						constraint != null ? "nombre like'" + constraint + "%'" : null, NOMBRE);
 			}
 

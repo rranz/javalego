@@ -7,34 +7,36 @@ import com.javalego.properties.PropertyReaderFactory;
 import com.javalego.util.ReflectionUtils;
 
 /**
- * Factoría para obtener el entorno de ejecución de nuestra aplicación usando
- * diferentes canales o recursos.
+ * Factoría para obtener el entorno de ejecución de nuestra aplicación usando diferentes canales o recursos.
  * 
  * @author ROBERTO RANZ
  *
  */
-public class EnviromentFactory {
+public class EnviromentFactory
+{
 
 	private static final String ENVIRONMENT = "environment";
 
-	private EnviromentFactory() {
+	private EnviromentFactory()
+	{
 	}
 
 	/**
-	 * Obtener el entorno a partir de un archivo de configuración de propiedades
-	 * que incluya el valor "environment=Class name full path".
+	 * Obtener el entorno a partir de un archivo de configuración de propiedades que incluya el valor
+	 * "environment=Class name full path".
 	 * 
 	 * @param resource
 	 * @return
 	 * @throws LocalizedException
 	 */
-	public static Environment getEnvironment(String resource) throws LocalizedException {
+	public static Environment getEnvironment(String resource) throws LocalizedException
+	{
 		return getEnvironment(resource, ENVIRONMENT);
 	}
 
 	/**
-	 * Obtener el entorno a partir de un archivo de configuración de propiedades
-	 * que incluya el valor "environment=Class name full path".
+	 * Obtener el entorno a partir de un archivo de configuración de propiedades que incluya el valor
+	 * "environment=Class name full path".
 	 * 
 	 * @param resource
 	 * @param propertyName
@@ -42,18 +44,21 @@ public class EnviromentFactory {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	public static Environment getEnvironment(String resource, String propertyName) throws LocalizedException {
-
+	public static Environment getEnvironment(String resource, String propertyName) throws LocalizedException
+	{
 		Environment environment = null;
 
-		try {
+		try
+		{
 			PropertyReader reader = PropertyReaderFactory.getReader(resource);
-			if (reader != null) {
+			if (reader != null)
+			{
 				String className = reader.getString(propertyName);
 				return (Environment) ReflectionUtils.createObject(className);
 			}
 		}
-		catch (JavaLegoException e) {
+		catch (JavaLegoException e)
+		{
 			throw new LocalizedException(e);
 		}
 

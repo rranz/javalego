@@ -27,7 +27,7 @@ public class ErpPersistenceContext extends SpringPersistenceContext {
 	@Override
 	protected void setJpaProperties(Properties properties) {
 
-		properties.put("hibernate.format_sql", "true".equals(getProperty(HIBERNATE_FORMAT_SQL, false)));
+		properties.put(HIBERNATE_FORMAT_SQL, "true".equals(getProperty(HIBERNATE_FORMAT_SQL, false)));
 		// Crear ddl con Hibernate
 		String ddl = getProperty(HIBERNATE_DDL, false);
 		if (!"".equals(ddl)) {

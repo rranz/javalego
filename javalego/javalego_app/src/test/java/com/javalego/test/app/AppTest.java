@@ -15,16 +15,19 @@ import com.javalego.exception.LocalizedException;
  * @author ROBERTO RANZ
  *
  */
-public class AppTest {
+public class AppTest
+{
 
 	@Before
-	public void BeforeTest() throws LocalizedException {
+	public void BeforeTest() throws LocalizedException
+	{
 	}
-	
+
 	public static final Logger logger = Logger.getLogger(AppTest.class);
 
 	@Test
-	public void environment() throws LocalizedException {
+	public void environment() throws LocalizedException
+	{
 
 		Environment environment = new EnvironmentImpl("TEST");
 
@@ -33,12 +36,12 @@ public class AppTest {
 		// environment.setRepositories(Collection<IRepositoryIcons>);
 		// environment.setSecurity(ISecurity);
 		// ...
-		
+
 		AppContext.getCurrent().load(environment);
-		
+
 		// Obtener los registros de una entidad.
-		//List<IEntity>list = AppContext.getDataProvider().getList(IEntity);
-		
+		// List<IEntity>list = AppContext.getDataProvider().getList(IEntity);
+
 		logger.info("Loaded environment " + AppContext.getCurrent().getName());
 	}
 

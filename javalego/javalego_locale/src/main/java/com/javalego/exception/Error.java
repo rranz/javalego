@@ -14,22 +14,22 @@ import com.javalego.model.resources.locale.Locale;
  *
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.FIELD})
-public @interface Error 
+@Target({ ElementType.TYPE, ElementType.FIELD })
+public @interface Error
 {
 	/**
 	 * Nivel de excepción: Warning, info, error, ...
 	 */
-	ErrorLevel level();	
+	ErrorLevel level();
 
 	/**
 	 * Idiomas soportados
 	 */
-	Locale[] locales();	
-	
+	Locale[] locales();
+
 	/**
 	 * Número de secuencia dentro del nivel excepción (opcional)
 	 */
-	int index() default -1;	
+	int index() default -1;
 
 }

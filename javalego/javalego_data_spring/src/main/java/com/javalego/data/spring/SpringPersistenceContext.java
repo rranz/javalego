@@ -19,25 +19,26 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.javalego.data.DataProvider;
+import com.javalego.data.jpa.GenericDaoJpa;
 import com.javalego.exception.LocalizedException;
 
 /**
- * Configuración básica de Spring Data (JPA Hibernate) basada en anotaciones (no
- * requiere applicationContext.xml) para utilizar el acceso a base de datos
- * mediante JPA. Define el datasource, entity manager y transaction manager.
+ * Configuración básica de Spring Data (JPA Hibernate) basada en anotaciones (no requiere applicationContext.xml) para
+ * utilizar el acceso a base de datos mediante JPA. Define el datasource, entity manager y transaction manager.
  * <p>
- * El archivo application.properties contiene configuración de acceso a la base
- * de datos mediante los drivers Jdbc (H2, MySql y PostgreSQL) y la definición
- * de los packages de las clases de entidad Jpa que utilizaremos en nuestro
+ * El archivo application.properties contiene configuración de acceso a la base de datos mediante los drivers Jdbc (H2,
+ * MySql y PostgreSQL) y la definición de los packages de las clases de entidad Jpa que utilizaremos en nuestro
  * proyecto.
  * <p>
- * Puede utilizar directamente esta clase pero necesitará el fichero de
- * propiedades que debe existir en su classpath application.properties.
+ * Puede utilizar directamente esta clase pero necesitará el fichero de propiedades que debe existir en su classpath
+ * application.properties.
  * <p>
  * Incluir anotación: @PropertySource("classpath:application.properties")
  * <p>
  * Ej. propiedades que necesitamos definir:
  * <p>
+ * 
  * <pre>
  * #Database Configuration
  * db.driver=org.h2.Driver
@@ -65,8 +66,8 @@ import com.javalego.exception.LocalizedException;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-abstract public class SpringPersistenceContext {
-
+abstract public class SpringPersistenceContext
+{
 	// Propiedades de configuración del datasource y jpa.
 	public static final String DB_DRIVER = "db.driver";
 	public static final String DB_DIALECT = "db.dialect";
@@ -81,9 +82,16 @@ abstract public class SpringPersistenceContext {
 
 	public static final Logger logger = Logger.getLogger(SpringPersistenceContext.class);
 
-	@Bean
-	public DataSource dataSource() {
+	@Resource
+	protected Environment environment;
 
+	@Bean DataProvider jpaDao() {
+		return new GenericDaoJpa();
+	}
+	
+	@Bean
+	public DataSource dataSource()
+	{
 		logger.info("Loading config properties ...");
 
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -96,40 +104,35 @@ abstract public class SpringPersistenceContext {
 	}
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
-
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
+		JpaVendorAdapter jpaVendorAdapter)
+	{
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 
 		em.setDataSource(dataSource);
 		em.setJpaVendorAdapter(jpaVendorAdapter);
 
+		// Propiedades jpa
+		Properties properties = new Properties();
+		setJpaProperties(properties);
+		em.setJpaProperties(properties);
+		
 		// Lista de packages de entities a escanear. Si no se define esta
 		// información, hay que definir las entidades en el fichero de recursos
 		// /META-INF/persistence.xml.
 		String ps = getPackagesToScan();
-		
+
 		// Buscar el valor de la propiedad en las variables de entorno,
 		// posiblemente inyectadas desde una fichero de propidades
 		// @PropertySource.
-		if (ps == null) {
+		if (ps == null)
+		{
 			ps = environment.getProperty(PACKAGES_TO_SCAN);
 		}
-		if (ps != null) {
+		if (ps != null)
+		{
 			em.setPackagesToScan(ps.split("\\,"));
 		}
-
-		Properties properties = new Properties();
-		em.setJpaProperties(properties);
-
-		// Propiedades Hibernate
-		// em.getJpaPropertyMap().put("hibernate.format_sql",
-		// "true".equals(getValue(HIBERNATE_FORMAT_SQL, false)));
-
-		// Crear ddl con Hibernate
-		// String ddl = getValue(HIBERNATE_DDL, false);
-		// if (!"".equals(ddl)) {
-		// em.getJpaPropertyMap().put(HIBERNATE_DDL, ddl);
-		// }
 
 		return em;
 	}
@@ -156,42 +159,39 @@ abstract public class SpringPersistenceContext {
 	protected abstract String getPackagesToScan();
 
 	/**
-	 * Definición de las propiedades del datasource para realizar la conexión a
-	 * la base de datos.
+	 * Definición de las propiedades del datasource para realizar la conexión a la base de datos.
 	 * 
 	 * @return
 	 */
 	protected abstract void setDataSourceProperties(DriverManagerDataSource dataSource);
 
 	@Bean
-	public JpaVendorAdapter jpaVendorAdapter() {
+	public JpaVendorAdapter jpaVendorAdapter()
+	{
 		return getJpaVendorAdapter();
 	}
 
 	@Bean
-	public PlatformTransactionManager transactionManager() {
+	public PlatformTransactionManager transactionManager()
+	{
 		return new JpaTransactionManager();
 	}
 
-	@Resource
-	protected Environment environment;
-
 	/**
-	 * Obtener el valor de una propiedad del archivo de configuración definido
-	 * en la anotación @PropertyResource
+	 * Obtener el valor de una propiedad del archivo de configuración definido en la anotación @PropertyResource
 	 *
 	 * @param key
 	 *            clave propiedad
 	 * @return
 	 * @throws LocalizedException
 	 */
-	protected String getProperty(String key) {
+	protected String getProperty(String key)
+	{
 		return getProperty(key, false);
 	}
 
 	/**
-	 * Obtener el valor de una propiedad del archivo de configuración definido
-	 * en la anotación @PropertyResource
+	 * Obtener el valor de una propiedad del archivo de configuración definido en la anotación @PropertyResource
 	 * 
 	 * @param key
 	 *            clave propiedad
@@ -200,15 +200,17 @@ abstract public class SpringPersistenceContext {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	protected String getProperty(String key, boolean required) {
-
-		if (environment == null) {
+	protected String getProperty(String key, boolean required)
+	{
+		if (environment == null)
+		{
 			return null;
 		}
 
 		String value = environment.getProperty(key);
 
-		if (required && value == null) {
+		if (required && value == null)
+		{
 			logger.error("Config datasource: key '" + key + "' is null. Required value.");
 			return null;
 		}
@@ -216,7 +218,8 @@ abstract public class SpringPersistenceContext {
 	}
 
 	@Bean
-	public MessageSource messageSource() {
+	public MessageSource messageSource()
+	{
 		return new ResourceBundleMessageSource();
 	}
 

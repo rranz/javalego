@@ -11,207 +11,218 @@ import com.javalego.exception.LocalizedException;
 /**
  * Proveedor de datos.
  * 
- * Interface que define los métodos básicos de acceso a datos, independiente del
- * proveedor o tecnología utilizada.
+ * Interface que define los métodos básicos de acceso a datos, independiente del proveedor y tecnología utilizada.
  * 
- * Las implementaciones de esta interface pueden ser Spring Data, EclipseLink,
- * JPA Hibernate, JDBC, mocks, ... o desarrollar nuestro propio código.
+ * Las implementaciones de esta interface pueden ser Spring Data, EclipseLink, JPA Hibernate, JDBC, mocks, ... o
+ * desarrollar nuestro propio código.
  * 
  * @author ROBERTO RANZ
  * 
  */
-public interface DataProvider {
+public interface DataProvider
+{
 
 	/*
-	 * A "copy" of the Hibernate's API as this doesn't exist in JPA.
+	 * Tipo de modo de búsqueda.
 	 */
-	public enum MatchMode {
-		START, END, EXACT, ANYWHERE
+	public enum MatchMode
+	{
+		START,
+		END,
+		EXACT,
+		ANYWHERE
 	}
 
 	/**
 	 * Tipologías de proveedores de datos.
 	 * <p>
-	 * Esta tipología nos permitirá adaptar nuestro modelo de negocio al
-	 * contexto de ejecución de acceso a la base de datos. Ej.: en Android con
-	 * SQLite podremos adaptar la sentencia de un filtro para este tipo de base
-	 * de datos en lugar de utilizar sentencias JPA más simples.
+	 * Esta tipología nos permitirá adaptar nuestro modelo de negocio al contexto de ejecución de acceso a la base de
+	 * datos. Ej.: en Android con SQLite podremos adaptar la sentencia de un filtro para este tipo de base de datos en
+	 * lugar de utilizar sentencias JPA más simples.
 	 * <p>
-	 * NOTA: El tipo Mock servirá para definir proveedores de datos para
-	 * realizar pruebas unitarias.
+	 * NOTA: El tipo Mock servirá para definir proveedores de datos para realizar pruebas unitarias.
 	 */
-	public enum Type {
-		SQLite, JPA, Spring_Data, REST, Mock
+	public enum Type
+	{
+		SQLite,
+		JPA,
+		Spring_Data,
+		REST,
+		Mock
 	};
-
+	
 	/**
-	 * Saves an entity.
+	 * Grabar un objeto de entidad
 	 * 
 	 * @param entity
-	 * @return newly created id for the entity.
+	 *            objeto entidad
+	 * @return Entidad actualizada
 	 */
-	<T extends Entity<PK>, PK extends Serializable> PK save(T entity);
+	<T extends Entity<?>> T save(T entity);
 
 	/**
-	 * Marges objects with the same identifier within a session into a newly
-	 * created object.
+	 * Mezclar datos de objetos de entidad con el mismo identificador creando un nuevo objeto.
 	 * 
 	 * @param entity
-	 * @return a newly created instance merged.
+	 *            objeto entidad
+	 * @return crear una nueva instancia de entidad mezclando sus datos
 	 */
-	<T extends Entity<PK>, PK extends Serializable> T merge(T entity);
+	<T extends Entity<?>> T merge(T entity);
 
 	/**
 	 * Deletes tne entity.
 	 * 
 	 * @param clazz
+	 *            clase entidad
 	 * @param id
+	 *            identificador
 	 * @throws NotFoundException
-	 *             if the id does not exist.
+	 *             Si el identificador de entidad no existe
 	 */
-	<T extends Entity<PK>, PK extends Serializable> void delete(T entity) throws LocalizedException;
+	<T extends Entity<?>> T delete(T entity) throws LocalizedException;
 
 	/**
-	 * Find an entity by its identifier.
+	 * Encontrar una entidad por su identificador.
 	 * 
 	 * @param clazz
+	 *            clase entidad
 	 * @param id
-	 * @return entity
+	 *            valor clave entidad
+	 * @return entity entidad
 	 */
 	<T extends Entity<?>> T find(Class<T> clazz, Serializable id);
 
 	/**
-	 * Finds an entity by one of its properties.
+	 * Encuentra entidades por una de sus propiedades.
 	 * 
 	 * 
 	 * @param clazz
-	 *            the entity class.
+	 *            clase entidad
 	 * @param propertyName
-	 *            the property name.
+	 *            nombre de la propiedad
 	 * @param value
-	 *            the value by which to find.
-	 * @return list
+	 *            valor de búsqueda de la propiedad
+	 * @return list lista de objetos de entidad
 	 */
 	<T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, Object value);
 
 	/**
-	 * Finds entities by a String property specifying a MatchMode. This search
-	 * is case insensitive.
+	 * Encuentra entidades por el valor de una de sus propiedades especificando un modo de búsqueda. La búsqueda no
+	 * distingue entre mayúsculas y minúsculas.
 	 * 
 	 * @param clazz
-	 *            the entity class.
+	 *            clase entidad
 	 * @param propertyName
-	 *            the property name.
+	 *            Nombre de la propiedad
 	 * @param value
-	 *            the value to check against.
+	 *            Valor de búsqueda.
 	 * @param matchMode
-	 *            the match mode: EXACT, START, END, ANYWHERE.
-	 * @return list
+	 *            modo de búsqueda: EXACT, START, END, ANYWHERE.
+	 * @return list lista de objetos de entidad
 	 */
-	<T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, String value, MatchMode matchMode);
+	<T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, String value,
+		MatchMode matchMode);
 
 	/**
-	 * Finds all objects of an entity class.
+	 * Encontrar todos los objetos de la clase entidad
 	 * 
 	 * @param clazz
-	 *            the entity class.
-	 * @return list
+	 *            clase entidad
+	 * @return list lista de objetos de entidad
 	 */
 	<T extends Entity<?>> List<T> findAll(Class<T> clazz);
 
 	/**
-	 * Finds all objects of an entity class.
+	 * Encontrar todos los objetos de la clase entidad
 	 * 
 	 * @param clazz
-	 *            the entity class.
+	 *            clase entidad
 	 * @param where
-	 *            condition HQL filter entities. Ej.: 'name like '%BA%' and
-	 *            number < 20'
-	 * @return list
+	 *            condición HQL para filtrar entidades. Ej.: 'name like '%BA%' and number < 20'
+	 * @return list lista de objetos de entidad
 	 */
 	<T extends Entity<?>> List<T> findAll(Class<T> clazz, String where);
 
 	/**
-	 * Finds all objects of an entity class.
+	 * Encontrar todos los objetos de la clase entidad
 	 * 
 	 * @param clazz
-	 *            the entity class.
+	 *            clase entidad
 	 * @param where
-	 *            condition HQL filter entities. Ej.: 'name like '%BA%' and
-	 *            number < 20'
+	 *            condición HQL para filtrar entidades. Ej.: 'name like '%BA%' and number < 20'
 	 * @param order
-	 *            order HQL entities. Ej.: 'name, date desc'
-	 * @return list
+	 *            sentencia de ordenación HQL. Ej.: 'name, date desc'
+	 * @return list lista de objetos de entidad
 	 */
 	<T extends Entity<?>> List<T> findAll(Class<T> clazz, String where, String order);
 
 	/**
-	 * Finds all objects of a class by the specified order.
+	 * Encontrar todos los objetos de la clase entidad para un order específico.
 	 * 
 	 * @param clazz
-	 *            the entity class.
+	 *            clase entidad
 	 * @param order
-	 *            the order: ASC or DESC.
+	 *            ordenación: ASC or DESC.
 	 * @param propertiesOrder
-	 *            the properties on which to apply the ordering.
+	 *            propiedades a aplicar la ordenación.
 	 * 
-	 * @return list
+	 * @return list lista de objetos de entidad
 	 */
 	<T extends Entity<?>> List<T> findAll(Class<T> clazz, Order order, String... propertiesOrder);
 
 	/**
-	 * Paged list entities
+	 * Lista de entidades paginada
 	 * 
 	 * @param clazz
-	 *            the entity class.
+	 *            clase entidad
 	 * @param startIndex
-	 *            init index
+	 *            índice de comienzo
 	 * @param count
-	 *            count objects
+	 *            número de objetos a recuperar
 	 * @param where
-	 *            condition HQL
+	 *            sentencia de condición HQL.
 	 * @param order
-	 *            order HQL
-	 * @return list
+	 *            sentencia de ordenación HQL. Ej.: 'name, date desc'
+	 * @return list lista de objetos de entidad
 	 * @throws LocalizedException
 	 */
-	<T extends Entity<?>> List<T> pagedList(Class<T> clazz, int startIndex, int count, String where, String order) throws LocalizedException;
+	<T extends Entity<?>> List<T> pagedList(Class<T> clazz, int startIndex, int count, String where, String order)
+		throws LocalizedException;
 
 	/**
 	 * Get property values.
 	 * 
 	 * @param clazz
-	 *            entity class
+	 *            clase entidad
 	 * @param propertyName
-	 *            property name
+	 *            Nombre de la propiedad
 	 * @param where
-	 *            condition HQL
+	 *            sentencia de condición HQL.
 	 * @param order
-	 *            order HQL
+	 *            sentencia de ordenación HQL. Ej.: 'name, date desc'
 	 * @return list values
 	 */
-	List<?> fieldValues(Class<?> clazz, String propertyName, String where, String order);
+	List<?> propertyValues(Class<?> clazz, String propertyName, String where, String order);
 
 	/**
-	 * Tipología de proveedor de datos (SQLite, JPA, Spring_Data, REST, Mock,
-	 * ...)
+	 * SQLite, JPA, Spring_Data, REST, Mock, ...
 	 * 
 	 * @return
 	 */
 	Type getType();
 
 	/**
-	 * Cargar o inicializar el proveedor de datos.
+	 * Inicialización del proveedor de datos.
 	 */
-	void load();
+	void init();
 
 	/**
-	 * Count records
+	 * Número de registros de una entidad
 	 * 
 	 * @param clazz
-	 *            entity class
+	 *            clase entidad
 	 * @param where
-	 *            condition HQL
+	 *            sentencia de condición HQL.
 	 * @return
 	 */
 	Long count(Class<?> clazz, String where);

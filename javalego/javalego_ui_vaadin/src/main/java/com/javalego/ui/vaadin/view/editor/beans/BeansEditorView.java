@@ -489,13 +489,14 @@ public class BeansEditorView<T> extends VerticalLayout implements IBeansEditorVi
 				tabsLayout.select(BeansEditorOptions.RECORDS);
 			}
 
+			@SuppressWarnings("rawtypes")
 			@Override
 			public void commit() throws LocalizedException {
 
 				T actual = bean;
 
 				if (actual instanceof Entity && DataContext.getProvider() != null) {
-					actual = (T) DataContext.getProvider().save((Entity) actual);
+					actual = (T) DataContext.getProvider().save((Entity)actual);
 				}
 
 				if (inserting) {

@@ -181,7 +181,7 @@ public class RESTDataServices implements Services {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getFieldValues(@PathParam("entity") String entityName, @QueryParam(FIELDNAME) String fieldName, @QueryParam(WHERE) String where, @QueryParam(ORDER) String order) {
 		try {
-			Collection<?> list = (Collection<?>) getDataProvider().fieldValues((Class<? extends Entity>) Class.forName(entityName), fieldName, NULL.equals(where) ? null : where, NULL.equals(order) ? null : order);
+			Collection<?> list = (Collection<?>) getDataProvider().propertyValues((Class<? extends Entity>) Class.forName(entityName), fieldName, NULL.equals(where) ? null : where, NULL.equals(order) ? null : order);
 			return gson.toJson(list);
 		}
 		catch (ClassNotFoundException e) {

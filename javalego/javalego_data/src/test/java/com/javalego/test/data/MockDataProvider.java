@@ -24,20 +24,21 @@ import com.javalego.test.data.entities.Product;
 public class MockDataProvider implements DataProvider {
 
 	@Override
-	public <T extends Entity<PK>, PK extends Serializable> PK save(T entity) {
+	public <T extends Entity<?>> T save(T entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <T extends Entity<PK>, PK extends Serializable> T merge(T entity) {
+	public <T extends Entity<?>> T merge(T entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <T extends Entity<PK>, PK extends Serializable> void delete(T entity) throws LocalizedException {
+	public <T extends Entity<?>> T delete(T entity) throws LocalizedException {
 		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -100,7 +101,7 @@ public class MockDataProvider implements DataProvider {
 	}
 
 	@Override
-	public List<?> fieldValues(Class<?> clazz, String propertyName, String where, String order) {
+	public List<?> propertyValues(Class<?> clazz, String propertyName, String where, String order) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -111,7 +112,7 @@ public class MockDataProvider implements DataProvider {
 	}
 
 	@Override
-	public void load() {
+	public void init() {
 	}
 
 	@Override
