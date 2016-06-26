@@ -11,7 +11,6 @@ import com.javalego.model.keys.Icon;
 import com.javalego.model.keys.Key;
 import com.javalego.security.services.UserServices;
 import com.javalego.security.session.UserSession;
-import com.javalego.session.UserSessionVaadin;
 
 /**
  * Entorno de pruebas.
@@ -20,9 +19,6 @@ import com.javalego.session.UserSessionVaadin;
  *
  */
 public abstract class BaseEnvironment implements Environment {
-
-	// Sesión de usuario
-	private UserSessionVaadin userSession = new UserSessionVaadin();
 
 	// Repositorio de imágenes
 	public BaseEnvironment() {
@@ -45,7 +41,7 @@ public abstract class BaseEnvironment implements Environment {
 
 	@Override
 	public UserSession getUserSession() {
-		return userSession;
+		return null;
 	}
 
 	@Override

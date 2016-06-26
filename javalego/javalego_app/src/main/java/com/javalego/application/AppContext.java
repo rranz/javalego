@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 
 import com.javalego.data.DataContext;
 import com.javalego.data.DataProvider;
-import com.javalego.exception.CommonErrors;
+import com.javalego.errors.CommonErrors;
 import com.javalego.exception.LocalizedException;
 import com.javalego.locale.LocaleContext;
 import com.javalego.locale.translator.Translator;

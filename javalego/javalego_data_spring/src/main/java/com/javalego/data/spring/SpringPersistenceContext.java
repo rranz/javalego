@@ -20,7 +20,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.javalego.data.DataProvider;
-import com.javalego.data.jpa.GenericDaoJpa;
+import com.javalego.data.spring.jpa.GenericDaoJpa;
 import com.javalego.exception.LocalizedException;
 
 /**

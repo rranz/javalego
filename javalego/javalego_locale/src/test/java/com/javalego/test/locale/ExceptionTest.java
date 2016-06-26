@@ -3,8 +3,10 @@ package com.javalego.test.locale;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
-import com.javalego.exception.ErrorLevel;
-import com.javalego.exception.Error;
+import com.javalego.errors.CommonErrors;
+import com.javalego.errors.Error;
+import com.javalego.errors.ErrorLevel;
+import com.javalego.errors.ErrorManager;
 import com.javalego.locale.LocaleContext;
 import com.javalego.model.keys.ErrorKey;
 import com.javalego.model.resources.locale.Locale;
@@ -53,6 +55,14 @@ public class ExceptionTest {
 
 	}
 
+	@Test
+	public void testError() throws Exception {
+		ErrorManager em = new ErrorManager(CommonErrors.REQUIRED_FIELD);
+		logger.info(em.code());
+		logger.info(em.message("nombre"));
+		logger.info(em.level());
+	}
+	
 	/**
 	 * Crea una excepción localizada usando archivos de paquetes de recursos.
 	 */

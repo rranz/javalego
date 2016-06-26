@@ -5,26 +5,27 @@ import java.util.Collection;
 /**
  * Model object that represents a security role.
  */
-public interface IRole {
-
+public interface IRole
+{
 	/**
 	 * Role name
+	 * 
 	 * @return
 	 */
-    String getName();
+	String getName();
 
-    /**
-     * Description role
-     * @return
-     */
-    String getDescription();
+	/**
+	 * Description role
+	 * 
+	 * @return
+	 */
+	String getDescription();
 
-    /**
-     * Permissions role
-     * @return
-     */
-    Collection<String> getPermissions();
+	/**
+	 * Permissions role
+	 * 
+	 * @return
+	 */
+	Collection<String> getPermissions();
 
 }
-
-

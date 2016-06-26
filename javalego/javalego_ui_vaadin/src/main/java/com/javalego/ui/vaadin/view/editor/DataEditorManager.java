@@ -10,7 +10,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.javalego.exception.CommonErrors;
+import com.javalego.errors.CommonErrors;
 import com.javalego.exception.LocalizedException;
 import com.javalego.ui.UIContext;
 import com.javalego.ui.actions.IActionEditor;

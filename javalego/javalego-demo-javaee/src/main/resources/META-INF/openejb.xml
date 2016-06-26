@@ -1,0 +1,12 @@
+<openejb>
+	<Resource id="movieDatabase" type="DataSource">
+		JdbcDriver = com.mysql.jdbc.Driver
+		JdbcUrl = jdbc:mysql://localhost:3306/javalego?createDatabaseIfNotExist=true
+		Username = root
+	</Resource>
+	<Resource id="mysql" type="DataSource">
+		JdbcDriver = com.mysql.jdbc.Driver
+		JdbcUrl = jdbc:mysql://localhost:3306/javalego?createDatabaseIfNotExist=true
+		Username = root
+	</Resource>	
+</openejb>

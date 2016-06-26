@@ -15,7 +15,7 @@ import java.util.jar.JarFile;
 
 import org.apache.log4j.Logger;
 
-import com.javalego.exception.CommonErrors;
+import com.javalego.errors.CommonErrors;
 import com.javalego.exception.LocalizedException;
 import com.javalego.icons.ResourceRepositoryIcons;
 import com.javalego.icons.types.IconItem;

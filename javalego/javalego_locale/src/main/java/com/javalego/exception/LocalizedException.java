@@ -9,6 +9,8 @@ import java.util.Locale;
 
 import org.apache.log4j.Logger;
 
+import com.javalego.errors.Error;
+import com.javalego.errors.ErrorLevel;
 import com.javalego.locale.LocaleContext;
 import com.javalego.model.keys.ErrorKey;
 import com.javalego.model.resources.locale.Languages;

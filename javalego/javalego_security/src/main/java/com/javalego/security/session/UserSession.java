@@ -10,19 +10,19 @@ import com.javalego.security.model.Profile;
  * <p>
  * Deberemos de implementar nuestra propia clase para obtener esta información.
  * <p>
- * Si estamos usando algún framework Web como Vaadin o Spring MVC, deberemos de
- * localizar el API que nos facilite esta información.
+ * Si estamos usando algún framework Web como Vaadin o Spring MVC, deberemos de localizar el API que nos facilite esta
+ * información.
  * 
  * @author ROBERTO RANZ
  *
  */
-public interface UserSession extends Services {
-
+public interface UserSession extends Services
+{
 	/**
 	 * Gets the default locale for this session.
 	 * 
-	 * By default this is the preferred locale of the user using the session. In
-	 * most cases it is read from the browser defaults.
+	 * By default this is the preferred locale of the user using the session. In most cases it is read from the browser
+	 * defaults.
 	 * 
 	 * @return the locale of this session.
 	 */
@@ -62,24 +62,21 @@ public interface UserSession extends Services {
 	Profile getProfile();
 
 	/**
-	 * El dispositivo del usuario tiene una pantalla de tipo pequeño.
-	 * Normalmente, menor a 600px
+	 * El dispositivo del usuario tiene una pantalla de tipo pequeño. Normalmente, menor a 600px
 	 * 
 	 * @return
 	 */
 	boolean isSmallScreen();
 
 	/**
-	 * El dispositivo del usuario tiene una pantalla de tipo medio. Normalmente,
-	 * entre 601px y 1050px
+	 * El dispositivo del usuario tiene una pantalla de tipo medio. Normalmente, entre 601px y 1050px
 	 * 
 	 * @return
 	 */
 	boolean isMediumScreen();
 
 	/**
-	 * El dispositivo del usuario tiene una pantalla grande. Normalmente, mayor
-	 * a 1050px
+	 * El dispositivo del usuario tiene una pantalla grande. Normalmente, mayor a 1050px
 	 * 
 	 * @return
 	 */

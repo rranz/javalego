@@ -7,19 +7,20 @@ import javax.persistence.criteria.Order;
 
 import com.javalego.entity.Entity;
 import com.javalego.exception.LocalizedException;
+import com.javalego.model.pattern.Adapter;
 
 /**
  * Proveedor de datos.
- * 
+ * <p>
  * Interface que define los métodos básicos de acceso a datos, independiente del proveedor y tecnología utilizada.
- * 
- * Las implementaciones de esta interface pueden ser Spring Data, EclipseLink, JPA Hibernate, JDBC, mocks, ... o
+ * <p>
+ * Los adaptadores de esta interface pueden ser: Spring Data, EclipseLink, JPA Hibernate, JDBC, mocks, ... o
  * desarrollar nuestro propio código.
  * 
  * @author ROBERTO RANZ
  * 
  */
-public interface DataProvider
+public interface DataProvider extends Adapter
 {
 
 	/*
@@ -52,7 +53,7 @@ public interface DataProvider
 	};
 	
 	/**
-	 * Grabar un objeto de entidad
+	 * Actualiza o inserta una entidad
 	 * 
 	 * @param entity
 	 *            objeto entidad
@@ -70,7 +71,7 @@ public interface DataProvider
 	<T extends Entity<?>> T merge(T entity);
 
 	/**
-	 * Deletes tne entity.
+	 * Elimina una entidad
 	 * 
 	 * @param clazz
 	 *            clase entidad
@@ -190,7 +191,7 @@ public interface DataProvider
 		throws LocalizedException;
 
 	/**
-	 * Get property values.
+	 * Obtiene los valores de una propiedad.
 	 * 
 	 * @param clazz
 	 *            clase entidad

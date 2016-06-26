@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>jar</packaging>
+	<artifactId>javalego_model</artifactId>
+	<name>JAVALEGO MODEL Archetype</name>
+	<description>JAVALEGO MODEL Project</description>
+	<parent>
+		<artifactId>javalego_maven</artifactId>
+		<relativePath>../pom.xml</relativePath>
+		<groupId>javalego</groupId>
+		<version>2.0</version>
+	</parent>
+
+
+	<dependencies>
+
+		<dependency>
+			<groupId>javalego</groupId>
+			<artifactId>javalego_util</artifactId>
+			<version>${javalego.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+	</dependencies>
+
+</project>

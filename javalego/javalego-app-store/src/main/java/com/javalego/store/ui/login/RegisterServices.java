@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.apache.shiro.crypto.hash.Sha256Hash;
 
-import com.javalego.exception.CommonErrors;
+import com.javalego.errors.CommonErrors;
 import com.javalego.exception.LocalizedException;
 import com.javalego.security.SecurityContext;
 import com.javalego.security.model.Profile;

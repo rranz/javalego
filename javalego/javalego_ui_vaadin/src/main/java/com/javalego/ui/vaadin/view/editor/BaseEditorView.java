@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import com.javalego.exception.CommonErrors;
+import com.javalego.errors.CommonErrors;
 import com.javalego.exception.LocalizedException;
 import com.javalego.model.locales.LocaleEditor;
 import com.javalego.ui.UIContext;

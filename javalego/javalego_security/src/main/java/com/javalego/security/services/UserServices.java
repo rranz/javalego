@@ -10,10 +10,11 @@ import com.javalego.security.model.IUser;
 /**
  * A service interface for accessing and modifying user data in the system.
  */
-public interface UserServices extends Services {
-
+public interface UserServices extends Services
+{
 	/**
 	 * Get all user
+	 * 
 	 * @return
 	 * @throws LocalizedException
 	 */
@@ -21,6 +22,7 @@ public interface UserServices extends Services {
 
 	/**
 	 * Get user
+	 * 
 	 * @param username
 	 * @return
 	 * @throws LocalizedException
@@ -29,6 +31,7 @@ public interface UserServices extends Services {
 
 	/**
 	 * Delete user
+	 * 
 	 * @param username
 	 * @throws LocalizedException
 	 */
@@ -36,13 +39,15 @@ public interface UserServices extends Services {
 
 	/**
 	 * Update user
+	 * 
 	 * @param user
 	 * @throws LocalizedException
 	 */
 	void updateUser(IUser user) throws LocalizedException;
-	
+
 	/**
 	 * Add new user
+	 * 
 	 * @param user
 	 * @throws LocalizedException
 	 */
@@ -50,17 +55,19 @@ public interface UserServices extends Services {
 
 	/**
 	 * User credentials
-	 * @param username 
+	 * 
+	 * @param username
 	 * @return
-	 * @throws LocalizedException 
+	 * @throws LocalizedException
 	 */
 	String getCredentials(String username) throws LocalizedException;
 
 	/**
 	 * Get user roles
+	 * 
 	 * @param username
 	 * @return
-	 * @throws LocalizedException 
+	 * @throws LocalizedException
 	 */
 	Collection<IRole> getRoles(String username) throws LocalizedException;
 }

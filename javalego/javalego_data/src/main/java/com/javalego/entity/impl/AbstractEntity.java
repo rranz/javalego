@@ -14,14 +14,6 @@ import com.javalego.entity.Entity;
 @MappedSuperclass
 public abstract class AbstractEntity<T extends Serializable> implements Entity<T>
 {
-
-	/*
-	 * As a starting point, we provide a basic mean for entities to test for equality using their "id".
-	 * 
-	 * Please note that THIS IS NOT ALWAYS ACCEPTABLE since newly generated ids might break Set/Collection semantics.
-	 * Please refer to the documentarion before doing something like this.
-	 * 
-	 */
 	@Override
 	public boolean equals(Object obj)
 	{

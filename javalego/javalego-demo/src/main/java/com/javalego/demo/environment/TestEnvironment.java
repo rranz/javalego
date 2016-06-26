@@ -1,12 +1,8 @@
 package com.javalego.demo.environment;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.GenericApplicationContext;
-import org.springframework.stereotype.Component;
+import javax.ejb.EJB;
 
 import com.javalego.data.DataProvider;
-import com.javalego.data.spring.SpringDataProvider;
-import com.javalego.demo.data.DemoPersistenceContext2;
 import com.javalego.security.SecurityServices;
 import com.javalego.security.shiro.SecurityShiro;
 
@@ -16,14 +12,13 @@ import com.javalego.security.shiro.SecurityShiro;
  * @author ROBERTO RANZ
  *
  */
-@Component("test")
 public class TestEnvironment extends BaseEnvironment {
 
 	// Seguridad
 	private SecurityShiro security = new SecurityShiro("classpath:shiro.ini");
 
-	@Autowired
-	private GenericApplicationContext context;
+	@EJB
+	private DataProvider dataProvider;
 
 	@Override
 	public String getName() {
@@ -31,8 +26,8 @@ public class TestEnvironment extends BaseEnvironment {
 	}
 
 	@Override
-	public synchronized DataProvider getDataProvider() {
-		return context != null ? new SpringDataProvider(context) : new SpringDataProvider(DemoPersistenceContext2.class);
+	public DataProvider getDataProvider() {
+		return dataProvider;
 	}
 
 	@Override

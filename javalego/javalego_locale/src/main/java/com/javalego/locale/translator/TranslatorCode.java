@@ -6,7 +6,7 @@ import java.text.MessageFormat;
 
 import org.apache.log4j.Logger;
 
-import com.javalego.exception.Error;
+import com.javalego.errors.Error;
 import com.javalego.model.BaseModel;
 import com.javalego.model.keys.Key;
 import com.javalego.model.resources.Language;

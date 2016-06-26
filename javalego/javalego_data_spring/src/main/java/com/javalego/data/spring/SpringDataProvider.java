@@ -16,11 +16,11 @@ import org.springframework.context.support.GenericApplicationContext;
 
 import com.javalego.data.DataProvider;
 import com.javalego.entity.Entity;
-import com.javalego.exception.CommonErrors;
+import com.javalego.errors.CommonErrors;
 import com.javalego.exception.LocalizedException;
 
 /**
- * Proveedor de Datos Spring Data.
+ * Adaptador de acceso a datos para Spring Data.
  * 
  * @author ROBERTO RANZ
  * 

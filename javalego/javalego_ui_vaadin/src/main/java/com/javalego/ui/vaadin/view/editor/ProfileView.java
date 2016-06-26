@@ -1,6 +1,6 @@
 package com.javalego.ui.vaadin.view.editor;
 
-import com.javalego.exception.CommonErrors;
+import com.javalego.errors.CommonErrors;
 import com.javalego.exception.LocalizedException;
 import com.javalego.model.locales.LocaleEditor;
 import com.javalego.security.SecurityContext;

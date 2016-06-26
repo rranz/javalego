@@ -6,28 +6,25 @@ import com.javalego.security.session.UserSession;
 
 /**
  * Administrador de la seguridad de acceso a los recursos de nuestra aplicación.
- * 
- * Gestiona la autenticación de usuarios, obtiene los datos de la sesión de
- * usuarios, gestiona los usuarios conectados y acceso a recursos mediante roles
- * y permisos.
- * 
- * Esta especificación debe utilizar algunos de los proveedores de seguridad
- * existentes en la plataforma.
- * 
- * Actualmente, existe una implementación para Apache Shiro (proyecto
- * javalego_security_shiro) que por su simplicidad y potencial recomendamos.
- * 
+ * <p>
+ * Gestiona la autenticación de usuarios, obtiene los datos de la sesión de usuarios, gestiona los usuarios conectados y
+ * acceso a recursos mediante roles y permisos.
+ * <p>
+ * Esta especificación debe utilizar algunos de los proveedores de seguridad existentes en la plataforma.
+ * <p>
+ * Actualmente, existe una implementación para Apache Shiro (proyecto javalego_security_shiro) que por su simplicidad y
+ * potencial recomendamos.
+ * <p>
  * Nota: integración Spring Security en desarrollo.
- * 
- * Puede desarrollar su propia tecnología de seguridad creando una clase que
- * implemente la interface ISecurityContext e integrarla en su aplicación
- * estableciendo la variable current (setCurrent()) con una instancia de esta
- * clase.
+ * <p>
+ * Puede desarrollar su propia tecnología de seguridad creando una clase que implemente la interface ISecurityContext e
+ * integrarla en su aplicación estableciendo la variable current (setCurrent()) con una instancia de esta clase.
  * 
  * @author ROBERTO RANZ
  *
  */
-public class SecurityContext implements Context {
+public class SecurityContext implements Context
+{
 
 	/**
 	 * Contexto de seguridad de la aplicación.
@@ -45,67 +42,71 @@ public class SecurityContext implements Context {
 	private UserServices userServices;
 
 	/**
-	 * Datos de la sesión de usuario. En un entorno Web deberemos de obtenerlo
-	 * de los datos de sesión de la request.
+	 * Datos de la sesión de usuario. En un entorno Web deberemos de obtenerlo de los datos de sesión de la request.
 	 */
 	private UserSession userSession;
 
-	private SecurityContext() {
+	private SecurityContext()
+	{
 	}
 
 	/**
-	 * Obtiene la instancia de aplicación de administrador de la seguridad de
-	 * acceso a la aplicación dependiendo del proveedor elegido (Shiro, Spring
-	 * Security, JEE, ...)
+	 * Obtiene la instancia de aplicación de administrador de la seguridad de acceso a la aplicación dependiendo del
+	 * proveedor elegido (Shiro, Spring Security, JEE, ...)
 	 * 
 	 * @return
 	 */
-	public static SecurityContext getCurrent() {
+	public static SecurityContext getCurrent()
+	{
 		return current;
 	}
 
 	/**
-	 * Establecer el contexto de seguridad que puede ser implementado para
-	 * Shiro, Spring Security, JEE, ... implementando la interface
-	 * ISecurityContext.
+	 * Establecer el contexto de seguridad que puede ser implementado para Shiro, Spring Security, JEE, ...
+	 * implementando la interface ISecurityContext.
 	 * 
 	 * @param current
 	 */
-	public static synchronized void setCurrent(SecurityContext current) {
+	public static synchronized void setCurrent(SecurityContext current)
+	{
 		SecurityContext.current = current;
 	}
 
 	/**
-	 * Servicios de seguridad de acceso a la aplicación dependiendo del
-	 * proveedor elegido (Shiro, Spring Security, JEE, ...)
+	 * Servicios de seguridad de acceso a la aplicación dependiendo del proveedor elegido (Shiro, Spring Security, JEE,
+	 * ...)
 	 * 
 	 * @return
 	 */
-	public SecurityServices getServices() {
+	public SecurityServices getServices()
+	{
 		return securityServices;
 	}
 
 	/**
-	 * Servicios de seguridad de acceso a la aplicación dependiendo del
-	 * proveedor elegido (Shiro, Spring Security, JEE, ...)
+	 * Servicios de seguridad de acceso a la aplicación dependiendo del proveedor elegido (Shiro, Spring Security, JEE,
+	 * ...)
 	 * 
 	 * @param securityServices
 	 */
-	public void setServices(SecurityServices securityServices) {
+	public void setServices(SecurityServices securityServices)
+	{
 		this.securityServices = securityServices;
 	}
 
 	/**
 	 * Servicios de gestión de usuarios de la aplicación
 	 */
-	public UserServices getUserServices() {
+	public UserServices getUserServices()
+	{
 		return userServices;
 	}
 
 	/**
 	 * Servicios de gestión de usuarios de la aplicación
 	 */
-	public void setUserServices(UserServices userServices) {
+	public void setUserServices(UserServices userServices)
+	{
 		this.userServices = userServices;
 	}
 
@@ -114,7 +115,8 @@ public class SecurityContext implements Context {
 	 * 
 	 * @return
 	 */
-	public UserSession getUserSession() {
+	public UserSession getUserSession()
+	{
 		return userSession;
 	}
 
@@ -123,7 +125,8 @@ public class SecurityContext implements Context {
 	 * 
 	 * @param userSession
 	 */
-	public void setUserSession(UserSession userSession) {
+	public void setUserSession(UserSession userSession)
+	{
 		this.userSession = userSession;
 	}
 

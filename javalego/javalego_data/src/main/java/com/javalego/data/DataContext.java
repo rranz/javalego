@@ -10,7 +10,7 @@ import com.javalego.model.context.Context;
 
 /**
  * Contexto de acceso a datos.
- * 
+ * <p>
  * Proporciona información de configuración del datasource utilizado y el proveedor de acceso a los datos (Spring Data,
  * JPA Hibernat, JDBC ...)
  * 

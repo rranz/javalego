@@ -1,12 +1,8 @@
 package com.javalego.demo.environment;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.GenericApplicationContext;
-import org.springframework.stereotype.Component;
+import javax.inject.Inject;
 
 import com.javalego.data.DataProvider;
-import com.javalego.data.spring.SpringDataProvider;
-import com.javalego.demo.data.DemoPersistenceContext2;
 import com.javalego.security.SecurityServices;
 import com.javalego.security.shiro.DefaultShiroRealm;
 import com.javalego.security.shiro.SecurityShiro;
@@ -17,18 +13,18 @@ import com.javalego.security.shiro.SecurityShiro;
  * @author ROBERTO RANZ
  *
  */
-@Component("dev")
-public class DevelopmentEnvironment extends BaseEnvironment {
-
+public class DevelopmentEnvironment extends BaseEnvironment
+{
 	private SecurityShiro security;
 
-	@Autowired
-	private GenericApplicationContext context;
+	@Inject
+	private DataProvider dataProvider;
 
 	private boolean database = true;
 
 	@Override
-	public String getName() {
+	public String getName()
+	{
 		return "DEV";
 	}
 
@@ -36,24 +32,30 @@ public class DevelopmentEnvironment extends BaseEnvironment {
 	 * No requiere autenticación en modo desarrollo
 	 */
 	@Override
-	public synchronized SecurityServices getSecurity() {
+	public synchronized SecurityServices getSecurity()
+	{
 
-		if (security == null) {
+		if (security == null)
+		{
 
 			// Seguridad simulada para pruebas
-			security = new SecurityShiro(new DefaultShiroRealm(getUserServices())) {
+			security = new SecurityShiro(new DefaultShiroRealm(getUserServices()))
+			{
 				@Override
-				public boolean isAuthenticated() {
+				public boolean isAuthenticated()
+				{
 					return true;
 				}
 
 				@Override
-				public Object getPrincipal() {
+				public Object getPrincipal()
+				{
 					return "testuser";
 				}
 
 				@Override
-				public boolean hasRole(String role) {
+				public boolean hasRole(String role)
+				{
 					return true;
 				}
 			};
@@ -62,11 +64,13 @@ public class DevelopmentEnvironment extends BaseEnvironment {
 	}
 
 	@Override
-	public synchronized DataProvider getDataProvider() {
-		if (!database) {
+	public synchronized DataProvider getDataProvider()
+	{
+		if (!database)
+		{
 			return null;
 		}
-		return context != null ? new SpringDataProvider(context) : new SpringDataProvider(DemoPersistenceContext2.class);
+		return dataProvider;
 	}
 
 }
