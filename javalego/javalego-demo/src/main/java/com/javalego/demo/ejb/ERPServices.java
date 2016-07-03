@@ -34,7 +34,7 @@ public class ERPServices
 		Department department = new Department();
 		department.setName("Development");
 
-		// Store Department
+		// Store Department.
 		dataProvider.save(department);
 
 		// Create Employee1 Entity
