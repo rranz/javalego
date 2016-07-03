@@ -1,4 +1,4 @@
 javalego
 ================
 
-Arquitectura Colaborativa de Microsiervos
+Arquitectura Colaborativa de Microservicios
