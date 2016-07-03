@@ -19,9 +19,12 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import com.javalego.application.AppContext;
 import com.javalego.application.Environment;
 import com.javalego.data.spring.SpringPersistenceContext;
+import com.javalego.demo.ejb.ERPServices;
 import com.javalego.demo.ejb.MovieServicesImpl2;
 import com.javalego.demo.ejb.MoviesServices;
 import com.javalego.exception.LocalizedException;
+import com.javalego.security.SecurityServices;
+import com.javalego.security.session.UserSession;
 
 @Configuration
 @EnableJpaRepositories("repositories")
@@ -38,12 +41,32 @@ public class DemoPersistenceContext extends SpringPersistenceContext
 
 	private static final Logger logger = Logger.getLogger(DemoPersistenceContext.class);
 
+	// Establecemos los beans de environment para poder usar autowired en las clases.
+	
 	@Bean
 	public MoviesServices movieServices()
-	{	
+	{
 		return new MovieServicesImpl2();
 	}
+
+	@Bean
+	public ERPServices erpServices()
+	{
+		return new ERPServices();
+	}
 	
+	@Bean
+	public SecurityServices securityServices()
+	{
+		return environment.getSecurity();
+	}
+
+	@Bean
+	public UserSession userSession()
+	{
+		return environment.getUserSession();
+	}
+
 	/**
 	 * Cargar entorno de ejecución de la aplicación.
 	 */

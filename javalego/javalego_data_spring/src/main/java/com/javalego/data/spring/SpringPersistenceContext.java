@@ -18,6 +18,7 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.util.StringUtils;
 
 import com.javalego.data.DataProvider;
 import com.javalego.data.spring.jpa.GenericDaoJpa;
@@ -131,6 +132,8 @@ abstract public class SpringPersistenceContext
 		}
 		if (ps != null)
 		{
+			ps = StringUtils.trimAllWhitespace(ps);
+			
 			em.setPackagesToScan(ps.split("\\,"));
 		}
 

@@ -15,5 +15,25 @@ package com.javalego.model.pattern;
  */
 public interface Adapter
 {
+	/**
+	 * Nombre clave de la tecnología (framework, api, ...) del adaptador.
+	 * 
+	 * @return
+	 */
+	String getName();
+
+	/**
+	 * Título de la tecnología (framework, api, ...) del adaptador.
+	 * 
+	 * @return
+	 */
+	String getTitle();
+
+	/**
+	 * Anotaciones sobre la adaptación realizada para integrar la tecnología usada por este adaptador.
+	 * 
+	 * @return
+	 */
+	String getDescription();
 
 }

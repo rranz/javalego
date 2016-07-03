@@ -17,7 +17,8 @@ import com.javalego.security.shiro.SecurityShiro;
  *
  */
 @Component("test")
-public class TestEnvironment extends BaseEnvironment {
+public class TestEnvironment extends BaseEnvironment
+{
 
 	// Seguridad
 	private SecurityShiro security = new SecurityShiro("classpath:shiro.ini");
@@ -26,17 +27,21 @@ public class TestEnvironment extends BaseEnvironment {
 	private GenericApplicationContext context;
 
 	@Override
-	public String getName() {
+	public String getName()
+	{
 		return "TEST";
 	}
 
 	@Override
-	public synchronized DataProvider getDataProvider() {
-		return context != null ? new SpringDataProvider(context) : new SpringDataProvider(DemoPersistenceContext2.class);
+	public synchronized DataProvider getDataProvider()
+	{
+		return context != null ? new SpringDataProvider(context)
+			: new SpringDataProvider(DemoPersistenceContext2.class);
 	}
 
 	@Override
-	public SecurityServices getSecurity() {
+	public SecurityServices getSecurity()
+	{
 		return security;
 	}
 

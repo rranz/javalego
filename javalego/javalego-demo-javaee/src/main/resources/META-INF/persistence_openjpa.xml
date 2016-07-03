@@ -12,9 +12,9 @@
 <persistence version="1.0"
 	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
-	<persistence-unit name="movie-unit">
-		<jta-data-source>movieDatabase</jta-data-source>
-		<non-jta-data-source>movieDatabaseUnmanaged</non-jta-data-source>
+	<persistence-unit name="erp-unit">
+		<jta-data-source>erpDatabase</jta-data-source>
+		<non-jta-data-source>erpDatabaseUnmanaged</non-jta-data-source>
 
 		<!-- Incluir las clases javalego requeridas para la configuración jpa -->
 		<class>com.javalego.entity.impl.EntityId</class>

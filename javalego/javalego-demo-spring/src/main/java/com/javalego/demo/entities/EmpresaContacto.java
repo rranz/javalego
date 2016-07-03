@@ -8,100 +8,108 @@ import javax.validation.constraints.NotNull;
 
 import com.javalego.entity.Entity;
 
-//@Entity
-public class EmpresaContacto implements Entity<Long> {
-	
+// @Entity
+public class EmpresaContacto implements Entity<Long>
+{
 	@NotNull
 	private String nombre;
 
 	private String telefono;
-	
+
 	private String email;
 
 	private String localidad;
-	
-	@ManyToOne 
-	@JoinColumn(name="empresa_id") 
+
+	@ManyToOne
+	@JoinColumn(name = "empresa_id")
 	@NotNull
 	private Empresa empresa;
 
 	@Lob
-	@Column(length=100000)
+	@Column(length = 100000)
 	private byte[] foto;
-	
+
 	private Long id;
 
-	public EmpresaContacto() {}
-	
-	public String getNombre() {
+	public EmpresaContacto()
+	{
+	}
+
+	public String getNombre()
+	{
 		return nombre;
 	}
 
-
-	public void setNombre(String nombre) {
+	public void setNombre(String nombre)
+	{
 		this.nombre = nombre;
 	}
 
-
-	public String getTelefono() {
+	public String getTelefono()
+	{
 		return telefono;
 	}
 
-
-	public void setTelefono(String telefono) {
+	public void setTelefono(String telefono)
+	{
 		this.telefono = telefono;
 	}
 
-
-	public String getEmail() {
+	public String getEmail()
+	{
 		return email;
 	}
 
-
-	public void setEmail(String email) {
+	public void setEmail(String email)
+	{
 		this.email = email;
 	}
 
-
-	public String getLocalidad() {
+	public String getLocalidad()
+	{
 		return localidad;
 	}
 
-
-	public void setLocalidad(String localidad) {
+	public void setLocalidad(String localidad)
+	{
 		this.localidad = localidad;
 	}
 
-
-	public byte[] getFoto() {
+	public byte[] getFoto()
+	{
 		return foto;
 	}
 
-
-	public void setFoto(byte[] foto) {
+	public void setFoto(byte[] foto)
+	{
 		this.foto = foto;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return nombre;
 	}
 
 	@Override
-	public Long getId() {
+	public Long getId()
+	{
 		return id;
 	}
 
 	@Override
-	public void setId(Long id) {
+	public void setId(Long id)
+	{
 		this.id = id;
 	}
 
-	public Empresa getEmpresa() {
+	public Empresa getEmpresa()
+	{
 		return empresa;
 	}
 
-	public void setEmpresa(Empresa empresa) {
+	public void setEmpresa(Empresa empresa)
+	{
 		this.empresa = empresa;
 	}
 }

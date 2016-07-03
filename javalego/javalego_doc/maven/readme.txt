@@ -1,4 +1,12 @@
-Salvar todas las dependencias de un proyecto jar un el directory /target/lib:
+1. Usar Maven con repositorios https:// sin certificados (descargas de artefactos a través de proxys de empresa)
+
+/maven/lib/​​mvn install -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true
+
+o incluir como variables al ejecutar un goal en Eclipse.
+
+
+
+2. Salvar todas las dependencias de un proyecto jar un el directory /target/lib:
 
 Run.Build...
 

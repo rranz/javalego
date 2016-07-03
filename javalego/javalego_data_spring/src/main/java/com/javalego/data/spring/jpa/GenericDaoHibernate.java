@@ -307,4 +307,22 @@ public class GenericDaoHibernate implements DataProvider
 			.uniqueResult();
 		return new Long(value != null ? value.toString() : "0");
 	}
+
+	@Override
+	public String getName()
+	{
+		return "Hibernate";
+	}
+
+	@Override
+	public String getTitle()
+	{
+		return "Hibernate JPA";
+	}
+
+	@Override
+	public String getDescription()
+	{
+		return null;
+	}
 }

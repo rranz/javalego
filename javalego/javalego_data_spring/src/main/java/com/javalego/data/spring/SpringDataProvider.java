@@ -263,4 +263,22 @@ public class SpringDataProvider implements DataProvider
 		return getDao().count(clazz, where);
 	}
 
+	@Override
+	public String getName()
+	{
+		return "SPRING";
+	}
+
+	@Override
+	public String getTitle()
+	{
+		return "Spring Data Framework";
+	}
+
+	@Override
+	public String getDescription()
+	{
+		return null;
+	}
+
 }

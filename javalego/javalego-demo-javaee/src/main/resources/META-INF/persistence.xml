@@ -13,17 +13,17 @@
 	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
 	
-	<persistence-unit name="movie-unit">
+	<persistence-unit name="erp-unit">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-		<jta-data-source>movieDatabase</jta-data-source>
-		<non-jta-data-source>movieDatabaseUnmanaged</non-jta-data-source>
+		<jta-data-source>erpDatabase</jta-data-source>
+		<non-jta-data-source>erpDatabaseUnmanaged</non-jta-data-source>
 
 		<!-- Incluir las clases javalego requeridas para la configuración jpa -->
 		<class>com.javalego.entity.impl.EntityId</class>
 		<class>com.javalego.entity.impl.AbstractEntity</class>
-		<class>com.javalego.demo.ejb.entities.Department</class>
-		<class>com.javalego.demo.ejb.entities.Employee</class>
+		<class>com.javalego.demo.entities.Department</class>
+		<class>com.javalego.demo.entities.Employee</class>
 
 		<!-- OpenJPA -->
 		<properties>
@@ -33,9 +33,16 @@
 		</properties>
 	</persistence-unit>
 	
-	
-<!-- 	<persistence-unit name="mysql">
+	<persistence-unit name="erp-unit-mysql">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>erpDatabaseMysql</jta-data-source>
+		
+		<!-- Incluir las clases javalego requeridas para la configuración jpa -->
+		<class>com.javalego.entity.impl.EntityId</class>
+		<class>com.javalego.entity.impl.AbstractEntity</class>
+		<class>com.javalego.demo.entities.Department</class>
+		<class>com.javalego.demo.entities.Employee</class>
+				
 		<properties>
 			<property name="hibernate.archive.autodetection" value="class" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect" />
@@ -47,6 +54,6 @@
 			<property name="hibernate.flushMode" value="FLUSH_AUTO" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
-	</persistence-unit>	 -->
+	</persistence-unit>	
 	
 </persistence>

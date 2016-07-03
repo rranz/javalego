@@ -6,63 +6,74 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Customer {
+public class Customer
+{
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private long id;
-    
-    private String firstName;
-    
-    private String lastName;
-    
-    private int age;
-    
-    protected Customer() {}
+	private String firstName;
 
-    public Customer(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+	private String lastName;
 
-    @Override
-    public String toString() {
-        return String.format(
-                "Customer[id=%d, firstName='%s', lastName='%s']",
-                id, firstName, lastName);
-    }
+	private int age;
 
-		public int getAge() {
-			return age;
-		}
+	protected Customer()
+	{
+	}
 
-		public void setAge(int age) {
-			this.age = age;
-		}
+	public Customer(String firstName, String lastName)
+	{
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 
-		public long getId() {
-			return id;
-		}
+	@Override
+	public String toString()
+	{
+		return String.format(
+			"Customer[id=%d, firstName='%s', lastName='%s']",
+			id, firstName, lastName);
+	}
 
-		public void setId(long id) {
-			this.id = id;
-		}
+	public int getAge()
+	{
+		return age;
+	}
 
-		public String getFirstName() {
-			return firstName;
-		}
+	public void setAge(int age)
+	{
+		this.age = age;
+	}
 
-		public void setFirstName(String firstName) {
-			this.firstName = firstName;
-		}
+	public long getId()
+	{
+		return id;
+	}
 
-		public String getLastName() {
-			return lastName;
-		}
+	public void setId(long id)
+	{
+		this.id = id;
+	}
 
-		public void setLastName(String lastName) {
-			this.lastName = lastName;
-		}
+	public String getFirstName()
+	{
+		return firstName;
+	}
+
+	public void setFirstName(String firstName)
+	{
+		this.firstName = firstName;
+	}
+
+	public String getLastName()
+	{
+		return lastName;
+	}
+
+	public void setLastName(String lastName)
+	{
+		this.lastName = lastName;
+	}
 
 }
-

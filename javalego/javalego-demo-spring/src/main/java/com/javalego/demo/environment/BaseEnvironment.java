@@ -19,47 +19,56 @@ import com.javalego.session.UserSessionVaadin;
  * @author ROBERTO RANZ
  *
  */
-public abstract class BaseEnvironment implements Environment {
+public abstract class BaseEnvironment implements Environment
+{
 
 	// Sesión de usuario
 	private UserSessionVaadin userSession = new UserSessionVaadin();
 
 	// Repositorio de imágenes
-	public BaseEnvironment() {
+	public BaseEnvironment()
+	{
 	}
 
 	@Override
-	public Key getTitle() {
+	public Key getTitle()
+	{
 		return null;
 	}
 
 	@Override
-	public Key getDescription() {
+	public Key getDescription()
+	{
 		return null;
 	}
 
 	@Override
-	public synchronized Collection<RepositoryIcons<Icon>> getRepositoriesIcons() throws LocalizedException {
+	public synchronized Collection<RepositoryIcons<Icon>> getRepositoriesIcons() throws LocalizedException
+	{
 		return null;
 	}
 
 	@Override
-	public UserSession getUserSession() {
+	public UserSession getUserSession()
+	{
 		return userSession;
 	}
 
 	@Override
-	public Translator getTranslator() {
+	public Translator getTranslator()
+	{
 		return null;
 	}
 
 	@Override
-	public BusinessService getBusinessService() {
+	public BusinessService getBusinessService()
+	{
 		return null;
 	}
 
 	@Override
-	public UserServices getUserServices() {
+	public UserServices getUserServices()
+	{
 		return null;
-	}	
+	}
 }

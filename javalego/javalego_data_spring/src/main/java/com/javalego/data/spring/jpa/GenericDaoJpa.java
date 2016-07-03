@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.javalego.data.DataProvider;
+import com.javalego.data.jpa.AbstractJpaProvider;
 import com.javalego.entity.Entity;
 import com.javalego.exception.LocalizedException;
 
@@ -32,211 +33,46 @@ import com.javalego.exception.LocalizedException;
  * 
  */
 @Service
-public class GenericDaoJpa implements DataProvider
+public class GenericDaoJpa extends AbstractJpaProvider
 {
 	@PersistenceContext
-	protected EntityManager entityManager;
+	private EntityManager entityManager;
 
+	/**
+	 * EntityManager
+	 * @return
+	 */
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public <T extends Entity<?>> T save(T entity)
+	public EntityManager getEntityManager()
 	{
-		if (entity.getId() != null)
-		{
-			T result = merge(entity);
-			entityManager.persist(result);
-			return result;
-		}
-		else
-		{
-			entityManager.persist(entity);
-		}
-		return entity;
-	}
-
-	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public <T extends Entity<?>> T merge(T entity)
-	{
-		return entityManager.merge(entity);
-	}
-
-	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public <T extends Entity<?>> T delete(T entity) throws LocalizedException
-	{
-		T result = merge(entity);
-		entityManager.remove(result);
-		return result;
-	}
-
-	@Override
-	public <T extends Entity<?>> T find(Class<T> clazz, Serializable id)
-	{
-		return entityManager.find(clazz, id);
-	}
-
-	@Override
-	public <T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, Object value)
-	{
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-
-		CriteriaQuery<T> cq = cb.createQuery(clazz);
-
-		Root<T> root = cq.from(clazz);
-
-		cq.where(cb.equal(root.get(propertyName), value));
-
-		return entityManager.createQuery(cq).getResultList();
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@Override
-	public <T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, String value,
-		MatchMode matchMode)
-	{
-		// convert the value String to lowercase
-		value = value.toLowerCase();
-
-		if (MatchMode.START.equals(matchMode))
-		{
-			value = value + "%";
-		}
-		else if (MatchMode.END.equals(matchMode))
-		{
-			value = "%" + value;
-		}
-		else if (MatchMode.ANYWHERE.equals(matchMode))
-		{
-			value = "%" + value + "%";
-		}
-
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-
-		CriteriaQuery<T> cq = cb.createQuery(clazz);
-
-		Root root = cq.from(clazz);
-
-		cq.where(cb.like(cb.lower(root.get(propertyName)), value));
-
-		return entityManager.createQuery(cq).getResultList();
-	}
-
-	@Override
-	public <T extends Entity<?>> List<T> findAll(Class<T> clazz)
-	{
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-
-		CriteriaQuery<T> cq = cb.createQuery(clazz);
-
-		cq.from(clazz);
-
-		return entityManager.createQuery(cq).getResultList();
-	}
-
-	@Override
-	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, Order order, String... propertiesOrder)
-	{
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-
-		CriteriaQuery<T> cq = cb.createQuery(clazz);
-
-		Root<T> root = cq.from(clazz);
-
-		List<Order> orders = new ArrayList<>();
-
-		for (String propertyOrder : propertiesOrder)
-		{
-			if (order.isAscending())
-			{
-				orders.add(cb.asc(root.get(propertyOrder)));
-			}
-			else
-			{
-				orders.add(cb.desc(root.get(propertyOrder)));
-			}
-		}
-		cq.orderBy(orders);
-
-		return entityManager.createQuery(cq).getResultList();
-	}
-
-	@Override
-	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, String where)
-	{
-		return findAll(clazz, where, null);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, String where, String order)
-	{
-		return entityManager
-			.createQuery("select e from " + clazz.getSimpleName() + " as e" + getWhereOrder(where, order))
-			.getResultList();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T extends Entity<?>> List<T> pagedList(Class<T> clazz, int startIndex, int count, String where,
-		String order) throws LocalizedException
-	{
-		Query query = entityManager
-			.createQuery("select e from " + clazz.getSimpleName() + " as e" + getWhereOrder(where, order));
-		query.setFirstResult(startIndex);
-		query.setMaxResults(count);
-
-		return query.getResultList();
-	}
-
-	@Override
-	public List<?> propertyValues(Class<?> clazz, String propertyName, String where, String order)
-	{
-		if (where == null)
-		{
-			where = propertyName + " is not null";
-		}
-		else
-		{
-			where = propertyName + " is not null" + " and " + where;
-		}
-
-		Query query = entityManager.createQuery(
-			"select " + propertyName + " from " + clazz.getSimpleName() + " " + getWhereOrder(where, order));
-
-		return (List<?>) query.getResultList();
+		return entityManager;
 	}
 
 	/**
-	 * Incluir where y order en sentencia JQL.
-	 * 
-	 * @param where
-	 * @param order
-	 * @return
+	 * EntityManager
+	 * @param entityManager
 	 */
-	private String getWhereOrder(String where, String order)
+	public void setEntityManager(EntityManager entityManager)
 	{
-		return (where != null ? " where " + where : "") + (order != null ? " order by " + order : "");
+		this.entityManager = entityManager;
 	}
 
 	@Override
-	public Type getType()
+	public String getName()
 	{
-		return Type.JPA;
+		return "JPA";
 	}
 
 	@Override
-	public void init()
+	public String getTitle()
 	{
+		return "Generic JPA";
 	}
 
 	@Override
-	public Long count(Class<?> clazz, String where)
+	public String getDescription()
 	{
-		Object value = entityManager
-			.createQuery("select count(*) from " + clazz.getCanonicalName() + (where != null ? " where " + where : ""))
-			.getSingleResult();
-		return new Long(value != null ? value.toString() : "0");
+		return null;
 	}
 
 }

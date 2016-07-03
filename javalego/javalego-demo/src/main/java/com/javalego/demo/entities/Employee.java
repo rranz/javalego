@@ -1,4 +1,4 @@
-package com.javalego.demo.ejb.entities;
+package com.javalego.demo.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;

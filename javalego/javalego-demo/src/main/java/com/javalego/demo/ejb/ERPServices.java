@@ -13,21 +13,19 @@
 package com.javalego.demo.ejb;
 
 import javax.ejb.EJB;
-import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
-import com.javalego.data.DataProvider;
-import com.javalego.demo.ejb.entities.Department;
-import com.javalego.demo.ejb.entities.Employee;
+import com.javalego.data.jpa.JpaProvider;
+import com.javalego.demo.entities.Department;
+import com.javalego.demo.entities.Employee;
 
 @Stateful
-@LocalBean
 public class ERPServices
 {
 	@EJB
-	private DataProvider dataProvider;
+	private JpaProvider dataProvider;
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void populateDatabase()

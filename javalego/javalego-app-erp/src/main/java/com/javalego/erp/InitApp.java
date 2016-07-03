@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 
 import org.apache.log4j.Logger;
 
+import com.javalego.application.AppContext;
 import com.javalego.erp.environment.DevelopmentEnvironment;
 import com.javalego.exception.LocalizedException;
 
@@ -34,7 +35,7 @@ public class InitApp extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		try {
-			ErpAppContext.getCurrent().load(new DevelopmentEnvironment());
+			AppContext.getCurrent().load(new DevelopmentEnvironment());
 		}
 		catch (LocalizedException e) {
 			logger.error(e.getLocalizedMessage());

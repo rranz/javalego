@@ -21,24 +21,30 @@ import com.javalego.demo.ejb.ERPServices;
 
 import junit.framework.TestCase;
 
-public class MoviesTest extends TestCase
+public class JpaTest extends TestCase
 {
 
 	public void test() throws Exception
 	{
 
 		final Properties p = new Properties();
-		
+
 		// Configurar datasource con propiedades
-		//p.put("mysql", "new://Resource?type=DataSource");
-//		p.put("movieDatabase.JdbcDriver", "com.mysql.jdbc.Driver");
-//		p.put("movieDatabase.JdbcUrl", "jdbc:mysql://localhost:3306/javalego?createDatabaseIfNotExist=true");
-//		p.put("movieDatabase.Username", "root");
-		
-		// User un fichero de configuración donde podremos incluir cualquier configuración (datasource, ...) de open ejb container.
+		// p.put("mysql", "new://Resource?type=DataSource");
+		// p.put("movieDatabase.JdbcDriver", "com.mysql.jdbc.Driver");
+		// p.put("movieDatabase.JdbcUrl", "jdbc:mysql://localhost:3306/javalego?createDatabaseIfNotExist=true");
+		// p.put("movieDatabase.Username", "root");
+
+		// User un fichero de configuración donde podremos incluir cualquier configuración (datasource, ...) de open ejb
+		// container.
 		p.put("openejb.configuration", "src/main/resources/META-INF/openejb.xml");
-		
-		//p.put(Context.INITIAL_CONTEXT_FACTORY,"org.apache.openejb.client.LocalInitialContextFactory");
+
+//		p.put("openejb.deployments.classpath.filter.descriptors", "true");
+//		p.put("openejb.exclude-include.order", "include-exclude"); // Defines the processing order
+//		p.put("openejb.deployments.classpath.include", ".*javalego.*"); // Include nothing
+//		p.put("openejb.descriptors.output", "true");
+
+		// p.put(Context.INITIAL_CONTEXT_FACTORY,"org.apache.openejb.client.LocalInitialContextFactory");
 
 		EJBContainer container = EJBContainer.createEJBContainer(p);
 		final Context context = container.getContext();
@@ -54,6 +60,5 @@ public class MoviesTest extends TestCase
 			container.close();
 		}
 	}
-	
 
 }

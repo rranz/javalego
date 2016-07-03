@@ -4,20 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Root;
 
-import com.javalego.data.DataProvider;
 import com.javalego.entity.Entity;
-import com.javalego.errors.DataErrors;
 import com.javalego.exception.LocalizedException;
 
 /**
@@ -31,39 +26,39 @@ import com.javalego.exception.LocalizedException;
  * @author ROBERTO RANZ
  * 
  */
-@Stateless(name = "jpaDataProvider")
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-public class JpaDataProvider implements DataProvider
+public abstract class AbstractJpaProvider implements JpaProvider
 {
-	@PersistenceContext
-	private EntityManager entityManager;
-
 	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public <T extends Entity<?>> T save(T entity)
 	{
-		getEntityManager().persist(entity);
+		if (entity.getId() != null)
+		{
+			T result = merge(entity);
+			getEntityManager().persist(result);
+			return result;
+		}
+		else
+		{
+			getEntityManager().persist(entity);
+		}
 		return entity;
 	}
 
 	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public <T extends Entity<?>> T merge(T entity)
 	{
 		return getEntityManager().merge(entity);
 	}
 
 	@Override
-	public <T extends Entity<?>> T delete(T entity) throws LocalizedException
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public <T extends Entity<?>> T delete(T entity)
 	{
-		Entity<?> find = find(entity.getClass(), entity.getId());
-		if (find != null)
-		{
-			getEntityManager().remove(find);
-			return entity;
-		}
-		else
-		{
-			throw new LocalizedException(DataErrors.ENTITY_NOT_FOUND);
-		}
+		T result = merge(entity);
+		getEntityManager().remove(result);
+		return result;		
 	}
 
 	@Override
@@ -235,23 +230,22 @@ public class JpaDataProvider implements DataProvider
 		return new Long(value != null ? value.toString() : "0");
 	}
 
-	/**
-	 * Entity manager
-	 * 
-	 * @return
-	 */
-	public EntityManager getEntityManager()
+
+	@Override
+	public String getName()
 	{
-		return entityManager;
+		return "JPA";
 	}
 
-	/**
-	 * Entity manager
-	 * 
-	 * @param entityManager
-	 */
-	public void setEntityManager(EntityManager entityManager)
+	@Override
+	public String getTitle()
 	{
-		this.entityManager = entityManager;
+		return "Generic JPA";
 	}
+
+	@Override
+	public String getDescription()
+	{
+		return "Implementación basada en los métodos estándar de la especificación JPA basada en la clase EntityManager";
+	}	
 }

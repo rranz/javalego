@@ -190,11 +190,11 @@
 		</properties>
 	</persistence-unit>	
 	
-	<persistence-unit name="movie-unit">
+	<persistence-unit name="erp-unit">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-		<jta-data-source>movieDatabase</jta-data-source>
-		<non-jta-data-source>movieDatabaseUnmanaged</non-jta-data-source>
+		<jta-data-source>erpDatabase</jta-data-source>
+		<non-jta-data-source>erpDatabaseUnmanaged</non-jta-data-source>
 
 		<!-- Incluir las clases javalego requeridas para la configuración jpa -->
 		<class>com.javalego.entity.impl.EntityId</class>
