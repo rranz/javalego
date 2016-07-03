@@ -1,0 +1,8 @@
+CREAR UNA CONEXIÓN ORACLE (thin) CONTRA UN SERVIDOR BALANCEADO.
+
+Usar tnsping para obtener el texto de conexión completo a un esquema de base de datos balanceado entre varias máquinas.
+
+Eclipse:
+Conexión: usar Generic JDBC y definir la url con este texto y database con el nombre del esquema.
+
+jdbc:oracle:thin:@(DESCRIPTION_LIST=(LOAD_BALANCE=off)(FAILOVER=on)(DESCRIPTION=(CONNECT_TIMEOUT=5)(TRANSPORT_CONNECT_TIMEOUT=3)(RETRY_COUNT=3)(ADDRESS_LIST=(LOAD_BALANCE=on)(ADDRESS=(PROTOCOL=TCP)(HOST=exaalc1-scan)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=TEXB.ORA.BDE.ES)))(DESCRIPTION=(CONNECT_TIMEOUT=5)(TRANSPORT_CONNECT_TIMEOUT=3)(RETRY_COUNT=3)(ADDRESS_LIST=(LOAD_BALANCE=on)(ADDRESS=(PROTOCOL=TCP)(HOST=exacib1-scan)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=TEXB.ORA.BDE.ES))))
