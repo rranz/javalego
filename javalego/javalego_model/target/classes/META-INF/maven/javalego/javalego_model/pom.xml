@@ -14,9 +14,7 @@
 		<version>2.0</version>
 	</parent>
 
-
 	<dependencies>
-
 		<dependency>
 			<groupId>javalego</groupId>
 			<artifactId>javalego_util</artifactId>
@@ -28,14 +26,6 @@
 			<artifactId>validation-api</artifactId>
 			<version>1.1.0.Final</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
 	</dependencies>
 
 </project>

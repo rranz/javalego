@@ -34,15 +34,13 @@ public abstract class AbstractJpaProvider implements JpaProvider
 	{
 		if (entity.getId() != null)
 		{
-			T result = merge(entity);
-			getEntityManager().persist(result);
-			return result;
+			return getEntityManager().merge(entity);
 		}
 		else
 		{
 			getEntityManager().persist(entity);
+			return entity;
 		}
-		return entity;
 	}
 
 	@Override
@@ -229,23 +227,4 @@ public abstract class AbstractJpaProvider implements JpaProvider
 			.getSingleResult();
 		return new Long(value != null ? value.toString() : "0");
 	}
-
-
-	@Override
-	public String getName()
-	{
-		return "JPA";
-	}
-
-	@Override
-	public String getTitle()
-	{
-		return "Generic JPA";
-	}
-
-	@Override
-	public String getDescription()
-	{
-		return "Implementación basada en los métodos estándar de la especificación JPA basada en la clase EntityManager";
-	}	
 }

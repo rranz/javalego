@@ -82,27 +82,6 @@ public class SecurityTest {
 				// TODO Auto-generated method stub
 				return null;
 			}
-
-			@Override
-			public String getName()
-			{
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public String getTitle()
-			{
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public String getDescription()
-			{
-				// TODO Auto-generated method stub
-				return null;
-			}
 		};
 
 		logger.info(s.isPermitted(EmpresasEditor.class));

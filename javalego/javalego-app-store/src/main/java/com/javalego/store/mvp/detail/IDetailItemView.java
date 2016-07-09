@@ -6,7 +6,6 @@ import java.util.List;
 import com.javalego.exception.LocalizedException;
 import com.javalego.model.keys.Key;
 import com.javalego.store.items.IBaseItem;
-import com.javalego.store.items.INews;
 import com.javalego.store.items.impl.News;
 import com.javalego.store.model.StoreDataServices;
 import com.javalego.ui.menu.IMenuItem;

@@ -1,25 +1,13 @@
 package com.javalego.data.spring.jpa;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Order;
-import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.javalego.data.DataProvider;
 import com.javalego.data.jpa.AbstractJpaProvider;
 import com.javalego.entity.Entity;
-import com.javalego.exception.LocalizedException;
 
 /**
  * Spring JPA (Java Persistence API)
@@ -38,10 +26,27 @@ public class GenericDaoJpa extends AbstractJpaProvider
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	/**
-	 * EntityManager
-	 * @return
-	 */
+	@Override
+	@Transactional(readOnly=false)
+	public <T extends Entity<?>> T save(T entity)
+	{
+		return super.save(entity);
+	}
+
+	@Override
+	@Transactional(readOnly=false)
+	public <T extends Entity<?>> T merge(T entity)
+	{
+		return super.merge(entity);
+	}
+
+	@Override
+	@Transactional(readOnly=false)
+	public <T extends Entity<?>> T delete(T entity)
+	{
+		return super.delete(entity);
+	}	
+	
 	@Override
 	public EntityManager getEntityManager()
 	{
@@ -55,24 +60,6 @@ public class GenericDaoJpa extends AbstractJpaProvider
 	public void setEntityManager(EntityManager entityManager)
 	{
 		this.entityManager = entityManager;
-	}
-
-	@Override
-	public String getName()
-	{
-		return "JPA";
-	}
-
-	@Override
-	public String getTitle()
-	{
-		return "Generic JPA";
-	}
-
-	@Override
-	public String getDescription()
-	{
-		return null;
 	}
 
 }

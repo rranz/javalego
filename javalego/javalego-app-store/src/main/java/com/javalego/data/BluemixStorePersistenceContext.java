@@ -57,4 +57,11 @@ public class BluemixStorePersistenceContext extends SpringPersistenceContext {
 		return getProperty(PACKAGES_TO_SCAN);
 	}
 
+	@Override
+	public String getPersistenceUnit()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

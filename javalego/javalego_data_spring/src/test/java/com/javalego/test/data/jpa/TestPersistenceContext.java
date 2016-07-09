@@ -43,4 +43,10 @@ public class TestPersistenceContext extends SpringPersistenceContext {
 	protected String getPackagesToScan() {
 		return "entities";
 	}
+
+	@Override
+	public String getPersistenceUnit()
+	{
+		return null;
+	}
 }

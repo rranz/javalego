@@ -1,27 +1,50 @@
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://java.sun.com/xml/ns/persistence persistence_1_0.xsd"
-        version="1.0">
-  <persistence-unit name="my-app" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    
-    <!-- Requeridas para javalego-data -->
-    <class>com.javalego.entity.impl.EntityId</class>
-    <class>com.javalego.entity.impl.AbstractEntity</class>
-    
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jsca?createDatabaseIfNotExist=true"/>
-      <property name="javax.persistence.jdbc.user" value="root"/>
-      <property name="javax.persistence.jdbc.password" value=""/>
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
 
-	  <!-- EclipseLink should create the database schema automatically
-	  <property name="eclipselink.ddl-generation" value="create-tables" />
-	  <property name="eclipselink.ddl-generation.output-mode" value="database" />-->
-  
-    </properties>
-    
-    
-  </persistence-unit>
+	<persistence-unit name="erp-unit">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+		<!-- Incluir las clases javalego requeridas para la configuración jpa -->
+		<class>com.javalego.entity.impl.EntityId</class>
+		<class>com.javalego.entity.impl.AbstractEntity</class>
+		<class>com.javalego.demo.entities.Department</class>
+		<class>com.javalego.demo.entities.Employee</class>
+
+		<properties>
+			<property name="connection.driver_class" value="org.h2.Driver" />
+			<property name="hibernate.connection.url" value="jdbc:h2:./db/repository;DB_CLOSE_ON_EXIT=FALSE" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<property name="hibernate.show_sql" value="true" />
+		</properties>
+		
+	</persistence-unit>
+	
+	<persistence-unit name="rrhh-unit">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+		<!-- Incluir las clases javalego requeridas para la configuración jpa -->
+		<class>com.javalego.entity.impl.EntityId</class>
+		<class>com.javalego.entity.impl.AbstractEntity</class>
+		<class>com.javalego.demo.entities.Department</class>
+		<class>com.javalego.demo.entities.Employee</class>
+		
+		<properties>
+  			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+        	<!-- Genera errores en la creación de las tablas -->
+			<!-- <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect" /> -->
+            <property name="hibernate.hbm2ddl.auto" value="create"/>		
+			<property name="hibernate.archive.autodetection" value="class" />
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/javalego?createDatabaseIfNotExist=true" />
+			<property name="hibernate.connection.username" value="root" />
+			<property name="hibernate.connection.password" value="" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.flushMode" value="FLUSH_AUTO" />
+		</properties>
+
+	</persistence-unit>	
+
 </persistence>

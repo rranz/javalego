@@ -330,24 +330,6 @@ public class SecurityShiro extends AbstractSecurityServices {
 		return false;
 	}
 
-	@Override
-	public String getName()
-	{
-		return "SHIRO";
-	}
-
-	@Override
-	public String getTitle()
-	{
-		return "Shiro Security Library";
-	}
-
-	@Override
-	public String getDescription()
-	{
-		return null;
-	}
-
 	// /**
 	// * Obtener la lista de roles del Realm principal.
 	// * @return

@@ -59,4 +59,10 @@ public class ErpPersistenceContext extends SpringPersistenceContext {
 		return getProperty(PACKAGES_TO_SCAN);
 	}
 
+	@Override
+	public String getPersistenceUnit()
+	{
+		return null;
+	}
+
 }

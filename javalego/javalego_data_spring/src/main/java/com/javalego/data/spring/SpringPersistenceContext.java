@@ -13,10 +13,8 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.StringUtils;
 
@@ -25,40 +23,31 @@ import com.javalego.data.spring.jpa.GenericDaoJpa;
 import com.javalego.exception.LocalizedException;
 
 /**
- * Configuración básica de Spring Data (JPA Hibernate) basada en anotaciones (no requiere applicationContext.xml) para
- * utilizar el acceso a base de datos mediante JPA. Define el datasource, entity manager y transaction manager.
+ * Configuración básica de Spring Data JPA basada en anotaciones (no requiere applicationContext.xml).
  * <p>
- * El archivo application.properties contiene configuración de acceso a la base de datos mediante los drivers Jdbc (H2,
- * MySql y PostgreSQL) y la definición de los packages de las clases de entidad Jpa que utilizaremos en nuestro
- * proyecto.
+ * Al extender esta clase, debe implementar los métodos de definición de propiedades JPA (como driver, package.to.scan y
+ * datasource) y el JpaVendorAdapter.
  * <p>
- * Puede utilizar directamente esta clase pero necesitará el fichero de propiedades que debe existir en su classpath
- * application.properties.
+ * Esta clase incluye, de forma opcional, métodos de obtención de propiedades a partir de ficheros de propiedades que
+ * podemos definir usando la anotación @PropertySource("classpath:application.properties").
  * <p>
- * Incluir anotación: @PropertySource("classpath:application.properties")
- * <p>
- * Ej. propiedades que necesitamos definir:
+ * Ejemplo de un archivo de configuración:
  * <p>
  * 
  * <pre>
- * #Database Configuration
+ * db.dialect=org.hibernate.dialect.H2Dialect
  * db.driver=org.h2.Driver
- * #db.driver=com.mysql.jdbc.Driver
- * #db.driver=org.postgresql.Driver
  * db.url=jdbc:h2:mem:datajpa
- * #db.url=jdbc:mysql://localhost:3306/datajpa
- * #db.url=jdbc:postgresql://localhost/datajpa
  * db.username=sa
  * db.password=
  * 
- * #Hibernate Configuration
- * db.dialect=org.hibernate.dialect.H2Dialect
- * #db.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
- * #db.dialect=org.hibernate.dialect.PostgreSQLDialect
- * hibernate.format_sql=true
  * db.show_sql=true
  * db.generate_ddl=true
- * #(opcional) hibernate.hbm2ddl.auto=update|create|create-drop|validate (valores posibles)
+ * 
+ * package.to.scan=
+ * 
+ * hibernate.format_sql=true
+ * hibernate.hbm2ddl.auto=update|create|create-drop|validate (valores posibles)
  * </pre>
  * 
  * @author ROBERTO RANZ
@@ -67,18 +56,29 @@ import com.javalego.exception.LocalizedException;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-abstract public class SpringPersistenceContext
+public abstract class SpringPersistenceContext
 {
+	public static final String PERSISTENCE_UNIT = "persistence-unit";
+
 	// Propiedades de configuración del datasource y jpa.
 	public static final String DB_DRIVER = "db.driver";
+
 	public static final String DB_DIALECT = "db.dialect";
+
 	public static final String DB_URL = "db.url";
+
 	public static final String DB_SHOW_SQL = "db.show_sql";
+
 	public static final String DB_GENERATE_DDL = "db.generate_ddl";
+
 	public static final String DB_USERNAME = "db.username";
+
 	public static final String DB_PASSWORD = "db.password";
+
 	public static final String HIBERNATE_FORMAT_SQL = "hibernate.format_sql";
+
 	public static final String HIBERNATE_DDL = "hibernate.hbm2ddl.auto";
+
 	public static final String PACKAGES_TO_SCAN = "packages.to.scan";
 
 	public static final Logger logger = Logger.getLogger(SpringPersistenceContext.class);
@@ -86,58 +86,10 @@ abstract public class SpringPersistenceContext
 	@Resource
 	protected Environment environment;
 
-	@Bean DataProvider jpaDao() {
+	@Bean
+	DataProvider jpaDao()
+	{
 		return new GenericDaoJpa();
-	}
-	
-	@Bean
-	public DataSource dataSource()
-	{
-		logger.info("Loading config properties ...");
-
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
-		setDataSourceProperties(dataSource);
-
-		logger.info("JPA CONNECTION: url=" + dataSource.getUrl() + " user=" + dataSource.getUsername());
-
-		return dataSource;
-	}
-
-	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
-		JpaVendorAdapter jpaVendorAdapter)
-	{
-		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-
-		em.setDataSource(dataSource);
-		em.setJpaVendorAdapter(jpaVendorAdapter);
-
-		// Propiedades jpa
-		Properties properties = new Properties();
-		setJpaProperties(properties);
-		em.setJpaProperties(properties);
-		
-		// Lista de packages de entities a escanear. Si no se define esta
-		// información, hay que definir las entidades en el fichero de recursos
-		// /META-INF/persistence.xml.
-		String ps = getPackagesToScan();
-
-		// Buscar el valor de la propiedad en las variables de entorno,
-		// posiblemente inyectadas desde una fichero de propidades
-		// @PropertySource.
-		if (ps == null)
-		{
-			ps = environment.getProperty(PACKAGES_TO_SCAN);
-		}
-		if (ps != null)
-		{
-			ps = StringUtils.trimAllWhitespace(ps);
-			
-			em.setPackagesToScan(ps.split("\\,"));
-		}
-
-		return em;
 	}
 
 	/**
@@ -172,12 +124,6 @@ abstract public class SpringPersistenceContext
 	public JpaVendorAdapter jpaVendorAdapter()
 	{
 		return getJpaVendorAdapter();
-	}
-
-	@Bean
-	public PlatformTransactionManager transactionManager()
-	{
-		return new JpaTransactionManager();
 	}
 
 	/**
@@ -226,4 +172,80 @@ abstract public class SpringPersistenceContext
 		return new ResourceBundleMessageSource();
 	}
 
+	// Beans para configurar sin archivo persistence.xml
+
+	@Bean
+	public DataSource dataSource()
+	{
+		logger.info("Loading config properties ...");
+
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+
+		setDataSourceProperties(dataSource);
+
+		logger.info("JPA CONNECTION: url=" + dataSource.getUrl() + " user=" + dataSource.getUsername());
+
+		return dataSource;
+	}
+
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
+		JpaVendorAdapter jpaVendorAdapter)
+	{
+		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+		em.setDataSource(dataSource);
+		em.setJpaVendorAdapter(jpaVendorAdapter);
+
+		// Obtener el valor de la unidad de persistencia, en caso de existir múltiples definiciones.
+		String persistenceUnit = getPersistenceUnit();
+		if (persistenceUnit == null || "".equals(persistenceUnit.trim()))
+		{
+			persistenceUnit = environment.getProperty(PERSISTENCE_UNIT);
+		}
+
+		if (persistenceUnit != null && !"".equals(persistenceUnit.trim()))
+		{
+			em.setPersistenceUnitName(persistenceUnit);
+		}
+
+		// Propiedades jpa
+		Properties properties = new Properties();
+		setJpaProperties(properties);
+		em.setJpaProperties(properties);
+		em.setPackagesToScan(getPackages());
+
+		return em;
+	}
+
+	/**
+	 * Lista de packages de entities a escanear.
+	 * 
+	 * @param values
+	 * @return
+	 */
+	private String[] getPackages()
+	{
+		String ps = getPackagesToScan();
+
+		// Buscar el valor de la propiedad en las variables de entorno,
+		// posiblemente inyectadas desde una fichero de propidades
+		// @PropertySource.
+		if (ps == null)
+		{
+			ps = environment.getProperty(PACKAGES_TO_SCAN);
+		}
+		if (ps != null)
+		{
+			ps = StringUtils.trimAllWhitespace(ps);
+		}
+		return ps != null ? ps.split("\\,") : null;
+	}
+
+	/**
+	 * Definir el unidad de persistencia en el caso de tener varias definidas en el archivos persistence.xml. En caso
+	 * contrario, devolver null.
+	 * 
+	 * @return
+	 */
+	public abstract String getPersistenceUnit();
 }

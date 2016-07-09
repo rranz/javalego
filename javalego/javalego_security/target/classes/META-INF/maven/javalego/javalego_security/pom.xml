@@ -18,54 +18,26 @@
 		</repository> </repositories> -->
 
 	<dependencies>
-
-		<!-- INCLUIR OAuth en javalego para FaceBook Twitter Linkedin GitHub ... https://vaadin.com/es/directory#addon/oauth-popup-add-on -->
-		<!-- <dependency> <groupId>org.vaadin.addon</groupId> <artifactId>oauthpopup</artifactId> 
-			<version>0.0.3</version> </dependency> -->
-
 		<dependency>
 			<groupId>javalego</groupId>
 			<artifactId>javalego_locale</artifactId>
 			<version>${javalego.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
 			<version>1.7.5</version>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${log4j.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcprov-jdk16</artifactId>
 			<version>1.46</version>
 		</dependency>
-
 	</dependencies>
 
-<!-- 	<build>
-		<resources>
-			<resource>
-				<directory>src/main/java</directory>
-				<includes>
-					<include>**/*.java</include>
-				</includes>
-			</resource>
-		</resources>
-	</build> -->
-	
+	<!-- <build> <resources> <resource> <directory>src/main/java</directory> 
+		<includes> <include>**/*.java</include> </includes> </resource> </resources> 
+		</build> -->
+
 </project>

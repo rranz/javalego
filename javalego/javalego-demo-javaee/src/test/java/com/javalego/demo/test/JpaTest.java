@@ -1,15 +1,3 @@
-/**
- * Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE
- * file distributed with this work for additional information regarding copyright ownership. The ASF licenses this file
- * to You under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
- * License. You may obtain a copy of the License at
- * <p/>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p/>
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
- * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
- */
 package com.javalego.demo.test;
 
 import java.util.Properties;
@@ -17,48 +5,67 @@ import java.util.Properties;
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import com.javalego.demo.ejb.ERPServices;
 
-import junit.framework.TestCase;
-
-public class JpaTest extends TestCase
+/**
+ * Pruebas unitarias del adaptador JPA para la persistencia de datos.
+ * 
+ * @author ROBERTO
+ *
+ */
+public class JpaTest
 {
+	private static Context context;
 
-	public void test() throws Exception
+	private static EJBContainer container;
+
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception
 	{
-
 		final Properties p = new Properties();
 
-		// Configurar datasource con propiedades
+		// Configuración del Driver (2 opciones)
+
+		// 1. Configurar datasource con propiedades
 		// p.put("mysql", "new://Resource?type=DataSource");
 		// p.put("movieDatabase.JdbcDriver", "com.mysql.jdbc.Driver");
 		// p.put("movieDatabase.JdbcUrl", "jdbc:mysql://localhost:3306/javalego?createDatabaseIfNotExist=true");
 		// p.put("movieDatabase.Username", "root");
 
-		// User un fichero de configuración donde podremos incluir cualquier configuración (datasource, ...) de open ejb
-		// container.
+		// 2. Usar un fichero de configuración donde podremos incluir cualquier configuración (datasource, ...) de open
+		// ejb container.
+		
 		p.put("openejb.configuration", "src/main/resources/META-INF/openejb.xml");
 
-//		p.put("openejb.deployments.classpath.filter.descriptors", "true");
-//		p.put("openejb.exclude-include.order", "include-exclude"); // Defines the processing order
-//		p.put("openejb.deployments.classpath.include", ".*javalego.*"); // Include nothing
-//		p.put("openejb.descriptors.output", "true");
+		// Reducir el ámbito de clases CDI del contenedor openejb para reducir el tiempo de localización. (por defecto busca
+		// en todas las clases del classpath).
+		p.put("openejb.deployments.classpath.filter.descriptors", "true");
+		p.put("openejb.exclude-include.order", "include-exclude"); // Defines the processing order
+		p.put("openejb.deployments.classpath.include", ".*javalego.*"); // Include nothing
+		p.put("openejb.descriptors.output", "true");
 
 		// p.put(Context.INITIAL_CONTEXT_FACTORY,"org.apache.openejb.client.LocalInitialContextFactory");
 
-		EJBContainer container = EJBContainer.createEJBContainer(p);
-		final Context context = container.getContext();
+		container = EJBContainer.createEJBContainer(p);
+		context = container.getContext();
+	}
 
-		try
-		{
-			/** javalego-demo-javaee es el nombre del proyecto para localizar al servicio ejb */
-			ERPServices movies = (ERPServices) context.lookup("java:global/javalego-demo/ERPServices");
-			movies.populateDatabase();
-		}
-		finally
-		{
-			container.close();
-		}
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception
+	{
+		container.close();
+	}
+
+	@Test
+	public void test() throws Exception
+	{
+		// 'javalego-demo-javaee' es el nombre del proyecto para localizar al servicio en el contenedor openejb.
+		ERPServices movies = (ERPServices) context.lookup("java:global/javalego-demo/ERPServices");
+		movies.populateDatabase();
 	}
 
 }

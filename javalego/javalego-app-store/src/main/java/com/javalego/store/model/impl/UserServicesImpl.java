@@ -26,7 +26,6 @@ public class UserServicesImpl implements UserServices {
 	public UserServicesImpl() {
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public synchronized Collection<IUser> getAllUsers() throws LocalizedException {
 
@@ -44,7 +43,7 @@ public class UserServicesImpl implements UserServices {
 	 * @return
 	 * @throws LocalizedException
 	 */
-	@SuppressWarnings({ "unchecked", "unused" })
+	@SuppressWarnings({ "unused" })
 	private synchronized Collection<IRole> getAllRoles() throws LocalizedException {
 
 		List<Role> list = DataContext.getProvider().findAll(Role.class);

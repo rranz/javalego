@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.javalego.data.DataProvider;
 import com.javalego.data.spring.SpringDataProvider;
-import com.javalego.demo.data.DemoPersistenceContext2;
+import com.javalego.demo.data.DemoPersistenceXmlContext;
 import com.javalego.security.SecurityServices;
 import com.javalego.security.shiro.SecurityShiro;
 
@@ -36,7 +36,7 @@ public class TestEnvironment extends BaseEnvironment
 	public synchronized DataProvider getDataProvider()
 	{
 		return context != null ? new SpringDataProvider(context)
-			: new SpringDataProvider(DemoPersistenceContext2.class);
+			: new SpringDataProvider(DemoPersistenceXmlContext.class);
 	}
 
 	@Override

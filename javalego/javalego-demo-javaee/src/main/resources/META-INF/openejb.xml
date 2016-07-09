@@ -1,8 +1,7 @@
 <openejb>
 	<Resource id="erpDatabase" type="DataSource">
-		JdbcDriver = com.mysql.jdbc.Driver
-		JdbcUrl = jdbc:mysql://localhost:3306/javalego?createDatabaseIfNotExist=true
-		Username = root
+		JdbcDriver = org.h2.Driver
+		JdbcUrl = jdbc:h2:./db/repository;DB_CLOSE_ON_EXIT=FALSE
 	</Resource>
 	<Resource id="erpDatabaseMysql" type="DataSource">
 		JdbcDriver = com.mysql.jdbc.Driver

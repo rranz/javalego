@@ -123,7 +123,7 @@ public class ListItemPresenter<T extends IBaseItem> extends AbstractListItemPres
 
 			// Persistencia
 			if (DataContext.getProvider() != null) {
-				DataContext.getProvider().save((Entity) bean);
+				DataContext.getProvider().save((Entity<?>) bean);
 			}
 
 			if (notify) {
@@ -139,7 +139,7 @@ public class ListItemPresenter<T extends IBaseItem> extends AbstractListItemPres
 			
 			// Persistencia
 			if (DataContext.getProvider() != null) {
-				DataContext.getProvider().delete((Entity) bean);
+				DataContext.getProvider().delete((Entity<?>) bean);
 			}
 
 			if (notify) {
