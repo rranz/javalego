@@ -1,4 +1,4 @@
-package com.javalego.test.data.jpa;
+package com.javalego.data.test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,15 +12,12 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Base class for integration tests.
+ * Usar un script SQL para inicializar una base de datos mediante Jdbc usando Spring.
  * 
- * 
- * @author Oliver Gierke
  */
 // @RunWith(SpringJUnit4ClassRunner.class)
-
 @Transactional
-public class IntegrationTest {
+public class PopulatesTest {
 
 	@Autowired
 	DataSource dataSource;

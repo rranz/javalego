@@ -1,11 +1,8 @@
-package com.javalego.test.data.jpa.repository;
+package repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
-/**
- * Verificar que si implementamos 
- * @author q74749x
- *
- */
+import entities.Domain;
+
 public interface DomainRepository extends CrudRepository<Domain, Long> {
 }

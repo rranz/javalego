@@ -9,6 +9,14 @@ public class Department extends EntityId
 {
 	private String name;
 
+	public Department() {
+		
+	}
+	
+	public Department(String name) {
+		this.name = name;
+	}
+	
 	public String getName()
 	{
 		return name;
@@ -17,5 +25,10 @@ public class Department extends EntityId
 	public void setName(String deptName)
 	{
 		this.name = deptName;
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 }

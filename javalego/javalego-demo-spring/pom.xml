@@ -19,6 +19,7 @@
 		<hibernate.version>4.3.0.Final</hibernate.version>
 	</properties>
 
+
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>

@@ -49,7 +49,7 @@ public class DemoTest
 	 * @throws Exception
 	 */
 	@Test
-	public void environment() throws Exception
+	public void populated() throws Exception
 	{
 		logger.info("Loaded environment " + environment.getName());
 

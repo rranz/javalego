@@ -38,10 +38,11 @@ public class JpaTest
 
 		// 2. Usar un fichero de configuración donde podremos incluir cualquier configuración (datasource, ...) de open
 		// ejb container.
-		
+
 		p.put("openejb.configuration", "src/main/resources/META-INF/openejb.xml");
 
-		// Reducir el ámbito de clases CDI del contenedor openejb para reducir el tiempo de localización. (por defecto busca
+		// Reducir el ámbito de clases CDI del contenedor openejb para reducir el tiempo de localización. (por defecto
+		// busca
 		// en todas las clases del classpath).
 		p.put("openejb.deployments.classpath.filter.descriptors", "true");
 		p.put("openejb.exclude-include.order", "include-exclude"); // Defines the processing order
@@ -57,7 +58,10 @@ public class JpaTest
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception
 	{
-		container.close();
+		if (container != null)
+		{
+			container.close();
+		}
 	}
 
 	@Test

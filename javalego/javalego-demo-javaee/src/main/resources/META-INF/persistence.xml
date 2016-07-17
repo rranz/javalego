@@ -5,6 +5,7 @@
 
 	<persistence-unit name="erp-unit">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>erpDatabase</jta-data-source>
 
 		<!-- Incluir las clases javalego requeridas para la configuración jpa -->
 		<class>com.javalego.entity.impl.EntityId</class>
@@ -25,6 +26,7 @@
 	
 	<persistence-unit name="rrhh-unit">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>rrhhDatabase</jta-data-source>
 
 		<!-- Incluir las clases javalego requeridas para la configuración jpa -->
 		<class>com.javalego.entity.impl.EntityId</class>
