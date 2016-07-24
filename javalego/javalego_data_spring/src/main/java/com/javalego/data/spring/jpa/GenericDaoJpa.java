@@ -6,6 +6,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.javalego.data.DataProviderException;
 import com.javalego.data.jpa.AbstractJpaProvider;
 import com.javalego.entity.Entity;
 
@@ -28,21 +29,21 @@ public class GenericDaoJpa extends AbstractJpaProvider
 
 	@Override
 	@Transactional(readOnly=false)
-	public <T extends Entity<?>> T save(T entity)
+	public <T extends Entity<?>> T save(T entity) throws DataProviderException
 	{
 		return super.save(entity);
 	}
 
 	@Override
 	@Transactional(readOnly=false)
-	public <T extends Entity<?>> T merge(T entity)
+	public <T extends Entity<?>> T merge(T entity) throws DataProviderException
 	{
 		return super.merge(entity);
 	}
 
 	@Override
 	@Transactional(readOnly=false)
-	public <T extends Entity<?>> T delete(T entity)
+	public <T extends Entity<?>> T delete(T entity) throws DataProviderException
 	{
 		return super.delete(entity);
 	}	

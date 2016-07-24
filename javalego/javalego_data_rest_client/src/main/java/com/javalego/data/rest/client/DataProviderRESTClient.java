@@ -353,7 +353,7 @@ public class DataProviderRESTClient implements DataProvider
 
 	@Override
 	public <T extends Entity<?>> List<T> pagedList(Class<T> clazz, int startIndex, int count, String where,
-		String order) throws LocalizedException
+		String order)
 	{
 		// TODO Auto-generated method stub
 		return null;
@@ -382,7 +382,7 @@ public class DataProviderRESTClient implements DataProvider
 	}
 
 	@Override
-	public <T extends Entity<?>> T delete(T entity) throws LocalizedException
+	public <T extends Entity<?>> T delete(T entity)
 	{
 		return null;// TODO Auto-generated method stub
 

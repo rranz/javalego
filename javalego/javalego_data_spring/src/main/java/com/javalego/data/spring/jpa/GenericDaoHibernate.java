@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.Order;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.javalego.data.DataProvider;
+import com.javalego.data.DataProviderErrors;
+import com.javalego.data.DataProviderException;
 import com.javalego.entity.Entity;
 import com.javalego.exception.LocalizedException;
 
@@ -34,58 +37,101 @@ public class GenericDaoHibernate implements DataProvider
 	private EntityManager entityManager;
 
 	@Override
-	@Transactional(readOnly=false)
-	public <T extends Entity<?>> T save(T entity)
+	@Transactional(readOnly = false)
+	public <T extends Entity<?>> T save(T entity) throws DataProviderException
 	{
-		getSession().saveOrUpdate(entity);
-		return entity;
+		try
+		{
+			getSession().saveOrUpdate(entity);
+			return entity;
+		}
+		catch (Exception e)
+		{
+			throw new DataProviderException(DataProviderErrors.PERSIST, e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional(readOnly=false)
-	public <T extends Entity<?>> T merge(T entity)
+	@Transactional(readOnly = false)
+	public <T extends Entity<?>> T merge(T entity) throws DataProviderException
 	{
-		return (T) getSession().merge(entity);
+		try
+		{
+			return (T) getSession().merge(entity);
+		}
+		catch (Exception e)
+		{
+			throw new DataProviderException(DataProviderErrors.MERGE, e);
+		}
 	}
 
 	@Override
-	@Transactional(readOnly=false)
-	public <T extends Entity<?>> T delete(T entity) throws LocalizedException
+	@Transactional(readOnly = false)
+	public <T extends Entity<?>> T delete(T entity) throws DataProviderException
 	{
-		Entity<?> result = entityManager.merge(entity);
-		entityManager.remove(result);
-		return entity;
+		try
+		{
+			Entity<?> result = entityManager.merge(entity);
+			entityManager.remove(result);
+			return entity;
+		}
+		catch (Exception e)
+		{
+			throw new DataProviderException(DataProviderErrors.DELETE, e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends Entity<?>> T find(Class<T> clazz, Serializable id)
+	public <T extends Entity<?>> T find(Class<T> clazz, Serializable id) throws DataProviderException
 	{
-		return (T) getSession().get(clazz, id);
+		try
+		{
+			return (T) getSession().get(clazz, id);
+		}
+		catch (Exception e)
+		{
+			throw new DataProviderException(DataProviderErrors.FIND_ID, e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, Object value)
+		throws DataProviderException
 	{
-		return getSession().createCriteria(clazz).add(Restrictions.eq(propertyName, value)).list();
+		try
+		{
+			return getSession().createCriteria(clazz).add(Restrictions.eq(propertyName, value)).list();
+		}
+		catch (HibernateException e)
+		{
+			throw new DataProviderException(DataProviderErrors.FIND, e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, String value,
-		MatchMode matchMode)
+		MatchMode matchMode) throws DataProviderException
 	{
-		if (matchMode != null)
+		try
 		{
-			return getSession().createCriteria(clazz)
-				.add(Restrictions.ilike(propertyName, value, getMatchMode(matchMode))).list();
+			if (matchMode != null)
+			{
+				return getSession().createCriteria(clazz)
+					.add(Restrictions.ilike(propertyName, value, getMatchMode(matchMode))).list();
+			}
+			else
+			{
+				return getSession().createCriteria(clazz)
+					.add(Restrictions.ilike(propertyName, value, org.hibernate.criterion.MatchMode.EXACT)).list();
+			}
 		}
-		else
+		catch (HibernateException e)
 		{
-			return getSession().createCriteria(clazz)
-				.add(Restrictions.ilike(propertyName, value, org.hibernate.criterion.MatchMode.EXACT)).list();
+			throw new DataProviderException(DataProviderErrors.FIND, e);
 		}
 	}
 
@@ -122,31 +168,45 @@ public class GenericDaoHibernate implements DataProvider
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends Entity<?>> List<T> findAll(Class<T> clazz)
+	public <T extends Entity<?>> List<T> findAll(Class<T> clazz) throws DataProviderException
 	{
-		return getSession().createCriteria(clazz).list();
+		try
+		{
+			return getSession().createCriteria(clazz).list();
+		}
+		catch (HibernateException e)
+		{
+			throw new DataProviderException(DataProviderErrors.FIND, e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, Order order, String... propertiesOrder)
+		throws DataProviderException
 	{
-
-		Criteria criteria = getSession().createCriteria(clazz);
-
-		for (String propertyOrder : propertiesOrder)
+		try
 		{
-			if (order.isAscending())
-			{
-				criteria.addOrder(org.hibernate.criterion.Order.asc(propertyOrder));
-			}
-			else
-			{
-				criteria.addOrder(org.hibernate.criterion.Order.desc(propertyOrder));
-			}
-		}
+			Criteria criteria = getSession().createCriteria(clazz);
 
-		return criteria.list();
+			for (String propertyOrder : propertiesOrder)
+			{
+				if (order.isAscending())
+				{
+					criteria.addOrder(org.hibernate.criterion.Order.asc(propertyOrder));
+				}
+				else
+				{
+					criteria.addOrder(org.hibernate.criterion.Order.desc(propertyOrder));
+				}
+			}
+
+			return criteria.list();
+		}
+		catch (HibernateException e)
+		{
+			throw new DataProviderException(DataProviderErrors.FIND, e);
+		}
 	}
 
 	/**
@@ -156,13 +216,20 @@ public class GenericDaoHibernate implements DataProvider
 	 */
 	protected Session getSession()
 	{
-		return ((Session)entityManager.getDelegate()).getSessionFactory().openSession();
+		return ((Session) entityManager.getDelegate()).getSessionFactory().openSession();
 	}
 
 	@Override
-	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, String where)
+	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, String where) throws DataProviderException
 	{
-		return findAll(clazz, where, null);
+		try
+		{
+			return findAll(clazz, where, null);
+		}
+		catch (Exception e)
+		{
+			throw new DataProviderException(DataProviderErrors.FIND, e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -176,13 +243,20 @@ public class GenericDaoHibernate implements DataProvider
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends Entity<?>> List<T> pagedList(Class<T> clazz, int startIndex, int count, String where,
-		String order) throws LocalizedException
+		String order) throws DataProviderException
 	{
-		Query query = getSession()
-			.createQuery("select e from " + clazz.getSimpleName() + " as e" + getWhereOrder(where, order));
-		query.setFirstResult(startIndex);
-		query.setMaxResults(count);
-		return query.list();
+		try
+		{
+			Query query = getSession()
+				.createQuery("select e from " + clazz.getSimpleName() + " as e" + getWhereOrder(where, order));
+			query.setFirstResult(startIndex);
+			query.setMaxResults(count);
+			return query.list();
+		}
+		catch (Exception e)
+		{
+			throw new DataProviderException(DataProviderErrors.FIND, e);
+		}
 	}
 
 	/**
@@ -199,21 +273,28 @@ public class GenericDaoHibernate implements DataProvider
 
 	@Override
 	public List<?> propertyValues(Class<?> clazz, String propertyName, String where, String order)
+		throws DataProviderException
 	{
-
-		if (where == null)
+		try
 		{
-			where = propertyName + " is not null";
+			if (where == null)
+			{
+				where = propertyName + " is not null";
+			}
+			else
+			{
+				where = propertyName + " is not null" + " and " + where;
+			}
+
+			Query query = getSession().createQuery(
+				"select " + propertyName + " from " + clazz.getSimpleName() + " " + getWhereOrder(where, order));
+
+			return (List<?>) query.list();
 		}
-		else
+		catch (Exception e)
 		{
-			where = propertyName + " is not null" + " and " + where;
+			throw new DataProviderException(DataProviderErrors.FIND, e);
 		}
-
-		Query query = getSession().createQuery(
-			"select " + propertyName + " from " + clazz.getSimpleName() + " " + getWhereOrder(where, order));
-
-		return (List<?>) query.list();
 	}
 
 	@Override
@@ -228,11 +309,19 @@ public class GenericDaoHibernate implements DataProvider
 	}
 
 	@Override
-	public Long count(Class<?> clazz, String where)
+	public Long count(Class<?> clazz, String where) throws DataProviderException
 	{
-		Object value = getSession()
-			.createQuery("select count(*) from " + clazz.getCanonicalName() + (where != null ? " where " + where : ""))
-			.uniqueResult();
-		return new Long(value != null ? value.toString() : "0");
+		try
+		{
+			Object value = getSession()
+				.createQuery(
+					"select count(*) from " + clazz.getCanonicalName() + (where != null ? " where " + where : ""))
+				.uniqueResult();
+			return new Long(value != null ? value.toString() : "0");
+		}
+		catch (NumberFormatException e)
+		{
+			throw new DataProviderException(DataProviderErrors.FIND, e);
+		}
 	}
 }

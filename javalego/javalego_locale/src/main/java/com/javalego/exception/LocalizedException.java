@@ -24,7 +24,7 @@ import com.javalego.model.resources.locale.Languages;
  */
 public class LocalizedException extends Exception
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4329587883810372619L;
 
 	private Object[] parameters;
 

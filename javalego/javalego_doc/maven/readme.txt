@@ -39,4 +39,34 @@ En pom.xml
 				</plugins>
 			</build>
 		</profile>
+		
+		
+Ejemplo sin profile:
+
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-dependency-plugin</artifactId>
+    <version>2.4</version>
+    <executions>
+        <execution>
+            <id>copy</id>
+            <phase>install</phase>
+            <goals>
+                <goal>copy-dependencies</goal>
+            </goals>
+            <!-- Si queremos generar los archivo en un directorio específico adicional a /target/dependencies
+            <configuration>
+                <outputDirectory>
+                    ${project.build.directory}/lib
+                </outputDirectory>
+            </configuration>
+            -->
+        </execution>
+    </executions>
+</plugin>
+
+Run.Build...
+
+incluir en Goals:
+	install dependency:copy-dependencies		
 	

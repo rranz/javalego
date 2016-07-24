@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
 
 import com.javalego.data.DataProvider;
+import com.javalego.data.DataProviderException;
 import com.javalego.entity.Entity;
 import com.javalego.errors.CommonErrors;
 import com.javalego.exception.LocalizedException;
@@ -184,81 +185,81 @@ public class SpringDataProvider implements DataProvider
 	}
 
 	@Override
-	public <T extends Entity<?>> T save(T entity)
+	public <T extends Entity<?>> T save(T entity) throws DataProviderException
 	{
 		return getDao().save(entity);
 	}
 
 	@Override
-	public <T extends Entity<?>> T merge(T entity)
+	public <T extends Entity<?>> T merge(T entity) throws DataProviderException
 	{
 		return getDao().merge(entity);
 	}
 
 	@Override
-	public <T extends Entity<?>> T delete(T entity) throws LocalizedException
+	public <T extends Entity<?>> T delete(T entity) throws DataProviderException
 	{
 		return getDao().delete(entity);
 	}
 
 	@Override
-	public <T extends Entity<?>> T find(Class<T> clazz, Serializable id)
+	public <T extends Entity<?>> T find(Class<T> clazz, Serializable id) throws DataProviderException
 	{
 		return getDao().find(clazz, id);
 	}
 
 	@Override
-	public <T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, Object value)
+	public <T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, Object value) throws DataProviderException
 	{
 		return getDao().findByProperty(clazz, propertyName, value);
 	}
 
 	@Override
 	public <T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, String value,
-		MatchMode matchMode)
+		MatchMode matchMode) throws DataProviderException
 	{
 		return getDao().findByProperty(clazz, propertyName, value, matchMode);
 	}
 
 	@Override
-	public <T extends Entity<?>> List<T> findAll(Class<T> clazz)
+	public <T extends Entity<?>> List<T> findAll(Class<T> clazz) throws DataProviderException
 	{
 		return getDao().findAll(clazz);
 	}
 
 	@Override
-	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, String where)
+	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, String where) throws DataProviderException
 	{
 		return getDao().findAll(clazz, where);
 	}
 
 	@Override
-	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, String where, String order)
+	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, String where, String order) throws DataProviderException
 	{
 		return getDao().findAll(clazz, where, order);
 	}
 
 	@Override
-	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, Order order, String... propertiesOrder)
+	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, Order order, String... propertiesOrder) throws DataProviderException
 	{
 		return getDao().findAll(clazz, order, propertiesOrder);
 	}
 
 	@Override
 	public <T extends Entity<?>> List<T> pagedList(Class<T> clazz, int startIndex, int count, String where,
-		String order) throws LocalizedException
+		String order) throws DataProviderException
 	{
 		return getDao().pagedList(clazz, startIndex, count, where, order);
 	}
 
 	@Override
-	public List<?> propertyValues(Class<?> clazz, String propertyName, String where, String order)
+	public List<?> propertyValues(Class<?> clazz, String propertyName, String where, String order) throws DataProviderException
 	{
 		return getDao().propertyValues(clazz, propertyName, where, order);
 	}
 
 	@Override
-	public Long count(Class<?> clazz, String where)
+	public Long count(Class<?> clazz, String where) throws DataProviderException
 	{
 		return getDao().count(clazz, where);
 	}

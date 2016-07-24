@@ -36,7 +36,7 @@ public class MockDataProvider implements DataProvider {
 	}
 
 	@Override
-	public <T extends Entity<?>> T delete(T entity) throws LocalizedException {
+	public <T extends Entity<?>> T delete(T entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -95,7 +95,7 @@ public class MockDataProvider implements DataProvider {
 	}
 
 	@Override
-	public <T extends Entity<?>> List<T> pagedList(Class<T> clazz, int startIndex, int count, String where, String order) throws LocalizedException {
+	public <T extends Entity<?>> List<T> pagedList(Class<T> clazz, int startIndex, int count, String where, String order) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -4,31 +4,34 @@ import java.util.List;
 import java.util.Properties;
 
 import javax.ejb.embeddable.EJBContainer;
+import javax.inject.Inject;
 import javax.naming.Context;
 import javax.naming.NamingException;
-import javax.ws.rs.core.Response;
 
 import org.apache.openejb.OpenEjbContainer;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.javalego.demo.Logger;
 import com.javalego.demo.entities.Department;
 import com.javalego.demo.rest.CRUDServicesRest;
-import com.javalego.demo.rest.department.DepartmentServicesRest;
 import com.javalego.exception.LocalizedException;
 
 public class UserServiceTest
 {
 	private static Context context;
 
-	private static DepartmentServicesRest services;
+	// No cdi si usamos @Inject y además logger tampoco
+	private static CRUDServicesRest services;
 
-	private static CRUDServicesRest ds;
-
-	@BeforeClass
-	public static void start() throws Exception
-	{
+	// nota: las clases tienen que estar en src/main/java
+	@Inject
+	private Logger logger;
+	
+    @Before
+    public void setUp() throws NamingException {
 		Properties p = new Properties();
 
 		// Acceso remoto a los servicios REST
@@ -46,10 +49,19 @@ public class UserServiceTest
 
 		context = EJBContainer.createEJBContainer(p).getContext();
 
-		// Obtener una instancia de los servicios REST CRUD.
-		services = (DepartmentServicesRest) context.lookup("java:global/javalego-demo/DepartmentServicesRestImpl");
+		services = (CRUDServicesRest) context.lookup("java:global/javalego-demo/DepartmentServices");
 
-		ds = (CRUDServicesRest) context.lookup("java:global/javalego-demo/DepartmentServices");
+		 //context = EJBContainer.createEJBContainer().getContext();
+		
+        context.bind("inject", this);
+
+        System.out.println(logger);
+    }
+	
+	
+	@BeforeClass
+	public static void start() throws Exception
+	{
 	}
 
 	@AfterClass
@@ -64,32 +76,31 @@ public class UserServiceTest
 	@Test
 	public void create() throws LocalizedException
 	{
-		Response r = ds.save(new Department("SDDDDD"));
+
 		
-		System.out.println(r.readEntity(Department.class));
+		//		Response r = services.save(new Department("SDDDDD"));
+//		System.out.println(r.readEntity(Department.class));
+//		r = services.find(1);
+//		System.out.println(r.readEntity(Department.class));
 		
-		r = ds.find(1);
-		System.out.println(r.readEntity(Department.class));
-		
-		//test();
+		test();
 	}
 
-	@SuppressWarnings("unchecked")
 	private void test() throws LocalizedException
 	{
-		services.create("dp 1");
-		services.create("dp 2");
+		services.save(new Department("dp 1"));
+		services.save(new Department("dp 2"));
 
-		List<Department> list = services.list().readEntity(List.class);
+		List<Department> list = services.findByProperty("name",  "dp 1"); //.readEntity(List.class);
 		for (Department item : list)
 		{
 			System.out.println(item.getName() + " " + item.getId());
 		}
 
 		list.get(0).setName("CAMBIO");
-		services.update(list.get(0));
+		services.save(list.get(0));
 
-		System.out.println(((Department) services.find(1).readEntity(Department.class)).getName());
+		System.out.println(((Department) services.find(1)).getName());
 
 		services.delete(1);
 	}

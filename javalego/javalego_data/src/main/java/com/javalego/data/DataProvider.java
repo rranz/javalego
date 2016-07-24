@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.criteria.Order;
+import javax.ws.rs.NotFoundException;
 
 import com.javalego.entity.Entity;
-import com.javalego.exception.LocalizedException;
 import com.javalego.model.pattern.Adapter;
 
 /**
@@ -57,18 +57,20 @@ public interface DataProvider extends Adapter
 	 * 
 	 * @param entity
 	 *            objeto entidad
+	 * @throws excepción
 	 * @return Entidad actualizada
 	 */
-	<T extends Entity<?>> T save(T entity);
+	<T extends Entity<?>> T save(T entity) throws DataProviderException;
 
 	/**
 	 * Mezclar datos de objetos de entidad con el mismo identificador creando un nuevo objeto.
 	 * 
 	 * @param entity
 	 *            objeto entidad
+	 * @throws excepción
 	 * @return crear una nueva instancia de entidad mezclando sus datos
 	 */
-	<T extends Entity<?>> T merge(T entity);
+	<T extends Entity<?>> T merge(T entity) throws DataProviderException;
 
 	/**
 	 * Elimina una entidad
@@ -77,41 +79,44 @@ public interface DataProvider extends Adapter
 	 *            clase entidad
 	 * @param id
 	 *            identificador
+	 * @throws excepción
 	 * @throws NotFoundException
 	 *             Si el identificador de entidad no existe
 	 */
-	<T extends Entity<?>> T delete(T entity) throws LocalizedException;
+	<T extends Entity<?>> T delete(T entity) throws DataProviderException;
 
 	/**
 	 * Encontrar una entidad por su identificador.
 	 * 
-	 * @param clazz
+	 * @param entityClass
 	 *            clase entidad
 	 * @param id
 	 *            valor clave entidad
+	 * @throws excepción
 	 * @return entity entidad
 	 */
-	<T extends Entity<?>> T find(Class<T> clazz, Serializable id);
+	<T extends Entity<?>> T find(Class<T> entityClass, Serializable id) throws DataProviderException;
 
 	/**
 	 * Encuentra entidades por una de sus propiedades.
 	 * 
 	 * 
-	 * @param clazz
+	 * @param entityClass
 	 *            clase entidad
 	 * @param propertyName
 	 *            nombre de la propiedad
 	 * @param value
 	 *            valor de búsqueda de la propiedad
+	 * @throws excepción
 	 * @return list lista de objetos de entidad
 	 */
-	<T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, Object value);
+	<T extends Entity<?>> List<T> findByProperty(Class<T> entityClass, String propertyName, Object value) throws DataProviderException;
 
 	/**
 	 * Encuentra entidades por el valor de una de sus propiedades especificando un modo de búsqueda. La búsqueda no
 	 * distingue entre mayúsculas y minúsculas.
 	 * 
-	 * @param clazz
+	 * @param entityClass
 	 *            clase entidad
 	 * @param propertyName
 	 *            Nombre de la propiedad
@@ -119,62 +124,66 @@ public interface DataProvider extends Adapter
 	 *            Valor de búsqueda.
 	 * @param matchMode
 	 *            modo de búsqueda: EXACT, START, END, ANYWHERE.
+	 * @throws excepción
 	 * @return list lista de objetos de entidad
 	 */
-	<T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, String value,
-		MatchMode matchMode);
+	<T extends Entity<?>> List<T> findByProperty(Class<T> entityClass, String propertyName, String value,
+		MatchMode matchMode) throws DataProviderException;
 
 	/**
 	 * Encontrar todos los objetos de la clase entidad
 	 * 
-	 * @param clazz
+	 * @param entityClass
 	 *            clase entidad
+	 * @throws excepción
 	 * @return list lista de objetos de entidad
 	 */
-	<T extends Entity<?>> List<T> findAll(Class<T> clazz);
+	<T extends Entity<?>> List<T> findAll(Class<T> entityClass) throws DataProviderException;
 
 	/**
 	 * Encontrar todos los objetos de la clase entidad
 	 * 
-	 * @param clazz
+	 * @param entityClass
 	 *            clase entidad
 	 * @param where
 	 *            condición HQL para filtrar entidades. Ej.: 'name like '%BA%' and number < 20'
+	 * @throws excepción
 	 * @return list lista de objetos de entidad
 	 */
-	<T extends Entity<?>> List<T> findAll(Class<T> clazz, String where);
+	<T extends Entity<?>> List<T> findAll(Class<T> entityClass, String where) throws DataProviderException;
 
 	/**
 	 * Encontrar todos los objetos de la clase entidad
 	 * 
-	 * @param clazz
+	 * @param entityClass
 	 *            clase entidad
 	 * @param where
 	 *            condición HQL para filtrar entidades. Ej.: 'name like '%BA%' and number < 20'
 	 * @param order
 	 *            sentencia de ordenación HQL. Ej.: 'name, date desc'
+	 * @throws excepción
 	 * @return list lista de objetos de entidad
 	 */
-	<T extends Entity<?>> List<T> findAll(Class<T> clazz, String where, String order);
+	<T extends Entity<?>> List<T> findAll(Class<T> entityClass, String where, String order) throws DataProviderException;
 
 	/**
 	 * Encontrar todos los objetos de la clase entidad para un order específico.
 	 * 
-	 * @param clazz
+	 * @param entityClass
 	 *            clase entidad
 	 * @param order
 	 *            ordenación: ASC or DESC.
 	 * @param propertiesOrder
 	 *            propiedades a aplicar la ordenación.
-	 * 
+	 * @throws excepción
 	 * @return list lista de objetos de entidad
 	 */
-	<T extends Entity<?>> List<T> findAll(Class<T> clazz, Order order, String... propertiesOrder);
+	<T extends Entity<?>> List<T> findAll(Class<T> entityClass, Order order, String... propertiesOrder) throws DataProviderException;
 
 	/**
 	 * Lista de entidades paginada
 	 * 
-	 * @param clazz
+	 * @param entityClass
 	 *            clase entidad
 	 * @param startIndex
 	 *            índice de comienzo
@@ -185,15 +194,15 @@ public interface DataProvider extends Adapter
 	 * @param order
 	 *            sentencia de ordenación HQL. Ej.: 'name, date desc'
 	 * @return list lista de objetos de entidad
-	 * @throws LocalizedException
+	 * @throws excepción
 	 */
-	<T extends Entity<?>> List<T> pagedList(Class<T> clazz, int startIndex, int count, String where, String order)
-		throws LocalizedException;
+	<T extends Entity<?>> List<T> pagedList(Class<T> entityClass, int startIndex, int count, String where, String order)
+		throws DataProviderException;
 
 	/**
 	 * Obtiene los valores de una propiedad.
 	 * 
-	 * @param clazz
+	 * @param entityClass
 	 *            clase entidad
 	 * @param propertyName
 	 *            Nombre de la propiedad
@@ -201,9 +210,10 @@ public interface DataProvider extends Adapter
 	 *            sentencia de condición HQL.
 	 * @param order
 	 *            sentencia de ordenación HQL. Ej.: 'name, date desc'
+	 * @throws excepción
 	 * @return list values
 	 */
-	List<?> propertyValues(Class<?> clazz, String propertyName, String where, String order);
+	List<?> propertyValues(Class<?> entityClass, String propertyName, String where, String order) throws DataProviderException;
 
 	/**
 	 * SQLite, JPA, Spring_Data, REST, Mock, ...
@@ -220,12 +230,13 @@ public interface DataProvider extends Adapter
 	/**
 	 * Número de registros de una entidad
 	 * 
-	 * @param clazz
+	 * @param entityClass
 	 *            clase entidad
 	 * @param where
 	 *            sentencia de condición HQL.
+	 * @throws excepción
 	 * @return
 	 */
-	Long count(Class<?> clazz, String where);
+	Long count(Class<?> entityClass, String where) throws DataProviderException;
 
 }

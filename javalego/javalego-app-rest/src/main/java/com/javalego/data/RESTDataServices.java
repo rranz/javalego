@@ -93,7 +93,7 @@ public class RESTDataServices implements Services {
 	@Produces(MediaType.APPLICATION_JSON)
 	// Nota: no se puede repetir el path aunque existan parámetros. Sólo se
 	// puede realizar con PathParameter /{where}/{order}
-	public String getList(@PathParam("entity") String entityName, @QueryParam(WHERE) String where, @QueryParam(ORDER) String order) {
+	public String getList(@PathParam("entity") String entityName, @QueryParam(WHERE) String where, @QueryParam(ORDER) String order) throws DataProviderException {
 		try {
 			List<? extends Entity<?>> list = getDataProvider().findAll((Class<? extends Entity<?>>)Class.forName(entityName), NULL.equals(where) ? null : where, NULL.equals(order) ? null : order);
 			return gson.toJson(list);
@@ -109,7 +109,7 @@ public class RESTDataServices implements Services {
 	@GET
 	@Path("/" + OBJECT_ID + "/{entity}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getObject(@PathParam("entity") String entityName, @QueryParam(ID) Long id) {
+	public String getObject(@PathParam("entity") String entityName, @QueryParam(ID) Long id) throws DataProviderException {
 		try {
 			EntityId entity = getDataProvider().find((Class<? extends EntityId>) Class.forName(entityName), id);
 			return gson.toJson(entity);
@@ -124,7 +124,7 @@ public class RESTDataServices implements Services {
 	@GET
 	@Path("/" + OBJECT_WHERE + "/{entity}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getObject(@PathParam("entity") String entityName, @QueryParam(WHERE) String where) {
+	public String getObject(@PathParam("entity") String entityName, @QueryParam(WHERE) String where) throws DataProviderException {
 		try {
 			Entity<?> entity = getDataProvider().find((Class<? extends Entity<?>>) Class.forName(entityName), NULL.equals(where) ? null : where);
 			return gson.toJson(entity);
@@ -142,7 +142,7 @@ public class RESTDataServices implements Services {
 	@Produces(MediaType.APPLICATION_JSON)
 	// Nota: no se puede repetir el path aunque existan parámetros. Sólo se
 	// puede realizar con PathParameter /{where}/{order}
-	public String save(@PathParam("entity") String entityName, String data) {
+	public String save(@PathParam("entity") String entityName, String data) throws DataProviderException {
 		try {
 			Entity bean = gson.fromJson(data, (Class<? extends Entity>) Class.forName(entityName));
 			bean = getDataProvider().save(bean);
@@ -179,7 +179,7 @@ public class RESTDataServices implements Services {
 	@GET
 	@Path("/" + FIELDVALUES + "/{entity}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getFieldValues(@PathParam("entity") String entityName, @QueryParam(FIELDNAME) String fieldName, @QueryParam(WHERE) String where, @QueryParam(ORDER) String order) {
+	public String getFieldValues(@PathParam("entity") String entityName, @QueryParam(FIELDNAME) String fieldName, @QueryParam(WHERE) String where, @QueryParam(ORDER) String order) throws DataProviderException {
 		try {
 			Collection<?> list = (Collection<?>) getDataProvider().propertyValues((Class<? extends Entity>) Class.forName(entityName), fieldName, NULL.equals(where) ? null : where, NULL.equals(order) ? null : order);
 			return gson.toJson(list);

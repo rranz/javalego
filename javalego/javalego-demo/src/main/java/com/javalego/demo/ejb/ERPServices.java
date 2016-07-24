@@ -17,6 +17,7 @@ import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
+import com.javalego.data.DataProviderException;
 import com.javalego.data.jpa.JpaProvider;
 import com.javalego.demo.entities.Department;
 import com.javalego.demo.entities.Employee;
@@ -28,7 +29,7 @@ public class ERPServices
 	private JpaProvider dataProvider;
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void populateDatabase()
+	public void populateDatabase() throws DataProviderException
 	{
 		// Create Department Entity
 		Department department = new Department();

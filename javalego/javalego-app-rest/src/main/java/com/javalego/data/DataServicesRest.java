@@ -33,7 +33,7 @@ public class DataServicesRest implements Services {
 	@GET
 	@Path("/products/all")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getAllProducts() {
+	public String getAllProducts() throws DataProviderException {
 
 		List<Product> list;
 		list = getDataProvider().findAll(Product.class);

@@ -131,6 +131,7 @@
 		<module>javalego_ui_vaadin</module>
 		<module>javalego_app</module>
 		<module>javalego_office</module>
+		<module>javalego_logger</module>
 	</modules>
 
 	<!-- DEPLOY artefactos en Archiva y Maven Central (TODO) -->

@@ -12,8 +12,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Root;
 
+import com.javalego.data.DataProviderErrors;
+import com.javalego.data.DataProviderException;
 import com.javalego.entity.Entity;
-import com.javalego.exception.LocalizedException;
 
 /**
  * JPA (Java Persistence API)
@@ -30,128 +31,188 @@ public abstract class AbstractJpaProvider implements JpaProvider
 {
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public <T extends Entity<?>> T save(T entity)
+	public <T extends Entity<?>> T save(T entity) throws DataProviderException
 	{
-		if (entity.getId() != null)
+		try
+		{
+			if (entity.getId() != null)
+			{
+				return getEntityManager().merge(entity);
+			}
+			else
+			{
+				getEntityManager().persist(entity);
+			}
+			return entity;
+		}
+		catch (Exception e)
+		{
+			throw new DataProviderException(DataProviderErrors.PERSIST, e);
+		}
+	}
+
+	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public <T extends Entity<?>> T merge(T entity) throws DataProviderException
+	{
+		try
 		{
 			return getEntityManager().merge(entity);
 		}
-		else
+		catch (Exception e)
 		{
-			getEntityManager().persist(entity);
-			return entity;
+			throw new DataProviderException(DataProviderErrors.MERGE, e);
 		}
 	}
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public <T extends Entity<?>> T merge(T entity)
+	public <T extends Entity<?>> T delete(T entity) throws DataProviderException
 	{
-		return getEntityManager().merge(entity);
+		T result = null;
+		try
+		{
+			result = merge(entity);
+			getEntityManager().remove(result);
+		}
+		catch (Exception e)
+		{
+			throw new DataProviderException(DataProviderErrors.DELETE, e);
+		}
+		return result;
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public <T extends Entity<?>> T delete(T entity)
+	public <T extends Entity<?>> T find(Class<T> clazz, Serializable id) throws DataProviderException
 	{
-		T result = merge(entity);
-		getEntityManager().remove(result);
-		return result;		
-	}
-
-	@Override
-	public <T extends Entity<?>> T find(Class<T> clazz, Serializable id)
-	{
-		return getEntityManager().find(clazz, id);
+		try
+		{
+			return getEntityManager().find(clazz, id);
+		}
+		catch (Exception e)
+		{
+			throw new DataProviderException(DataProviderErrors.FIND_ID, e);
+		}
 	}
 
 	@Override
 	public <T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, Object value)
+		throws DataProviderException
 	{
-		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+		try
+		{
+			CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 
-		CriteriaQuery<T> cq = cb.createQuery(clazz);
+			CriteriaQuery<T> cq = cb.createQuery(clazz);
 
-		Root<T> root = cq.from(clazz);
+			Root<T> root = cq.from(clazz);
 
-		cq.where(cb.equal(root.get(propertyName), value));
+			cq.where(cb.equal(root.get(propertyName), value));
 
-		return getEntityManager().createQuery(cq).getResultList();
+			return getEntityManager().createQuery(cq).getResultList();
+		}
+		catch (Exception e)
+		{
+			throw new DataProviderException(DataProviderErrors.FIND, e);
+		}
+
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public <T extends Entity<?>> List<T> findByProperty(Class<T> clazz, String propertyName, String value,
-		MatchMode matchMode)
+		MatchMode matchMode) throws DataProviderException
 	{
-		// convert the value String to lowercase
-		value = value.toLowerCase();
-
-		if (MatchMode.START.equals(matchMode))
+		try
 		{
-			value = value + "%";
+			// convert the value String to lowercase
+			value = value.toLowerCase();
+
+			if (MatchMode.START.equals(matchMode))
+			{
+				value = value + "%";
+			}
+			else if (MatchMode.END.equals(matchMode))
+			{
+				value = "%" + value;
+			}
+			else if (MatchMode.ANYWHERE.equals(matchMode))
+			{
+				value = "%" + value + "%";
+			}
+
+			CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+
+			CriteriaQuery<T> cq = cb.createQuery(clazz);
+
+			Root root = cq.from(clazz);
+
+			cq.where(cb.like(cb.lower(root.get(propertyName)), value));
+
+			return getEntityManager().createQuery(cq).getResultList();
 		}
-		else if (MatchMode.END.equals(matchMode))
+		catch (Exception e)
 		{
-			value = "%" + value;
+			throw new DataProviderException(DataProviderErrors.FIND, e);
 		}
-		else if (MatchMode.ANYWHERE.equals(matchMode))
-		{
-			value = "%" + value + "%";
-		}
-
-		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-
-		CriteriaQuery<T> cq = cb.createQuery(clazz);
-
-		Root root = cq.from(clazz);
-
-		cq.where(cb.like(cb.lower(root.get(propertyName)), value));
-
-		return getEntityManager().createQuery(cq).getResultList();
 	}
 
 	@Override
-	public <T extends Entity<?>> List<T> findAll(Class<T> clazz)
+	public <T extends Entity<?>> List<T> findAll(Class<T> clazz) throws DataProviderException
 	{
-		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+		try
+		{
+			CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 
-		CriteriaQuery<T> cq = cb.createQuery(clazz);
+			CriteriaQuery<T> cq = cb.createQuery(clazz);
 
-		cq.from(clazz);
+			cq.from(clazz);
 
-		return getEntityManager().createQuery(cq).getResultList();
+			return getEntityManager().createQuery(cq).getResultList();
+		}
+		catch (Exception e)
+		{
+			throw new DataProviderException(DataProviderErrors.FIND, e);
+		}
 	}
 
 	@Override
 	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, Order order, String... propertiesOrder)
+		throws DataProviderException
 	{
-		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-
-		CriteriaQuery<T> cq = cb.createQuery(clazz);
-
-		Root<T> root = cq.from(clazz);
-
-		List<Order> orders = new ArrayList<>();
-
-		for (String propertyOrder : propertiesOrder)
+		try
 		{
-			if (order.isAscending())
-			{
-				orders.add(cb.asc(root.get(propertyOrder)));
-			}
-			else
-			{
-				orders.add(cb.desc(root.get(propertyOrder)));
-			}
-		}
-		cq.orderBy(orders);
+			CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 
-		return getEntityManager().createQuery(cq).getResultList();
+			CriteriaQuery<T> cq = cb.createQuery(clazz);
+
+			Root<T> root = cq.from(clazz);
+
+			List<Order> orders = new ArrayList<>();
+
+			for (String propertyOrder : propertiesOrder)
+			{
+				if (order.isAscending())
+				{
+					orders.add(cb.asc(root.get(propertyOrder)));
+				}
+				else
+				{
+					orders.add(cb.desc(root.get(propertyOrder)));
+				}
+			}
+			cq.orderBy(orders);
+
+			return getEntityManager().createQuery(cq).getResultList();
+		}
+		catch (Exception e)
+		{
+			throw new DataProviderException(DataProviderErrors.FIND, e);
+		}
 	}
 
 	@Override
-	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, String where)
+	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, String where) throws DataProviderException
 	{
 		return findAll(clazz, where, null);
 	}
@@ -159,41 +220,64 @@ public abstract class AbstractJpaProvider implements JpaProvider
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends Entity<?>> List<T> findAll(Class<T> clazz, String where, String order)
+		throws DataProviderException
 	{
-		return getEntityManager()
-			.createQuery("select e from " + clazz.getSimpleName() + " as e" + getWhereOrder(where, order))
-			.getResultList();
+		try
+		{
+			return getEntityManager()
+				.createQuery("select e from " + clazz.getSimpleName() + " as e" + getWhereOrder(where, order))
+				.getResultList();
+		}
+		catch (Exception e)
+		{
+			throw new DataProviderException(DataProviderErrors.FIND, e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends Entity<?>> List<T> pagedList(Class<T> clazz, int startIndex, int count, String where,
-		String order) throws LocalizedException
+		String order) throws DataProviderException
 	{
-		Query query = getEntityManager()
-			.createQuery("select e from " + clazz.getSimpleName() + " as e" + getWhereOrder(where, order));
-		query.setFirstResult(startIndex);
-		query.setMaxResults(count);
+		try
+		{
+			Query query = getEntityManager()
+				.createQuery("select e from " + clazz.getSimpleName() + " as e" + getWhereOrder(where, order));
+			query.setFirstResult(startIndex);
+			query.setMaxResults(count);
 
-		return query.getResultList();
+			return query.getResultList();
+		}
+		catch (Exception e)
+		{
+			throw new DataProviderException(DataProviderErrors.FIND, e);
+		}
 	}
 
 	@Override
 	public List<?> propertyValues(Class<?> clazz, String propertyName, String where, String order)
+		throws DataProviderException
 	{
-		if (where == null)
+		try
 		{
-			where = propertyName + " is not null";
+			if (where == null)
+			{
+				where = propertyName + " is not null";
+			}
+			else
+			{
+				where = propertyName + " is not null" + " and " + where;
+			}
+
+			Query query = getEntityManager().createQuery(
+				"select " + propertyName + " from " + clazz.getSimpleName() + " " + getWhereOrder(where, order));
+
+			return (List<?>) query.getResultList();
 		}
-		else
+		catch (Exception e)
 		{
-			where = propertyName + " is not null" + " and " + where;
+			throw new DataProviderException(DataProviderErrors.FIND, e);
 		}
-
-		Query query = getEntityManager().createQuery(
-			"select " + propertyName + " from " + clazz.getSimpleName() + " " + getWhereOrder(where, order));
-
-		return (List<?>) query.getResultList();
 	}
 
 	/**
@@ -220,11 +304,19 @@ public abstract class AbstractJpaProvider implements JpaProvider
 	}
 
 	@Override
-	public Long count(Class<?> clazz, String where)
+	public Long count(Class<?> clazz, String where) throws DataProviderException
 	{
-		Object value = getEntityManager()
-			.createQuery("select count(*) from " + clazz.getCanonicalName() + (where != null ? " where " + where : ""))
-			.getSingleResult();
-		return new Long(value != null ? value.toString() : "0");
+		try
+		{
+			Object value = getEntityManager()
+				.createQuery(
+					"select count(*) from " + clazz.getCanonicalName() + (where != null ? " where " + where : ""))
+				.getSingleResult();
+			return new Long(value != null ? value.toString() : "0");
+		}
+		catch (NumberFormatException e)
+		{
+			throw new DataProviderException(DataProviderErrors.FIND, e);
+		}
 	}
 }
